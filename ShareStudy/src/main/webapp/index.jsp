@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-
+<body>	
+<%@ include file="/views/common/menubar.jsp" %>
+<br><br>
+	<h1>메인페이지 테스트</h1>
 </body>
 </html>
