@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<!-- 로그인 구문 -->
+	<entry key="loginUser">
+		SELECT *
+		FROM USERINFO
+		WHERE USER_ID = ?
+		AND USER_PW = ?
+		AND STATUS = 'Y'
+	</entry>
+	
+	<!-- 회원가입 구문 -->
+	<entry key="enrollUser">
+		INSERT INTO USERINFO(USER_ID,
+							 USER_PW,
+							 USER_NAME,
+							 USER_PHONE,
+							 RRN,
+							 EMAIL,
+							 ZIP_CODE,
+							 ADDRESS,
+							 DETAIL_ADDRESS)
+		VALUES(?,?,?,?,?,?,?,?,?)
+	</entry>
+
+</properties>
