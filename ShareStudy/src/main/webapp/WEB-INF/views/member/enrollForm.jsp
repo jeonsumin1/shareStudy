@@ -10,26 +10,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
 
 <title>Insert title here</title>
+
+<style>
+	
+</style>
+
+
 </head>
 <body>
 
-  			<div id="section1">
+  			<div>
 
-                <form action="<%=contextPath %>/enrollForm.me" id="search_form">
+                <form action="<%=contextPath %>/enrollForm.me" id="enroll">
                     <div id="search_text">
-                        <input type="search" class="alert alert-success" placeholder="검색어를 입력하세요.">
-                        <br clear="both">
+                        <input type="search" placeholder="검색어를 입력하세요.">
+                        
                       
                     </div>
-                    <div id="search_btn">
-                        <input type="submit"  value="검색">
-                    </div>
+                    
 
 
 
