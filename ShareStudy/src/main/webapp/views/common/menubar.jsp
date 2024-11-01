@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.kh.member.model.vo.User"%>
 <!DOCTYPE html>
 <html>
-<% String contextPath = request.getContextPath(); %>
+<%  
+
+    String contextPath = request.getContextPath(); 
+	User userInfo = (User)session.getAttribute("userInfo");
+	
+
+
+%>
 <head>
 <meta charset="UTF-8">
    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
@@ -40,11 +48,12 @@
         <li><a href="#" class="nav-link px-2">메뉴2</a></li>
         <li><a href="${contextPath}/share/views/manager/m_Frame.jsp" class="nav-link px-2">관리자(임시)</a></li>
       </ul>
-
+   
       <div class="col-md-3 text-end">
         <button type="button" class="btn btn-outline-primary me-2">Login</button>
         <button type="button" class="btn btn-primary">회원가입</button>
       </div>
+     
     </header>
   </div>
 
