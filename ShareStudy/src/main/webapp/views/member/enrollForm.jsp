@@ -239,9 +239,11 @@ input[type="email"]{
                         </tr>
                         
                          
+                      
                         <tr id="a2">
                         <td colspan="3"><input type="checkbox" name="agree" id="agree2" value="서비스동의"  required>
                         <label for="agree2">[필수]sharestudy 서비스 이용약관 동의</label>
+
                         </td>
                         </tr>
                          
