@@ -1,4 +1,4 @@
-package com.kh.member.model.vo;
+package com.kh.manager.model.vo;
 
 public class Manager {
 	private String managerId;

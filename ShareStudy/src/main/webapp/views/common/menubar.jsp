@@ -14,10 +14,14 @@
    <link href="${pageContext.request.contextPath}/views/common/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
  <style>
+<<<<<<< HEAD
    #logout{
    		text-decoration: none;
       color: grey;
    }
+=======
+  
+>>>>>>> refs/remotes/origin/main
  </style>
 <title>메뉴바</title>
 </head>
@@ -46,6 +50,7 @@
         <li><a href="<%=contextPath%>/productDetail.shs" class="nav-link px-2">상품 상세보기</a></li>
         <li><a href="<%=contextPath%>/reviewBoard.shs" class="nav-link px-2">리뷰게시판</a></li>
         <li><a href="${contextPath}/share/views/manager/m_Frame.jsp" class="nav-link px-2">관리자(임시)</a></li>
+    
       </ul>
    		
    	  <%if(userInfo==null){%>

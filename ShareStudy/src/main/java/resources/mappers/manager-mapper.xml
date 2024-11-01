@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="loginManager">
+    SELECT * FROM MANAGER
+    WHERE MANAGER_ID = ?
+    AND MANAGER_PASSWORD = ?
+</entry>
+
+</properties>

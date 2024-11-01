@@ -98,6 +98,7 @@ th, td {
 </style>
 </head>
 <body>	
+
 <%@ include file="/views/common/menubar.jsp" %>
 <% String alertMsg = (String)request.getAttribute("alertMsg"); %>
 
