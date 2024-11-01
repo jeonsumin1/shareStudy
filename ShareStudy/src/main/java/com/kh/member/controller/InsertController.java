@@ -34,8 +34,15 @@ public class InsertController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		request.setCharacterEncoding("UTF-8");
+		
+        
+		String manId = request.getParameter("userId");
+		String manPwd = request.getParameter("userPwd");
+		
+		System.out.println(manId);
+		System.out.println(manPwd);
 	}
 
 }
