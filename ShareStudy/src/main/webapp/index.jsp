@@ -20,7 +20,6 @@ body {
 }
 
 #header {
-	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -28,7 +27,6 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	z-index: 500;
 	max-height: 400px;
 }
 
@@ -100,6 +98,7 @@ th, td {
 </style>
 </head>
 <body>	
+
 <%@ include file="/views/common/menubar.jsp" %>
 <% String alertMsg = (String)request.getAttribute("alertMsg"); %>
 
