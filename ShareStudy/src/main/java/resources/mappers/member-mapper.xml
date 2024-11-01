@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	
+	<!-- 회원 등록 -->
+	<entry key="insertMember">
+	INSERT INTO USERINFO(USER_ID,
+                         USER_PW,
+                         USER_NAME,
+                         RRN,
+                         USER_PHONE,
+                         EMAIL,
+                         ADACCEPT)
+     VALUES(?,?,?,?,?,?,?)
+	</entry>
+	
+	
+	
+
+	
+	
+
+</properties>
