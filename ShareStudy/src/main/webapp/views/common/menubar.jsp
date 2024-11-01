@@ -37,7 +37,7 @@
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="#" class="nav-link px-2 link-secondary">메인메뉴</a></li>
         <li><a href="#" class="nav-link px-2">메뉴1</a></li>
-        <li><a href="#" class="nav-link px-2">메뉴2</a></li>
+        <li><a href="${contextPath}/share/views/member/enrollForm.jsp" class="nav-link px-2">메뉴2</a></li>
         <li><a href="${contextPath}/share/views/manager/m_manager.jsp" class="nav-link px-2">메뉴3</a></li>
       </ul>
 

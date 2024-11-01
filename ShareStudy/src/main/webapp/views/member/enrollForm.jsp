@@ -61,7 +61,7 @@
                     	<td>비밀번호</td>
                         <td><input type="password" name="userPwd" id="userPwd" maxlength="15" placeholder="" required></td>
                         </tr>
-                        
+                         
                         <tr>
                         <td>비밀번호 확인</td>
                         <td><input type="password" id="checkPwd" maxlength="15" placeholder="" required></td>
