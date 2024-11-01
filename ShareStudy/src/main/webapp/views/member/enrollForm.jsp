@@ -98,7 +98,7 @@
                          
                         <tr>
                         <td><input type="checkbox" name="agree" id="agree2"   required>
-                        <label for="agree2">[필수]sharestudy 서비스 이용약관 동의</label>
+                        <label for="agree2">[필수]ShareStudy 서비스 이용약관 동의</label>
                         </td>
                         </tr>
                          

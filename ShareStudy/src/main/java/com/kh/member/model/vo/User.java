@@ -36,6 +36,16 @@ public class User {
 		this.address = address;
 		this.detailAddress = detailAddress;
 	}
+	
+	public User(String userId, String userPw, String userName, String userPhone, String rrn, String email) {
+		super();
+		this.userId = userId;
+		this.userPw = userPw;
+		this.userName = userName;
+		this.userPhone = userPhone;
+		this.rrn = rrn;
+		this.email = email;
+	}
 
 	public String getUserId() {
 		return userId;

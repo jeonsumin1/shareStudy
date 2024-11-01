@@ -20,7 +20,6 @@ body {
 }
 
 #header {
-	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -28,7 +27,6 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	z-index: 500;
 	max-height: 400px;
 }
 
@@ -92,8 +90,8 @@ th, td {
 }
 
 #product{
-	padding-left: 160px;
-	padding-right: 100px;
+	padding-left: 250px;
+	padding-right: 200px;
 }
 
 
@@ -133,35 +131,6 @@ th, td {
 				</div>
 			</form>
 		</div>
-		<%if(userInfo == null) {%>
-		<div id="loginSpace">
-			<form action="<%=contextPath%>/login.shs" method="post" id="loginForm">
-				<table>
-					<tr id="idForm">
-						<th>아이디 :</th>
-						<td><input type="text" name="userId" id="userId" placeholder="아이디를 입력해주세요."></td>
-					</tr>
-					<tr id="pwForm">
-						<th>비밀번호 :</th>
-						<td><input type="password" name="userPw" id="userPw"
-							placeholder="비밀번호를 입력해주세요."></td>
-					</tr>
-					<tr>
-						<td colspan=2>
-							<button type="submit">로그인</button>
-				<button type="button" onclick="enrollPage();">회원가입</button>
-				</td>
-				</tr>
-			</table>
-			</form>
-		</div>
-		<%}else{ %> 
-		<div id="loginSpace">
-			<%=userInfo.getUserName()%>님 환영합니다.
-			<a href="<%=contextPath %>/myPage.shs">마이페이지</a>
-			<a href="<%=contextPath %>/logout.shs">로그아웃</a>
-		</div>
-		<%} %>
 	</div>
 
 

@@ -2,6 +2,7 @@ package com.kh.member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +25,8 @@ public class UserLoginController extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher view = request.getRequestDispatcher("/views/member/loginForm.jsp");
+		view.forward(request, response);
 	}
 
 
@@ -33,18 +35,18 @@ public class UserLoginController extends HttpServlet {
 		
 		String userId = request.getParameter("userId");
 		String userPw = request.getParameter("userPw");
+		
 		User userInfo = new UserService().loginUser(userId, userPw);
 		
 		HttpSession session = request.getSession();
 		
-		if(userInfo!=null) {
+		if(userInfo != null) {
 			session.setAttribute("userInfo", userInfo);
-			session.setAttribute("alertMsg", "로그인 성공");
+			session.setAttribute("alertMsg", "로그인에 성공하였습니다.");
 		}else {
 			session.setAttribute("alertMsg", "로그인 실패. 아이디나 비밀번호를 확인해주세요.");
 		}
-		String url = request.getHeader("referer");
-		response.sendRedirect(url);
+		response.sendRedirect(request.getContextPath());
 	}
 
 }
