@@ -1,4 +1,4 @@
-package com.kh.member.controller;
+package com.kh.manager.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ManagerLoginController
  */
-@WebServlet("/login.mn")
+@WebServlet("/ManagerLoginController")
 public class ManagerLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,13 +37,8 @@ public class ManagerLoginController extends HttpServlet {
 		
         request.setCharacterEncoding("UTF-8");
 		
-        
 		String manId = request.getParameter("mid");
 		String manPwd = request.getParameter("mpwd");
-		
-		System.out.println(manId);
-		System.out.println(manPwd);
-		
 	}
 
 }
