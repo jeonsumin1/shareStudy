@@ -1,4 +1,4 @@
-package com.kh.member.controller;
+package com.kh.reservation.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ManagerLoginController
+ * Servlet implementation class ReservationInsertController
  */
-@WebServlet("/login.mn")
-public class ManagerLoginController extends HttpServlet {
+@WebServlet("/reservation.re")
+public class ReservationInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerLoginController() {
+    public ReservationInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,14 +35,8 @@ public class ManagerLoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-        request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
-        
-		String manId = request.getParameter("mid");
-		String manPwd = request.getParameter("mpwd");
-		
-		System.out.println(manId);
-		System.out.println(manPwd);
 		
 	}
 

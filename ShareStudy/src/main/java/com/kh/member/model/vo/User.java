@@ -19,20 +19,6 @@ public class User {
 	public User() {
 		super();
 	}
-	
-	
-
-	public User(String userId, String userPw, String userName, String userPhone, String rrn, String email) {
-		super();
-		this.userId = userId;
-		this.userPw = userPw;
-		this.userName = userName;
-		this.userPhone = userPhone;
-		this.rrn = rrn;
-		this.email = email;
-	}
-
-
 
 	public User(String userId, String userPw, String userName, String userPhone, String rrn, String email,
 			String adAccept, Date enrollDate, String status, String zipCode, String address, String detailAddress) {
