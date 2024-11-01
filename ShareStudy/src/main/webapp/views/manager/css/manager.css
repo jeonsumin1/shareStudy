@@ -1,0 +1,249 @@
+/* 관리자 페이지 */
+@font-face {
+  font-family: 'Chosunilbo_myungjo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Noto Sans KR", sans-serif;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+body{
+ -ms-overflow-style: none;
+ }
+ 
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* 사이드 바 */
+.sidebar {
+	width: 200px;
+	height: 100%;
+	background-color: #ceaa1a;
+	color: #fff;
+	padding: 40px 0px;
+	position: fixed;
+	display: block;
+
+}
+.sidebar .logo img {
+    width: 80px;
+    margin: 0 auto;
+	display: block;
+	margin-bottom: 40px;
+}
+.sidebar ul {
+	padding: 0;
+	margin: 0 10px;
+	text-align: center;
+}
+.sidebar ul li {
+    font-size: 20px;
+    list-style-type: none;
+	padding: 30px 0;
+	border-top: 1px solid #E8E8E8;	
+}
+.sidebar ul li:last-child {
+	border-bottom: 1px solid #E8E8E8;	
+}
+.sidebar ul li a:hover {
+    color: #e43636;
+	cursor: pointer;	
+}
+.sidebar .logout span {
+	text-align: center;
+	bottom: 50px;
+	left: 50px;
+	position: fixed;
+	font-size: 15px;
+}
+.sidebar .logout span:hover {
+	color: #e43636;
+	cursor: pointer;
+}
+
+/* iframe */
+iframe {
+	width: 100%;
+	height: 900px;
+	border: none;
+}
+
+/* total_board 영역. .main 안에 있음 */
+.total_board {
+	display: flex;
+	margin-bottom: 20px;
+}
+.board1, .board2, .board3 {
+	width: 350px;
+	height: 200px;
+	border-radius: 10px;
+	background-color: #fff;
+	box-shadow: rgba(60, 64, 67, 0.05) 0px 1px 2px 0px, rgba(60, 64, 67, 0.02) 0px 2px 6px 2px;
+	margin-right: 20px;
+	text-align: center;
+	overflow-y: scroll;
+}
+.board3 {
+	margin-right: 0;
+}
+.board1 h2, .board2 h2, .board3 h2{
+	margin: 20px 0;
+}
+.board1 h3{
+	margin-bottom: 20px;
+}
+
+.board1::-webkit-scrollbar,
+.board2::-webkit-scrollbar,
+.board3::-webkit-scrollbar {
+  display: none;
+}
+.board1, .board2, .board3 {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 콘텐츠 영역 */
+.main {
+	padding-left: 230px;
+	padding-right: 30px;
+	width: 87%;
+	display: inline-block;
+	background: #f9f9f9;
+}
+.main .title h1 {
+	font-size: 25px;
+	margin: 40px 0;
+}
+section {
+	background-color: #fff;
+	display: block;
+	width: auto;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	box-shadow: rgba(60, 64, 67, 0.01) 0px 1px 2px 0px, rgba(60, 64, 67, 0.05) 0px 2px 6px 2px;
+	padding: 20px;
+}
+section h2 {
+	margin: 0;
+	margin-bottom: 20px;
+}
+section h3 {
+	margin: 0;
+	margin-bottom: 20px;
+}
+table {
+	width: 100%;
+	text-align: left;
+	border-collapse: collapse;
+	border: 1px solid #444;
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+th {
+    background-color: #ceaa1a;
+}
+th, td {
+    border: 1px solid #444444;
+    padding: 10px;
+}
+.long {
+	width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+	display: inline-block;
+}
+.long2 {
+	width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+	display: inline-block;
+}
+.goods img {
+	width: 150px;
+	cursor: pointer;
+}
+.goods textarea {
+	width: 500px;
+	height: 200px;
+	font-size: 18px;
+}
+
+/* 뒤로가기, 삭제 버튼 */
+div.btn_back, div.btn_modify, div.btn_delete {
+	margin: 0 auto;
+	width: 200px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	display: inline-block;
+	border-radius: 20px;
+	border: 2px solid #0e5a6d;
+	background-color: #0e5a6d;
+	color: #fff;
+	margin-top: 20px;
+}
+div.btn_back:hover, div.btn_modify:hover, div.btn_delete:hover {
+	color: #ffd62c;
+}
+table a:hover{
+	color: #ffd62c;
+}
+
+/* member input */
+input {
+	width : 300px;
+	height: 30px;
+	font-size: 18px;
+}
+#tel1{
+	width: 60px;
+}
+#tel2, #tel3{
+	width: 100px;
+}
+#address, #addrplus, #addressdetail{
+	width : 400px;
+}
+#address, #addrplus{
+	margin-bottom: 5px;
+}
+button {
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+}
+
+/* 통계 부분. */
+#chart_wrap{
+	position: relative;
+}
+.chart1{
+	position: relative;
+	width: 90%;
+	margin-bottom: 50px;
+}
+.chart2{
+	position: relative;
+}
+#myChart2{
+	width: 100px;
+}
+.chart2_group{
+	width: 30%;
+	display: flex;
+	text-align: center;
+	margin: 0 auto;
+}
