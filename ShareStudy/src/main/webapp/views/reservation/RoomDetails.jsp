@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 	#details{
 		border : 1px solid black;
@@ -24,12 +28,12 @@
 	<div align="center" id="details">
 		<img src="../../resources/스터디룸.jpg">
 	
-		<p>당산역 스터디룸<p>		
+		<p>당산역 스터디룸</p>		
 	</div>
 	
 	<script>
 		$("img").click(function(){
-			console.log($(this).text());
+			console.log($(this));
 		});
 	</script>
 	

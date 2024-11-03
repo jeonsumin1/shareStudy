@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+	
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -92,13 +96,13 @@
 			    	<div class="i">
 		                <div>
 			                <p> 예약 날짜 </p>
-		                	<input type="date" name="rvDate" id="rvDate" class="form-control" required>
+		                	<input type="date" name="rvDate" id="rvDate" class="form-control" required onchange="selDate();">
 		                </div>
 		                <br>
 		               
 		                <div>
 			                <p> 예약 인원 수 </p>
-		                	<input type="number" name="rvUser" id="rvUser" class="form-control" min="1" max="50" required>
+		                	<input type="number" name="rvUser" id="rvUser" class="form-control" min="1" max="50" required oninput="selDate();"> <!-- 입력 시 값을 보여줄 수 있도록 oninput 사용 -->
 		                		<!-- 각 상품별 예약 가능 입원수로 제한? --ROOM_SIZE를 가져와서 max에 넣어주면 될 듯. -->
 		                		<!-- 상품 정보 테이블에서 사용 가능 인원 불러와서 max에 넣어주기? -->
 		                </div>
@@ -122,6 +126,7 @@
 					        <p> 요청사항 </p>
 					        <textarea id="request" name="request" class="form-control" cols="50" rows="5" style="resize:none;" placeholder="남기고 싶은 말을 적어주세요. (최대 500글자)"></textarea>
 						</div>
+						<button onclick="check();" class="btn btn-block" style="background-color: #a3c296; font-weight: bold;">확인하기</button>
 					</div>
 			    </div>
 			    <br><br>
@@ -134,12 +139,12 @@
 			    	<table class="table table-bordered">
 			    		<tr>
 			    			<th>예약 날짜</th>
-			    			<td>2024.11.01</td>
+			    			<td id="selDate"></td>
 			    			
 			    		</tr>
 			    		<tr>
 			    			<th>예약 인원</th>
-			    			<td>4명</td>
+			    			<td id="selUser"></td>
 			    		</tr>
 			    	</table>
 			    	<hr>  <!-- text-align은 block 요소에만 사용됨.  -->
@@ -157,17 +162,24 @@
 			    <div id="pay">
 			        <div class="text"> <p>결제 방법</p> </div>
 				    <hr>
-				    <div class="i">
+				    <div class="i" id="divBor">
 				    	<p>결제 수단 선택</p>
+				    	<p id="result">결제 수단</p>
 				        <div class="radio">
-				            <input type="radio" name="card" id="card"><label for="card" class="itext">신용카드</label>
+				            <input type="radio" name="card" id="card" value="신용카드"><label for="card" class="itext">신용카드</label>
 				        </div>
 						
 				        <div class="radio">
-				            <input type="radio" name="card" id="kpay" class=""><label for="kpay" class="itext">카카오페이</label>  <!-- 신용카드 기능 구현 후 추가 구현하기 -->
+				            <input type="radio" name="card" id="bankTransfer" value="무통장 입금"><label for="bankTransfer" class="itext">무통장 입금</label>  
+				        </div>
+				        
+				        <div class="radio">
+				            <input type="radio" name="card" id="kpay" value="카카오페이"><label for="kpay" class="itext">카카오페이</label>  <!-- 신용카드 기능 구현 후 추가 구현하기 -->
 				        </div>
 					</div>
 			    </div>
+			    
+			    <br><br>
 			    
 			    <div id="divBor"> 
 			    	<strong>서비스 동의</strong> 
@@ -187,6 +199,35 @@
 
 	    
 	    <script>
+	    	function check(){
+	    		console.log($("#rvDate").val());
+	    		console.log($("#rvUser").val());
+	    		console.log($("#userName").val());  <%-- --%>
+	    		console.log($("#phone").val());
+	    		console.log($("#request").val());
+	    		console.log($("input[name='card']:checked").val());
+	    		
+	    		var result = $("input[name='card']:checked").val();
+	    		$("#result").text(result);
+	    		
+	    	}
+	    	
+	    	<%-- 결제 예정 금액 테이블에 선택한 날짜와 예약 인원 표시 --%>
+	    	function selDate(){
+	    		console.log($("#rvDate").val());
+	    		console.log($("#rvUser").val());
+	    		
+	    		var selectDate = $("#rvDate").val();
+	    		var selectUser = $("#rvUser").val();
+	    		
+	    		$("#selDate").text(selectDate);
+	    		$("#selUser").text(selectUser+ " 명");	
+	    		
+	    		
+	    		
+	    	}
+	    	
+	    <%--
 	    	function isnertReservation(){
 				$.ajax({
 					url : "<%= contextPath %>/reservation.re",
@@ -208,6 +249,9 @@
 				});
 				
 			}
+	    
+	    --%>
+	    
 	    </script>
 	    
 	    
