@@ -76,8 +76,7 @@
 		            </div>
 		            <br>
 		            <div class="st" id="stDiv">
-		                <p>* 상품 정보 * </p>  <!-- db 에서 정보 가져오기 -->
-		                         
+		                <p>* 상품 정보 * </p>  <!-- db 에서 정보 가져오기 -->      
 		                <p>상품 가격</p>       <!-- db 에서 정보 가져오기 -->
 		                <p>주차 가능 유무</p>  <!-- db 에서 정보 가져오기 -->
 		                <p>취식 가능 유무</p>  <!-- db 에서 정보 가져오기 -->
@@ -173,13 +172,13 @@
 			    <div id="divBor"> 
 			    	<strong>서비스 동의</strong> 
 					<div align="right" id="check">
-						<input type="checkbox" name="" id="" required> <label>전체동의</label>
+						<input type="checkbox" name="agreement" id="allCheck" required> <label>전체동의</label>
 					</div>
 					<br>
-					<input type="checkbox" name="" id="" required> <label>위 공간의 예약 조건 확인 및 결제 진행 동의</label> <br>
-					<input type="checkbox" name="" id="" required> <label>환불 규정 안내에 대한 동의</label> <br>
-					<input type="checkbox" name="" id="" required> <label>개인정보 제3자 제공 동의</label> <br>
-					<input type="checkbox" name="" id="" required> <label>개인정보 수집 및 이용 동의</label> <br>
+					<input type="checkbox" name="agreement" id="ag1" required> <label>위 공간의 예약 조건 확인 및 결제 진행 동의</label> <br>
+					<input type="checkbox" name="agreement" id="ag2" required> <label>환불 규정 안내에 대한 동의</label> <br>
+					<input type="checkbox" name="agreement" id="ag3" required> <label>개인정보 제3자 제공 동의</label> <br>
+					<input type="checkbox" name="agreement" id="ag4" required> <label>개인정보 수집 및 이용 동의</label> <br>
 			    </div>				    
 		    </div>
 		   
@@ -192,12 +191,19 @@
 				$.ajax({
 					url : "<%= contextPath %>/reservation.re",
 					type: "post",
-					successe : function(){
+					data: {
+						rvDate: $("#rvDate").val(),
+				        rvUser: $("#rvUser").val(),
+				        userName: $("#userName").val(),
+				        phone: $("#phone").val(),
+				        request: $("#request").val()
+					}
+					success : function(){
 						// 성공했을 경우 입력받은 데이터들을 DB 테이블에 넣어준다. 
-						
+						alert("예약이 완료되었습니다.");
 					}, 
 					error: function(){
-						
+						alert("예약 중 오류 발생.");
 					}
 				});
 				
