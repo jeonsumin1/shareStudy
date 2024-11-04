@@ -13,12 +13,13 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
    <link href="${pageContext.request.contextPath}/views/common/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
- <style>
-<<<<<<< HEAD
-=======
-  
->>>>>>> refs/remotes/origin/main
    }
+ <style>
+   #logout{
+   		text-decoration: none;
+      color: grey;
+   }
+
  </style>
 <title>메뉴바</title>
 </head>

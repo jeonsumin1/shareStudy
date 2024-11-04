@@ -1,14 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  
 <style>
     .input input, .input textarea{
         width: 100%;
@@ -72,8 +79,9 @@
 		            </div>
 		            <br>
 		            <div class="st" id="stDiv">
+		                <p>* 상품 정보 * </p>  <!-- db 에서 정보 가져오기 -->      
 		                <p>* 상품 정보 * </p>  <!-- db 에서 정보 가져오기 -->
-		                        
+
 		                <p>상품 가격</p>       <!-- db 에서 정보 가져오기 -->
 		                <p>주차 가능 유무</p>  <!-- db 에서 정보 가져오기 -->
 		                <p>취식 가능 유무</p>  <!-- db 에서 정보 가져오기 -->
@@ -89,13 +97,13 @@
 			    	<div class="i">
 		                <div>
 			                <p> 예약 날짜 </p>
-		                	<input type="date" name="rvDate" id="rvDate" class="form-control" required>
+		                	<input type="date" name="rvDate" id="rvDate" class="form-control" required onchange="selDate();">
 		                </div>
 		                <br>
 		              
 		                <div>
 			                <p> 예약 인원 수 </p>
-		                	<input type="number" name="rvUser" id="rvUser" class="form-control" min="1" max="50" required>
+		                	<input type="number" name="rePeople" id="rePeople" class="form-control" min="1" max="50" required oninput="selDate();"> <!-- 입력 시 값을 보여줄 수 있도록 oninput 사용 -->
 		                		<!-- 각 상품별 예약 가능 입원수로 제한? --ROOM_SIZE를 가져와서 max에 넣어주면 될 듯. -->
 		                		<!-- 상품 정보 테이블에서 사용 가능 인원 불러와서 max에 넣어주기? -->
 		                </div>
@@ -117,7 +125,7 @@
 						<br>
 						<div>
 					        <p> 요청사항 </p>
-					        <textarea id="request" name="request" class="form-control" cols="50" rows="5" style="resize:none;" placeholder="남기고 싶은 말을 적어주세요. (최대 500글자)"></textarea>
+					        <textarea id="rvRequest" name="rvRequest" class="form-control" cols="50" rows="5" style="resize:none;" placeholder="남기고 싶은 말을 적어주세요. (최대 500글자)"></textarea>
 						</div>
 					</div>
 			    </div>
@@ -131,12 +139,12 @@
 			    	<table class="table table-bordered">
 			    		<tr>
 			    			<th>예약 날짜</th>
-			    			<td>2024.11.01</td>
+			    			<td id="selDate"></td>
 			    			
 			    		</tr>
 			    		<tr>
 			    			<th>예약 인원</th>
-			    			<td>4명</td>
+			    			<td id="selUser"></td>
 			    		</tr>
 			    	</table>
 			    	<hr>  <!-- text-align은 block 요소에만 사용됨.  -->
@@ -148,55 +156,135 @@
 					<br><br>
 					<p style="color:red;">환불 관련 사항은 호스트에게 직접 문의하시기 바랍니다.</p>
 				</div>	
-				   
-			   
-			    <br><br>
+				     
+			    <br><br><br>
+			    
 			    <div id="pay">
 			        <div class="text"> <p>결제 방법</p> </div>
 				    <hr>
-				    <div class="i">
+				    <div class="i" id="divBor">
 				    	<p>결제 수단 선택</p>
 				        <div class="radio">
-				            <input type="radio" name="card" id="card"><label for="card" class="itext">신용카드</label>
+				            <input type="radio" name="rvPayment" id="bankTransfer" value="무통장입금"><label for="bankTransfer" class="itext">무통장 입금</label>  
+				        </div>
+
+				        <div class="radio">
+				            <input type="radio" name="rvPayment" id="card" value="신용카드"><label for="card" class="itext">신용카드</label>
 				        </div>
 						
+				        
 				        <div class="radio">
-				            <input type="radio" name="card" id="kpay" class=""><label for="kpay" class="itext">카카오페이</label>  <!-- 신용카드 기능 구현 후 추가 구현하기 -->
+				            <input type="radio" name="rvPayment" id="kpay" value="카카오페이"><label for="kpay" class="itext">카카오페이</label>  <!-- 신용카드 기능 구현 후 추가 구현하기 -->
 				        </div>
 					</div>
 			    </div>
+				<br><br>
 			   
 			    <div id="divBor">
 			    	<strong>서비스 동의</strong>
+
 					<div align="right" id="check">
-						<input type="checkbox" name="" id="" required> <label>전체동의</label>
+						<input type="checkbox" id="all" onclick="chkAll();" required><label for="all">전체동의</label>
 					</div>
 					<br>
-					<input type="checkbox" name="" id="" required> <label>위 공간의 예약 조건 확인 및 결제 진행 동의</label> <br>
-					<input type="checkbox" name="" id="" required> <label>환불 규정 안내에 대한 동의</label> <br>
-					<input type="checkbox" name="" id="" required> <label>개인정보 제3자 제공 동의</label> <br>
-					<input type="checkbox" name="" id="" required> <label>개인정보 수집 및 이용 동의</label> <br>
-			    </div>				   
+
+					<input type="checkbox" name="agreement" id="ag1" required> <label for="ag1">위 공간의 예약 조건 확인 및 결제 진행 동의</label> <br>
+					<input type="checkbox" name="agreement" id="ag2" required> <label for="ag2">환불 규정 안내에 대한 동의</label> <br>
+					<input type="checkbox" name="agreement" id="ag3" required> <label for="ag3">개인정보 제3자 제공 동의</label> <br>
+					<input type="checkbox" name="agreement" id="ag4" required> <label for="ag4">개인정보 수집 및 이용 동의</label> <br>
+			    </div>				    
+
 		    </div>
 		  
 		   <br><br>
-		    <button onclick="isnertReservation();" class="btn btn-block" style="background-color: #A3C296; font-weight: bold;">결제하기</button>
+		    <button type="button" onclick="insertReservation();" class="btn btn-block" style="background-color: #A3C296; font-weight: bold;">결제하기</button>
 	   
 	    <script>
-	    	function isnertReservation(){
+	    	
+	    	// 서비스 동의 전체 체크 
+	    	function chkAll(){
+	    		//console.log($("#all").next().text());
+	    		//console.log($("input[name='agreement']").next());
+	    		
+	    		var all = $("#all");
+	    		
+	    		var sub = $("input[name='agreement']");
+	    		
+	    		if(all.checked){
+	    			
+	    			// 나머지 요소에 접근하여 속성 checked true로 변경
+	    			
+	    			
+	    			
+	    		}else{ // 체크 해제 
+	    			
+	    		}
+	    		
+	    	}
+
+	    	<%-- 결제 예정 금액 테이블에 선택한 날짜와 예약 인원 표시 --%>
+	    	function selDate(){
+	    		//console.log($("#rvDate").val());
+	    		//console.log($("#rePeople").val());
+	    		
+	    		var selectDate = $("#rvDate").val();
+	    		var selectUser = $("#rePeople").val();
+	    		
+	    		$("#selDate").text(selectDate);
+	    		$("#selUser").text(selectUser+ " 명");	
+	    				
+	    	}
+	    	
+
+	    	function insertReservation(){
+	    		//console.log($("#rvDate").val());
+	    		//console.log($("#rePeople").val());
+	    		//console.log($("#userName").val()); 
+	    		//console.log($("#rvRequest").val());
+	    		//console.log($("input[name='rvPayment']:checked").val());
+	    		
+	    		// 무통장입금체크 시 페이지 
+	    		console.log($("#bankTransfer").val());	    		
+	    		// 신용카드 체크 시 페이지 
+	    		// 카카오페이 체크 시 페이지 
+	    		
+	    		
+	    		if(!$("#rvDate").val() || !$("#rePeople").val() || 
+	    				!$("#userName").val()|| !$("input[name='rvPayment']:checked").val()){
+	    			alert("모든 정보를 입력해 주세요.");
+	    			return;
+	    		}
+	    		
+	    		<!--
+	    		if($("#bankTransfer").checked){
+	    			
+	    		}
+	    		-->
+
 				$.ajax({
 					url : "<%= contextPath %>/reservation.re",
-					type: "post",
-					successe : function(){
-						// 성공했을 경우 입력받은 데이터들을 DB 테이블에 넣어준다.
-						
+					type: "POST",
+
+					data: {
+						rvDate: $("#rvDate").val(),
+				        rePeople: $("#rePeople").val(),
+				        userName: $("#userName").val(),
+				        rvRequest: $("#rvRequest").val(),
+				        rvPayment : $("input[name='rvPayment']:checked").val()
 					},
+					success : function(){
+						// 성공했을 경우 입력받은 데이터들을 DB 테이블에 넣어준다. 
+						alert("예약이 완료되었습니다.");
+					}, 
 					error: function(){
-						
+						alert("예약 중 오류 발생.");
 					}
 				});
-				
+
 			}
+	    
+
+	    
 	    </script>
 	   
 	   
