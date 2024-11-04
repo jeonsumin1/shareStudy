@@ -62,7 +62,7 @@ body {
 
 #content {
     flex: 1;
-    padding-top: 400px;
+    padding-top: 180px;
 }
 
 table {
@@ -100,17 +100,14 @@ th, td {
 <body>	
 
 <%@ include file="/views/common/menubar.jsp" %>
-<% String alertMsg = (String)request.getAttribute("alertMsg"); %>
 
 <script>
 	
 	var msg = "<%=alertMsg%>";
-	
 	if(msg != "null"){
 		alert(msg);
 		<%session.removeAttribute("alertMsg");%>
 	}
-	
     	function enrollPage(){
     		location.href="<%=contextPath%>/enrollPage.shs";
 		}
@@ -133,8 +130,30 @@ th, td {
 			</form>
 		</div>
 	</div>
-
-
+	<!-- 
+	<span class="slideshow-container">
+                <div class="Slidesbackground">
+                    <div class="mySlides fade">
+                    <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2369&q=80" class="slideshow-image">
+                    </div>
+                    <div class="mySlides fade">
+                        <img src="https://images.unsplash.com/photo-1581888227599-779811939961?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2148&q=80" class="slideshow-image">
+                    </div>
+                    <div class="mySlides fade">
+                        <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80" class="slideshow-image">
+                    </div>
+                    <div class="mySlides fade">
+                        <img src="https://images.unsplash.com/photo-1527526029430-319f10814151?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80" class="slideshow-image">
+                    </div>
+                    <div class="mySlides fade">
+                        <img src="https://images.unsplash.com/photo-1600077029182-92ac8906f9a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80" class="slideshow-image">
+                    </div>
+                    <div class="mySlides fade">
+                        <img src=https://cdn.cnn.com/cnnnext/dam/assets/201030094143-stock-rhodesian-ridgeback-super-tease.jpg" class="slideshow-image">
+                    </div>
+                </div>
+             </span>
+ 	-->
 	<div id="content" style="display:flex; justify-content:center; flex-wrap: wrap;">
     <div id="product">
         <table style="margin: 10px; text-align: center; display: inline-block;">
@@ -146,7 +165,7 @@ th, td {
             <tr>
                 <td>Room No.999</td>
                 <td>수용인원 : 최대 4명</td>
-                <td>가격 : 30,000￦</td>
+                <td>가격 : 50,000￦</td>
             </tr>
         </table>
         
@@ -157,9 +176,9 @@ th, td {
                 alt="roomEx" id="roomEx" oncontextmenu="return false"></th>
             </tr>
             <tr>
-                <td>Room No.999</td>
-                <td>수용인원 : 최대 4명</td>
-                <td>가격 : 30,000￦</td>
+                <td>Room No.998</td>
+                <td>수용인원 : 최대 3명</td>
+                <td>가격 : 40,000￦</td>
             </tr>
         </table>
         
@@ -170,8 +189,8 @@ th, td {
                 alt="roomEx" id="roomEx" oncontextmenu="return false"></th>
             </tr>
             <tr>
-                <td>Room No.999</td>
-                <td>수용인원 : 최대 4명</td>
+                <td>Room No.997</td>
+                <td>수용인원 : 최대 2명</td>
                 <td>가격 : 30,000￦</td>
             </tr>
         </table>
@@ -182,9 +201,9 @@ th, td {
                 alt="roomEx" id="roomEx" oncontextmenu="return false"></th>
             </tr>
             <tr>
-                <td>Room No.999</td>
-                <td>수용인원 : 최대 4명</td>
-                <td>가격 : 30,000￦</td>
+                <td>Room No.996</td>
+                <td>수용인원 : 최대 1명</td>
+                <td>가격 : 20,000￦</td>
             </tr>
         </table>
     </div>
