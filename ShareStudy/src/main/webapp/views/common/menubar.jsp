@@ -6,6 +6,8 @@
 <%  
     String contextPath = request.getContextPath(); 
 	User userInfo = (User)session.getAttribute("userInfo");
+	/* alert 추가 */
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <head>
 <meta charset="UTF-8">
@@ -14,14 +16,11 @@
    <link href="${pageContext.request.contextPath}/views/common/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
  <style>
-<<<<<<< HEAD
    #logout{
    		text-decoration: none;
       color: grey;
    }
-=======
-  
->>>>>>> refs/remotes/origin/main
+
  </style>
 <title>메뉴바</title>
 </head>
