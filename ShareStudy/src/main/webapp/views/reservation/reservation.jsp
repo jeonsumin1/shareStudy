@@ -126,7 +126,6 @@
 					        <p> 요청사항 </p>
 					        <textarea id="request" name="request" class="form-control" cols="50" rows="5" style="resize:none;" placeholder="남기고 싶은 말을 적어주세요. (최대 500글자)"></textarea>
 						</div>
-						<button onclick="check();" class="btn btn-block" style="background-color: #a3c296; font-weight: bold;">확인하기</button>
 					</div>
 			    </div>
 			    <br><br>
@@ -221,9 +220,7 @@
 	    		
 	    		$("#selDate").text(selectDate);
 	    		$("#selUser").text(selectUser+ " 명");	
-	    		
-	    		
-	    		
+	    				
 	    	}
 	    	
 	    <%--
