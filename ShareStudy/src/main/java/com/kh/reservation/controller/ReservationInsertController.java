@@ -1,6 +1,8 @@
 package com.kh.reservation.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +38,12 @@ public class ReservationInsertController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+	
+		String rvUser = request.getParameter("rvUser");
+		String userName = request.getParameter("userName");
+		String phone = request.getParameter("phone");
+		String userRequest = request.getParameter("userRequest");
+		String rvPayment = request.getParameter("rvPayment");
 		
 		
 	}
