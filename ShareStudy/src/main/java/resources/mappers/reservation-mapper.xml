@@ -1,0 +1,24 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="insertReservation">
+	
+		INSERT INTO RESERVATION 
+		VALUES('STS'||RESER_SEQ.NEXTVAL,
+				'1',  <!-- 룸번호 -->
+				?,  <!-- 회원아이디 (회원 이름으로 테스트-> 아이디로 수정 필요) -->
+				?,
+				?,
+				SYSDATE, 
+				?,
+				?)
+	</entry>
+	
+	<!-- 상품 예약 여부 정보 업데이트 -->
+	<entry key="updateRoomStatement">
+		UPDATE ROOM 
+		SET STATUS='N'
+		WHERE ROOM_NO = ?
+	</entry>
+	
+	
+</properties>
