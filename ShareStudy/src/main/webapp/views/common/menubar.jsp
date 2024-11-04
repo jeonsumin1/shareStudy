@@ -47,7 +47,9 @@
    
       <div class="col-md-3 text-end">
         <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-primary">회원가입</button>
+        <form action="<%=contextPath %>/enrollForm.me">
+        <button class="btn btn-primary">회원가입</button>
+        </form>
       </div>
      
     </header>
