@@ -124,7 +124,7 @@
 						<br>
 						<div>
 					        <p> 요청사항 </p>
-					        <textarea id="request" name="request" class="form-control" cols="50" rows="5" style="resize:none;" placeholder="남기고 싶은 말을 적어주세요. (최대 500글자)"></textarea>
+					        <textarea id="userRequest" name="userRequest" class="form-control" cols="50" rows="5" style="resize:none;" placeholder="남기고 싶은 말을 적어주세요. (최대 500글자)"></textarea>
 						</div>
 					</div>
 			    </div>
@@ -164,15 +164,15 @@
 				    <div class="i" id="divBor">
 				    	<p>결제 수단 선택</p>
 				        <div class="radio">
-				            <input type="radio" name="card" id="card" value="신용카드"><label for="card" class="itext">신용카드</label>
+				            <input type="radio" name="rvPayment" id="card" value="신용카드"><label for="card" class="itext">신용카드</label>
 				        </div>
 						
 				        <div class="radio">
-				            <input type="radio" name="card" id="bankTransfer" value="무통장 입금"><label for="bankTransfer" class="itext">무통장 입금</label>  
+				            <input type="radio" name="rvPayment" id="bankTransfer" value="무통장 입금"><label for="bankTransfer" class="itext">무통장 입금</label>  
 				        </div>
 				        
 				        <div class="radio">
-				            <input type="radio" name="card" id="kpay" value="카카오페이"><label for="kpay" class="itext">카카오페이</label>  <!-- 신용카드 기능 구현 후 추가 구현하기 -->
+				            <input type="radio" name="rvPayment" id="kpay" value="카카오페이"><label for="kpay" class="itext">카카오페이</label>  <!-- 신용카드 기능 구현 후 추가 구현하기 -->
 				        </div>
 					</div>
 			    </div>
@@ -202,18 +202,14 @@
 	    		console.log($("#rvUser").val());
 	    		console.log($("#userName").val());  <%-- --%>
 	    		console.log($("#phone").val());
-	    		console.log($("#request").val());
-	    		console.log($("input[name='card']:checked").val());
-	    		
-	    		var result = $("input[name='card']:checked").val();
-	    		$("#result").text(result);
-	    		
+	    		console.log($("#userRequest").val());
+	    		console.log($("input[name='rvPayment']:checked").val());	    		
 	    	}
 	    	
 	    	<%-- 결제 예정 금액 테이블에 선택한 날짜와 예약 인원 표시 --%>
 	    	function selDate(){
-	    		console.log($("#rvDate").val());
-	    		console.log($("#rvUser").val());
+	    		//console.log($("#rvDate").val());
+	    		//console.log($("#rvUser").val());
 	    		
 	    		var selectDate = $("#rvDate").val();
 	    		var selectUser = $("#rvUser").val();
@@ -223,8 +219,16 @@
 	    				
 	    	}
 	    	
-	    <%--
+
 	    	function isnertReservation(){
+	    		console.log($("#rvDate").val());
+	    		console.log($("#rvUser").val());
+	    		console.log($("#userName").val());  <%-- --%>
+	    		console.log($("#phone").val());
+	    		console.log($("#userRequest").val());
+	    		console.log($("input[name='rvPayment']:checked").val());
+	    		
+
 				$.ajax({
 					url : "<%= contextPath %>/reservation.re",
 					type: "post",
@@ -233,7 +237,8 @@
 				        rvUser: $("#rvUser").val(),
 				        userName: $("#userName").val(),
 				        phone: $("#phone").val(),
-				        request: $("#request").val()
+				        request: $("#userRequest").val()
+				        rvPayment : $("input[name='rvPayment']:checked").val()
 					}
 					success : function(){
 						// 성공했을 경우 입력받은 데이터들을 DB 테이블에 넣어준다. 
@@ -243,10 +248,10 @@
 						alert("예약 중 오류 발생.");
 					}
 				});
-				
+
 			}
 	    
-	    --%>
+
 	    
 	    </script>
 	    
