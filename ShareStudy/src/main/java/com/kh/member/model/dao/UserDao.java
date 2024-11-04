@@ -36,8 +36,7 @@ public class UserDao {
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userPw);
 			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
+			if(rset.next()) {
 				userInfo = new User(rset.getString("USER_ID"),
 									rset.getString("USER_PW"),
 									rset.getString("USER_NAME"),
@@ -49,7 +48,7 @@ public class UserDao {
 									rset.getString("STATUS"),
 									rset.getString("ZIP_CODE"),
 									rset.getString("ADDRESS"),
-									rset.getString("DETAIL_ADDRESS"));
+									rset.getString("DETAIL_ADDRESS"));	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
