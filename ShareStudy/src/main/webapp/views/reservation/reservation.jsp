@@ -164,7 +164,6 @@
 				    <hr>
 				    <div class="i" id="divBor">
 				    	<p>결제 수단 선택</p>
-				    	<p id="result">결제 수단</p>
 				        <div class="radio">
 				            <input type="radio" name="card" id="card" value="신용카드"><label for="card" class="itext">신용카드</label>
 				        </div>
