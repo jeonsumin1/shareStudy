@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.kh.member.model.vo.User"%>
 <!DOCTYPE html>
 <html>
-<% String contextPath = request.getContextPath(); %>
+<%  
+    String contextPath = request.getContextPath(); 
+	User userInfo = (User)session.getAttribute("userInfo");
+%>
 <head>
 <meta charset="UTF-8">
    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
@@ -10,7 +14,14 @@
    <link href="${pageContext.request.contextPath}/views/common/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
  <style>
-   
+<<<<<<< HEAD
+   #logout{
+   		text-decoration: none;
+      color: grey;
+   }
+=======
+  
+>>>>>>> refs/remotes/origin/main
  </style>
 <title>메뉴바</title>
 </head>
@@ -35,16 +46,26 @@
       </div>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">메인메뉴</a></li>
-        <li><a href="#" class="nav-link px-2">메뉴1</a></li>
-        <li><a href="#" class="nav-link px-2">메뉴2</a></li>
-        <li><a href="${contextPath}/share/views/manager/m_manager.jsp" class="nav-link px-2">메뉴3</a></li>
+        <li><a href="<%=contextPath%>/noticeBoard.shs" class="nav-link px-2 link-secondary">공지사항</a></li>
+        <li><a href="<%=contextPath%>/productDetail.shs" class="nav-link px-2">상품 상세보기</a></li>
+        <li><a href="<%=contextPath%>/reviewBoard.shs" class="nav-link px-2">리뷰게시판</a></li>
+        <li><a href="${contextPath}/share/views/manager/m_Frame.jsp" class="nav-link px-2">관리자(임시)</a></li>
+    
       </ul>
-
+   		
+   	  <%if(userInfo==null){%>
       <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+      <form action="<%=contextPath %>/login.shs">
+        <button type="submit" class="btn btn-outline-primary me-2">로그인</button>
+       </form>
         <button type="button" class="btn btn-primary">회원가입</button>
       </div>
+      <%}else{%>
+      <b><%=userInfo.getUserName()%>님 환영합니다.
+      <button type="submit" class="btn btn-outline-primary me-2">마이페이지</button>
+      <a href="<%=contextPath%>/logout.shs" id="logout">로그아웃</a></b>
+      <%}%>
+     
     </header>
   </div>
 

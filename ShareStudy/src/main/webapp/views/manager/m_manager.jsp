@@ -11,7 +11,7 @@
 <%@ include file="/views/common/menubar.jsp" %>
 </div>
 <h1>관리자 로그인 테스트</h1>
-<form action="<%=contextPath%>/login.mn" id="login-form" method="post">
+<form action="<%=contextPath%>/login.ma" id="login-form" method="post">
 <label for="m_id">관리자 아이디: </label>
 <input type="text" name="mid" value=""><br>
 <label for="m_pwd">관리자 비밀번호: </label>
