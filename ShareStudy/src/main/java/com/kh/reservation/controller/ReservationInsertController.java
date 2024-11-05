@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.vo.User;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Reservation;
 
@@ -45,42 +46,38 @@ public class ReservationInsertController extends HttpServlet {
 		// 임시 → 상품 상세 페이지에서 전달받은 roomNumber값으로 지정해야 한다. 
 		String roomNo = "1";
 		
-		String userId = request.getParameter("userName"); // (전달받은 회원의 아이디를 전달해야 한다.)
-		int rePeople = Integer.parseInt(request.getParameter("rePeople")); // 예약 인원수 
+		String userId = request.getParameter("userId"); // (전달받은 회원의 아이디를 전달해야 한다.)
+		userId = "1111";
 		String rvDate = request.getParameter("rvDate"); //방문 날짜
-		String rvPayment = request.getParameter("rvPayment"); // 결제 수단
+		int rePeople = Integer.parseInt(request.getParameter("rePeople")); // 예약 인원수 
 		String rvRequest = request.getParameter("rvRequest"); //요청사항
-				
+		String rvPayment = request.getParameter("rvPayment"); // 결제 수단
+		String bank = request.getParameter("bank"); 			
+		String rvName = request.getParameter("rvName"); 			
+		String payDate = request.getParameter("payDate"); 			
+
+		
 		System.out.println(roomNo+" "+userId+" "+rePeople+" "+rvDate+" "+rvPayment+" "+rvRequest);
 		
-		Reservation reserInfo = new Reservation(roomNo, userId,rePeople,rvDate,rvPayment,rvRequest);
+		Reservation reserInfo = new Reservation(roomNo,userId,rePeople,rvDate,rvPayment,rvRequest);
 		
+		// 예약 정보 저장 메소드 
+		int result = new ReservationService().insertReservation(reserInfo, userId, bank, rvName, payDate);
 		
-		int result = new ReservationService().insertReservation(reserInfo);
 		// 결제 수단에 따라 저장 테이블 따로?
 		// 무통장 입금, 신용카드 
 		String alertMsg = "";
+				
+		request.getSession().setAttribute("alertMsg", alertMsg);
 		
 		if(result>0) {
 			
-			// 무통장 입금인 경우 
-			if(rvPayment.equals("bank")) {
-				// 무통장 입금 테이블에 데이터 저장 
-				//int bResert = new ReservationService().insertBank();
-			}else if(rvPayment.equals("card")) { // 신용카드 결제인 경우 
-				// 신용카드 테이블에 데이터 저장
-				//int cResult = new ReservationService().insertCard();
-			}
+			//request.getRequestDispatcher("").forward(request, response);
+		}else {
 			
-			
-			System.out.println("성공");
-			alertMsg = "예약이 완도되었습니다.";
-		}else { // 예약 정보, 예약여부 변경 실패			
-			System.out.println("실패");
-			alertMsg = "예약에 실패하셨습니다. 다시 시도해 주세요.";
 		}
 		
-		request.getSession().setAttribute("alertMsg", alertMsg);
+		
 	}
 
 }

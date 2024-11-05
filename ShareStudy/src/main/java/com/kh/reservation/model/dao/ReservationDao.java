@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -36,11 +37,13 @@ public class ReservationDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, reserInfo.getUserId());
-			pstmt.setInt(2, reserInfo.getRePeople());
-			pstmt.setString(3, reserInfo.getReDate());
-			pstmt.setString(4, reserInfo.getRvPayment());
-			pstmt.setString(5, reserInfo.getRvRequest());
+			pstmt.setString(1, reserInfo.getRvNo());
+			pstmt.setString(2, "1");
+			pstmt.setString(3, reserInfo.getUserId());
+			pstmt.setInt(4, reserInfo.getRePeople());
+			pstmt.setString(5, reserInfo.getReDate());
+			pstmt.setString(6, reserInfo.getRvPayment());
+			pstmt.setString(7, reserInfo.getRvRequest());
 			
 			result = pstmt.executeUpdate();
 			
@@ -78,5 +81,61 @@ public class ReservationDao {
 		
 		return result;
 	}
+
+	// 예약 번호 시퀀스 번호 추출 메소드 
+	public String selectRvNo(Connection conn) {
+		
+		String rvNo = "";
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectRvNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				rvNo = rset.getString("RV_NO");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return rvNo;
+	}
+
+	public int insertRvPayment(Connection conn, String rvNo, String userId, String bank, String rvName, String payDate) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertRvPayment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, rvNo);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, bank);
+			pstmt.setString(4, rvName);
+			pstmt.setString(5, payDate);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
+
+	
 
 }
