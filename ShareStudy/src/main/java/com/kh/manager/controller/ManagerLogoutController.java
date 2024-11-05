@@ -27,13 +27,14 @@ public class ManagerLogoutController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 HttpSession session = request.getSession();
-			
-			session.removeAttribute("loginManager"); 
-			
-			//관리자페이지 나가서 메인페이지로 
-			response.sendRedirect(request.getContextPath());
+
 		
+        HttpSession session = request.getSession();
+		
+		session.removeAttribute("loginManager"); 
+		
+		//관리자페이지 나가서 메인페이지로 
+		response.sendRedirect(request.getContextPath());
 	}
 
 	/**
