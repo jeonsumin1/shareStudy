@@ -108,13 +108,13 @@
 				        <br>
 				        <div>
 					        <p> 성명 </p>
-					        <input type="text" name="userName" id="userName" class="form-control" value="예약자" readonly>  <!-- 로그인한 사용자 이름 불러오기 -->
+					        <input type="text" name="userName" id="userName" class="form-control" value="${userInfo.getUserName}" readonly>  <!-- 로그인한 사용자 이름 불러오기 -->
 				        </div>
 				
 						<br>
 						<div>
 					        <p> 휴대폰 번호 </p>
-					        <input type="text" name="phone" id="phone" class="form-control" value="010-1111-1111" readonly>
+					        <input type="text" name="phone" id="phone" class="form-control" value="${userInfo.getUserPhone}" readonly>
 						</div>
 					
 						<br>
@@ -183,7 +183,7 @@
 					<div>
 					   입금은행:
 		               <select name="bank" class="form-control" required>
-		               	   <option disabled selected>입금 은행 선택</option>
+		               	   <option value="NO" disabled selected>입금 은행 선택</option>
                            <option value="KI">기업은행 / 521-458845-01-255 / 쉐어스터디(주) </option>
                            <option value="KUK">국민은행 / 465201-01-222569 / 쉐어스터디(주) </option>
                        </select>
@@ -271,27 +271,22 @@
 	    	function insertReservation(){
 	    		var rvDate = $("#rvDate").val();
 				var rePeople = $("#rePeople").val();
-				var userName = $("#userName").val();
+				//var userName = $("#userName").val();
 				var rvRequest = $("#rvRequest").val();
-				var rvPayment = $("input[name='rvPayment']:checked").val();
+				var rvPayment = $("input[name='rvPayment']:checked").val(); // 결제 수단
 	    		var agrementChk = $("input[name='agreement']:checked").length;
 	    		
 	    		// 무통장 입금시 전달할 데이터. bank (name), payName (ID), payDate (ID)
 	    		var bank = $("select[name='bank'] :selected").val();
 	    		var rvName = $("#rvName").val();
-	    		var payDate = $("#payDate").val()
-	    		
-	    		
-	    		//console.log($("select[name='bank'] :selected").val());
-	    		console.log($("#rvName").val());
-	    		console.log($("#payDate").val());
-
-	    		
+	    		var payDate = $("#payDate").val();
 	    		
 	    		var sub = $("input[name='agreement']");
+
+	    		console.log($("select[name='bank'] :selected").val());
 	    		
 				<%-- 예약 날짜, 인원수, 결제 방법 미입력시 focus --%>
-	    		if(!rvDate || !rePeople || !rvPayment){
+	    		if(!rvDate || !rePeople || !rvPayment ){
 	    			if(!rvDate){
 		    			$("#rvDate").focus();
 		    			return;
@@ -306,6 +301,27 @@
 		    			return;
 		    		}
 	    		}
+	    		
+	    		<%-- 무통장입금 결제정보 미입력시 focus --%>
+	    		if((rvPayment === "bank") && (bank == "NO") && (!rvName || !payDate)){
+	    			if(bank == "NO"){
+	    				$("#bank").focus();
+	    				alert("입금은행을 선택해 주세요.");
+	    				return;
+	    			} 
+	    		
+	    			if(!rvName){
+	    				$("#rvName").focus();
+	    				alert("입금자 명을 입력해 주세요.");
+	    				return;
+	    			}
+	    			if(!payDate){
+	    				$("#payDate").focus();
+	    				alert("입금 예정일을 선택해 주세요.");
+	    				return;
+	    			}
+	    		}
+	    		
 	    		
 	    		<%-- 서비스 전체동의를 하지 않은 경우 결제 불가능하게 하기.
 	    			 	| ** → DB 컬럼 추가. [서비스 동의 여부]
@@ -327,25 +343,38 @@
 	    	        return;
 	    		}
 	    		
-	 
-				$.ajax({
-					url : "<%= contextPath %>/reservation.re",
-					type: "POST",
-					data: {
-						rvDate: rvDate,
-				        rePeople: rePeople,
-				        userName: userName,
-				        rvRequest: rvRequest,
-				        rvPayment : $("input[name='rvPayment']:checked").val()  <%-- check되어있는 현재 값을 가져와야 한다. --%>
-					},
-					success : function(){
-						// 성공했을 경우 입력받은 데이터들을 DB 테이블에 넣어준다.
-						alert("예약이 완료되었습니다.");
-					},
-					error: function(){
-						alert("예약 중 오류 발생.");
-					}
-				});
+	    		
+	    		if (rvPayment === "bank") {
+					$.ajax({
+						url : "${contextPath}/reservation.re",
+						type: "POST",
+						data: {
+							userId : "${userInfo.getUserId}", 
+							rvDate: rvDate,
+					        rePeople: rePeople,
+					        rvRequest: rvRequest,
+					        rvPayment : $("input[name='rvPayment']:checked").val(),  <%-- check되어있는 현재 값을 가져와야 한다. --%>
+							bank : bank,
+							rvName : rvName,
+							payDate : payDate
+						},
+						success : function(){
+							// 성공했을 경우 입력받은 데이터들을 DB 테이블에 넣어준다.
+							alert("예약이 완료되었습니다.");
+							
+						},
+						error: function(){
+							alert("예약 중 오류 발생.");
+						}
+					});
+				}else if (rvPayment === "card"){
+							alert("준비중.");
+					
+				}else if(rvPayment === "pay"){
+							alert("준비중.");
+					
+				}
+				
 			}
 	   
 	   
