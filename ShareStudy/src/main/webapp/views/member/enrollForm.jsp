@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<% String contextPath = request.getContextPath(); %>
+<%String contextPath = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -402,6 +402,41 @@ input[type="email"]{
                             agree[i].checked = false;
                         }
                     }
+                }
+                
+                
+                function checkId(){
+                	
+                	var chId = $("#userId");
+                	var share = "<%= contextPath %>";
+                	
+                	console.log(chId);
+                	$.ajax({
+                		url : share+"/idCheck.me",
+                		type : "GET",
+                		data : {
+                			chId : chId.val()
+                	
+                		},
+                		success : function(result){
+                			console.log(result)
+                			if(result=='NO'){
+                				alert("이미 존재하는 아이디입니다. 다시 입력주세요.")
+                			}else if(result=='YES'){
+                				if(confirm("사용 가능한 아이디입니다. 정말 사용하시겠습니까?")){
+                					
+                					$("#submit").removeAttr("disabled");
+                					chId.attr("readonly",true);
+                				}else{
+                					chId.focus();
+                				}
+                			}
+                		},
+                		error : function(){
+                			console.log("통신실패");
+                		}
+                	});
+                	
                 }
                     
 
