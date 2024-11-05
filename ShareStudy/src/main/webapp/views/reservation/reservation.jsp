@@ -180,9 +180,11 @@
 					</div>
 			    </div>
 			    <br><hr><br>
+			    
 			    <!-- 무통장입금을 눌렀을 경우 하단에 입금 정보 입력 -->
 				<!-- 입금은행, 입금자, 입금예정일 -->
-				<div class="i divBor">
+				
+				<div class="i divBor" id="bInfo" style="display:none;">
 					<div>
 					   입금은행: 
 		               <select name="bank" class="form-control">
@@ -229,11 +231,15 @@
 	   
 	    <script>
 
-			<%-- 무통장 입금 클릭시 
+			<%-- 무통장 입금 클릭시 결제 정보 입력 영역 보여주기 --%>
 			function Rvbank(){
-					
+				if($("#bankTransfer").checked){
+					$("#bInfo").css("display","block");
+				}else{
+					$("#bInfo").css("display","none");
+				}
 				
-			}--%>
+			}
 			
 	    	<%-- 결제 예정 금액 테이블에 선택한 날짜와 예약 인원 표시 --%>
 	    	function selDate(){
@@ -351,7 +357,6 @@
 
 			}
 	    
-
 	    
 	    </script>
 	   
