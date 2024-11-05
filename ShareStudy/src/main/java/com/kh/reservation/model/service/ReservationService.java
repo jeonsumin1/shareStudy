@@ -40,7 +40,7 @@ public class ReservationService {
 			}else {
 				System.out.println("예약정보 저장 실패--");
 			}
-		}else {
+		}else { 
 			System.out.println("예약정보 저장 실패--");
 		}
 		

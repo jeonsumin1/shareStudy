@@ -58,7 +58,7 @@ public class ReservationInsertController extends HttpServlet {
 
 		
 		System.out.println(roomNo+" "+userId+" "+rePeople+" "+rvDate+" "+rvPayment+" "+rvRequest);
-		
+	 
 		Reservation reserInfo = new Reservation(roomNo,userId,rePeople,rvDate,rvPayment,rvRequest);
 		
 		// 예약 정보 저장 메소드 

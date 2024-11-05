@@ -308,7 +308,7 @@
 	    				$("#bank").focus();
 	    				alert("입금은행을 선택해 주세요.");
 	    				return;
-	    			}
+	    			} 
 	    		
 	    			if(!rvName){
 	    				$("#rvName").focus();

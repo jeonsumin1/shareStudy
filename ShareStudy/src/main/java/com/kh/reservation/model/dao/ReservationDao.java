@@ -46,7 +46,7 @@ public class ReservationDao {
 			pstmt.setString(7, reserInfo.getRvRequest());
 			
 			result = pstmt.executeUpdate();
-			
+			 
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

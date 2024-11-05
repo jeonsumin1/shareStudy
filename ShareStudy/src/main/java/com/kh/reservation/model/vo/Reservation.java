@@ -33,7 +33,7 @@ public class Reservation {
 			String rvPayment, String rvRequest) {
 		super();
 		this.rvNo = rvNo;
-		this.roomNo = roomNo;
+		this.roomNo = roomNo; 
 		this.userId = userId;
 		this.rePeople = rePeople;
 		this.reDate = reDate;
