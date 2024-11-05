@@ -59,7 +59,7 @@ public class UserDao {
 		return userInfo;
 	}
 	
-public int insertMember(Connection conn, User u) {
+	public int insertMember(Connection conn, User u) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -89,7 +89,7 @@ public int insertMember(Connection conn, User u) {
 		return result;
 	}
 
-public boolean idCheck(Connection conn, String chId) {
+	public boolean idCheck(Connection conn, String chId) {
 	
 	PreparedStatement pstmt = null;
 	ResultSet rset = null;
@@ -119,5 +119,33 @@ public boolean idCheck(Connection conn, String chId) {
 	return flag;
 }
 
+	public int updateUser(Connection conn, User u) {
+
+	PreparedStatement pstmt = null;
+	int result = 0;
+	
+	String sql = prop.getProperty("updateUser");
+	
+	try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, u.getUserName());
+		pstmt.setString(2, u.getRrn());
+		pstmt.setString(3, u.getUserPw());
+		pstmt.setString(4, u.getUserPhone());
+		pstmt.setString(5, u.getEmail());
+		pstmt.setString(6, u.getAdAccept());
+		pstmt.setString(7, u.getUserId());
+		
+		result = pstmt.executeUpdate();
+
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally {
+		JDBCTemplate.close(pstmt);
+	}
+
+	return result;
+}
 
 }

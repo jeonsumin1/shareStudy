@@ -45,6 +45,22 @@
 	WHERE USER_ID = ?
 	</entry>
 	
+	<!-- 회원정보 수정 -->
+	<entry key="updateUser">
+	UPDATE USERINFO
+	SET USER_NAME = ?,
+    RRN = ?,
+    USER_PW = ?,
+    PHONE = ?,
+    EMAIL = ?,
+    ADACCEPT = ?
+	WHERE USER_ID = ?
+	AND STATUS = 'Y'
+	</entry>
+	
+
+	
+	
 	
 
 
