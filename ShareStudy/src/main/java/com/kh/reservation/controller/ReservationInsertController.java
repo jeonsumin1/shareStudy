@@ -50,17 +50,29 @@ public class ReservationInsertController extends HttpServlet {
 		String rvDate = request.getParameter("rvDate"); //방문 날짜
 		String rvPayment = request.getParameter("rvPayment"); // 결제 수단
 		String rvRequest = request.getParameter("rvRequest"); //요청사항
-		
+				
 		System.out.println(roomNo+" "+userId+" "+rePeople+" "+rvDate+" "+rvPayment+" "+rvRequest);
 		
 		Reservation reserInfo = new Reservation(roomNo, userId,rePeople,rvDate,rvPayment,rvRequest);
 		
 		
 		int result = new ReservationService().insertReservation(reserInfo);
-		
+		// 결제 수단에 따라 저장 테이블 따로?
+		// 무통장 입금, 신용카드 
 		String alertMsg = "";
 		
 		if(result>0) {
+			
+			// 무통장 입금인 경우 
+			if(rvPayment.equals("bank")) {
+				// 무통장 입금 테이블에 데이터 저장 
+				//int bResert = new ReservationService().insertBank();
+			}else if(rvPayment.equals("card")) { // 신용카드 결제인 경우 
+				// 신용카드 테이블에 데이터 저장
+				//int cResult = new ReservationService().insertCard();
+			}
+			
+			
 			System.out.println("성공");
 			alertMsg = "예약이 완도되었습니다.";
 		}else { // 예약 정보, 예약여부 변경 실패			

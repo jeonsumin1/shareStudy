@@ -160,17 +160,17 @@
 				    <div class="i divBor">
 				    	<p>결제 수단 선택</p>
 				        <div class="radio">
-				            <input type="radio" name="rvPayment" id="bankTransfer" value="무통장입금" onclick="Rvbank();"><label for="bankTransfer" class="itext">무통장입금</label>
+				            <input type="radio" name="rvPayment" id="bankTransfer" value="bank"><label for="bankTransfer" class="itext">무통장입금</label>
 				        </div>
 					  
 					
 				        <div class="radio">
-				            <input type="radio" name="rvPayment" id="card" value="신용카드"><label for="card" class="itext">신용카드</label>
+				            <input type="radio" name="rvPayment" id="card" value="card"><label for="card" class="itext">신용카드</label>
 				        </div>
 						
 				       
 				        <div class="radio">
-				            <input type="radio" name="rvPayment" id="kpay" value="카카오페이"><label for="kpay" class="itext">카카오페이</label>  <!-- 신용카드 기능 구현 후 추가 구현하기 -->
+				            <input type="radio" name="rvPayment" id="kpay" value="pay"><label for="kpay" class="itext">카카오페이</label>  <!-- 신용카드 기능 구현 후 추가 구현하기 -->
 				        </div>
 					</div>
 			    </div>
@@ -182,25 +182,27 @@
 				<div class="i divBor" id="bInfo" style="display:none;">
 					<div>
 					   입금은행:
-		               <select name="bank" class="form-control">
-		               	   <option value="NO" selected>입금 은행 선택</option>
-                              <option value="기업은행">기업은행 / 521-458845-01-255 / 쉐어스터디(주) </option>
-                              <option value="국민은행">국민은행 / 465201-01-222569 / 쉐어스터디(주) </option>
-                          </select>
+		               <select name="bank" class="form-control" required>
+		               	   <option disabled selected>입금 은행 선택</option>
+                           <option value="KI">기업은행 / 521-458845-01-255 / 쉐어스터디(주) </option>
+                           <option value="KUK">국민은행 / 465201-01-222569 / 쉐어스터디(주) </option>
+                       </select>
+					</div>
+					
+					<br>
+					
+					<div>  
+		               입금자 명 <input type="text" id="rvName" class="form-control" required>
 					</div>
 					
 					<br>
 					
 					<div>
-		               입금자 명 <input type="text" name="usserName" id="userName" class="form-control">
-					</div>
-					
-					<br>
-					
-					<div>
-		               입금예정일 <input type="date" class="form-control">
+		               입금예정일 <input type="date" class="form-control" id="payDate" required>
 		               <!-- 7일 이후에는 선택 못하도록 조건처리하기 -->
-					</div>				              
+					</div>	
+
+					<p style="color:red; font-size:12px;">* 무통장입금은 입금 완료 확인 후 예약이 확정됩니다.</p>		              
 				</div>
 					  
 				<br><br>
@@ -222,18 +224,20 @@
 		    <button onclick="insertReservation();" class="btn btn-block" style="background-color: #A3C296; font-weight: bold;">결제하기</button>
 	  
 	    <script>
+	 
+	    	
+		    $(function(){
+		    	$("input[type='radio']").on("click", function(){
+			    	// 라디오 버튼 중 bankTransfer를 체크했을 경우에만 화면이 보여지게 하기 // 무통장 입금		
+		    												//$("선택자").is("선택자") <br> (선택 요소 일치 여부 판단 → 논리값 반환)
+		    		if($("#bankTransfer").is(":checked")){
+		    			$("#bInfo").css("display","block");
+		    		}else{
+		    			$("#bInfo").css("display","none");
+					}
+		    	});
+		    });
 	    
-			<%-- 무통장 입금 클릭시 결제 정보 입력 영역 보여주기 --%>
-			function Rvbank(){
-				var bankTransfer = $("#bankTransfer");
-				
-				if(bankTransfer.checked){
-					$("#bInfo").css("display","block");
-				}else{
-					$("#bInfo").css("display","none");
-				}
-			}
-			
 	    	<%-- 결제 예정 금액 테이블에 선택한 날짜와 예약 인원 표시 --%>
 	    	function selDate(){
 	    		//console.log($("#rvDate").val());
@@ -244,16 +248,11 @@
 	    		
 	    		$("#selDate").text(selectDate);
 	    		$("#selUser").text(selectUser + " 명");	
-	    		
 	    	}
 	    	
 	    	// 서비스 동의 전체 체크
 	    	function chkAll(){
-	    		//console.log($("#all"));
-	    		//console.log($("input[name='agreement']"));
-	    		
 	    		var all = $("#all")[0]; /* Object 타입으로 반환 → 0번 인덱스에 있는 input 요소를 가져와야 한다.*/
-	    		
 	    		var sub = $("input[name='agreement']");
 	    		
 	    		if(all.checked){	    			
@@ -261,7 +260,6 @@
 	    			for(var i=0; i<sub.length; i++){
     					sub[i].checked = true;
 	    			}
-	    			
 	    		}else{ // 체크 해제
 	    			for(var i=0; i<sub.length; i++){
     					sub[i].checked = false;
@@ -269,6 +267,7 @@
 	    		}		
 	    	}
 	    	
+	    	// 예약 정보 전달
 	    	function insertReservation(){
 	    		var rvDate = $("#rvDate").val();
 				var rePeople = $("#rePeople").val();
@@ -277,17 +276,19 @@
 				var rvPayment = $("input[name='rvPayment']:checked").val();
 	    		var agrementChk = $("input[name='agreement']:checked").length;
 	    		
-	    		console.log($("input[name='agreement']"));
+	    		// 무통장 입금시 전달할 데이터. bank (name), payName (ID), payDate (ID)
+	    		var bank = $("select[name='bank'] :selected").val();
+	    		var rvName = $("#rvName").val();
+	    		var payDate = $("#payDate").val()
+	    		
+	    		
+	    		//console.log($("select[name='bank'] :selected").val());
+	    		console.log($("#rvName").val());
+	    		console.log($("#payDate").val());
+
+	    		
 	    		
 	    		var sub = $("input[name='agreement']");
-	    		console.log(sub.length);
-	    		// 무통장입금체크 시 페이지
-	    		console.log($("#bankTransfer").val());	    		
-	    		console.log($("#card").val());	    		
-	    		console.log($("#kpay").val());	    		
-	    		// 신용카드 체크 시 페이지
-	    		
-	    		// 카카오페이 체크 시 페이지	
 	    		
 				<%-- 예약 날짜, 인원수, 결제 방법 미입력시 focus --%>
 	    		if(!rvDate || !rePeople || !rvPayment){
@@ -309,8 +310,7 @@
 	    		<%-- 서비스 전체동의를 하지 않은 경우 결제 불가능하게 하기.
 	    			 	| ** → DB 컬럼 추가. [서비스 동의 여부]
 	    				| ** → 전체 동의를 했을 경우 Y로 저장되게 하기.
-	    		--%>
-	    		
+	    		--%>    		
 	    		if(agrementChk !== sub.length){
 	    			alert("서비스 동의를 해주시기 바랍니다.");
 	    			
