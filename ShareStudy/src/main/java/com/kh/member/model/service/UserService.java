@@ -32,5 +32,16 @@ public class UserService {
 		}
 		return result;
 	}
+
+	public boolean idCheck(String chId) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		boolean flag = new UserDao().idCheck(conn,chId);
+		
+		JDBCTemplate.close(conn);
+		
+		return flag;
+	}
 	
 }
