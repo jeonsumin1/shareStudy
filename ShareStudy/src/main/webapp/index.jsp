@@ -190,5 +190,6 @@ th, td {
 </div>
 <%@ include file="/views/common/footer.jsp" %>
 
+
 </body>
 </html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="insertRoom">
+        INSERT INTO ROOM (ROOM_NO, REGION_NO, ROOM_SIZE, ROOM_NAME, ROOM_ADDRESS, 
+        PRICE, USE_NIGHT, PARKING, EATING, STATUS) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Y')
+    </entry>
+    
+    <entry key="insertAttachment">
+        INSERT INTO ATTACHMENT (FILE_NO, ROOM_NO, ORIGIN_NAME, CHANGE_NAME, 
+        FILE_PATH, UPLOAD_DATE, FILE_LEVEL, STATUS)
+        VALUES (SEQ_FNO.NEXTVAL, ?, ?, ?, ?, SYSDATE, ?, 'Y')
+    </entry>
+    
+    <entry key="selectThumbnailList">
+        SELECT R.*, A.FILE_PATH || A.CHANGE_NAME AS TITLE_IMG
+        FROM ROOM R
+        LEFT JOIN (SELECT * FROM ATTACHMENT WHERE FILE_LEVEL = 1) A ON R.ROOM_NO = A.ROOM_NO
+        WHERE R.STATUS = 'Y'
+        ORDER BY R.ROOM_NO DESC
+    </entry>
+</properties>
