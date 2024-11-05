@@ -23,10 +23,10 @@
 		</div>
 	</div>
 
-	<section class="goods" id="goods">
-		<h2>관리</h2>
+	<section class="room" id="room">
+		<h2>룸(상품) 관리</h2>
 
-		<h3>관리1</h3>
+		<h3>룸(상품) 관리</h3>
 		<table>
 			<tr>
 			    <th width="12%">행1</th>
@@ -49,10 +49,10 @@
 		</table>
 	</section>
 
-	<section class="order" id="order">
+	<section class="reservation" id="reservation">
 		<h2>관리</h2>
 
-		<h3>관리2</h3>
+		<h3>회원 예약</h3>
 		<table>
 			<tr>
 			    <th width="7%">행1</th>
@@ -76,7 +76,7 @@
 			</tr>
 		</table>
 
-		<h3>관리3</h3>
+		<h3>비회원 예약</h3>
 		<table>
 			<tr>
 			    <th width="7%">행1</th>
@@ -133,11 +133,11 @@
   
 		<table>
 			<tr>
-				<th width="25%">행1</th>
-				<th width="15%">행2</th>
-				<th width="40%">행3</th>
-				<th width="10%">행4</th>
-				<th width="10%">행5</th>
+				<th width="25%">작성일</th>
+				<th width="15%">작성자</th>
+				<th width="40%">리뷰 제목</th>
+				<th width="10%">상세보기</th>
+				<th width="10%">삭제</th>
 			</tr>
 			<tr>
 				<td>값1</td>
@@ -148,15 +148,34 @@
 			</tr>
 		</table>
 	</section>
+	
+	<section class="question" id="question">
+		<h2>1:1상담 신청 내역</h2>
+  
+		<table>
+			<tr>
+				<th width="25%">신청자</th>
+				<th width="25%">전화번호</th>
+				<th width="40%">신청일</th>
+				<th width="10%">삭제</th>
+			</tr>
+			<tr>
+				<td>값1</td>
+				<td>값2</td>
+				<td>값3</td>
+				<td>값4</td>
+			</tr>
+		</table>
+	</section>
 
 	<section class="graph_n_chart" id="chart_wrap">
 		<h2>통계</h2>
 		<div class="chart1">
-			<h3>순위</h3>
+			<h3>순위(그래프 예정)</h3>
 			<canvas id="myChart1"></canvas>
 		</div>
 		<div class="chart2">
-			<h3>카테고리</h3>
+			<h3>카테고리(그래프 예정)</h3>
 			<div class="chart2_group">
 				<canvas id="myChart2"></canvas>
 			</div>
