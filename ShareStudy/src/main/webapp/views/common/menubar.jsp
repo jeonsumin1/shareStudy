@@ -55,12 +55,14 @@
    		
    	  <%if(userInfo==null){%>
       <div class="col-md-3 text-end">
-      <form action="<%=contextPath%>/login.shs">
-        <button type="submit" class="btn btn-outline-primary me-2">로그인</button>
-       </form>
-       <form action="<%=contextPath%>/enrollForm.me">
-        <button type="submit" class="btn btn-primary">회원가입</button>
+
+
+        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        <form action="<%=contextPath %>/enrollForm.me">
+        <button class="btn btn-primary">회원가입</button>
         </form>
+
+
       </div>
       <%}else{%>
       <b><%=userInfo.getUserName()%>님 환영합니다.

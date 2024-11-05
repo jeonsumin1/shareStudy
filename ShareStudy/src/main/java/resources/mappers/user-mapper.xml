@@ -10,4 +10,42 @@
 		AND USER_PW = ?
 		AND STATUS = 'Y'
 	</entry>
+
+	
+	<!-- 회원가입 구문 -->
+	<entry key="enrollUser">
+		INSERT INTO USERINFO(USER_ID,
+							 USER_PW,
+							 USER_NAME,
+							 USER_PHONE,
+							 RRN,
+							 EMAIL,
+							 ZIP_CODE,
+							 ADDRESS,
+							 DETAIL_ADDRESS)
+		VALUES(?,?,?,?,?,?,?,?,?)
+	</entry>
+	
+	<!-- 회원 등록 -->
+	<entry key="insertMember">
+	INSERT INTO USERINFO(USER_ID,
+                         USER_PW,
+                         USER_NAME,
+                         RRN,
+                         USER_PHONE,
+                         EMAIL,
+                         ADACCEPT)
+     VALUES(?,?,?,?,?,?,?)
+	</entry>
+	
+	<!-- 아이디 중복 확인 -->
+	<entry key="idCheck">
+	SELECT USER_ID
+	FROM USERINFO
+	WHERE USER_ID = ?
+	</entry>
+	
+	
+
+
 </properties>

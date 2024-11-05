@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<% 
-
-	String contextPath = request.getContextPath();
-
-
-
-%>
+<% String contextPath = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +9,7 @@
   
 
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <style>
 
@@ -114,6 +109,15 @@ input[type="password"]{
     height: 30px;
     width: 300px;
 }
+
+input[type="password"].valid{
+    border-color: greenyellow;
+}
+
+input[type="password"].invalid{
+    border-color: red;
+}
+
 input[type="email"]{
     border-radius: 5px;
     border: 1px solid #99999953;
@@ -163,6 +167,30 @@ input[type="email"]{
             /*z-index : 더 높은 수가 위로 올라온다 */
  }
 
+ #ch{
+    color: red;
+    display: none;
+ }
+
+ #re{
+    color: red;
+    display: none;
+    
+    
+ }
+ .error{
+    border-color: red;
+ }
+
+ #rn{
+    color: red;
+    display: none;
+ }
+ #ph{
+    color: red;
+    display: none;
+ }
+
  
 
 
@@ -187,45 +215,45 @@ input[type="email"]{
                     	<tr>
                     	<td align="left" style="font-size: small;">아이디*</td> 
                         </tr>
-                        <tr >
-                        <td colspan="2"><input type="text" name="userId" id="userId" maxlength="12" placeholder="아이디를 입력하세요."required>
-                        <button type="button" onclick="checkId();" id="button">중복확인</button></td>
+                        <tr>
+                        <td colspan="2"><input type="text" name="userId" id="userId" maxlength="12"  placeholder="아이디를 입력하세요."required>
+                        <button type="button" onclick="checkId();" id="button"> 중복확인 </button></td>
                         </tr>
                         
                        
                         
                         <tr>
-                    	<td align="left" style="font-size: small;">비밀번호*</td>
+                    	<td align="left" style="font-size: small;">비밀번호* <div id="ch"> PASSWORD가 동일하지 않습니다.</div><div id="re"> 비밀번호는 영문자+숫자 조합으로 8~15자리 사용해야 합니다.</div></td>
                         </tr>
-                        <td colspan="2"><input type="password" name="userPwd" id="userPwd" maxlength="15" onclick="password();"placeholder="영문/숫자 조합 8~15자로 입력하세요." required></td>
+                        <td colspan="2"><input type="password" name="userPwd" id="userPwd" maxlength="15" oninput="che();"  placeholder="영문/숫자 조합 8~15자로 입력하세요." required></td>
                         
                          
                         <tr>
                         <td align="left" style="font-size: small;">비밀번호 확인</td>
                         </tr>
-                        <td colspan="2"><input type="password" id="checkPwd" maxlength="15" required></td>
+                        <td colspan="2"><input type="password" id="checkPwd" maxlength="15" oninput="che();"  required></td>
                         
                         
                         <tr>
-                        <td align="left" style="font-size: small;">이름</td>
+                        <td align="left" style="font-size: small;">이름*</td>
                         </tr>
                         <td colspan="2"><input type="text" name="userName"  maxlength="6" placeholder="이름을 입력하세요." required></td>
                         
                       
                         <tr>
-                        <td align="left" style="font-size: small;">주민등록번호</td>
+                        <td align="left" style="font-size: small;">주민등록번호*<div id="rn"> 잘못입력하셨습니다. 다시 입력해주세요.</div></td>
                         </tr>
-                        <td colspan="2"><input type="text" name="userRrn"  id="rrn" maxlength="20" placeholder="-포함하여 입력하세요." onclick="num();" required></td>
+                        <td colspan="2"><input type="text" name="userRrn"  id="rrn" maxlength="15" placeholder="-포함하여 입력하세요." oninput="num();" required></td>
                         
                        
                         <tr>
-                        <td align="left" style="font-size: small;">전화번호</td>
+                        <td align="left" style="font-size: small;">전화번호*<div id="ph"> 잘못입력하셨습니다. 다시 입력해주세요.</div></td>
                         </tr>
-                        <td colspan="2"><input type="text" name="phone" id="phone" maxlength="15" placeholder="-없이 입력하세요."  onclick="phone();"required></td>
+                        <td colspan="2"><input type="text" name="phone" id="phone" maxlength="15" placeholder="-포함하여 입력하세요."  oninput="phone();" required></td>
                         
                         
                         <tr>
-                        <td align="left" style="font-size: small;">이메일</td>
+                        <td align="left" style="font-size: small;">이메일*</td>
                         </tr>
                         <td colspan="2"><input type="email" name="email" id="email" required></td>
                         
@@ -233,8 +261,8 @@ input[type="email"]{
                       
                         
                         <tr id="a1">
-                        <td colspan="3"><input type="checkbox" name="agree"  id="agree1" value="전체동의" align="right" >전체동의하기
-                        <label for="agree1"align="right">전체동의하기</label>
+                        <td colspan="3"><input type="checkbox"  id="all" value="전체동의" align="right" onclick="agree();">
+                        <label for="all"align="right">전체동의하기</label>
                         </td>
                         </tr>
                         
@@ -258,6 +286,7 @@ input[type="email"]{
                         <label for="agree4">[선택] 마케팅 정보 수신 동의</label>
                         </td>
                         </tr>
+                   
                         
                         <tr>
                             <td style="height: 20px;"></td>
@@ -266,7 +295,7 @@ input[type="email"]{
                         
                             
                         <tr>   
-                            <td align="center" ><input type="submit"  onclick="retrun pwdCheck();" id="submit"  required></td>
+                            <td align="center" ><input type="submit"   id="submit" disabled></td>
                         </tr>
                             
                              
@@ -275,56 +304,120 @@ input[type="email"]{
             </div>
             
             <script>
-            
-            function num(){
-            	var num = document.querySelector("#rrn");
-            	var phone = document.querySelector("#phone");
-            	var regExp =/^\d{2}(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])-[1-4]\d{6}$/;
-            	
-            	if(regExp.num(num.value)){
-            		phone.focus();
-                }else{
-                	num.focus();
+                function che(){
+
+                    var password = $("#userPwd").val();
+                    var passwordCheck = $("#checkPwd").val();
+                    var regExp = /^[a-zA-Z\d]{8,15}$/;
+
+                    if(!regExp.test(password)){
+                        $("#re").show();
+                        $("#userPwd").css("border-color","red");
+                    }
+                    else {
+                        $("#userPwd").css("border-color","#99999953");
+                        $("#re").hide();
+
+                    }
+
+                    if(password !== passwordCheck){
+                        $("#ch").show();
+                    }else{
+                        $("#ch").hide();
+                    }
+
+                    }
+
+                
+
+                $(document).ready(function(){
+                    $("#ch").hide();
+                    $("#re").hide();
+                    $("#userPwd").addClass("error");
+                   
+
+                });
+
+                function num(){
+
+                    var rrn = $("#rrn").val();
+                    var regExp =/^\d{2}(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])-[1-4]\d{6}$/;
+
+                    if(!regExp.test(rrn)){
+                        $("#rn").show();
+                        $("#rrn").css("border-color","red");
+                    }else{
+                        $("#rrn").css("border-color","#99999953");
+                        $("#rn").hide();
+                        
+                    }
+
                 }
 
-            }
+                    $(document).ready(function(){
+                        $("#rn").hide();
+                   
+
+                });
+
+                function phone(){
+
+                var phone = $("#phone").val();
+                var regExp =/^(\d{3})-(\d{3,4})-(\d{4})$/;
+
+
+                if(!regExp.test(phone)){
+                    $("#ph").show();
+                    $("#phone").css("border-color","red");
+                }else{
+                    $("#phone").css("border-color","#99999953");
+                    $("#ph").hide();
+                    
+                }
+
+                }
+
+                $(document).ready(function(){
+                $("#ph").hide();
+                $("#phone").on("input", phone);
+
+
+                });
+
+                
+                
+
+                function agree(){
+
+                    var all = document.getElementById("all");
+                    var agree = document.getElementByName("agree");
+                    console.log(agree);
+                    if(all.checked){
+
+                        for(var i=0; i<agree.length; i++){
+                            agree[i].checked = true;
+                        }
+                    }else{
+                        for(var i=0; i<agree.length; i++){
+                            agree[i].checked = false;
+                        }
+                    }
+                }
+                    
+
+                  
+
+
+                
+
+                
+
+
+
+
+
+                
             
-            function pwdCheck(){
-            	
-            	var userPwd = document.querySeletor("#userPwd");
-            	var checkPwd = document.querySeletor("#checkPwd");
-            	
-            	if(userPwd.value != checkPwd){
-            		alert("입력하신 비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
-            		userPwd.focus();
-            		return false;
-            	}
-            }
-            
-            function phone(){
-            	
-            	var phone = document.querySelector("#phone");
-            	var email = document.querySelector("#email");
-            	var regExp = /^(\d{3})-(\d{3,4})-(\d{4})$/;
-            	
-            	if(reExp.phone(phone.value)){
-            		email.focus();
-            	}else{
-            		phone.focus();
-            	}
-            }
-            
-            function password(){
-            	
-            	var userPwd = document.querySelecor("#userPwd");
-            	var checkPwd = document.querySelecor("#checkPwd");
-            	
-            	var regExp = /^[a-zA-Z\d]{8,15}$/;
-            	
-            	if(reExp.password(password.value){
-            		
-            	}
-            }
             
             </script>
                     
