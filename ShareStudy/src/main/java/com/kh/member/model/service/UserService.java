@@ -43,5 +43,22 @@ public class UserService {
 		
 		return flag;
 	}
+
+	public int updateUser(User u) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new UserDao().updateUser(conn,u);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	
+		
+		
+	}
 	
 }

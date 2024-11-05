@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%String contextPath = request.getContextPath(); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +57,7 @@
 #a1{
      position: relative;
      top:3px;
-     right: 90px;
+     right: 130px;
      text-align: center;
      padding: 5px; 
      font-size: small;
@@ -126,8 +126,8 @@ input[type="email"]{
 }
 #form{
     position: relative;
-    left: 200px;
-    top: 87px;
+    left: 205px;
+    top: 85px;
     font-size: 30px;
     z-index: 200;
 }
@@ -161,7 +161,7 @@ input[type="email"]{
         }
 #z1{
             background-color: rgba(255, 166, 0, 0.774);
-            top: 130px;
+            top: 235px;
             left: 200px;
             z-index: 100;
             /*z-index : 더 높은 수가 위로 올라온다 */
@@ -200,13 +200,16 @@ input[type="email"]{
 
 </head>
 <body>
+
+<%@ include file="/views/common/menubar.jsp" %>
+
 	<h2 align="left" id="form">회원가입</h2>
     <div id="z1" class="z-test"></div>
   			<div class="outer">
   			 	<br> 
   			 	
 
-                <form action="<%=contextPath %>/insert.me" id="enroll" method="post">
+                <form action="<%=contextPath %>/insert.shs" id="enroll" method="post">
                 
                 
                     <table>
@@ -261,7 +264,7 @@ input[type="email"]{
                       
                         
                         <tr id="a1">
-                        <td colspan="3"><input type="checkbox"  id="all" value="전체동의" align="right" onclick="agree();">
+                        <td colspan="3"><input type="checkbox"  id="all" value="전체동의" align="right" onclick="chkAll();">
                         <label for="all"align="right">전체동의하기</label>
                         </td>
                         </tr>
@@ -269,21 +272,21 @@ input[type="email"]{
                          
                       
                         <tr id="a2">
-                        <td colspan="3"><input type="checkbox" name="agree" id="agree2" value="서비스동의"  required>
-                        <label for="agree2">[필수]sharestudy 서비스 이용약관 동의</label>
+                        <td colspan="3"><input type="checkbox" name="agree" id="a" value="서비스동의"  required>
+                        <label for="a">[필수]sharestudy 서비스 이용약관 동의</label>
 
                         </td>
                         </tr>
                          
                         <tr id="a3">
-                        <td colspan="3"><input type="checkbox" name="agree" id="agree3" value="본인확인동의"  required>
-                        <label for="agree3">[필수]본인 확인 서비스 이용약관 동의</label>
+                        <td colspan="3"><input type="checkbox" name="agree" id="b" value="본인확인동의"  required>
+                        <label for="b">[필수]본인 확인 서비스 이용약관 동의</label>
                         </td>
                         </tr>
                          
                         <tr id="a4">
-                        <td colspan="3"><input type="checkbox" name="agree" id="agree4" value="마케팅동의">
-                        <label for="agree4">[선택] 마케팅 정보 수신 동의</label>
+                        <td colspan="3"><input type="checkbox" name="agree" id="c" value="마케팅동의">
+                        <label for="c">[선택] 마케팅 정보 수신 동의</label>
                         </td>
                         </tr>
                    
@@ -387,23 +390,24 @@ input[type="email"]{
                 
                 
 
-                function agree(){
+                function chkAll(){
 
                     var all = document.getElementById("all");
-                    var agree = document.getElementByName("agree");
-                    console.log(agree);
+                    var agrees = document.getElementsByName("agree");
+                    console.log(agrees);
+                    console.log(all);
+
                     if(all.checked){
 
-                        for(var i=0; i<agree.length; i++){
-                            agree[i].checked = true;
+                        for(var i=0; i<agrees.length; i++){
+                            agrees[i].checked = true;
                         }
                     }else{
-                        for(var i=0; i<agree.length; i++){
-                            agree[i].checked = false;
+                        for(var i=0; i<agrees.length; i++){
+                            agrees[i].checked = false;
                         }
                     }
                 }
-                
                 
                 function checkId(){
                 	
