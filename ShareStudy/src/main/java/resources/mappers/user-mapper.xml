@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-	<!-- 로그인 구문 -->
+	<!-- 로그인 -->
 	<entry key="loginUser">
 		SELECT *
 		FROM USERINFO
@@ -10,6 +10,7 @@
 		AND USER_PW = ?
 		AND STATUS = 'Y'
 	</entry>
+
 	
 	<!-- 회원가입 구문 -->
 	<entry key="enrollUser">
@@ -45,5 +46,6 @@
 	</entry>
 	
 	
+
 
 </properties>
