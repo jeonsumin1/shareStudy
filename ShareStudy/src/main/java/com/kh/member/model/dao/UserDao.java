@@ -128,13 +128,12 @@ public class UserDao {
 	
 	try {
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, u.getUserName());
-		pstmt.setString(2, u.getRrn());
-		pstmt.setString(3, u.getUserPw());
-		pstmt.setString(4, u.getUserPhone());
-		pstmt.setString(5, u.getEmail());
-		pstmt.setString(6, u.getAdAccept());
-		pstmt.setString(7, u.getUserId());
+		pstmt.setString(1, u.getUserPhone());
+		pstmt.setString(2, u.getEmail());
+		pstmt.setString(3, u.getAdAccept());
+		pstmt.setString(4, u.getUserId());
+		
+		
 		
 		result = pstmt.executeUpdate();
 
@@ -147,5 +146,53 @@ public class UserDao {
 
 	return result;
 }
+
+	public int updatePwd(Connection conn, String userId,String userPw,String updatePw) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, updatePw);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, userPw);
+			
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteUser(Connection conn, String userId,String delPwd) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteUser");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, delPwd);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 
 }

@@ -48,16 +48,28 @@
 	<!-- 회원정보 수정 -->
 	<entry key="updateUser">
 	UPDATE USERINFO
-	SET USER_NAME = ?,
-    RRN = ?,
-    USER_PW = ?,
-    PHONE = ?,
+	SET USER_PHONE = ?,
     EMAIL = ?,
     ADACCEPT = ?
 	WHERE USER_ID = ?
 	AND STATUS = 'Y'
 	</entry>
 	
+	<!-- 회원비밀번호 수정 -->
+	<entry key="updatePwd">
+	UPDATE USERINFO
+	SET USER_PW = ?
+	WHERE USER_ID = ?
+	AND USER_PW = ?
+	</entry>
+	
+	<!-- 회원탈퇴 -->
+	<entry key="deleteUser">
+	UPDATE USERINFO
+	SET STATUS = 'N'
+	WHERE USER_ID = ?
+	AND USER_PW = ?
+	</entry>
 
 	
 	
