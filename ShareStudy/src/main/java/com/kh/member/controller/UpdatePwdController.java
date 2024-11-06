@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.service.UserService;
-import com.kh.member.model.vo.User;
 
 /**
- * Servlet implementation class UpdateController
+ * Servlet implementation class UpdatePwdController
  */
-@WebServlet("/update.shs")
-public class UpdateController extends HttpServlet {
+@WebServlet("/updatePwd.shs")
+public class UpdatePwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateController() {
+    public UpdatePwdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,60 +30,43 @@ public class UpdateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//아이디 이름 주민등록번호 비밀번호 전화번호 이메일 동의변경
 		
 		request.setCharacterEncoding("UTF-8");
 		
 		String userId = request.getParameter("userId");
-		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
-		String[] agree = request.getParameterValues("agree");
+		String userPw = request.getParameter("uPwd");
+		String updatePw = request.getParameter("upPwd");
 		
+		//System.out.println(userId);
+		//System.out.println(userPw);
+		//System.out.println(updatePw);
 		
+	
 		
-		String agreeStr = "";
+		int result = new UserService().updatePwd(userId,userPw,updatePw);
 		
-		if(agree != null) {
-			agreeStr = String.join("," , agree);
-		};
-		
-		User u = new User();
-		u.setUserId(userId);
-		u.setEmail(email);
-		u.setUserPhone(phone);
-		u.setAdAccept(agreeStr);
-		
-		System.out.println(u);
-		
-		int result = new UserService().updateUser(u);
-		
-		System.out.println(result);
 		
 		if(result>0) {
 			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "정보가 수정되었습니다.");
 			
-			String userPw = ((User)session.getAttribute("userInfo")).getUserPw();
-			User updateUser = new UserService().loginUser(userId, userPw);
+			session.setAttribute("alertMsg", "비밀번호변경 완료되었으니 다시 로그인해주세요!");
 			
-			session.setAttribute("userInfo", updateUser);
-			
+			session.removeAttribute("userInfo");
 			response.sendRedirect(request.getContextPath());
 			
-		}else {
-			request.setAttribute("errorMsg", "정보수정이 실패되었습니다. 확인해주세요");
 			
+		}else {
+			request.setAttribute("errorMsg", "정보수정 실패했습니다. 다시 입력해주세요.");
+		
 		}
-		
-		
-		
 	}
 
 }

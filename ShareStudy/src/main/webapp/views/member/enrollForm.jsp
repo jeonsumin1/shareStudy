@@ -307,6 +307,61 @@ input[type="email"]{
             </div>
             
             <script>
+            
+            function chkAll(){
+
+                var all = document.getElementById("all");
+                var agrees = document.getElementsByName("agree");
+                console.log(agrees);
+                console.log(all);
+
+                if(all.checked){
+
+                    for(var i=0; i<agrees.length; i++){
+                        agrees[i].checked = true;
+                    }
+                }else{
+                    for(var i=0; i<agrees.length; i++){
+                        agrees[i].checked = false;
+                    }
+                }
+            }
+            
+            function checkId(){
+            	
+            	var chId = $("#userId");
+            	var share = "<%= contextPath %>";
+            	
+            	console.log(chId);
+            	$.ajax({
+            		url : share+"/idCheck.me",
+            		type : "GET",
+            		data : {
+            			chId : chId.val()
+            	
+            		},
+            		success : function(result){
+            			console.log(result)
+            			if(result=='NO'){
+            				alert("이미 존재하는 아이디입니다. 다시 입력주세요.")
+            			}else if(result=='YES'){
+            				if(confirm("사용 가능한 아이디입니다. 정말 사용하시겠습니까?")){
+            					
+            					$("#submit").removeAttr("disabled");
+            					chId.attr("readonly",true);
+            				}else{
+            					chId.focus();
+            				}
+            			}
+            		},
+            		error : function(){
+            			console.log("통신실패");
+            		}
+            	});
+            	
+            }
+            
+            
                 function che(){
 
                     var password = $("#userPwd").val();
@@ -345,6 +400,10 @@ input[type="email"]{
 
                     var rrn = $("#rrn").val();
                     var regExp =/^\d{2}(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])-[1-4]\d{6}$/;
+                    
+                   
+                    
+                    
 
                     if(!regExp.test(rrn)){
                         $("#rn").show();
@@ -359,6 +418,11 @@ input[type="email"]{
 
                     $(document).ready(function(){
                         $("#rn").hide();
+                        
+                    
+                        var regExp1 = regExp.replace("\\d{6}","●");
+                        
+                        var regExp2 = new regExp(regExp1);
                    
 
                 });
@@ -390,58 +454,7 @@ input[type="email"]{
                 
                 
 
-                function chkAll(){
-
-                    var all = document.getElementById("all");
-                    var agrees = document.getElementsByName("agree");
-                    console.log(agrees);
-                    console.log(all);
-
-                    if(all.checked){
-
-                        for(var i=0; i<agrees.length; i++){
-                            agrees[i].checked = true;
-                        }
-                    }else{
-                        for(var i=0; i<agrees.length; i++){
-                            agrees[i].checked = false;
-                        }
-                    }
-                }
                 
-                function checkId(){
-                	
-                	var chId = $("#userId");
-                	var share = "<%= contextPath %>";
-                	
-                	console.log(chId);
-                	$.ajax({
-                		url : share+"/idCheck.me",
-                		type : "GET",
-                		data : {
-                			chId : chId.val()
-                	
-                		},
-                		success : function(result){
-                			console.log(result)
-                			if(result=='NO'){
-                				alert("이미 존재하는 아이디입니다. 다시 입력주세요.")
-                			}else if(result=='YES'){
-                				if(confirm("사용 가능한 아이디입니다. 정말 사용하시겠습니까?")){
-                					
-                					$("#submit").removeAttr("disabled");
-                					chId.attr("readonly",true);
-                				}else{
-                					chId.focus();
-                				}
-                			}
-                		},
-                		error : function(){
-                			console.log("통신실패");
-                		}
-                	});
-                	
-                }
                     
 
                   
