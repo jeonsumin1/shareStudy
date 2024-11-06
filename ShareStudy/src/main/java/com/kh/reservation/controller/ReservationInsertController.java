@@ -15,7 +15,7 @@ import com.kh.reservation.model.vo.Reservation;
 /**
  * Servlet implementation class ReservationInsertController
  */
-@WebServlet("/reservation.re")
+@WebServlet("/reservationInsert.re")
 public class ReservationInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -56,23 +56,19 @@ public class ReservationInsertController extends HttpServlet {
 		String rvName = request.getParameter("rvName"); 			
 		String payDate = request.getParameter("payDate"); 			
 
+//		System.out.println(roomNo+" "+userId+" "+rePeople+" "+rvDate+" "+rvPayment+" "+rvRequest);
+//		System.out.println(bank+ " " + rvName+ " " +payDate);
 		
-		System.out.println(roomNo+" "+userId+" "+rePeople+" "+rvDate+" "+rvPayment+" "+rvRequest);
-	 
 		Reservation reserInfo = new Reservation(roomNo,userId,rePeople,rvDate,rvPayment,rvRequest);
 		
 		// 예약 정보 저장 메소드 
 		int result = new ReservationService().insertReservation(reserInfo, userId, bank, rvName, payDate);
 		
-		// 결제 수단에 따라 저장 테이블 따로?
-		// 무통장 입금, 신용카드 
-		String alertMsg = "";
-				
-		request.getSession().setAttribute("alertMsg", alertMsg);
+//		System.out.println(result);
 		
 		if(result>0) {
-			
-			//request.getRequestDispatcher("").forward(request, response);
+//			response.getWriter().print("/views/reservation/reservationSuccess.jsp");
+			response.getWriter().print(result);
 		}else {
 			
 		}
