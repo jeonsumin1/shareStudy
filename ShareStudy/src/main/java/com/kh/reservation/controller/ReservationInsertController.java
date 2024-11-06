@@ -8,13 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.vo.User;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Reservation;
 
 /**
  * Servlet implementation class ReservationInsertController
  */
-@WebServlet("/reservation.re")
+@WebServlet("/reservationInsert.re")
 public class ReservationInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -45,30 +46,34 @@ public class ReservationInsertController extends HttpServlet {
 		// 임시 → 상품 상세 페이지에서 전달받은 roomNumber값으로 지정해야 한다. 
 		String roomNo = "1";
 		
-		String userId = request.getParameter("userName"); // (전달받은 회원의 아이디를 전달해야 한다.)
-		int rePeople = Integer.parseInt(request.getParameter("rePeople")); // 예약 인원수 
+		String userId = request.getParameter("userId"); // (전달받은 회원의 아이디를 전달해야 한다.)
+		userId = "1111";
 		String rvDate = request.getParameter("rvDate"); //방문 날짜
-		String rvPayment = request.getParameter("rvPayment"); // 결제 수단
+		int rePeople = Integer.parseInt(request.getParameter("rePeople")); // 예약 인원수 
 		String rvRequest = request.getParameter("rvRequest"); //요청사항
+		String rvPayment = request.getParameter("rvPayment"); // 결제 수단
+		String bank = request.getParameter("bank"); 			
+		String rvName = request.getParameter("rvName"); 			
+		String payDate = request.getParameter("payDate"); 			
+
+//		System.out.println(roomNo+" "+userId+" "+rePeople+" "+rvDate+" "+rvPayment+" "+rvRequest);
+//		System.out.println(bank+ " " + rvName+ " " +payDate);
 		
-		System.out.println(roomNo+" "+userId+" "+rePeople+" "+rvDate+" "+rvPayment+" "+rvRequest);
+		Reservation reserInfo = new Reservation(roomNo,userId,rePeople,rvDate,rvPayment,rvRequest);
 		
-		Reservation reserInfo = new Reservation(roomNo, userId,rePeople,rvDate,rvPayment,rvRequest);
+		// 예약 정보 저장 메소드 
+		int result = new ReservationService().insertReservation(reserInfo, userId, bank, rvName, payDate);
 		
-		
-		int result = new ReservationService().insertReservation(reserInfo);
-		
-		String alertMsg = "";
+//		System.out.println(result);
 		
 		if(result>0) {
-			System.out.println("성공");
-			alertMsg = "예약이 완도되었습니다.";
-		}else { // 예약 정보, 예약여부 변경 실패			
-			System.out.println("실패");
-			alertMsg = "예약에 실패하셨습니다. 다시 시도해 주세요.";
+//			response.getWriter().print("/views/reservation/reservationSuccess.jsp");
+			response.getWriter().print(result);
+		}else {
+			
 		}
 		
-		request.getSession().setAttribute("alertMsg", alertMsg);
+		
 	}
 
 }

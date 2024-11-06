@@ -56,8 +56,8 @@
         <li><a href="<%=contextPath%>/noticeBoard.shs" class="nav-link px-2 link-secondary">공지사항</a></li>
         <li><a href="<%=contextPath%>/productDetail.shs" class="nav-link px-2 link-secondary">상품 상세보기</a></li>
         <li><a href="<%=contextPath%>/reviewBoard.shs" class="nav-link px-2 link-secondary">리뷰게시판</a></li>
-        <li><a href="" class="nav-link px-2 link-secondary">쓸사람 쓰세요</a></li>
-      </ul>
+        <li><a href="<%=contextPath%>/reservation.re" class="nav-link px-2 link-secondary">예약 페이지(삭제예정)</a></li>
+ </ul>
    		
    	  <%if(userInfo==null){%>
       <div class="col-md-3 text-end">
@@ -69,13 +69,19 @@
         </form>
       </div>
       <%}else{%>
-      <b><%=userInfo.getUserName()%>님 환영합니다.
+      <b><%=userInfo.getUserName()%>님 환영합니다.</b>
+      <form action="<%=contextPath %>/views/member/myPage.jsp">
       <button type="submit" class="btn btn-outline-primary me-2">마이페이지</button>
-      <a href="<%=contextPath%>/logout.shs" id="logout">로그아웃</a></b>
+      </form>
+      <a href="<%=contextPath%>/logout.shs" id="logout">로그아웃</a>
       <%}%>
     </header>
   </div>
 </main>
 <script src="${pageContext.request.contextPath}/views/common/assets/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
 </body>
 </html>
