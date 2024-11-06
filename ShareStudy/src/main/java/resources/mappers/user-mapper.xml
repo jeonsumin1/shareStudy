@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-	<!-- 로그인 구문 -->
+	<!-- 로그인 -->
 	<entry key="loginUser">
 		SELECT *
 		FROM USERINFO
@@ -10,6 +10,7 @@
 		AND USER_PW = ?
 		AND STATUS = 'Y'
 	</entry>
+
 	
 	<!-- 회원가입 구문 -->
 	<entry key="enrollUser">
@@ -24,5 +25,43 @@
 							 DETAIL_ADDRESS)
 		VALUES(?,?,?,?,?,?,?,?,?)
 	</entry>
+	
+	<!-- 회원 등록 -->
+	<entry key="insertMember">
+	INSERT INTO USERINFO(USER_ID,
+                         USER_PW,
+                         USER_NAME,
+                         RRN,
+                         USER_PHONE,
+                         EMAIL,
+                         ADACCEPT)
+     VALUES(?,?,?,?,?,?,?)
+	</entry>
+	
+	<!-- 아이디 중복 확인 -->
+	<entry key="idCheck">
+	SELECT USER_ID
+	FROM USERINFO
+	WHERE USER_ID = ?
+	</entry>
+	
+	<!-- 회원정보 수정 -->
+	<entry key="updateUser">
+	UPDATE USERINFO
+	SET USER_NAME = ?,
+    RRN = ?,
+    USER_PW = ?,
+    PHONE = ?,
+    EMAIL = ?,
+    ADACCEPT = ?
+	WHERE USER_ID = ?
+	AND STATUS = 'Y'
+	</entry>
+	
+
+	
+	
+	
+
 
 </properties>

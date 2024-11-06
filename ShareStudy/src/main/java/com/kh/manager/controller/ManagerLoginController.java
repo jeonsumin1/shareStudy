@@ -55,7 +55,6 @@ public class ManagerLoginController extends HttpServlet {
 		
 		if (loginManager != null) {
 	        session.setAttribute("loginManager", loginManager);
-	        session.setAttribute("alertMsg", manId + "관리자로 접속하셨습니다");
 	        
 	        response.sendRedirect(contextPath + "/views/manager/m_Frame.jsp");
 	    } else {

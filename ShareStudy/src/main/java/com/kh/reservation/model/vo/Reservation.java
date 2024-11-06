@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Reservation {
 
-	private String rv_no; // RV_NO VARCHAR2(100 BYTE)
+	private String rvNo; // RV_NO VARCHAR2(100 BYTE)
 	private String roomNo;// ROOM_NO VARCHAR2(100 BYTE)
 	private String userId;// USER_ID VARCHAR2(100 BYTE)
 	private int rePeople; // RV_PEOPLE NUMBER
@@ -29,11 +29,11 @@ public class Reservation {
 		this.rvRequest = rvRequest;
 	}
 
-	public Reservation(String rv_no, String roomNo, String userId, int rePeople, String reDate, Date rvConfirm,
+	public Reservation(String rvNo, String roomNo, String userId, int rePeople, String reDate, Date rvConfirm,
 			String rvPayment, String rvRequest) {
 		super();
-		this.rv_no = rv_no;
-		this.roomNo = roomNo;
+		this.rvNo = rvNo;
+		this.roomNo = roomNo; 
 		this.userId = userId;
 		this.rePeople = rePeople;
 		this.reDate = reDate;
@@ -42,12 +42,12 @@ public class Reservation {
 		this.rvRequest = rvRequest;
 	}
 
-	public String getRv_no() {
-		return rv_no;
+	public String getRvNo() {
+		return rvNo;
 	}
 
-	public void setRv_no(String rv_no) {
-		this.rv_no = rv_no;
+	public void setRvNo(String rvNo) {
+		this.rvNo = rvNo;
 	}
 
 	public String getRoomNo() {
@@ -108,7 +108,7 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return "Reservation [rv_no=" + rv_no + ", roomNo=" + roomNo + ", userId=" + userId + ", rePeople=" + rePeople
+		return "Reservation [rvNo=" + rvNo + ", roomNo=" + roomNo + ", userId=" + userId + ", rePeople=" + rePeople
 				+ ", reDate=" + reDate + ", rvConfirm=" + rvConfirm + ", rvPayment=" + rvPayment + ", rvRequest="
 				+ rvRequest + "]";
 	}

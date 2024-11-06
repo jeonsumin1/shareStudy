@@ -7,8 +7,9 @@
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
 <link rel="stylesheet" href="${contextPath}/share/views/manager/css/manager.css">
-<% String alertMsg = (String)request.getAttribute("alertMsg"); 
+<%  String alertMsg = (String)request.getAttribute("alertMsg"); 
     Manager mInfo = (Manager)session.getAttribute("loginManager");
+    String contextPath = request.getContextPath();
 %>
 <style>
 
@@ -24,11 +25,11 @@
 		</a>
 		</div>
 		<ul>
-			<li><a href="" target="display-frame">관리1</a></li>
-			<li><a href="" target="display-frame">관리2</a></li>
-			<li><a href="" target="display-frame">관리3</a></li>
-			<li><a href="" target="display-frame">관리4</a></li>
-			<li><a href="" target="display-frame">판매 통계</a></li>
+			<li><a href="./m_main.jsp#reservation" target="display-frame">예약 관리</a></li>
+			<li><a href="./m_main.jsp#member" target="display-frame">회원 관리</a></li>
+			<li><a href="./m_main.jsp#review" target="display-frame">리뷰 관리</a></li>
+			<li><a href="./m_main.jsp#question" target="display-frame">1:1 상담</a></li>
+			<li><a href="./m_main.jsp#chart_wrap" target="display-frame">판매 통계</a></li>
 		</ul>
 		<% if(mInfo == null){ %>
 		<div class="logout">
@@ -36,7 +37,7 @@
 		</div>
 		<%}else{ %>
 		<div class="logout">
-			<span><a href="${contextPath}/share">관리자 로그아웃</a></span>
+			<span><a href="${contextPath}/share/logout.ma">관리자 로그아웃</a></span>
 		</div>
 		<%} %>
 	</div>

@@ -3,10 +3,10 @@
 	<entry key="insertReservation">
 	
 		INSERT INTO RESERVATION 
-		VALUES('STS'||RESER_SEQ.NEXTVAL,
-				'1',  <!-- 룸번호 -->
+		VALUES( ?,
+				?,  <!-- 룸번호 -->
 				?,  <!-- 회원아이디 (회원 이름으로 테스트-> 아이디로 수정 필요) -->
-				?,
+				?, 
 				?,
 				SYSDATE, 
 				?,
@@ -19,6 +19,23 @@
 		SET STATUS='N'
 		WHERE ROOM_NO = ?
 	</entry>
+	
+	<!-- 상품 예약 번호 시퀀스 -->
+	<entry key="selectRvNo">
+		SELECT 'STS'||RESER_SEQ.NEXTVAL RV_NO
+		FROM DUAL
+	</entry>
+	
+	<!-- 무통장 결제 정보 업데이트 -->
+	<entry key="insertRvPayment">
+		INSERT INTO RVBANK 
+			VALUES (?, 
+				    ?, 
+				    ?,
+				    ?,
+				    ?)
+	</entry>
+	
 	
 	
 </properties>

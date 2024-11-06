@@ -46,6 +46,8 @@ public class UserLoginController extends HttpServlet {
 		}else {
 			session.setAttribute("alertMsg", "로그인 실패. 아이디나 비밀번호를 확인해주세요.");
 		}
+		
+		
 		response.sendRedirect(request.getContextPath());
 	}
 
