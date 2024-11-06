@@ -21,15 +21,16 @@
 		<div class="logo">
 		
 		<a href="${contextPath}/share">
-			<img src="./image/logo.png">
+			<img src="${pageContext.request.contextPath}/views/manager/image/logo.png">
 		</a>
 		</div>
 		<ul>
-			<li><a href="./m_main.jsp#reservation" target="display-frame">예약 관리</a></li>
-			<li><a href="./m_main.jsp#member" target="display-frame">회원 관리</a></li>
-			<li><a href="./m_main.jsp#review" target="display-frame">리뷰 관리</a></li>
-			<li><a href="./m_main.jsp#question" target="display-frame">1:1 상담</a></li>
-			<li><a href="./m_main.jsp#chart_wrap" target="display-frame">판매 통계</a></li>
+			<li><a href="${contextPath}/share/views/manager/m_main.jsp#room" target="display-frame">룸(상품) 관리</a></li>
+			<li><a href="${contextPath}/share/views/manager/m_main.jsp#reservation" target="display-frame">예약 관리</a></li>
+			<li><a href="${contextPath}/share/views/manager/m_main.jsp#member" target="display-frame">회원 관리</a></li>
+			<li><a href="${contextPath}/share/views/manager/m_main.jsp#review" target="display-frame">리뷰 관리</a></li>
+			<li><a href="${contextPath}/share/views/manager/m_main.jsp#question" target="display-frame">1:1 상담</a></li>
+			<li><a href="${contextPath}/share/views/manager/m_main.jsp#chart_wrap" target="display-frame">판매 통계</a></li>
 		</ul>
 		<% if(mInfo == null){ %>
 		<div class="logout">

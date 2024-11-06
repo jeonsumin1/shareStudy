@@ -56,16 +56,15 @@
         <li><a href="<%=contextPath%>/noticeBoard.shs" class="nav-link px-2 link-secondary">공지사항</a></li>
         <li><a href="<%=contextPath%>/productDetail.shs" class="nav-link px-2 link-secondary">상품 상세보기</a></li>
         <li><a href="<%=contextPath%>/reviewBoard.shs" class="nav-link px-2 link-secondary">리뷰게시판</a></li>
-        <li><a href="${contextPath}/share/views/manager/m_manager.jsp" class="nav-link px-2 link-secondary">관리자(임시)</a></li>
         <li><a href="<%=contextPath%>/reservation.re" class="nav-link px-2 link-secondary">예약 페이지(삭제예정)</a></li>
-      </ul>
+ </ul>
    		
    	  <%if(userInfo==null){%>
       <div class="col-md-3 text-end">
       <form action="<%=contextPath %>/login.shs">
         <button type="submit" class="btn btn-outline-primary me-2">로그인</button>
        </form>
-       <form action="<%=contextPath %>/views/member/enrollForm.jsp">
+        <form action="<%=contextPath %>/views/member/enrollForm.jsp">
         <button type="submit" class="btn btn-primary">회원가입</button>
         </form>
       </div>
