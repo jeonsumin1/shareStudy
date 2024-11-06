@@ -6,10 +6,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.manager.model.vo.Manager;
+import com.kh.member.model.vo.User;
+import com.kh.reservation.model.vo.Room;
 
 public class ManagerDao {
 	
@@ -58,6 +61,87 @@ public class ManagerDao {
 		
 		
 		return m;
+	}
+
+	public ArrayList<User> selectAllMember(Connection conn) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null; 
+	    
+		ArrayList<User> list = new ArrayList<>();
+		
+		String sql = prop.getProperty("selectAllMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				 list.add(new User(
+						    rset.getString("USER_ID"),
+						    rset.getString("USER_NAME"),
+						    rset.getString("USER_PHONE"),
+						    rset.getString("EMAIL"),
+						    rset.getDate("ENROLLDATE"),
+						    rset.getString("ADACCEPT")));
+			}
+//			 while (rset.next()) {
+//		            User user = new User(
+//		                rset.getString("USER_ID"),
+//		                rset.getString("USER_NAME"),
+//		                rset.getString("EMAIL"),
+//		                rset.getString("USER_PHONE"),
+//		                rset.getDate("ENROLLDATE"),
+//		                rset.getString("ADACCEPT")
+//		            );
+//		            System.out.println("Retrieved User: " + user); // 디버깅 출력
+//		            list.add(user);
+//			 }
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<Room> selectAllRoom(Connection conn){
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null; 
+	    
+		ArrayList<Room> list = new ArrayList<>();
+		
+		String sql = prop.getProperty("selectAllRoom");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			rset=pstmt.executeQuery();
+			
+			while(rset.next()) {
+				 list.add(new Room(
+						    rset.getString("ROOM_NO"),
+						    rset.getString("REGION_NO"),
+						    rset.getString("ROOM_NAME"),
+						    rset.getString("ROOM_SIZE"),
+						    rset.getString("PRICE"),
+						    rset.getString("STATUS")));
+			}
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		} 
+		
+		return list;
 	}
 
 }

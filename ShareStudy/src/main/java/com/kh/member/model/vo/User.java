@@ -47,6 +47,20 @@ public class User {
 		this.email = email;
 	}
 
+	
+
+	
+
+	public User(String userId, String userName, String userPhone, String email, Date enrollDate,String adAccept) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userPhone = userPhone;
+		this.email = email;
+		this.enrollDate = enrollDate;
+		this.adAccept = adAccept;
+	}
+
 	public String getUserId() {
 		return userId;
 	}

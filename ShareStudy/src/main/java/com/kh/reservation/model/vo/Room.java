@@ -30,6 +30,18 @@ public class Room {
 		this.eating = eating;
 		this.status = status;
 	}
+	
+	
+
+	public Room(String roomNo, String regionNo, String roomSize, String roomName, String price, String status) {
+		super();
+		this.roomNo = roomNo;
+		this.regionNo = regionNo;
+		this.roomName = roomName;
+		this.roomSize = roomSize;
+		this.price = price;
+		this.status = status;
+	}
 
 	public String getRoomNo() {
 		return roomNo;

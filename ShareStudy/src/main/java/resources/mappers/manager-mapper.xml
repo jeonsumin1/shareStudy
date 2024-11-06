@@ -7,4 +7,28 @@
     AND MANAGER_PASSWORD = ?
 </entry>
 
+<entry key="selectAllMember">
+    SELECT USER_ID,
+	       USER_NAME,
+	       USER_PHONE,
+	       EMAIL,
+	       ENROLLDATE,
+	       ADACCEPT
+FROM USERINFO WHERE STATUS = 'Y'
+</entry>
+
+<entry key="selectAllRoom">
+SELECT ROOM_NO, 
+       REGION_NO, 
+       ROOM_NAME,
+       ROOM_SIZE, 
+       PRICE,
+       STATUS
+FROM ROOM
+</entry>
+
+<entry key="">
+    
+</entry>
+
 </properties>
