@@ -475,7 +475,7 @@ input[type="email"]{
                     
                     
 
-
+<%@ include file="/views/common/footer.jsp" %>
 
 
 </body>
