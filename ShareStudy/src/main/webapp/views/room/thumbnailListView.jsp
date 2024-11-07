@@ -29,15 +29,22 @@
         <h2 align="center">상품 상세보기</h2>
         <br>
         
+        <c:if test="${'admin'eq userid}">
         <div align="center">
-            <button class="btn btn-info" onclick="location.href='<%=contextPath%>/productInsert.shs'">상품등록</button>
+            <button class="btn btn-info" onclick="location.href='<%=contextPath%>/room/insert.shs'">상품등록</button>
         </div>
-        
+       </c:if>
+				
+			        
         <div class="list-area">
             <c:forEach var="room" items="${list}">
-                <div class="thumbnail" align="center" onclick="location.href='${contextPath}/detail.room?rno=${room.roomNo}'">
-                    <img src="${contextPath}${room.titleImg}" width="200px" height="150px">
+                <div class="thumbnail" align="center" onclick="location.href='<%=contextPath%>/detail.room?rno=${room.roomNo}'">
+              
+                    <%-- <img src="${contextPath}${room.titleImg}" width="200px" height="150px"> --%>
+                    <img src="..${room.titleImg}" width="230px" height="160px">
+                   
                     <p>
+                        지역 : ${region.regionName}<br>
                         ${room.roomName}<br>
                         이용가격: ${room.price}원
                     </p>

@@ -1,5 +1,6 @@
 package com.kh.room.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -15,13 +16,12 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.kh.common.MyFileRenamePolicy;
 import com.kh.room.model.service.RoomService;
 import com.kh.room.model.vo.Attachment;
+import com.kh.room.model.vo.Region;
 import com.kh.room.model.vo.Room;
 import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-/**
- * Servlet implementation class PhotoInsertController
- */
-@WebServlet("/productInsert.shs")
+@WebServlet("/room/insert.shs")
 public class PhotoInsertController extends HttpServlet {
     private static final long serialVersionUID = 1L;
        
@@ -30,17 +30,19 @@ public class PhotoInsertController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 지역 목록 조회
+        ArrayList<Region> regionList = new RoomService().selectRegionList();
+        request.setAttribute("regionList", regionList);
         request.getRequestDispatcher("/views/room/photoEnrollForm.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        
         if(ServletFileUpload.isMultipartContent(request)) {
-            int maxSize = 10*1024*1024;
+            int maxSize = 10 * 1024 * 1024;
             String savePath = request.getSession().getServletContext().getRealPath("/resources/uploadFiles/");
-            
-            MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+
+            MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
             
             // Room 객체 생성 및 데이터 설정
             Room r = new Room();
@@ -54,38 +56,37 @@ public class PhotoInsertController extends HttpServlet {
             r.setParking(multiRequest.getParameter("parking"));
             r.setEating(multiRequest.getParameter("eating"));
             
-            // Attachment 리스트 생성
             ArrayList<Attachment> atList = new ArrayList<>();
-            
             for(int i=1; i<=4; i++) {
                 String key = "file"+i;
                 if(multiRequest.getOriginalFileName(key) != null) {
                     Attachment at = new Attachment();
-                    at.setRoomNo(multiRequest.getParameter("roomNo")); // Room 번호 설정
+                    at.setRoomNo(multiRequest.getParameter("roomNo"));
                     at.setOriginName(multiRequest.getOriginalFileName(key));
                     at.setChangeName(multiRequest.getFilesystemName(key));
                     at.setFilePath("/resources/uploadFiles/");
-                    at.setFileLevel(i == 1 ? 1 : 2);
+                    if(i==1) {//대표이미지
+						at.setFileLevel(1);
+					}else {//상세이미지
+						at.setFileLevel(2);
+					}
                     
                     atList.add(at);
                 }
             }
-            
-            // 서비스 호출하여 데이터 저장
+            	
+            // 서비스에 요청하기 
             int result = new RoomService().insertPhoto(r, atList);
             
             HttpSession session = request.getSession();
-            String alertMsg = "";
             
             if(result > 0) {
-                alertMsg = "상품 등록 완료!";
-                response.sendRedirect(request.getContextPath() + "/roomList.shs"); // 목록 페이지로 이동
+                session.setAttribute("alertMsg", "상품 등록 완료!");
+                response.sendRedirect(request.getContextPath() + "/room/list.shs");
             } else {
-                alertMsg = "상품 등록 실패!";
-                response.sendRedirect(request.getContextPath() + "/productInsert.shs"); // 등록 페이지로 다시 이동
+                session.setAttribute("alertMsg", "상품 등록 실패!");
+                response.sendRedirect(request.getContextPath() + "/room/insert.shs");
             }
-            
-            session.setAttribute("alertMsg", alertMsg);
         }
     }
 }
