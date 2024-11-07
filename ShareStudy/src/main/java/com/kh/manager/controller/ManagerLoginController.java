@@ -56,7 +56,8 @@ public class ManagerLoginController extends HttpServlet {
 		if (loginManager != null) {
 	        session.setAttribute("loginManager", loginManager);
 	        
-	        response.sendRedirect(contextPath + "/views/manager/m_Frame.jsp");
+//	        response.sendRedirect(contextPath + "/views/manager/m_Frame.jsp");
+	        response.sendRedirect(contextPath + "/selectAll.ma");
 	    } else {
 	        
 	    	 response.setContentType("text/html; charset=UTF-8");

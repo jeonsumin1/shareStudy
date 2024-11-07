@@ -1,10 +1,13 @@
 package com.kh.manager.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.manager.model.dao.ManagerDao;
 import com.kh.manager.model.vo.Manager;
+import com.kh.member.model.vo.User;
+import com.kh.reservation.model.vo.Room;
 
 public class ManagerService {
 
@@ -17,6 +20,27 @@ public class ManagerService {
         JDBCTemplate.close(conn);
 		
 		return m;
+	}
+
+	public ArrayList<User> selectAllMember() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<User> list = new ManagerDao().selectAllMember(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
+	public ArrayList<Room> selectAllRoom(){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Room> list = new ManagerDao().selectAllRoom(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+		
 	}
 
 }

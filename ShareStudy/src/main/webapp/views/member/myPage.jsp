@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <script src="https://use.fontawesome.com/72aaf9ab20.js"></script>
 
@@ -137,7 +142,7 @@ input[type="email"]{
 }
 
 
-#submit{
+#submit1,#submit2,#submit3{
     width: 100px;
     height: 40px;
     background-color: white;
@@ -209,7 +214,7 @@ input[type="email"]{
 
 .eyes{
     position: absolute;
-    top:217px;
+    top:175px;
     bottom: 0;
     right: 645px;
     margin: auto;
@@ -239,6 +244,13 @@ input[type="email"]{
 
 <%@ include file="/views/common/menubar.jsp" %>
 
+
+	
+    
+    
+   
+    
+
 	<h2 align="left" id="form">마이페이지</h2>
     <div id="z1" class="z-test"></div>
   			<div class="outer">
@@ -246,10 +258,12 @@ input[type="email"]{
   			 	
 
                 <form action="<%=contextPath %>/update.shs" id="update" method="post">
+                <input type="hidden" name="userId" value= "${userInfo.userId }">
                 
-                
+             
                     <table>
-                    
+                     
+                    	
                     	
                     	<tr>
                     	<td align="left" style="font-size: small;">📌 아이디</td> 
@@ -261,57 +275,65 @@ input[type="email"]{
                         <tr>
                             <td align="left" style="font-size: small;">📌 이름</td>
                         </tr>
-                            <td align="left" style="font-size:medium;"><p id="m1"> &nbsp; ${userInfo.userName }</p></td>
                         <tr>
+                            <td align="left" style="font-size:medium;"><p id="m1"> &nbsp; ${userInfo.userName }</p></td>
+                        </tr>
                         
                       
                         <tr>
-                        <td align="left" style="font-size: small;"> 📌 주민등록번호<div id="rn"> 잘못입력하셨습니다. 다시 입력해주세요.</div></td>
+                        <td align="left" style="font-size: small;"> 📌 주민등록번호</td>
                         </tr>
-                        <td colspan="2"><p id="m1"> &nbsp; ${userInfo.rrn }</p></td>
+                        <tr>
+                        <td colspan="2"><p id="m1" class="rrn1" ></p></td>
+                        </tr>
+                       
                         <tr>
                         <td align="left" style="font-size: small;"> 📌 비밀번호 </td>
-                         
                         </tr>
-                        <td colspan="2"><p id="m1" class="mm1"> &nbsp; ●●●●●●●●</p><div onclick="eye();" class="eyes"><i class="fa fa-eye fa-lg"></i></div></td>
-                             
+                         
+                        <tr>
+                        <td colspan="2"><input type="password" id="m1" class="mm1" value=" &nbsp; ${userInfo.userPw }" > <div onclick="eye();" class="eyes"><i id="icon" class="fa fa-eye fa-lg"></i></div></td>
+                        </tr>     
                 
                         <tr>
-                        <td align="left" style="font-size: small;"> 📌 전화번호<div id="ph"> 잘못입력하셨습니다. 다시 입력해주세요.</div></td>
+                        <td align="left" style="font-size: small;"> 📌 전화번호</td>
                         </tr>
-                        <td colspan="2"><p id="m1"> &nbsp; ${userInfo.userPhone }</p></td>
+                        <tr>
+                        <td colspan="2"><input type="text" id="m1" name="phone" value=" &nbsp; ${userInfo.userPhone }"></td>
+                        </tr>
                         
                         <tr>
                         <td align="left" style="font-size: small;">📌 이메일</td>
                         </tr>
-                        <td colspan="2"><p id="m1"> &nbsp; ${userInfo.email }</p></td>
-                        
+                        <tr>
+                        <td colspan="2"><input type="email" id="m1" name="email" value=" &nbsp; ${userInfo.email }"></td>
+                        </tr>
                         
                       
                         
                         <tr id="a1">
-                        <td colspan="3"><input type="checkbox"  id="all" value="전체동의" align="right" onclick="chkAll();">
-                        <label for="all"align="right">전체동의하기</label>
+                        <td colspan="3"><input type="checkbox" name="agreeBox" id="all" value="전체동의" align="right" >
+                        <label for="all" align="right">전체동의하기</label>
                         </td>
                         </tr>
                         
                          
                       
                         <tr id="a2">
-                        <td colspan="3"><input type="checkbox" name="agree" id="a" value="서비스동의"  required>
+                        <td colspan="3"><input type="checkbox" name="agreeBox id="a" value="서비스동의"  required>
                         <label for="a">[필수]sharestudy 서비스 이용약관 동의</label>
 
                         </td>
                         </tr>
                          
                         <tr id="a3">
-                        <td colspan="3"><input type="checkbox" name="agree" id="b" value="본인확인동의"  required>
+                        <td colspan="3"><input type="checkbox" name="agreeBox" id="b" value="본인확인동의"  required>
                         <label for="b">[필수]본인 확인 서비스 이용약관 동의</label>
                         </td>
                         </tr>
                          
                         <tr id="a4">
-                        <td colspan="3"><input type="checkbox" name="agree" id="c" value="마케팅동의">
+                        <td colspan="3"><input type="checkbox" name="agreeBox" id="c" value="마케팅동의">
                         <label for="c">[선택] 마케팅 정보 수신 동의</label>
                         </td>
                         </tr>
@@ -361,11 +383,14 @@ input[type="email"]{
                             
                         <tr>   
                             <td align="left" >
-                                <input type="submit" id="submit" value="정보변경">
-                                <input type="submit" id="submit" value="비밀번호 변경">
-                                <input type="submit" id="submit" value="회원탈퇴">
+                                <input type="submit" id="submit1" value="정보변경">
+                                <input type="button" data-toggle="modal" data-target="#updatePwd" id="submit2" value="비밀번호 변경">
+                                <input type="button" id="submit3" data-toggle="modal" data-target="#deleteUser" value="회원탈퇴" onclick="deleteUser();">
                             </td>
                         </tr>
+                                
+                                
+                                
 
                        
                             
@@ -374,26 +399,251 @@ input[type="email"]{
                 </form>
             </div>
             
+            
+  
+
+  
+
+  <!-- The Modal -->
+  <div class="modal fade" id="updatePwd">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">비밀번호 변경</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        
+          <form action="<%=contextPath %>/updatePwd.shs" method="post">
+          
+          <input type="hidden" name="userId" value= "${userInfo.userId }">
+          
+          	<table>
+          		<tr>
+          			<td>현재 비밀번호</td>
+          		</tr>
+          		<tr>
+          			<td><input type="password" name="uPwd" required ></td>
+          		</tr>
+          			
+          		<tr>
+          			<td>변경할 비밀번호</td>
+          		</tr>
+          		<tr>
+          			<td><input type="password" name="upPwd" id="p1"  required ></td>
+          		</tr>
+          			
+          		
+          		<tr>
+          			<td>변경할 비밀번호 확인</td>
+          		</tr>
+          		<tr>
+          			<td><input type="password" name="chUpPwd" id="p2" required ></td>
+          		</tr>
+          			
+          	</table>
+          	 <br>
+          	 <!-- Modal footer -->
+        
+        
+          <button type="submit" class="btn btn-warning"  onclick="return checkPwd();">저장</button>
+        
+          </form>
+          
+          	 
+          
+        </div>
+        
+        
+          
+        
+       
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- The Modal -->
+  <div class="modal fade" id="deleteUser">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+  <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">회원계정탈퇴</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        
+          <form action="<%=contextPath %>/delete.shs" method="post">
+          
+          <input type="hidden" name="userId" value= "${userInfo.userId }">
+          
+          	<table>
+          	
+          		<tr>
+          			<td>현재 비밀번호</td>
+          		</tr>
+          		<tr>
+          			<td><input type="password" name="delPwd" id="d1"  required ></td>
+          		</tr>
+          			
+          		
+          		
+          			
+          	</table>
+          	 <br>
+          	 <!-- Modal footer -->
+        
+        
+          <button type="submit" class="btn btn-warning"  onclick=" deleteUser();">탈퇴</button>
+        
+          </form>
+   	 
+          
+        </div>
+        
+        
+          
+        
+       
+      </div>
+      
+    </div>
+  </div> 		
+          		
+          	
+          	
+          
+          
+          
+          
+          
+            
             <script>
+            
+            
+             
+            function maskRrn() {
+                
+                var rrn = "<%= userInfo.getRrn() %>";
+
+                
+                var maskedRrn = rrn.substring(0, 8) + "●●●●●●";
+
+               
+                $(".rrn1").html("&nbsp;" + maskedRrn);
+            }
+
+            // 페이지 로딩 후, 마스킹 함수 호출
+            $(document).ready(function() {
+                maskRrn();
+            });
+            
+           
                
                 
+           
+                
+            
+            
+            
+            
+            
+            function eye() {
+                var mm1 = document.querySelector(".mm1");
+                var icon = document.querySelector("#icon");
 
-                function eye(){
-						
-                    document.querySelector(".mm1").innerHTML = "&nbsp; ${userInfo.userPw}";
-                    
+                if (mm1.type !== "password") {
+                    mm1.type = "password"; // 비밀번호 입력창을 비밀번호로 설정
+                    icon.classList.remove("fa-eye-slash"); // 'fa-eye-slash' 아이콘을 제거
+                    icon.classList.add("fa-eye"); // 'fa-eye' 아이콘을 추가
+                } else {
+                    mm1.type = "text"; // 비밀번호 입력창을 일반 텍스트로 설정
+                    icon.classList.remove("fa-eye"); // 'fa-eye' 아이콘을 제거
+                    icon.classList.add("fa-eye-slash"); // 'fa-eye-slash' 아이콘을 추가
                 }
-                    
+            }
 
+               
+                    
+             </script>   
+                
+                
+                
+                
+				<script>
+                function checkPwd(){
+
+                	var pwd1 = document.querySelector("#p1");
+                	var pwd2 = document.querySelector("#p2");
+                	
+                	if(pwd1.value != pwd2.value){
+                		alert("변경된 비밀번호가 일치하지 않습니다. 다시 입력해주시길 바랍니다.");
+                		return false;
+                	}
+                }
+                
+
+                $(function(){ //이거 수정했을때 수정이 안됨..
+                	
+                	var adAgree = "${userInfo.adAccept}";
                 	
                 	
+                	
+                	var adAgreeStr = adAgree.split(",");
+                	console.log(adAgree);
+                	console.log(adAgreeStr);
+                	
+                	$("input[type=checkbox]").each(function(){
+                		
+                		if(adAgreeStr.indexOf($(this).val()) != -1){
+                		
+                		$(this).attr("checked",true);
+                		}
+                	})
+                	
+                	
+                	
+                });
+                
+               
+                
+                function deleteUser(){
+                	
+                	var pwd1 = 	$("#d1").val();
+                	var userPw = ${userInfo.userPw};
+                	
+                	if(pwd1 == userPw){
+                		
+                		return confirm("정말 탈퇴하시겠습니까? 탈퇴 후 복구는 불가능하며 사이트 이용 원할시 다시 회원가입해주시길 바랍니다. 그동안 이용해주셔서 감사합니다." );
+                
+                		
+                	}else{
+                		alert("비밀번호를 잘못입력하셨습니다. 다시 확인 해주시길 바랍니다.");
+                		return false;
+                	}
+                	
+     
+                	
+                }
+            
+                
+               
+
                 	
             
             
-            </script>
+                </script>
                     
                     
-
+<%@ include file="/views/common/footer.jsp" %>
 
 
 

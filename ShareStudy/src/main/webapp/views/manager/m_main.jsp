@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.member.model.vo.User
+    ,com.kh.reservation.model.vo.Room"%>
+
+<%
+    //회원
+     ArrayList<User> mList = (ArrayList<User>) session.getAttribute("mList");
+     ArrayList<Room> rList = (ArrayList<Room>) session.getAttribute("rList");
+     int memCount = mList.size();
+     int roomCount = rList.size();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +22,10 @@
 	<div class="total_board">
 		<div class="board1">
 			<h2>총 예약 건수 : 건</h2>
-			<h3>현재 등록된 룸 갯수 :  건</h3>
+			<h3>현재 등록된 룸 갯수 : <%=roomCount %> 건</h3>
 		</div>
 		<div class="board2">
-			<h2>회원 수 : 500 명</h2>
+			<h2>회원 수 : <%=memCount%> 명</h2>
 		</div>
 		<div class="board3">
 			<h2>리뷰 수 : 15 개</h2>
@@ -29,23 +38,42 @@
 		<h3>룸(상품) 관리</h3>
 		<table>
 			<tr>
-			    <th width="12%">행1</th>
-				<th width="12%">행2</th>
-				<th width="20%">행3</th>
-				<th width="13%">행4</th>
-				<th width="13%">행5</th>
-				<th width="10%">행6</th>
-				<th width="10%">행7</th>
+			    <th width="12%">룸 번호</th>
+				<th width="12%">지역</th>
+				<th width="20%">룸 명</th>
+				<th width="13%">수용가능 인원</th>
+				<th width="12%">가격</th>
+				<th width="7%">예약 가능 여부</th>
+				<th width="7%">룸 상세정보</th>
+				<th width="7%">삭제</th>
 			</tr>
-			<tr>
-			    <td>값1</td>
-				<td>값2</td>
-				<td>값3</td>
-				<td>값4</td>
-				<td>값5</td>
-				<td>값6</td>
-				<td>값7</td>
-			</tr>
+			<%
+			    if (mList == null || mList.isEmpty()) {
+			%>
+			        <tr>
+			            <td colspan="8">조회할 회원 정보가 없습니다.</td>
+			        </tr>
+			<%
+			    } else {
+			        for (Room r : rList) {
+			%>
+			 <tr>
+			       <td><%= r.getRoomNo() %></td>
+			       <td><%= r.getRegionNo() %></td>
+			       <td><%= r.getRoomName() %></td>
+			       <td><%= r.getRoomSize() %></td>
+			       <td><%= r.getPrice() %>원</td>
+			       <td><%= r.getStatus() %></td>
+			       <td><a href="">상세보기</a></td>
+			       <td><a href="">삭제</a></td>
+			  </tr>
+			                
+			
+			
+			<%             
+			        }
+			    }
+			%>
 		</table>
 	</section>
 
@@ -64,6 +92,7 @@
 				<th width="9%">행7</th>
 				<th width="9%">행8</th>
 			</tr>
+			
 			<tr>
 			    <td>값1</td>
 			    <td>값2</td>
@@ -108,23 +137,48 @@
    
 		<table>
 			<tr>
-				<th width="10%">행1</th>
-				<th width="15%">행2</th>
-				<th width="20%">행3</th>
-				<th width="31%">행4</th>
-				<th width="10%">행5</th>
-				<th width="7%">행6</th>
-				<th width="7%">행7</th>
+				<th width="10%">회원 아이디</th>
+				<th width="15%">회원 이름</th>
+				<th width="20%">이메일</th>
+				<th width="15%">전화번호</th>
+				<th width="19%">가입일자</th>
+				<th width="7%">수신 동의</th>
+				<th width="7%">상세보기</th>
+				<th width="7%"></th>
 			</tr>
-			<tr>
-				<td>값1</td>
-				<td>값2</td>
-				<td>값3</td>
-				<td>값4</td>
-				<td>값5</td>
-				<td>값6</td>
-				<td>값7</td>
-			</tr>
+			<%
+			    if (mList == null || mList.isEmpty()) {
+			%>
+			        <tr>
+			            <td colspan="7">조회할 회원 정보가 없습니다.</td>
+			        </tr>
+			<%
+			    } else {
+			        for (User u : mList) {
+			%>
+			            <tr>
+			                <td><%= u.getUserId() %></td>
+			                <td><%= u.getUserName() %></td>
+			                <td><%= u.getEmail() %></td>
+			                <td><%= u.getUserPhone() %></td>
+			                <td><%= u.getEnrollDate() %></td>
+			                <td><% if (u.getAdAccept() != null && u.getAdAccept().contains("마케팅동의")) { %>
+                                      Y
+                                 <% } else { %>
+                                     N
+                                 <% } %></td>
+			                 
+			                <td><a href="">상세보기</a></td>
+			                <td><form action="${contextPath}/share/mdelete.ma" method="post" style="display:inline;">
+							        <input type="hidden" name="userId" value="<%= u.getUserId() %>">
+							        <button type="submit">삭제</button>
+							    </form>
+							</td>
+			            </tr>
+			<%             
+			        }
+			    }
+			%>
 		</table>
 	</section>
 

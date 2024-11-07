@@ -1,4 +1,4 @@
-package com.kh.manager.controller;
+package com.kh.reservation.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,19 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ManagerLogoutController
+ * Servlet implementation class ReservationConttroller
  */
-@WebServlet("/logout.ma")
-public class ManagerLogoutController extends HttpServlet {
+@WebServlet("/reservation.re")
+public class ReservationConttroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerLogoutController() {
+    public ReservationConttroller() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,14 +27,7 @@ public class ManagerLogoutController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
-        HttpSession session = request.getSession();
-		
-		session.removeAttribute("loginManager"); 
-		System.out.println("로그아웃 완료");
-		
-		//관리자페이지 나가서 메인페이지로 
-		response.sendRedirect(request.getContextPath());
+		request.getRequestDispatcher("/views/reservation/reservation.jsp").forward(request, response);
 		
 	}
 

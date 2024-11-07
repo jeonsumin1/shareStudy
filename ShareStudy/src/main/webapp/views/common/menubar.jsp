@@ -54,17 +54,19 @@
       </div>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="<%=contextPath%>/noticeBoard.shs" class="nav-link px-2 link-secondary">공지사항</a></li>
+
         <li><a href="<%=contextPath%>/room/list.shs" class="nav-link px-2 link-secondary">상품 상세보기</a></li>
         <li><a href="<%=contextPath%>/reviewBoard.shs" class="nav-link px-2 link-secondary">리뷰게시판</a></li>
         <li><a href="${contextPath}/share/views/manager/m_manager.jsp" class="nav-link px-2 link-secondary">관리자(임시)</a></li>
       </ul>
+
    		
    	  <%if(userInfo==null){%>
       <div class="col-md-3 text-end">
       <form action="<%=contextPath %>/login.shs">
         <button type="submit" class="btn btn-outline-primary me-2">로그인</button>
        </form>
-       <form action="<%=contextPath %>/views/member/enrollForm.jsp">
+        <form action="<%=contextPath %>/views/member/enrollForm.jsp">
         <button type="submit" class="btn btn-primary">회원가입</button>
         </form>
       </div>
@@ -79,5 +81,9 @@
   </div>
 </main>
 <script src="${pageContext.request.contextPath}/views/common/assets/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
 </body>
 </html>

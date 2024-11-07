@@ -1,24 +1,29 @@
 package com.kh.manager.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.kh.manager.model.service.ManagerService;
+import com.kh.member.model.vo.User;
+import com.kh.reservation.model.vo.Room;
 
 /**
- * Servlet implementation class ManagerLogoutController
+ * Servlet implementation class ManagerSelectMember
  */
-@WebServlet("/logout.ma")
-public class ManagerLogoutController extends HttpServlet {
+@WebServlet("/selectAll.ma")
+public class ManagerSelectAll extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerLogoutController() {
+    public ManagerSelectAll() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,15 +32,20 @@ public class ManagerLogoutController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	     
+		//모든 정보를 조회해서 표에 넣을예정
+		//회원, 예약내역, 상품, 상담신청, 리뷰 
+        //SELECT 문을 이용
 		
-        HttpSession session = request.getSession();
+		ArrayList<User> list = new ManagerService().selectAllMember();		
+		request.getSession().setAttribute("mList", list);
 		
-		session.removeAttribute("loginManager"); 
-		System.out.println("로그아웃 완료");
+		ArrayList<Room> list2 = new ManagerService().selectAllRoom();
+		request.getSession().setAttribute("rList", list2);
 		
-		//관리자페이지 나가서 메인페이지로 
-		response.sendRedirect(request.getContextPath());
+		
+		request.getRequestDispatcher("/views/manager/m_Frame.jsp").forward(request, response);
+		
 		
 	}
 

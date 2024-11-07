@@ -61,4 +61,44 @@ public class UserService {
 		
 	}
 	
+	public int updatePwd(String userId, String userPw,String updatePw) {
+		
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new UserDao().updatePwd(conn,userId,userPw,updatePw);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+			
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+		
+	}
+
+	public int deleteUser(String userId,String delPwd) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new UserDao().deleteUser(conn,userId,delPwd);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+			
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	
+	}
+	
 }
