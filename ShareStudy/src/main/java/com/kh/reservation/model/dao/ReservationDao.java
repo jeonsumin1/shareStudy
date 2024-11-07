@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.reservation.model.vo.Reservation;
+import com.kh.reservation.model.vo.RvBank;
 
 public class ReservationDao {
 	
@@ -38,7 +39,7 @@ public class ReservationDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, reserInfo.getRvNo());
-			pstmt.setString(2, "1");
+			pstmt.setString(2, "1"); 
 			pstmt.setString(3, reserInfo.getUserId());
 			pstmt.setInt(4, reserInfo.getRePeople());
 			pstmt.setString(5, reserInfo.getReDate());
@@ -83,57 +84,88 @@ public class ReservationDao {
 	}
 
 	// 예약 번호 시퀀스 번호 추출 메소드 
-	public String selectRvNo(Connection conn) {
-		
-		String rvNo = "";
-		ResultSet rset = null;
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("selectRvNo");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				rvNo = rset.getString("RV_NO");
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return rvNo;
-	}
+//	public String selectRvNo(Connection conn) {
+//		
+//		String rvNo = "";
+//		ResultSet rset = null;
+//		PreparedStatement pstmt = null;
+//		
+//		String sql = prop.getProperty("selectRvNo");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			
+//			rset = pstmt.executeQuery();
+//			
+//			if(rset.next()) {
+//				rvNo = rset.getString("RV_NO");
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			JDBCTemplate.close(rset);
+//			JDBCTemplate.close(pstmt);
+//		}
+//		
+//		return rvNo;
+//	}
 
-	public int insertRvPayment(Connection conn, String rvNo, String userId, String bank, String rvName, String payDate) {
+	// 무통장 입금 정보 저장 메소드 
+	public int insertRvBank(Connection conn, Reservation reserInfo, RvBank rvBank) {
+		// reserInfo, rvBank
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = prop.getProperty("insertRvPayment");
+		String sql = prop.getProperty("insertRvBank");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, rvNo);
-			pstmt.setString(2, userId);
-			pstmt.setString(3, bank);
-			pstmt.setString(4, rvName);
-			pstmt.setString(5, payDate);
+			pstmt.setString(1, reserInfo.getRvNo());
+			pstmt.setString(2, reserInfo.getUserId());
+			pstmt.setString(3, rvBank.getRvBank());
+			pstmt.setString(4, rvBank.getRvName());
+			pstmt.setString(5, rvBank.getRvDate());
+			pstmt.setString(6, rvBank.getAmount());
 			
 			result = pstmt.executeUpdate();
 			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
 		}
 		
 		return result;
 		
+	}
+
+	// 신용카드 결제 정보 저장 메소드 
+	public int insertRvCard(Connection conn, Reservation reserInfo, String buyEmail, String amount) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertRvCard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, reserInfo.getRvNo());
+			pstmt.setString(2, reserInfo.getUserId());
+			pstmt.setString(3, buyEmail);
+			pstmt.setString(4, amount);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 
 	

@@ -19,8 +19,9 @@ public class Reservation {
 		super();
 	}
 
-	public Reservation(String roomNo, String userId, int rePeople, String reDate, String rvPayment, String rvRequest) {
+	public Reservation(String rvNo, String roomNo, String userId, int rePeople, String reDate, String rvPayment, String rvRequest) {
 		super();
+		this.rvNo = rvNo;
 		this.roomNo = roomNo;
 		this.userId = userId;
 		this.rePeople = rePeople;

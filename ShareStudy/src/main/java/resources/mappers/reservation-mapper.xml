@@ -20,22 +20,31 @@
 		WHERE ROOM_NO = ?
 	</entry>
 	
-	<!-- 상품 예약 번호 시퀀스 -->
+	<!-- 상품 예약 번호 시퀀스 
 	<entry key="selectRvNo">
 		SELECT 'STS'||RESER_SEQ.NEXTVAL RV_NO
 		FROM DUAL
 	</entry>
+	-->
 	
 	<!-- 무통장 결제 정보 업데이트 -->
-	<entry key="insertRvPayment">
+	<entry key="insertRvBank">
 		INSERT INTO RVBANK 
 			VALUES (?, 
 				    ?, 
 				    ?,
 				    ?,
+				    ?,
 				    ?)
 	</entry>
 	
-	
+	<!-- 카드 결제 정보 업데이트 -->
+	<entry key="insertRvCard">
+		INSERT INTO RVPAYMENT
+			VALUES (?, 
+				    ?, 
+				    ?,
+				    ?)
+	</entry>
 	
 </properties>
