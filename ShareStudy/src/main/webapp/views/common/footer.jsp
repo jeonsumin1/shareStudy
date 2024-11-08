@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.User"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +27,12 @@
   #snsIcon{
   	width: 25px;
   	height: 25px;
+  	text-align: center;
+  	margin-left: 5px;
+  }
+  
+  #footer > a{
+  	display: none;
   }
 </style>
 </head>
@@ -38,12 +44,17 @@
 	<p>제휴문의 : ShareStudy@Shs.kr</p>
 	<p>대표전화 : 02-123-1234 (평일 am 10:00 ~ pm 06:00)</p>
 	<p>쉐어스터디(이하 Shs)는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 Shs는 공간 거래정보 및 거래에 대해 책임지지 않습니다.</p>
-	<a href="${contextPath}/share/views/manager/m_manager.jsp" style="float:right; color:grey; text-decoration:none;" >관리자 로그인</a>
-	<img src="./resources/Icon/NaverBlog.png" alt="NaverBlogIcon" id="snsIcon">
-	<img src="./resources/Icon/NaverPost.png" alt="NaverPostIcon" id="snsIcon">
-	<img src="./resources/Icon/Instagram.png" alt="InstagramIcon" id="snsIcon">
-	<img src="./resources/Icon/Twitter.png" alt="TwitterIcon" id="snsIcon">
-	<img src="./resources/Icon/FaceBook.png" alt="FaceBookIcon" id="snsIcon">
+	<%User userInform = (User)session.getAttribute("userInfo"); %>
+	<%if(userInform == null) {%>
+		<a href="${contextPath}/share/views/manager/m_manager.jsp" style="float:right; color:grey; text-decoration:none; display: block">관리자 로그인</a>
+	<%} %>
+	<div id="snsIcons">
+	<img src="${pageContext.request.contextPath}/resources/Icon/NaverBlog.png" alt="NaverBlogIcon" id="snsIcon">
+	<img src="${pageContext.request.contextPath}/resources/Icon/NaverPost.png" alt="NaverPostIcon" id="snsIcon">
+	<img src="${pageContext.request.contextPath}/resources/Icon/Instagram.png" alt="InstagramIcon" id="snsIcon">
+	<img src="${pageContext.request.contextPath}/resources/Icon/Twitter.png" alt="TwitterIcon" id="snsIcon">
+	<img src="${pageContext.request.contextPath}/resources/Icon/FaceBook.png" alt="FaceBookIcon" id="snsIcon">
+	</div>
 </div>
 </body>
 </html>

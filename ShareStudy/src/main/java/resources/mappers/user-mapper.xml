@@ -71,9 +71,22 @@
 	AND USER_PW = ?
 	</entry>
 
+	<!-- 아이디 찾기 -->
+	<entry key="FindId">
+		SELECT USER_ID
+		FROM USERINFO
+		WHERE USER_NAME = ?
+		AND PHONE = ?
+	</entry>
 	
-	
-	
+	<!-- 비밀번호 찾기 -->
+	<entry key="FindPw">
+		SELECT USER_PW
+		FROM USERINFO
+		WHERE USER_ID = ?
+		AND USER_NAME = ?
+		AND USER_PHONE = ?
+	</entry>
 
 
 </properties>
