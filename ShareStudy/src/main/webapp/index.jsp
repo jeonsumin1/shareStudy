@@ -246,5 +246,6 @@ body {font-family: Verdana, sans-serif; margin:0}
 </div>
 <%@ include file="/views/common/footer.jsp" %>
 
+
 </body>
 </html>

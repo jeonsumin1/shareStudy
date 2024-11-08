@@ -45,7 +45,7 @@ public class UpdateController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
-		String[] agree = request.getParameterValues("agree");
+		String[] agree = request.getParameterValues("agreeBox");
 		
 		
 		
@@ -61,11 +61,13 @@ public class UpdateController extends HttpServlet {
 		u.setUserPhone(phone);
 		u.setAdAccept(agreeStr);
 		
-		System.out.println(u);
+		//System.out.println(u);
+		
+		
 		
 		int result = new UserService().updateUser(u);
 		
-		System.out.println(result);
+		//System.out.println(result);
 		
 		if(result>0) {
 			HttpSession session = request.getSession();
