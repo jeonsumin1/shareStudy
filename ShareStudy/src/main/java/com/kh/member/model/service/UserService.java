@@ -100,5 +100,25 @@ public class UserService {
 		return result;
 	
 	}
+
+	public String findId(String findName, String findPhone) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String findId = new UserDao().findId(conn, findName, findPhone);
+		
+		JDBCTemplate.close(conn);
+		
+		return findId;
+	}
+
+	public String findPw( String findId, String findName, String findPhone) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String findPw = new UserDao().findPw(conn, findId, findName, findPhone);
+		
+		JDBCTemplate.close(conn);
+		
+		return findPw;
+	}
 	
 }
