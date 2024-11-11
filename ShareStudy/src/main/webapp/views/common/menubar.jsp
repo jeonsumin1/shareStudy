@@ -58,9 +58,10 @@
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
       <li><a href="<%=contextPath%>" class="nav-link px-2 link-secondary" style="margin-right: 2px;">Home</a></li>
         <li><a href="<%=contextPath%>/noticeBoard.shs?PageNum=" class="nav-link px-2 link-secondary">공지사항</a></li>
-        <li><a href="<%=contextPath%>/productDetail.shs" class="nav-link px-2 link-secondary">상품 상세보기</a></li>
+        <li><a href="<%=contextPath%>/room/list.shs" class="nav-link px-2 link-secondary">상품 상세보기</a></li>
         <li><a href="<%=contextPath%>/reviewBoard.shs" class="nav-link px-2 link-secondary">리뷰게시판</a></li>
-        <li><a href="<%=contextPath%>/reservation.re" class="nav-link px-2 link-secondary">예약 페이지(삭제예정)</a></li>
+        <!-- <li><a href="<%=contextPath%>/reservation.re" class="nav-link px-2 link-secondary">예약 페이지(삭제예정)</a></li> -->
+        <li><a href="<%=contextPath%>/views/reservation/reservation.jsp" class="nav-link px-2 link-secondary">예약 페이지(삭제예정)</a></li>
       </ul>
    		
    	  <%if(userInfo==null){%>

@@ -30,6 +30,9 @@ public class RoomDetailController extends HttpServlet {
         Room room = rService.selectRoom(roomNo);
         ArrayList<Attachment> atList = rService.selectAttachmentList(roomNo);
         
+        // 룸 정보를 여러 페이지에서 보여주어야 하기 때문에 session에 저장하는 것이 좋을 것 같음.?
+        request.getSession().setAttribute("room", room);
+        
         request.setAttribute("room", room);
         request.setAttribute("atList", atList);
         

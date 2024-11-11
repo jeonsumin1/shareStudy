@@ -8,22 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.kh.room.model.service.RoomService;
-import com.kh.room.model.vo.Attachment;
-import com.kh.room.model.vo.Room;
+import com.kh.reservation.model.service.ReservationService;
 
 /**
- * Servlet implementation class ReservationConttroller
+ * Servlet implementation class ReservationController
  */
-@WebServlet("/reservation.re")
-public class ReservationConttroller extends HttpServlet {
+@WebServlet("/reservationDetail.shs")
+public class ReservationDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationConttroller() {
+    public ReservationDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,18 +34,12 @@ public class ReservationConttroller extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		// 예약할 룸 정보 불러오는 메소드 
-//		String roomNo = request.getParameter("rno");
-//	    System.out.println(roomNo);
-//	    
-//        RoomService rService = new RoomService();
-//        
-//        Room room = rService.selectRoom(roomNo);
-//        
-//        request.setAttribute("room", room);
+		HttpSession session = request.getSession();
 		
-        
-		request.getRequestDispatcher("/views/reservation/reservation.jsp").forward(request, response);
+		String rvNo = (String) session.getAttribute("rvNo");
+		System.out.println(rvNo);
+		
+		request.getRequestDispatcher("/views/reservation/reDetail.jsp").forward(request, response);
 		
 	}
 

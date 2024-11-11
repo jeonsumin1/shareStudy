@@ -8,9 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.member.model.vo.User;
+import org.json.simple.JSONObject;
+
+import com.google.gson.Gson;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Reservation;
+import com.kh.reservation.model.vo.ReservationSelect;
 import com.kh.reservation.model.vo.RvBank;
 
 /**
@@ -43,13 +46,11 @@ public class ReservationInsertController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 	
-		
-		// 임시 → 상품 상세 페이지에서 전달받은 roomNumber값으로 지정해야 한다. 
-		String roomNo = "1";
+		String roomNo = request.getParameter("rno");
 		
 		String userId = request.getParameter("userId"); // (전달받은 회원의 아이디를 전달해야 한다.)
-		String rvNo = request.getParameter("rvNo");
 		String rvDate = request.getParameter("rvDate"); //방문 날짜
+		
 		int rePeople = Integer.parseInt(request.getParameter("rePeople")); // 예약 인원수 
 		String rvRequest = request.getParameter("rvRequest"); //요청사항
 		String rvPayment = request.getParameter("rvPayment"); // 결제 수단
@@ -58,18 +59,33 @@ public class ReservationInsertController extends HttpServlet {
 		String payDate = request.getParameter("payDate"); 			
 		String amount = request.getParameter("amount");
 		
-		// 예약시 입력 정보  
-		Reservation reserInfo = new Reservation(rvNo,roomNo,userId,rePeople,rvDate,rvPayment,rvRequest);
+		// 예약시 입력 정보   // 예약 번호는 시퀀스로 생성. 
+		Reservation reserInfo = new Reservation(roomNo,userId,rePeople,rvDate,rvPayment,rvRequest);
 		RvBank rvBank = new RvBank(bank, rvName, payDate, amount);
 		
-		int result = new ReservationService().insertReservation(reserInfo, rvBank);
+//		int result = new ReservationService().insertReservation(reserInfo, rvBank);
+		String rvNo = new ReservationService().insertReservation(reserInfo, rvBank);
+//		System.out.println(rvNo);
 		
-		if(result>0) {
-			response.getWriter().print(result);
+//		System.out.println(result);
+		
+		
+//		if(result>0) {
+//			response.getWriter().print(result);
+//		}else {
+//			response.getWriter().print("예약 불가능");
+//		}
+		
+//		
+		if(rvNo != null) {
+//			// rvNo 결제 번호를 가져온다면 결제 정보 select session에 정보 넣기. 
+			ReservationSelect reSuccessInfo = new ReservationService().selReSuccessInfo(rvNo);
+			request.getSession().setAttribute("reSuccessInfo", reSuccessInfo);
+			response.getWriter().print(rvNo);
+				
 		}else {
-			
+			response.getWriter().print("예약 불가능");
 		}
-		
 		
 	}
 
