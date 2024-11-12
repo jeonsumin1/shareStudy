@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.room.model.service.RoomService;
 import com.kh.room.model.vo.Attachment;
@@ -30,10 +31,13 @@ public class RoomDetailController extends HttpServlet {
         Room room = rService.selectRoom(roomNo);
         ArrayList<Attachment> atList = rService.selectAttachmentList(roomNo);
         
-        // 룸 정보를 여러 페이지에서 보여주어야 하기 때문에 session에 저장하는 것이 좋을 것 같음.?
-        request.getSession().setAttribute("room", room);
+        // session 객체 얻기
+        HttpSession session = request.getSession();
         
-        request.setAttribute("room", room);
+        // room 정보를 session에 저장
+        session.setAttribute("room", room);
+
+        //첨부파일 정보는 여기서만 필요하니 request로 저장ㄴ
         request.setAttribute("atList", atList);
         
         request.getRequestDispatcher("/views/room/roomDetailView.jsp").forward(request, response);
