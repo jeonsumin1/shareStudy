@@ -20,12 +20,12 @@
 		WHERE ROOM_NO = ?
 	</entry>
 	
-	<!-- 상품 예약 번호 시퀀스 
+	<!-- 상품 예약 번호 시퀀스 -->
 	<entry key="selectRvNo">
 		SELECT 'STS'||RESER_SEQ.NEXTVAL RV_NO
 		FROM DUAL
 	</entry>
-	-->
+	
 	
 	<!-- 무통장 결제 정보 업데이트 -->
 	<entry key="insertRvBank">
@@ -45,6 +45,25 @@
 				    ?, 
 				    ?,
 				    ?)
+	</entry>
+	
+	<!-- 예약 정보 SELECT -->
+	<entry key="selReSuccessInfo">
+		SELECT R.RV_NO, 
+		       M.ROOM_NAME, 
+		       R.USER_ID, 
+		       R.RV_PEOPLE, 
+		       R.RV_DATE, 
+		       R.RV_CONFIRM, 
+		       R.RV_PAYMENT,
+		       R.RV_REQUEST, 
+		       B.AMOUNT B_AMOUNT, 
+		       P.AMOUNT P_AMOUNT
+		FROM RESERVATION R
+		JOIN ROOM M ON R.ROOM_NO=M.ROOM_NO
+		LEFT JOIN RVBANK B ON R.RV_NO=B.RV_NO
+		LEFT JOIN RVPAYMENT P ON R.RV_NO=P.RV_NO
+		WHERE R.RV_NO = ?
 	</entry>
 	
 </properties>
