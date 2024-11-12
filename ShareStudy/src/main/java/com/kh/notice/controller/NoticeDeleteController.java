@@ -42,7 +42,7 @@ public class NoticeDeleteController extends HttpServlet {
 		}
 		
 		if(result>0) {
-			session.setAttribute("alertMsg", "공지 삭제가 완료되었습니다.");
+			session.setAttribute("alertMsg", "공지사항이 삭제되었습니다.");
 		}else {
 			session.setAttribute("alertMsg", "공지 삭제에 실패하였습니다.");
 		}

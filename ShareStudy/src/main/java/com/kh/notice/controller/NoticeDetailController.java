@@ -27,8 +27,7 @@ public class NoticeDetailController extends HttpServlet {
 		if(result>0) {
 			
 			Notice n = new NoticeService().noticeDetailView(noticeNo);
-			// n에 담겨있는 정보 : 번호, 제목, 내용, 작성일
-			// 수정에 필요한 정보가 다 담겨있다... 가서 빼내기만 하자.
+			// n에 있는 정보 : 번호, 제목, 내용, 작성일
 		
 			request.setAttribute("noticeDetail", n);
 			

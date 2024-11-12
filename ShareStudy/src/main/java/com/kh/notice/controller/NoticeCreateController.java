@@ -26,28 +26,28 @@ public class NoticeCreateController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User userInfo = (User)session.getAttribute("userInfo");
-		
+		System.out.println("userInfo: " + userInfo);
+	    if (userInfo != null) {
+	        System.out.println("userName: " + userInfo.getUserName());
+	    }
 		if (userInfo == null || !userInfo.getUserName().equals("관리자")) {
-	        session.setAttribute("alertMsg", "접근 권한이 없습니다.");
+	        session.setAttribute("alertMsg", "작성 권한이 없습니다.");
 	        response.sendRedirect(request.getContextPath()+"/");
 	        return;
-	    } else {
-	    	request.getRequestDispatcher("/views/notice/createNotice.jsp").forward(request, response);
 	    }
+	    	request.getRequestDispatcher("/views/notice/noticeCreate.jsp").forward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		User userInfo = (User)session.getAttribute("userInfo");
-		
 		if (userInfo == null || !userInfo.getUserName().equals("관리자")) {
-	        session.setAttribute("alertMsg", "접근 권한이 없습니다.");
-	        response.sendRedirect(request.getContextPath() + "/");
+	        session.setAttribute("alertMsg", "작성 권한이 없습니다.");
+	        response.sendRedirect(request.getContextPath()+"/");
 	        return;
 	    }
-		
-		request.setCharacterEncoding("UTF-8");
 		
 		String nTitle = request.getParameter("nTitle");
 		String nContent = request.getParameter("nContent");
@@ -64,7 +64,6 @@ public class NoticeCreateController extends HttpServlet {
 		}else {
 			session.setAttribute("alertMsg", "공지 등록에 실패하였습니다.");
 		}
-//		request.getRequestDispatcher("/noticeBoard.shs").forward(request, response);
 		response.sendRedirect(request.getContextPath()+"/noticeBoard.shs");
 	}
 	
