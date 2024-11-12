@@ -40,7 +40,7 @@
     <div class="outer">
         <h2 align="center">상품 등록</h2>
         
-        <form action="<%=contextPath%>/room/insert.shs" method="post" 
+        <form action="<%=contextPath%>/room/insert.shs" method="post"  
               enctype="multipart/form-data" id="enroll-form" onsubmit="return validateForm()">
             <table>
                 <tr>

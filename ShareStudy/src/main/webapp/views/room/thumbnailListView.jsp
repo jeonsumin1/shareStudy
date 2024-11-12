@@ -29,7 +29,7 @@
         <h2 align="center">상품 상세보기</h2>
         <br>
         
-        <c:if test="${'admin'eq userid}">
+	        <c:if test="${'admin'eq userid}">
         <div align="center">
             <button class="btn btn-info" onclick="location.href='<%=contextPath%>/room/insert.shs'">상품등록</button>
         </div>
@@ -44,7 +44,7 @@
                     <img src="..${room.titleImg}" width="230px" height="160px">
                    
                     <p>
-                        지역 : ${region.regionName}<br>
+                        지역 : ${room.regionName}<br>
                         ${room.roomName}<br>
                         이용가격: ${room.price}원
                     </p>
