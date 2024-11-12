@@ -43,12 +43,11 @@ public class UserLoginController extends HttpServlet {
 		if(userInfo != null) {
 			session.setAttribute("userInfo", userInfo);
 			session.setAttribute("alertMsg", "로그인에 성공하였습니다.");
+			response.sendRedirect(request.getContextPath());
 		}else {
 			session.setAttribute("alertMsg", "로그인 실패. 아이디나 비밀번호를 확인해주세요.");
+			response.sendRedirect(request.getContextPath()+"/login.shs");
 		}
-		
-		
-		response.sendRedirect(request.getContextPath());
 	}
 
 }
