@@ -12,7 +12,8 @@ public class Room {
     private String eating;           // EATING VARCHAR2(1 BYTE)
     private String status;           // STATUS VARCHAR2(1 BYTE)
     private String titleImg;         // 썸네일 표시용
-    
+    private String regionName;         // 지역명
+
     public Room() {
         super();
     }
@@ -134,7 +135,15 @@ public class Room {
         this.titleImg = titleImg;
     }
 
-    @Override
+    public String getRegionName() {
+		return regionName;
+	}
+
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
+	}
+
+	@Override
     public String toString() {
         return "Room [roomNo=" + roomNo + ", regionNo=" + regionNo + ", roomSize=" + roomSize + ", roomName=" + roomName
                 + ", roomAddress=" + roomAddress + ", price=" + price + ", useNight=" + useNight + ", parking=" + parking

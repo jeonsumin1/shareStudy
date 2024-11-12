@@ -142,6 +142,7 @@ public class RoomDao {
                 r.setParking(rset.getString("PARKING"));
                 r.setEating(rset.getString("EATING"));
                 r.setTitleImg(rset.getString("TITLE_IMG"));
+                r.setRegionName(rset.getString("regionName"));
                 
                 list.add(r);
             }
