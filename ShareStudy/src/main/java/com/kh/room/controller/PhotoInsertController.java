@@ -1,6 +1,5 @@
 package com.kh.room.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import com.kh.common.MyFileRenamePolicy;
 import com.kh.room.model.service.RoomService;
 import com.kh.room.model.vo.Attachment;
 import com.kh.room.model.vo.Region;
