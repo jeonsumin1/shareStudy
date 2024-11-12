@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
-import com.google.gson.Gson;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Reservation;
 import com.kh.reservation.model.vo.ReservationSelect;
