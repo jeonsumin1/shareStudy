@@ -43,10 +43,6 @@ public class NoticeUpdateController extends HttpServlet {
 		String nTitle = request.getParameter("nTitle");
 		String nContent = request.getParameter("nContent");
 		
-		request.setAttribute("noticeNo", noticeNo);
-		request.setAttribute("nTitle", nTitle);
-		request.setAttribute("nContent", nContent);
-		
 		request.getRequestDispatcher("views/notice/noticeUpdateView.jsp").forward(request, response);
 	}
 
@@ -78,10 +74,6 @@ public class NoticeUpdateController extends HttpServlet {
 		} else {
 		    System.out.println("nDetailKey가 null이거나 비어 있습니다.");
 		}
-		
-		System.out.println("nDetailKey : "+nDetailKey);
-		System.out.println("nUpdateTitle : "+nUpdateTitle);
-		System.out.println("nUpdateContent : "+nUpdateContent);
 		
 		int result = new NoticeService().UpdateNotice(nDetailKey, nUpdateTitle, nUpdateContent);
 		

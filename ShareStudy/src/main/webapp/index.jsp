@@ -153,6 +153,10 @@ body {font-family: Verdana, sans-serif; margin:0}
 	height: 700px;
 }
 
+#roomPhoto{
+	width: 410px;
+	height: 226px;
+}
 
 </style>
 </head>
@@ -195,12 +199,12 @@ body {font-family: Verdana, sans-serif; margin:0}
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <a href=""><img src="<%=contextPath%>/views/common/images/roomEx.png"
-                alt="roomEx" id="roomEx" oncontextmenu="return false"></a></th>
+                <a href="detail.room?rno=R01"><img src="<%=contextPath%>/resources/uploadFiles/rsiel12.jpg"
+                alt="R01" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
-                <td>Room No.999</td>
-                <td>수용인원 : 최대 4명</td>
+                <td>상품 번호 : R01</td>
+                <td>수용인원 : 1~7명</td>
                 <td>가격 : 50,000￦</td>
             </tr>
         </table>
@@ -208,13 +212,13 @@ body {font-family: Verdana, sans-serif; margin:0}
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <a href=""><img src="<%=contextPath%>/views/common/images/roomEx.png"
-                alt="roomEx" id="roomEx" oncontextmenu="return false"></a></th>
+                <a href="detail.room?rno=R02"><img src="<%=contextPath%>/resources/uploadFiles/rsiel3.jpg"
+                alt="R02" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
-                <td>Room No.998</td>
-                <td>수용인원 : 최대 3명</td>
-                <td>가격 : 40,000￦</td>
+                <td>상품 번호 : R02</td>
+                <td>수용인원 : 1~10명</td>
+                <td>가격 : 80,000￦</td>
             </tr>
         </table>
         
@@ -222,7 +226,7 @@ body {font-family: Verdana, sans-serif; margin:0}
             <tr>
                 <th colspan="3">
                 <a href=""><img src="<%=contextPath%>/views/common/images/roomEx.png"
-                alt="roomEx" id="roomEx" oncontextmenu="return false"></a></th>
+                alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
                 <td>Room No.997</td>
@@ -234,7 +238,7 @@ body {font-family: Verdana, sans-serif; margin:0}
             <tr>
                 <th colspan="3">
                 <a href=""><img src="<%=contextPath%>/views/common/images/roomEx.png"
-                alt="roomEx" id="roomEx" oncontextmenu="return false"></a></th>
+                alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
                 <td>Room No.996</td>
