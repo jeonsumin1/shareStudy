@@ -4,7 +4,43 @@
 
 	<!-- 공지사항 작성 -->
 	<entry key="createNotice">
-		INSERT INTO NOTICE (KEY, N_TITLE, N_CONTENT
-					VALUE (SEQ_NNO.NEXTVAL(), ?, ?)
+		INSERT INTO NOTICE (KEY, N_TITLE, N_CONTENT)
+					VALUES (SEQ_NNO.NEXTVAL, ?, ?)
 	</entry>
+	
+	<!--  공지사항 조회  -->
+	<entry key="selectNotice">
+	SELECT KEY, N_TITLE, N_CONTENT, COUNT, CREATEDATE
+	FROM NOTICE
+	WHERE STATUS = 'Y'
+	ORDER BY CREATEDATE DESC
+	</entry>
+	
+	<!--  조회수 올라감!  -->
+	<entry key="increaseCount"> 
+	UPDATE NOTICE
+	SET COUNT = COUNT+1 
+	WHERE KEY = ? 
+	</entry>
+	
+	<!--  공지사항 상세보기  -->
+	<entry key="noticeDetailView"> 
+	SELECT KEY, N_TITLE, N_CONTENT, CREATEDATE 
+	FROM NOTICE 
+	WHERE KEY = ? 
+	</entry>
+	
+	<!--  공지사항 수정하기  -->
+	<entry key="UpdateNotice"> 
+	UPDATE NOTICE 
+	SET N_TITLE = ?, N_CONTENT = ? 
+	WHERE KEY = ?
+	</entry>
+	
+	<!-- 공지사항 삭제하기 -->
+	<entry key="deleteNotice">
+	DELETE FROM NOTICE
+	WHERE KEY = ?
+	</entry>
+	
 </properties>

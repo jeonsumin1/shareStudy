@@ -11,43 +11,38 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.service.UserService;
-import com.kh.member.model.vo.User;
 
-
-@WebServlet("/login.shs")
-public class UserLoginController extends HttpServlet {
+@WebServlet("/findId.shs")
+public class UserFindIdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
-    public UserLoginController() {
+    public UserFindIdController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("/views/member/loginForm.jsp");
-		view.forward(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String userId = request.getParameter("userId");
-		String userPw = request.getParameter("userPw");
+		String findName = request.getParameter("findName");
+		String findPhone = request.getParameter("findPhone");
 		
-		User userInfo = new UserService().loginUser(userId, userPw);
+		String findId = new UserService().findId(findName, findPhone);
 		
 		HttpSession session = request.getSession();
 		
-		if(userInfo != null) {
-			session.setAttribute("userInfo", userInfo);
-			session.setAttribute("alertMsg", "로그인에 성공하였습니다.");
-			response.sendRedirect(request.getContextPath());
-		}else {
-			session.setAttribute("alertMsg", "로그인 실패. 아이디나 비밀번호를 확인해주세요.");
-			response.sendRedirect(request.getContextPath()+"/login.shs");
+		if(findId != null) {
+			session.setAttribute("alertMsg", "회원님의 아이디는 "+findId+"입니다.");
+		} else {
+			session.setAttribute("alertMsg", "입력하신 정보와 일치하는 아이디가 없습니다.");
 		}
+		
+		RequestDispatcher view = request.getRequestDispatcher("/views/member/findId.jsp");
+		view.forward(request, response);
 	}
 
 }

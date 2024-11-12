@@ -19,6 +19,28 @@ public class Reservation {
 		super();
 	}
 
+	public Reservation(String roomNo, String userId, int rePeople, String reDate, String rvPayment, String rvRequest) {
+		super();
+		this.roomNo = roomNo;
+		this.userId = userId;
+		this.rePeople = rePeople;
+		this.reDate = reDate;
+		this.rvPayment = rvPayment;
+		this.rvRequest = rvRequest;
+	}
+
+	public Reservation(String rvNo, String userId, int rePeople, String reDate, Date rvConfirm, String rvPayment,
+			String rvRequest) {
+		super();
+		this.rvNo = rvNo;
+		this.userId = userId;
+		this.rePeople = rePeople;
+		this.reDate = reDate;
+		this.rvConfirm = rvConfirm;
+		this.rvPayment = rvPayment;
+		this.rvRequest = rvRequest;
+	}
+
 	public Reservation(String rvNo, String roomNo, String userId, int rePeople, String reDate, String rvPayment, String rvRequest) {
 		super();
 		this.rvNo = rvNo;
@@ -30,8 +52,7 @@ public class Reservation {
 		this.rvRequest = rvRequest;
 	}
 
-	public Reservation(String rvNo, String roomNo, String userId, int rePeople, String reDate, Date rvConfirm,
-			String rvPayment, String rvRequest) {
+	public Reservation(String rvNo, String roomNo, String userId, int rePeople, String reDate, Date rvConfirm, String rvPayment, String rvRequest) {
 		super();
 		this.rvNo = rvNo;
 		this.roomNo = roomNo; 

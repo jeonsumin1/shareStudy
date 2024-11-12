@@ -6,7 +6,6 @@
 <%
     String contextPath = request.getContextPath();
 	User userInfo = (User)session.getAttribute("userInfo");
-	/* alert 추가 */
 	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <head>
@@ -20,22 +19,26 @@
       color: grey;
    }
     .btn-outline-primary {
-    color: rgba(255, 166, 0, 0.774); /* 텍스트 색상 */
-    border-color: rgba(255, 166, 0, 0.774); /* 버튼 테두리 색상 */
+    color: rgba(255, 166, 0, 0.774);
+    border-color: rgba(255, 166, 0, 0.774);
    }
    .btn-outline-primary:hover {
-    background-color: rgba(255, 166, 0, 0.774); /* 호버 시 배경 색상 */
+    background-color: rgba(255, 166, 0, 0.774);
     color: #fff; /* 호버 시 텍스트 색상 */
     border-color: #FFA500;
    }
    .btn-primary {
-    background-color: rgba(255, 166, 0, 0.774); /* 기본 배경 색상 */
+    background-color: rgba(255, 166, 0, 0.774);
     border-color: rgba(255, 166, 0, 0.774); /* 테두리 색상 */
     }
    .btn-primary:hover {
-    background-color: rgba(255, 166, 0, 0.9); /* 호버 시 더 진한 배경 색상 */
-    border-color: rgba(255, 166, 0, 0.9); /* 호버 시 더 진한 테두리 색상 */
+    background-color: rgba(255, 166, 0, 0.9);
+    border-color: rgba(255, 166, 0, 0.9);
     }
+    .border-bottom {
+    	border-bottom: 2px solid !important;
+    	color: rgb(193, 195, 190);
+	}
  </style>
 <title>메뉴바</title>
 </head>
@@ -53,13 +56,17 @@
         </a>
       </div>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li><a href="<%=contextPath%>" class="nav-link px-2 link-secondary" style="margin-right: 2px;">Home</a></li>
         <li><a href="<%=contextPath%>/noticeBoard.shs" class="nav-link px-2 link-secondary">공지사항</a></li>
-
         <li><a href="<%=contextPath%>/room/list.shs" class="nav-link px-2 link-secondary">상품 상세보기</a></li>
-        <li><a href="<%=contextPath%>/reviewList.shs?currentPage=1" class="nav-link px-2 link-secondary">리뷰게시판</a></li>
-        <li><a href="${contextPath}/share/views/manager/m_manager.jsp" class="nav-link px-2 link-secondary">관리자(임시)</a></li>
-      </ul>
 
+        <li><a href="<%=contextPath%>/reviewList.shs?currentPage=1" class="nav-link px-2 link-secondary">리뷰게시판</a></li>
+
+        
+        <!-- <li><a href="<%=contextPath%>/reservation.re" class="nav-link px-2 link-secondary">예약 페이지(삭제예정)</a></li> -->
+        <li><a href="<%=contextPath%>/room/list.shs" class="nav-link px-2 link-secondary">예약 페이지(삭제예정)</a></li>
+
+      </ul>
    		
    	  <%if(userInfo==null){%>
       <div class="col-md-3 text-end">
@@ -81,9 +88,5 @@
   </div>
 </main>
 <script src="${pageContext.request.contextPath}/views/common/assets/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-
 </body>
 </html>

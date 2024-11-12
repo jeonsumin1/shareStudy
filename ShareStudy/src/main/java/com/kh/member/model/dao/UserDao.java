@@ -195,4 +195,52 @@ public class UserDao {
 		return result;
 	}
 
+	public String findId(Connection conn, String findName, String findPhone) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String findId = null;
+		String sql = prop.getProperty("FindId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, findName);
+			pstmt.setString(2, findPhone);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				findId = rset.getString("USER_ID");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return findId;
+	}
+
+	public String findPw(Connection conn, String findId, String findName, String findPhone) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String findPw = null;
+		String sql = prop.getProperty("FindPw");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, findId);
+			pstmt.setString(2, findName);
+			pstmt.setString(3, findPhone);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				findPw = rset.getString("USER_PW");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return findPw;
+	}
+
 }

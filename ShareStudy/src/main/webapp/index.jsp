@@ -94,6 +94,69 @@ th, td {
 	padding-right: 200px;
 }
 
+{box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+.mySlides {display: none}
+.slideshow-container img {vertical-align: middle; width: 100%}
+
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    width: 70%;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.active{
+    background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 7s;
+    animation-name: fade;
+    animation-duration: 7s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+.slideshow-container{
+	width: 400px;
+	height: 700px;
+}
+
+#roomPhoto{
+	width: 410px;
+	height: 226px;
+}
 
 </style>
 </head>
@@ -119,7 +182,7 @@ th, td {
 			<a href="<%=contextPath%>">
 			<img src="<%=contextPath%>/views/common/images/ShareStudyLogo2.png"
 				alt="ShareStudyLogo" id="mainLogo" oncontextmenu="return false"></a>
-		</div>
+	</div>
 		<div id="searchBar">
 			<form action="search.shs" id="searchForm">
 				<div class="search-container">
@@ -130,41 +193,18 @@ th, td {
 			</form>
 		</div>
 	</div>
-	<!-- 
-	<span class="slideshow-container">
-                <div class="Slidesbackground">
-                    <div class="mySlides fade">
-                    <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2369&q=80" class="slideshow-image">
-                    </div>
-                    <div class="mySlides fade">
-                        <img src="https://images.unsplash.com/photo-1581888227599-779811939961?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2148&q=80" class="slideshow-image">
-                    </div>
-                    <div class="mySlides fade">
-                        <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80" class="slideshow-image">
-                    </div>
-                    <div class="mySlides fade">
-                        <img src="https://images.unsplash.com/photo-1527526029430-319f10814151?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80" class="slideshow-image">
-                    </div>
-                    <div class="mySlides fade">
-                        <img src="https://images.unsplash.com/photo-1600077029182-92ac8906f9a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80" class="slideshow-image">
-                    </div>
-                    <div class="mySlides fade">
-                        <img src=https://cdn.cnn.com/cnnnext/dam/assets/201030094143-stock-rhodesian-ridgeback-super-tease.jpg" class="slideshow-image">
-                    </div>
-                </div>
-             </span>
- 	-->
+	
 	<div id="content" style="display:flex; justify-content:center; flex-wrap: wrap;">
     <div id="product">
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <img src="<%=contextPath%>/views/common/images/roomEx.png"
-                alt="roomEx" id="roomEx" oncontextmenu="return false"></th>
+                <a href="detail.room?rno=R01"><img src="<%=contextPath%>/resources/uploadFiles/rsiel12.jpg"
+                alt="R01" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
-                <td>Room No.999</td>
-                <td>수용인원 : 최대 4명</td>
+                <td>상품 번호 : R01</td>
+                <td>수용인원 : 1~7명</td>
                 <td>가격 : 50,000￦</td>
             </tr>
         </table>
@@ -172,21 +212,21 @@ th, td {
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <img src="<%=contextPath%>/views/common/images/roomEx.png"
-                alt="roomEx" id="roomEx" oncontextmenu="return false"></th>
+                <a href="detail.room?rno=R02"><img src="<%=contextPath%>/resources/uploadFiles/rsiel3.jpg"
+                alt="R02" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
-                <td>Room No.998</td>
-                <td>수용인원 : 최대 3명</td>
-                <td>가격 : 40,000￦</td>
+                <td>상품 번호 : R02</td>
+                <td>수용인원 : 1~10명</td>
+                <td>가격 : 80,000￦</td>
             </tr>
         </table>
         
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <img src="<%=contextPath%>/views/common/images/roomEx.png"
-                alt="roomEx" id="roomEx" oncontextmenu="return false"></th>
+                <a href=""><img src="<%=contextPath%>/views/common/images/roomEx.png"
+                alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
                 <td>Room No.997</td>
@@ -197,8 +237,8 @@ th, td {
          <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <img src="<%=contextPath%>/views/common/images/roomEx.png"
-                alt="roomEx" id="roomEx" oncontextmenu="return false"></th>
+                <a href=""><img src="<%=contextPath%>/views/common/images/roomEx.png"
+                alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
                 <td>Room No.996</td>

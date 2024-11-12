@@ -3,7 +3,10 @@ package com.kh.room.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import com.kh.common.JDBCTemplate;
+import com.kh.member.model.vo.User;
 import com.kh.room.model.dao.RoomDao;
 import com.kh.room.model.vo.Attachment;
 import com.kh.room.model.vo.Region;
