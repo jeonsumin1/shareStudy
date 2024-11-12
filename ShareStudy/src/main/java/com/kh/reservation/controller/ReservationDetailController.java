@@ -34,10 +34,9 @@ public class ReservationDetailController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		HttpSession session = request.getSession();
-		
-		String rvNo = (String) session.getAttribute("rvNo");
-		System.out.println(rvNo);
+//		HttpSession session = request.getSession();
+//		String rvNo = (String) session.getAttribute("rvNo");
+//		System.out.println(rvNo);
 		
 		request.getRequestDispatcher("/views/reservation/reDetail.jsp").forward(request, response);
 		
