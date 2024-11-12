@@ -36,6 +36,7 @@ public class RoomDetailController extends HttpServlet {
         
         // room 정보를 session에 저장
         session.setAttribute("room", room);
+
         //첨부파일 정보는 여기서만 필요하니 request로 저장ㄴ
         request.setAttribute("atList", atList);
         
