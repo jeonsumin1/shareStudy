@@ -64,8 +64,7 @@
 
         
         <!-- <li><a href="<%=contextPath%>/reservation.re" class="nav-link px-2 link-secondary">예약 페이지(삭제예정)</a></li> -->
-        <li><a href="<%=contextPath%>/room/list.shs" class="nav-link px-2 link-secondary">예약 페이지(삭제예정)</a></li>
-
+        <li><a href="<%=contextPath%>/reservation.re" class="nav-link px-2 link-secondary">예약 페이지(삭제예정)</a></li>
       </ul>
    		
    	  <%if(userInfo==null){%>

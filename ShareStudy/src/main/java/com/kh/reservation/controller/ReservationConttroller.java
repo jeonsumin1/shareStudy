@@ -35,17 +35,6 @@ public class ReservationConttroller extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		// 예약할 룸 정보 불러오는 메소드 
-//		String roomNo = request.getParameter("rno");
-//	    System.out.println(roomNo);
-//	    
-//        RoomService rService = new RoomService();
-//        
-//        Room room = rService.selectRoom(roomNo);
-//        
-//        request.setAttribute("room", room);
-		
-        
 		request.getRequestDispatcher("/views/reservation/reservation.jsp").forward(request, response);
 		
 	}

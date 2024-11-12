@@ -69,11 +69,15 @@
 	.areSt{
 		color : red;
 	}
-	table{
-		background-color: #f8f9fa;
-	}
 	table th{
-		width: 150px;
+		width: 100px;
+	}
+	.roomInfo{
+		display: flex;
+		align-items: flex-start;
+	}
+	.roomInfo div{
+		margin-right: 20px;
 	}
 	
 </style>
@@ -85,33 +89,35 @@
 		 - 비회원 예약 추가할 경우 비회원/로그인 예약 페이지 따로 생성.?
 	--%>
 	<div class="outer" align="center">
-		<c:if test="${empty userInfo}">
-			<div class="i divBor" align="center">
-				<h3> 로그인/회원가입을 해주세요. </h3>
-				<P>공간을 예약하려면 로그인이 필요합니다.</P>
-			</div>
-			
-			<div class="outer" >비회원 예약 </div> <!-- 버튼 클릭하면 비회원 예약 페이지로 이동하게. -->
-		</c:if>
 		
+		<!-- <c:if test="${empty userInfo}">
+			<script>
+				location.href="<%= contextPath %>/reLogOrNon.shs";
+			</script>
+		</c:if>
+		-->
+		
+		<c:if test="${empty userInfo}">
+			<h3> 로그인/회원가입을 해주세요. </h3>
+			<P>공간을 예약하려면 로그인이 필요합니다.</P>
+		</c:if>
 		<c:if test="${not empty userInfo}">
 		
 		
 			<h2>예약 정보 작성</h2>
 			<hr>
 			    <div>	  
-		            <div class="i">
-			            <div><h4>${room.roomName}</h4></div> <!-- ${room.roomName}    상세페이지에서 클릭한 상품 pk를 이용하여 상품명 불러오기 -->
+			    	<div><h4>${room.roomName}</h4></div> <!-- ${room.roomName}    상세페이지에서 클릭한 상품 pk를 이용하여 상품명 불러오기 -->
+			            <div class="i roomInfo">
 			            <div>
 				            <img src="../../resources/스터디룸.jpg" >  <!-- 상품 사진으로 불러오기 -->
 			            </div>
 			            <br>
-			            <div class="st" id="stDiv">
-			                <p>* 상품 정보 * </p>  <!--   db 에서 정보 가져오기 -->
-			            	<table class="table table-bordered">
+			            <div class="st" id="stDiv" style="width: 500px;">
+			            	<table class="table table-bordered tbstyle">
 			            		<tr>
 			            			<th>가격</th>
-			            			<td>${room.price}</td>
+			            			<td>${room.price} 원</td> <!-- 수정  -->
 			            		</tr>
 			            		<tr>
 			            			<th>야간이용</th>
@@ -148,8 +154,6 @@
 			                	<select name="rePeople" class="form-control" oninput="selDate();" required ></select>
 			                </div>
 			            
-					        <div><input type="hidden"></div> <!-- 사용자 아이디, 룸 (상품) 번호 받아와야 한다. -->
-										
 					        <br>
 					        <div>
 						        <p> 성명 </p>
@@ -187,7 +191,7 @@
 				    		</tr>
 				    	</table>
 				    	<hr>  <!-- text-align은 block 요소에만 사용됨.  -->
-				    	<h4 align="right">₩<strong style="margin-left: 3%;">${room.price}</strong></h4> 
+				    	<h4 align="right">₩<strong style="margin-left: 3%;">${room.price}<%-- 수정 ${room.price} --%></strong></h4> 
 				    </div>
 					
 					<div class="divBor">
@@ -212,10 +216,6 @@
 					            <input type="radio" name="rvPayment" id="card" value="card"><label for="card" class="itext">신용카드</label>
 					        </div>
 							
-					       
-					        <div class="radio">
-					            <input type="radio" name="rvPayment" id="kpay" value="pay"><label for="kpay" class="itext">카카오페이</label>  <!-- 신용카드 기능 구현 후 추가 구현하기 -->
-					        </div>
 						</div>
 				    </div>
 				    <br><hr><br>
@@ -311,7 +311,7 @@
 		    	
 		    	<%-- 전달받은 예약 인원 만큼 select 박스 생성 --%>
 		    	var rePeople = $("select[name='rePeople']");
-		    	for(var i=1; i<=${room.roomSize}; i++){
+		    	for(var i=1; i<=2; i++){ //${room.roomSize}
 		    		rePeople.append($("<option>").val(i).text(i));
 		    	}
 		    	
@@ -425,8 +425,8 @@
 							bank : bank,
 							rvName : rvName,
 							payDate : payDate,
-							amount : '${room.price}'
-						},success : function(jInfo){
+							amount : '${room.price}' <%-- 수정 ${room.price} --%>
+						},success : function(rvNo){
 							// 사용자에게 입력받은 정보가 저장되었을 때. 예약 확인 또는 메인 페이지로 이동 
 							if(rvNo != null){
 								if(confirm("예약이 완료되었습니다. 예약 확인 페이지로 이동하시겠습니까?")){
@@ -503,17 +503,13 @@
 				            alert('결제 실패');
 				        }
 				    });
-				    
-					<%-- 카카오페이 입금 --%>
-				}else if(rvPayment === "pay"){
-							alert("준비중.");
-				}
-				
+				}				
 			}
 	   
 	   
 	    </script>
-	  
+	    
+	  <%@ include file="/views/common/footer.jsp" %>
 	  
 	    <br><br><br><br><br><br>
 		<%-- <%@ include file="/views/common/footer.jsp" %> --%>
