@@ -41,7 +41,7 @@ public class reservationInsertCard extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		// 임시 → 상품 상세 페이지에서 전달받은 roomNumber값으로 지정해야 한다. 
+		// 신용카드 결제시 생성되는 주문번호 (신용카드 결제 예약 번호 != 시퀀스) 
 		String rvNo = request.getParameter("rvNo");
 		
 		String roomNo = request.getParameter("rno"); 

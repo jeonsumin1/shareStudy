@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
@@ -189,7 +190,7 @@ public class ReservationDao {
 			if(rset.next()) {
 				reSuccessInfo = new ReservationSelect(rset.getString("RV_NO"),
 													  rset.getString("ROOM_NAME"),
-													  rset.getString("USER_ID"),
+													  rset.getString("USER_NAME"),
 													  rset.getString("RV_PEOPLE"),
 													  rset.getDate("RV_DATE"),
 													  rset.getString("RV_CONFIRM"),
@@ -208,6 +209,43 @@ public class ReservationDao {
 		}
 		
 		return reSuccessInfo;
+	}
+
+	
+	// 예약 내역 리스트 
+	public ArrayList<Reservation> selectReserList(Connection conn, String userId) {
+		
+		ArrayList<Reservation> relist = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReserList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+				
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				relist.add(new Reservation(rset.getString("RV_NO"),
+									       rset.getString("ROOM_NAME"),
+									       rset.getString("USER_ID"),
+									       rset.getInt("RV_PEOPLE"),
+									       rset.getString("RV_DATE"),
+						 			       rset.getDate("RV_CONFIRM"),
+									       rset.getString("RV_PAYMENT"),
+									       rset.getString("RV_REQUEST")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return relist;
 	}
 
 	

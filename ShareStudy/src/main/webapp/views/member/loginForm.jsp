@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<% String contextPath = request.getContextPath(); %>
+<% String contextPath = request.getContextPath();
+   String alertMsg = (String) session.getAttribute("alertMsg");
+   if (alertMsg != null) {
+   session.removeAttribute("alertMsg");
+%>
+    <script>
+        alert("<%= alertMsg %>");
+    </script>
+<%
+}
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -11,7 +21,6 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
-
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -20,11 +29,9 @@
 <title>로그인</title>
 <style>
 @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
-
 html {
 	height: 100%;
 }
-
 body {
 	width: 100%;
 	height: 100%;
@@ -34,18 +41,15 @@ body {
 	font-family: "Nanum Gothic", arial, helvetica, sans-serif;
 	background-repeat: no-repeat;
 }
-
 .card {
 	margin: 0 auto; /* Added */
 	float: none; /* Added */
 	margin-bottom: 10px; /* Added */
 }
-
 #btn-Yes {
-	background-color: #e4932b;
+	background-color: #E4932B;
 	border: none;
 }
-
 .login .form-control {
 	position: relative;
 	height: auto;
@@ -55,43 +59,35 @@ body {
 	padding: 10px;
 	font-size: 16px;
 }
-
 .checkbox {
 	margin-right: 20px;
 	text-align: right;
 }
-
 .card-title {
 	left: 30px;
 }
-
 .card-title > img{
 	width: 70%;
 	margin-left: 60px;
 }
-
 .links {
 	text-align: center;
 	margin-bottom: 10px;
 }
-
 a {
-	color: #f58b34;
+	color: #F58B34;
 	text-decoration: none;
 }
-
 .check {
 	color: red;
 }
 </style>
 </head>
-
 <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0"
 	width="100%" height="100%" align="center">
-
 	<div class="card align-middle" style="width: 25rem;">
 		<div class="card-title" style="margin-top: 30px; display: flex; justify-content: center;">
-			<h2 class="card-title" style="color: #f58b34;">
+			<h2 class="card-title" style="color: #F58B34;">
 				<a href="<%=contextPath%>/index.jsp"><img src="<%=contextPath%>/views/common/images/IDPWFIND.png"/></a>
 			</h2>
 		</div>
@@ -109,8 +105,6 @@ a {
 	</div>
 	<div class="links">
 		<a href="<%=contextPath%>/views/member/findId.jsp">아이디 찾기</a> | <a href="<%=contextPath%>/views/member/findPw.jsp">비밀번호 찾기</a>
-
 	</div>
-
 </body>
 </html>

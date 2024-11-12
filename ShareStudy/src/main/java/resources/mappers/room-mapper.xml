@@ -27,18 +27,15 @@
         ORDER BY REGION_NO
     </entry>
     
-    <entry key="selectThumbnailList">
-    
-        SELECT 
-        	b.region_name AS regionName, 
-        	A.*,
-        	C.FILE_PATH || C.CHANGE_NAME AS TITLE_IMG
-		FROM ROOM A, REGION B, ATTACHMENT C
-		WHERE 1=1
-		AND A.region_no = B.region_no
-		AND A.ROOM_NO = C.ROOM_NO
-		AND A.STATUS = 'Y'
-		AND C.FILE_LEVEL = 1
+     <entry key="selectThumbnailList">
+	 	SELECT
+	        b.region_name AS regionName,
+	        A.*,
+	        C.FILE_PATH || C.CHANGE_NAME AS TITLE_IMG
+	    FROM ROOM A
+	    JOIN REGION B ON A.region_no = B.region_no
+	    LEFT JOIN ATTACHMENT C ON A.ROOM_NO = C.ROOM_NO AND C.FILE_LEVEL = 1
+	    WHERE A.STATUS = 'Y'
     </entry>	
     
     <entry key="selectRoom">

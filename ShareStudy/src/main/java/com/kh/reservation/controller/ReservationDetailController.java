@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.reservation.model.service.ReservationService;
+import com.kh.reservation.model.vo.ReservationSelect;
 
 /**
  * Servlet implementation class ReservationController
@@ -34,9 +35,11 @@ public class ReservationDetailController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-//		HttpSession session = request.getSession();
-//		String rvNo = (String) session.getAttribute("rvNo");
-//		System.out.println(rvNo);
+		String rvNo = request.getParameter("rvNo");
+		
+		// 예약 내역에서 상세 보기로 갈 경우 예약 내역 정보 select 메소드 (예약 완료 후 정보는 insertController에서 정보를 바로 전달한다.)
+		ReservationSelect reSuccessInfo = new ReservationService().selReSuccessInfo(rvNo);
+		request.setAttribute("reSuccessInfo", reSuccessInfo);
 		
 		request.getRequestDispatcher("/views/reservation/reDetail.jsp").forward(request, response);
 		
