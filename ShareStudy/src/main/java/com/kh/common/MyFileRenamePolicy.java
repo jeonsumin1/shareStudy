@@ -21,7 +21,7 @@ public class MyFileRenamePolicy implements FileRenamePolicy{
 		
 		String changeName = currentTime + ranNum + ext;
 		
-		return new File(originFile.getParent());
+		return new File(originFile.getParent(),changeName);
 	}
 
 }

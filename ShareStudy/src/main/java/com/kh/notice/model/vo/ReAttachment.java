@@ -30,6 +30,16 @@ public class ReAttachment {
 		this.status = status;
 		this.fileLevel = fileLevel;
 	}
+	
+	
+
+	public ReAttachment(String fileNo, String originName, String changeName, String filePath) {
+		super();
+		this.fileNo = fileNo;
+		this.originName = originName;
+		this.changeName = changeName;
+		this.filePath = filePath;
+	}
 
 	public String getFileNo() {
 		return fileNo;

@@ -59,4 +59,44 @@ public class ReviewService {
 		return listCount;
 	}
 
+	public int increaseCount(int rno) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new ReviewDao().increaseCount(conn,rno);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+			
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public Review selectReview(int rno) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Review r = new ReviewDao().selectReview(conn,rno);
+		
+		JDBCTemplate.close(conn);
+		
+		return r;
+	}
+
+	public ReAttachment selectAttachment(int rno) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ReAttachment rt = new ReviewDao().selectAttachment(conn,rno);
+		
+		JDBCTemplate.close(conn);
+		
+		return rt;
+	}
+
 }

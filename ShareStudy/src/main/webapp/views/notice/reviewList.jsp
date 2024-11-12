@@ -170,6 +170,25 @@ h1{
                
             </tbody>
 		</table>
+		
+		<script>
+		$(function(){
+			
+			$(".list>tbody>tr").click(function(){
+				
+				var rno = $(this).children().first().text();
+				console.log($(this).children().first().text());
+				
+				location.href="detailReview.shs=" +rno;
+				
+			});
+			
+			
+		});
+		
+		</script>
+		
+		
             <br>
             <div id="write">
                 <a href="<%=contextPath %>/insertReview.shs" id="submit" align="center">글작성</a>
@@ -205,6 +224,7 @@ h1{
             
             
             
+            
 
            
             
@@ -218,7 +238,7 @@ h1{
         
         
         
-<!--         </form> -->
+
 
 
     </div>

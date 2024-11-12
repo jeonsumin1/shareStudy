@@ -34,18 +34,35 @@ public class Review {
 	}
 	
 	
-
-	public Review(int reviewNo, String regionName,String reviewTitle, String userId, int reviewCount, Date reviewDate 
-			) {
+	
+	public Review(int reviewNo, String userId, String reviewTitle, Date reviewDate, int reviewCount,
+			String regionName) {
 		super();
 		this.reviewNo = reviewNo;
-		this.regionName = regionName;
-		
-		this.reviewTitle = reviewTitle;
 		this.userId = userId;
-		this.reviewCount = reviewCount;
+		this.reviewTitle = reviewTitle;
 		this.reviewDate = reviewDate;
+		this.reviewCount = reviewCount;
+		this.regionName = regionName;
 	}
+
+	public Review(int reviewNo, String userId, String reviewTitle, String reviewContent, Date reviewDate,
+			int reviewCount, String regionName) {
+		super();
+		this.reviewNo = reviewNo;
+		this.userId = userId;
+		this.reviewTitle = reviewTitle;
+		this.reviewContent = reviewContent;
+		this.reviewDate = reviewDate;
+		this.reviewCount = reviewCount;
+		this.regionName = regionName;
+	}
+
+	
+	
+	
+
+	
 
 	public int getReviewNo() {
 		return reviewNo;

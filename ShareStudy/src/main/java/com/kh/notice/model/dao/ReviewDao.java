@@ -61,11 +61,11 @@ import com.kh.notice.model.vo.Review;
 				
 				rList.add(new Review(
 									  rset.getInt("REVIEW_NO"),
-									  rset.getString("REGION_NAME"),
-									  rset.getString("REVIEW_TITLE"),
 									  rset.getString("USER_ID"),
+									  rset.getString("REVIEW_TITLE"),
+									  rset.getDate("REVIEW_DATE"),
 									  rset.getInt("REVIEW_COUNT"),
-									  rset.getDate("REVIEW_DATE")
+									  rset.getString("REGION_NAME")
 						
 						
 						));
@@ -96,6 +96,8 @@ import com.kh.notice.model.vo.Review;
 			pstmt.setString(1, r.getReviewTitle());
 			pstmt.setString(2, r.getRegionName());
 			pstmt.setString(3, r.getReviewContent());
+			pstmt.setString(4, r.getUserId());
+			
 			
 			result = pstmt.executeUpdate();
 			
@@ -205,6 +207,107 @@ import com.kh.notice.model.vo.Review;
 			JDBCTemplate.close(pstmt);
 		}
 		return ReviewNo;
+	}
+
+	public int increaseCount(Connection conn, int rno) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("increaseCount");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public Review selectReview(Connection conn, int rno) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		Review r = null;
+		
+		String sql = prop.getProperty("selectReview");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+
+				r = new Review(rset.getInt("REVIEW_NO"),
+							   rset.getString("USER_ID"),
+							   rset.getString("REVIEW_TITLE"),
+							   rset.getString("REVIEW_CONTENT"),
+							   rset.getDate("REVIEW_DATE"),
+							   rset.getInt("REVIEW_COUNT"),
+							   rset.getString("REGION_NAME"));		
+				
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+	
+		return r;
+	}
+
+	public ReAttachment selectAttachment(Connection conn, int rno) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ReAttachment rt = null;
+		
+		String sql = prop.getProperty("selectAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				rt = new ReAttachment(rset.getString("FILE_NO"),
+									  rset.getString("ORIGIN_NAME"),
+									  rset.getString("CHANGE_NAME"),
+									  rset.getString("FILE_PATH"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+			
+		
+		
+		return rt;
 	}
 
 		

@@ -131,7 +131,7 @@
         
 
 
-        <form action="<%=contextPath %>/detailReview.shs" method="post" id="review-area" enctype="multipart/form-data">
+        <form action="<%=contextPath %>/detailReview.shs" id="review-area" >
             
             <h2 align="center" >리뷰게시판</h2>
             <br>
@@ -139,15 +139,15 @@
             <table align="center"  >
                 <tr>
                     <td align="center">제목</td>
-                    <td colspan="5"><input type="text" name="title" id="title"></td>
+                    <td colspan="5"><input type="text" name="title" id="title" value="${r.reviewTitle }"></td>
                 </tr>
                 <tr>
                     <td align="center">작성자</td>
-                    <td><input type="text" id="writer"  ></td>
+                    <td><input type="text" id="writer" value="${r.userId }" ></td>
                     <td align="center">장소</td>
-                    <td><input type="text" name="place" id="place"></td>
+                    <td><input type="text" name="place" id="place" ></td>
                     <td align="center" >지역
-                    <select name="region" >
+                    <select name="region">
                          <option value="서울">서울</option>
                          <option value="경기">경기</option>
                          <option value="인천">인천</option>
@@ -172,113 +172,32 @@
                 </tr>
                 <tr> 
                     <td align="center">내용</td>
-                    <td colspan="5" height="300"><textarea name="content" rows='10'></textarea></td>
+                    <td colspan="5" height="300"><textarea name="content" rows='10'>${r.reviewContent}</textarea></td>
                     
                 </tr>
             
             
-                <tr>
-					<td>이미지</td>
-					
-					<td colspan="1.5" width="130" height="120" >
-						<img id="contentImg1">
-					</td>
-					<td colspan="1.5" width="130" height="120" >
-						<img id="contentImg2">
-					</td>
-					<td  colspan="1.5" width="130" height="120">
-						<img id="contentImg3">
-					</td>
-					<td  colspan="1.5" width="130" height="120">
-						<img id="contentImg4">
-					</td>
-					
-				</tr>
+               <tr>
+				<th>첨부파일</th> 
+				<td colspan="3">
+					<c:choose>
+						<c:when test="${empty at}">
+							첨부파일이 없습니다 
+						</c:when>
+						<c:otherwise>
+							<!-- 다운로드 속성 추가 -->
+							<a href="${contextPath}${at.filePath}${at.changeName}">${at.originName}</a>
+						</c:otherwise>
+					</c:choose>
+				
+				</td>
+			</tr>
                 
-                <tr>
-                    <td align="center">첨부파일</td>  <!-- on -->
-                    <td colspan="5" align="center"><input type="file" id="file1" name="file1" onchange="loadImg(this,1);"></td>
-                </tr>
-                <tr>
-                	<td></td>
-                    <td colspan="4" align="center"><input type="file" id="file2" name="file2" onchange="loadImg(this,2);"></td>
-                </tr>
-                <tr>
-                	<td></td>
-                    <td colspan="4" align="center"><input type="file" id="file3" name="file3" onchange="loadImg(this,3);"></td>
-                </tr>
-                <tr>
-                	<td></td>
-                    <td colspan="4" align="center"><input type="file" id="file4" name="file4" onchange="loadImg(this,4);"></td>
-                </tr>
-
-                <tr>
-                    <td style="height: 30px;"></td>
-                </tr>
-                <tr>
-                    <td colspan="6" align="center"><input type="submit" id="submit">
-                    <input type="button" id="submit" onclick="history.back();" value="뒤로가기"></td>
-
-                </tr>
+               
                 </table>
         </form>
         
-        		<script>
         		
-        		
-        			//onchange에서 동작할 함수 정의
-        			function loadImg(inputFile,num){
-        				//inputFile는 현재 이벤트가 발생한 요소이고 num은 자식으로 생각하면 된다.
-        				//inputFile.files : input file에 현재 파일 정보를 확인할 수 있는 속성(배열형식의 fileList)
-        				//파일을 선택하면 0번 인덱스에 파일 정보가 담긴다. 이때 length는 1이 된다.
-        				//파일을 선택했을땐 length가 1이고 선택하지 않았을땐 또는 선택을 취소했을땐 0이기 때문에 해당 조건으로 파일에 대한 처리하기 
-        				
-        				if(inputFile.files.length == 1){
-        					//해당 파일의 정보를 읽어서 미리보기 영역에 보여주기
-        					//파일 정보를 읽어줄 객체 FileReader() 준비
-        					var reader = new FileReader();
-        					//FileReader의 메소드중 readAsDataURL(파일) 이라는 메소드로 
-        					//파일을 읽어 해당 파일의 고유한 url을 반환받아 사용한다.
-        					
-        					reader.readAsDataURL(inputFile.files[0]);
-        					//파일은 0번 인덱스에 등록되어있다.
-        					
-        					//reader 객체가 해당 파일 정보를 읽어오는 시점 : onload
-        					reader.onload = function(e){
-        						//이벤트 정보 매개변수(e)
-        						//이벤트가 동작한 대상 : e.target
-        						//해당 이벤트가 발생한 대상의 결과 : e.target.result (생성된 고유 url이 담긴다.)
-        						
-        						console.log(e.target.result);
-        						
-        						switch(num){//같이 전달했던 번호 이용하기
-	        						case 1 : $("#contentImg1").attr("src",e.target.result); break;
-	        						case 2 : $("#contentImg2").attr("src",e.target.result); break;
-	        						case 3 : $("#contentImg3").attr("src",e.target.result); break;
-	        						case 4 : $("#contentImg4").attr("src",e.target.result); break;
-        						
-        						}
-        						
-        					};
-        					
-        				}else{
-    						//선택된 파일이 사라졌을때 띄워놨던 이미지 지워주기 (src 비우기)
-    						switch(num){
-    							case 1 : $("#contentImg1").attr("src",null); break; 
-    							case 2 : $("#contentImg2").attr("src",null); break;
-    							case 3 : $("#contentImg3").attr("src",null); break;
-    							case 4 : $("#contentImg4").attr("src",null); break;
-    						}
-    					}
-    					
-        				
-        			}
-        			
-        		</script>
-            
-            
-
-                
 				
 
 
