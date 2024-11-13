@@ -63,6 +63,7 @@ public class ReservationInsertController extends HttpServlet {
 		
 		String rvNo = new ReservationService().insertReservation(reserInfo, rvBank);
 		
+		System.out.println(rvNo);
 		//정보저장 실패했을 경우 NULL로 return 
 		
 		// DAO에서 rvNo를 String rvNo = ""; 빈 문자열로 선언해 두었으니 null 값이 아닌 "" 빈 문자열과 비교해서 빈 문자열이 아닌 경우 예약 및 결제 정보를 가져온다. 

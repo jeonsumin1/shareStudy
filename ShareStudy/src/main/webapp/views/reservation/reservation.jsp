@@ -69,15 +69,11 @@
 	.areSt{
 		color : red;
 	}
+	table{
+		background-color: #f8f9fa;
+	}
 	table th{
-		width: 100px;
-	}
-	.roomInfo{
-		display: flex;
-		align-items: flex-start;
-	}
-	.roomInfo div{
-		margin-right: 20px;
+		width: 150px;
 	}
 	
 </style>
@@ -89,18 +85,15 @@
 		 - 비회원 예약 추가할 경우 비회원/로그인 예약 페이지 따로 생성.?
 	--%>
 	<div class="outer" align="center">
-		
-		<!-- <c:if test="${empty userInfo}">
-			<script>
-				location.href="<%= contextPath %>/reLogOrNon.shs";
-			</script>
-		</c:if>
-		-->
-		
 		<c:if test="${empty userInfo}">
-			<h3> 로그인/회원가입을 해주세요. </h3>
-			<P>공간을 예약하려면 로그인이 필요합니다.</P>
+			<div class="i divBor" align="center">
+				<h3> 로그인/회원가입을 해주세요. </h3>
+				<P>공간을 예약하려면 로그인이 필요합니다.</P>
+			</div>
+			
+			<div class="outer" >비회원 예약 </div> <!-- 버튼 클릭하면 비회원 예약 페이지로 이동하게. -->
 		</c:if>
+		
 		<c:if test="${not empty userInfo}">
 		
 		
