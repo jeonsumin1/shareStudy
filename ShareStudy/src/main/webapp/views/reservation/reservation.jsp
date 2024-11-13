@@ -437,7 +437,7 @@
 									alert('메인으로 돌아갑니다.');
 									location.href = '<%= contextPath%>';				
 								}
-							}else{
+							}else{ 
 								alert("예약 중 오류가 발생했습니다. ");
 							}
 							
