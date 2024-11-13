@@ -1,6 +1,7 @@
 package com.kh.notice.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,15 +37,20 @@ public class ReviewDetailController extends HttpServlet {
 		
 		int result = new ReviewService().increaseCount(rno);
 		
+		//System.out.println(rno);
+		
 		if(result>0) {
 			
 			Review r = new ReviewService().selectReview(rno);
 			
-			ReAttachment rt = new ReviewService().selectAttachment(rno);
+			ArrayList<ReAttachment> rt = new ReviewService().selectAttachment(rno);
 			
 			request.setAttribute("r", r);
 			
 			request.setAttribute("rt", rt);
+			
+			//System.out.println(r);
+			System.out.println(rt);
 			
 			request.getRequestDispatcher("views/notice/reviewDetail.jsp").forward(request, response);
 		}else {
@@ -60,7 +66,6 @@ public class ReviewDetailController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
 		
 		
 	}

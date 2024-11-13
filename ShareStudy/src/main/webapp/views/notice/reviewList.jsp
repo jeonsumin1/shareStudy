@@ -10,6 +10,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>리뷰게시판</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
 
@@ -155,7 +156,8 @@ h1{
                    		</c:when>
                    		<c:otherwise>
                    			<c:forEach var="r" items="${rList }">
-                   				<tr height="50">
+                   				<c:if test="${r.reviewStatus == 'Y' }">
+                   				<tr height="50" id="reviewList">
                    					<td align="center" >${r.reviewNo }</td>
                    					<td align="center">${r.regionName }</td>
                    					<td>${r.reviewTitle }</td>
@@ -163,6 +165,7 @@ h1{
                    					<td align="center">${r.reviewCount }</td>
                    					<td align="center">${r.reviewDate }</td>
                    				</tr>
+                   				</c:if>
                    			</c:forEach>
                    		</c:otherwise>
                    </c:choose>
@@ -177,9 +180,10 @@ h1{
 			$(".list>tbody>tr").click(function(){
 				
 				var rno = $(this).children().first().text();
-				console.log($(this).children().first().text());
+				console.log(rno);
+				//console.log($(this).children().first().text());
 				
-				location.href="detailReview.shs=" +rno;
+				location.href="detailReview.shs?rno=" + rno; 
 				
 			});
 			

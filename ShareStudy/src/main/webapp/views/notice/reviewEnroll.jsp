@@ -136,6 +136,7 @@
             <h2 align="center" >리뷰게시판</h2>
             <br>
 			<input type="hidden" name="userId" value="${userInfo.userId }">
+			<input type="hidden" name="reviewNo" value="${r.reviewNo}">
             <table align="center"  >
                 <tr>
                     <td align="center">제목</td>
