@@ -244,7 +244,7 @@ public class UserDao {
 	}
 
 	// 상담 신청
-	public int insertQuestion(Connection conn, String userId, String qTime, String qContent) {
+	public int insertQuestion(Connection conn, String userId, String qTime, String qContent, String tel) {
 
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -253,15 +253,42 @@ public class UserDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, "userId");
-			pstmt.setString(2, "qTime");
-			pstmt.setString(3, "qContent");
+			pstmt.setString(1, userId);
+			pstmt.setString(2, tel);
+			pstmt.setString(3, qTime);
+			pstmt.setString(4, qContent);
+			
+			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		return result;
+	}
+
+	public String qCount(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("qCount");
+		String count = "";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getString("COUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return count;
 	}
 
 }

@@ -81,8 +81,8 @@
       <%}else{%>
       <div class="col-md-3 text-end d-flex justify-content-center align-items-center">
       <b><%=userInfo.getUserName()%>님 환영합니다.</b>
-      <form action="<%=contextPath %>/views/member/myPage.jsp">
-      <button type="submit" class="btn btn-outline-primary me-2">마이페이지</button>
+      <form action="<%=contextPath %>/MyPage.shs">
+      	<button type="submit" class="btn btn-outline-primary me-2">마이페이지</button>
       </form>
       <a href="<%=contextPath%>/logout.shs" id="logout" onclick="return confirmLogout();">로그아웃</a>
       <%}%>

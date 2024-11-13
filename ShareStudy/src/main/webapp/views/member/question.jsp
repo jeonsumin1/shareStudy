@@ -47,61 +47,84 @@
 	<div data-toggle="modal" data-target="#QModal">📞 문의 하기</div>
 	<!-- 문의하기 모달 -->
 	
-	<div class="modal" id="QModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">ShareStudy</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+<div class="modal" id="QModal">
+   <div class="modal-dialog">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h4 class="modal-title">ShareStudy</h4>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+           </div>
 
-            <div class="modal-body">
-                <p>문의사항</p>
-                <table class="table table-bordered inputSt">
-                    <tr>
-                        <th>상담 가능 시간</th>
-                        <td><input type="datetime-local" id="qTime" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <th>상담 상담 내용</th>
-                        <td><textarea id="qContent" rows="5" cols="30" placeholder="상담 내용에 대해 간략하게 적어주세요." style="resize: none;" class="form-control"></textarea></td>
-                    </tr>
-                </table>
-            </div>
+           <div class="modal-body">
+               <p>문의사항</p>
+               <table class="table table-bordered inputSt">
+                   <tr>
+                       <th>상담 가능 시간</th>
+                       <td><input type="datetime-local" id="qTime" class="form-control" required></td>
+                   </tr>
+                   <tr>
+                       <th>전화번호</th>
+                       <td><input type="text" id="tel" class="form-control" placeholder="010-0000-0000 (- 포함입력)" maxlength="13" required></td>
+                   </tr>
+                   <tr>
+                       <th>상담 상담 내용</th>
+                       <td><textarea id="qContent" rows="5" cols="30" placeholder="상담 내용에 대해 간략하게 적어주세요." style="resize: none;" class="form-control"></textarea></td>
+                   </tr>
+               </table>
+           </div>
 
-            <div class="modal-footer">
-                <!-- 'send' 버튼 클릭 시 test() 함수 호출 -->
-                <button class="btn" style="background-color: rgba(255, 166, 0, 0.774)" onclick="test();">send</button>
-                <!-- 'close' 버튼 클릭 시 모달만 닫히고 test() 함수는 호출되지 않음 -->
+           <div class="modal-footer">
+               <!-- 'send' 버튼 클릭 시 test() 함수 호출 -->
+               <button class="btn" style="background-color: rgba(255, 166, 0, 0.774)" onclick="test();">send</button>
+               <!-- 'close' 버튼 클릭 시 모달만 닫히고 test() 함수는 호출되지 않음 -->
                 <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- jQuery 라이브러리 포함 -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
 
 	
     function test() {
-    	var qTime = $("#qTime").val();
-        var qContent = $("#qContent").val();
+    	var qTime = $("#qTime");
+        var qContent = $("#qContent");
+        var tel = $("#tel");
+        console.log(qTime+" "+qContent+" "+tel);
         
+        var regExp = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}$/;
+       	if(!regExp.test(tel.val())){
+       		alert("전화번호를 다시 입력하세요.");
+       		$("#tel").focus();
+       		return;
+       	}
+       	
     	$.ajax({
-    		url: "${contextPath}/question.shs",
+    		url: "<%= contextPath%>/question.shs",
     		type: "POST",
     		data: {
     			userId : "${userInfo.userId}", 
-    			qTime: qTime,
-    			qContent : qContent
+    			qTime: qTime.val(),
+    			qContent : qContent.val(),
+    			tel : tel.val()
     		},
     		success: function(result){
     			if(result>0){
 	    		 	alert("상담신청이 완료되었습니다.");
-			        $('#QModal').modal('hide');
-    				
+			        		        
+			        qTime.val("");
+			        qContent.val("");
+			        tel.val("");
+			        
+			        <!-- 닫기(close)  : 모달 닫는 메소드라는데 적용이 안됨. 
+			        	$('#QModal').modal('hide'); 
+			        -->
+			        
+			        $("#QModal").css("display","none");
+			        $(".modal-backdrop").css("display","none");
+			        
+			        
     			}else{
 	    			alert("상담신청이 실패되었습니다.");
     			}
@@ -111,7 +134,6 @@
     		}
     		
     	});
-        
     }
     
 </script>    
