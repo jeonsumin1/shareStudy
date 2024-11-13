@@ -77,4 +77,32 @@ public class RoomService {
         JDBCTemplate.close(conn);
         return list;
     }
+
+	public int deleteRoom(String roomNo) {
+		Connection conn = JDBCTemplate.getConnection();
+	    int result = 0;
+	    
+	    try {
+	        conn.setAutoCommit(false);
+	        
+	        RoomDao dao = new RoomDao();
+	        
+	        // 상품 상태를 'N'으로 변경
+	        result = dao.deleteRoom(conn, roomNo);
+	        
+	        if(result > 0) {
+	            JDBCTemplate.commit(conn);
+	        } else {
+	            JDBCTemplate.rollback(conn);
+	        }
+	    } catch (Exception e) {
+	        JDBCTemplate.rollback(conn);
+	        e.printStackTrace();
+	    } finally {
+	        JDBCTemplate.close(conn);
+	    }
+	    
+	    return result;
+    
+	}
 }
