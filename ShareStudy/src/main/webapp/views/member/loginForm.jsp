@@ -104,7 +104,8 @@ a {
 		</div>
 	</div>
 	<div class="links">
-		<a href="<%=contextPath%>/views/member/findId.jsp">아이디 찾기</a> | <a href="<%=contextPath%>/views/member/findPw.jsp">비밀번호 찾기</a>
+		<a href="<%=contextPath%>/views/member/findId.jsp">아이디 찾기</a> | <a href="<%=contextPath%>/views/member/findPw.jsp">비밀번호 찾기</a> | <a href="<%=contextPath%>/views/member/enrollForm.jsp">회원가입</a>
 	</div>
+	
 </body>
 </html>

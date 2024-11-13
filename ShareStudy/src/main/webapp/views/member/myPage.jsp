@@ -10,6 +10,8 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <script src="https://use.fontawesome.com/72aaf9ab20.js"></script>
@@ -228,8 +230,23 @@ input[type="email"]{
 
 
     
+.qq{
+	   width: 550px; /* 페이지 너비 */
+       margin: auto; /* 페이지 중앙 정렬 */
+       margin-top: 50px;
+       text-align: left;
+       border: 1px solid #99999953;
+	   border-radius: 10px;
+	   height: 230px;
+}
+.inputSt{
+    	margin-top: 10px;
+    	width: 100%; 
+    }
+table th{
+	width: 200px;
+}
 
- 
 
 
  
@@ -320,7 +337,7 @@ input[type="email"]{
                          
                       
                         <tr id="a2">
-                        <td colspan="3"><input type="checkbox" name="agreeBox id="a" value="서비스동의"  required>
+                        <td colspan="3"><input type="checkbox" name="agreeBox" id="a" value="서비스동의"  required>
                         <label for="a">[필수]sharestudy 서비스 이용약관 동의</label>
 
                         </td>
@@ -346,34 +363,15 @@ input[type="email"]{
                     	
                     	<!-- sm 추가! -->
                     	<tr>
-                            <td align="left" style="font-size: small;"><button onclick="location.href='<%= contextPath %>/rvlist.shs'">● 예약 내역</button></td>
+                            <td align="left" style="font-size: small;"><div onclick="location.href='<%= contextPath %>/rvlist.shs'"> 📚 예약 내역</div></td>                       
                         </tr>
                         
-                    	
                         <tr>
-                            <td align="left" style="font-size: small;">● 예약 정보</td>
-                        </tr>
-                            <td colspan="2"><input type="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MTBfNDYg%2FMDAxNjU3NDU2MjM2NTAz.yJQCChoFPgiWm0vjkCU4NlcH4lRPWWxePl6n0R7IkB0g.1Alvs-Px7p8PWhddQBr3-SZXZ5X2zzMGMAQqSVemU7Mg.JPEG.room_rivate%2F%25BD%25BA%25C5%25CD%25B5%25F0%25B7%25EB1.JPG&type=a340" required></td>
-                        <tr>
-                        </tr>
-                        <td align="left" style="font-size: small;" id="inform1">📚예약번호</td>
-                        <tr>
-                        </tr>
-                        <td align="left" style="font-size: small;"  id="inform2">📚룸 번호</td>
-                        <tr>
-                        </tr>
-                        <td align="left" style="font-size: small;" id="inform3">📚예약인원수</td>
-                        <tr>
-                        </tr>
-                        <td align="left" style="font-size: small;" id="inform4">📚예약시간</td>
-                        <tr>
-
-                        <tr>
-                            <td style="height: 20px;"></td>
-                        </tr>
-
-                        <tr>
-                            <td align="left" style="font-size: small;">📞 나의 문의</td>
+                            <!-- <td align="left" style="font-size: small;">📞 나의 문의</td> -->
+                            <td align="left" style="font-size: small;">
+                            	<div data-toggle="modal" data-target="#QModal">📞 문의 하기</div>
+                            	<div onclick="location.href='<%= contextPath%>/question.shs'">📞 나의 문의</div>
+                            </td>
                             </tr>
                             <td align="left" style="font-size: small;"><p id="m1"> 💌 시간문의(카테고리화)</p></td>
                         <tr>       
@@ -395,20 +393,11 @@ input[type="email"]{
                             </td>
                         </tr>
                                 
-                                
-                                
-
-                       
-                            
-                             
 					</table>
                 </form>
+                
             </div>
             
-            
-  
-
-  
 
   <!-- The Modal -->
   <div class="modal fade" id="updatePwd">
@@ -460,14 +449,8 @@ input[type="email"]{
         
           </form>
           
-          	 
-          
         </div>
         
-        
-          
-        
-       
       </div>
       
     </div>
@@ -522,19 +505,61 @@ input[type="email"]{
           		
           	
           	
-          
-          
-          
-          
-          
-            
-            <script>
-            
-            
-             
-            function maskRrn() {
-                
-                var rrn = "<%= userInfo.getRrn() %>";
+<%-- 문의하기 모달 
+<div class="modal" id="QModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">ShareStudy</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <p>문의사항</p>
+                <table class="table table-bordered inputSt">
+                    <tr>
+                        <th>상담 가능 시간</th>
+                        <td><input type="datetime-local" id="qTime" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <th>상담 상담 내용</th>
+                        <td><textarea id="qContent" rows="5" cols="30" placeholder="상담 내용에 대해 간략하게 적어주세요." style="resize: none;" class="form-control"></textarea></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <!-- 'send' 버튼 클릭 시 test() 함수 호출 -->
+                <button type="button" class="btn" style="background-color: rgba(255, 166, 0, 0.774)" onclick="test();">send</button>
+                <!-- 'close' 버튼 클릭 시 모달만 닫히고 test() 함수는 호출되지 않음 -->
+                <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+            </div>
+        </div>
+    </div>
+</div>
+--%>
+
+
+<script>
+
+<%--
+    function test() {
+        var qTime = $("#qTime").val();
+        var qContent = $("#qContent").val();
+        console.log(qTime);
+        console.log(qContent);
+
+        // 모달 닫기
+        $('#QModal').modal('hide');
+    }
+--%>
+    
+    
+    
+		function maskRrn() {
+
+			var rrn = "
+	<%= userInfo.getRrn() %>";
 
                 
                 var maskedRrn = rrn.substring(0, 8) + "●●●●●●";

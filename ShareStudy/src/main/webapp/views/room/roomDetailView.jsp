@@ -113,8 +113,7 @@
 		</div>
 		<div align="center">
 
-			<button type="button" class="btn btn-primary"
-				onclick="location.href='<%= contextPath %>/reservation/re?rno=${room.roomNo}'">
+			<button type="button" class="btn btn-primary" onclick="location.href='<%= contextPath %>/reservation.re?rno=${room.roomNo}'">
 				예약하기</button>
 
 			<button type="button" class="btn btn-secondary"

@@ -243,4 +243,25 @@ public class UserDao {
 		return findPw;
 	}
 
+	// 상담 신청
+	public int insertQuestion(Connection conn, String userId, String qTime, String qContent) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertQuestion");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, "userId");
+			pstmt.setString(2, "qTime");
+			pstmt.setString(3, "qContent");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 }

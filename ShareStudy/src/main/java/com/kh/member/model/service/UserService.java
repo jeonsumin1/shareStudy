@@ -120,5 +120,21 @@ public class UserService {
 		
 		return findPw;
 	}
+
+	
+	// 상담 신청
+	public int insertQuestion(String userId, String qTime, String qContent) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new UserDao().insertQuestion(conn, userId, qTime, qContent);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		return result;
+	}
 	
 }
