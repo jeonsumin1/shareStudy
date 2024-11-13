@@ -346,32 +346,9 @@ input[type="email"]{
                     	
                     	<!-- sm 추가! -->
                     	<tr>
-                            <td align="left" style="font-size: small;"><button onclick="location.href='<%= contextPath %>/rvlist.shs'">● 예약 내역</button></td>
+                            <td align="left" style="font-size: small;"><div onclick="location.href='<%= contextPath %>/rvlist.shs'"> 📚 예약 내역</div></td>                       
                         </tr>
                         
-                    	
-                        <tr>
-                            <td align="left" style="font-size: small;">● 예약 정보</td>
-                        </tr>
-                            <td colspan="2"><input type="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MTBfNDYg%2FMDAxNjU3NDU2MjM2NTAz.yJQCChoFPgiWm0vjkCU4NlcH4lRPWWxePl6n0R7IkB0g.1Alvs-Px7p8PWhddQBr3-SZXZ5X2zzMGMAQqSVemU7Mg.JPEG.room_rivate%2F%25BD%25BA%25C5%25CD%25B5%25F0%25B7%25EB1.JPG&type=a340" required></td>
-                        <tr>
-                        </tr>
-                        <td align="left" style="font-size: small;" id="inform1">📚예약번호</td>
-                        <tr>
-                        </tr>
-                        <td align="left" style="font-size: small;"  id="inform2">📚룸 번호</td>
-                        <tr>
-                        </tr>
-                        <td align="left" style="font-size: small;" id="inform3">📚예약인원수</td>
-                        <tr>
-                        </tr>
-                        <td align="left" style="font-size: small;" id="inform4">📚예약시간</td>
-                        <tr>
-
-                        <tr>
-                            <td style="height: 20px;"></td>
-                        </tr>
-
                         <tr>
                             <td align="left" style="font-size: small;">📞 나의 문의</td>
                             </tr>

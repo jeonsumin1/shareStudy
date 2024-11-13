@@ -39,9 +39,7 @@
 	hr{
 		width: 100%;
 	}
-	img{
-		width: 100%;
-	}
+	
 	
 	.i{
 		padding:5%;
@@ -65,6 +63,9 @@
 		padding: 3%;
 		border-radius: 5px;
 	}
+	.imgSt{
+		margin-right: 30px;
+	}
 	
 	.areSt{
 		color : red;
@@ -76,6 +77,12 @@
 		width: 150px;
 	}
 	
+	.roomInfo{
+		padding-top: 30px;
+		display: flex;
+		justify-content: space-between; /* 아이템 사이에 균일한 간격을 만들어 준다. */
+	}
+	
 </style>
 </head>
 <body>
@@ -85,32 +92,32 @@
 		 - 비회원 예약 추가할 경우 비회원/로그인 예약 페이지 따로 생성.?
 	--%>
 	<div class="outer" align="center">
-		<c:if test="${empty userInfo}">
-			<div class="i divBor" align="center">
-				<h3> 로그인/회원가입을 해주세요. </h3>
-				<P>공간을 예약하려면 로그인이 필요합니다.</P>
-			</div>
-			
-			<div class="outer" >비회원 예약 </div> <!-- 버튼 클릭하면 비회원 예약 페이지로 이동하게. -->
-		</c:if>
-		
+		 
 		<c:if test="${not empty userInfo}">
-		
 		
 			<h2>예약 정보 작성</h2>
 			<hr>
 			    <div>	  
 			    	<div><h4>${room.roomName}</h4></div> <!-- ${room.roomName}    상세페이지에서 클릭한 상품 pk를 이용하여 상품명 불러오기 -->
-			            <div class="i roomInfo">
-			            <div>
-				            <img src="../../resources/스터디룸.jpg" >  <!-- 상품 사진으로 불러오기 -->
-			            </div>
+			        <div class="roomInfo">
+			            <div class="imgSt">
+			            	<!-- 룸정보 중 filePath가 1인 것만 보여준다. -->
+			           		<c:forEach var="atList" items="${atList}">
+				            	<c:if test="${atList.fileLevel == 1}">
+				            		<img alt="예약룸사진" src="<%= contextPath %>${atList.filePath}${atList.changeName}">
+				            	</c:if>
+			           		</c:forEach>
+				        </div>
 			            <br>
-			            <div class="st" id="stDiv" style="width: 500px;">
-			            	<table class="table table-bordered tbstyle">
+			            <div class="" id="stDiv" style="width: 500px;">
+			            	<table class="table table-bordered">
 			            		<tr>
 			            			<th>가격</th>
 			            			<td>${room.price} 원</td> <!-- 수정  -->
+			            		</tr>
+			            		<tr>
+			            			<th>이용 가능 인원</th>
+			            			<td>${room.roomSize} 명</td> <!-- 수정  -->
 			            		</tr>
 			            		<tr>
 			            			<th>야간이용</th>
@@ -264,7 +271,8 @@
 		
 	</div>
 	  
-	  
+<br><br><br><br><br><br>
+<%@ include file="/views/common/footer.jsp" %> 
 	  
 	    <script>
 	 		 		
@@ -304,7 +312,7 @@
 		    	
 		    	<%-- 전달받은 예약 인원 만큼 select 박스 생성 --%>
 		    	var rePeople = $("select[name='rePeople']");
-		    	for(var i=1; i<=2; i++){ //${room.roomSize}
+		    	for(var i=1; i<=${room.roomSize}; i++){ //
 		    		rePeople.append($("<option>").val(i).text(i));
 		    	}
 		    	
@@ -429,7 +437,7 @@
 									alert('메인으로 돌아갑니다.');
 									location.href = '<%= contextPath%>';				
 								}
-							}else{
+							}else{ 
 								alert("예약 중 오류가 발생했습니다. ");
 							}
 							
@@ -502,9 +510,7 @@
 	   
 	    </script>
 	    
-	  <%@ include file="/views/common/footer.jsp" %>
+
 	  
-	    <br><br><br><br><br><br>
-		<%-- <%@ include file="/views/common/footer.jsp" %> --%>
 </body>
 </html>

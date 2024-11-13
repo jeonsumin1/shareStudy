@@ -37,15 +37,37 @@ public class UserLoginController extends HttpServlet {
 		String userPw = request.getParameter("userPw");
 
 		User userInfo = new UserService().loginUser(userId, userPw);
+<<<<<<< HEAD
 
+=======
+		
+		//이전 URL 정보 
+		String reUrl = (String) request.getSession().getAttribute("reUrl");
+		
+>>>>>>> branch 'main' of https://github.com/jeonsumin1/shareStudy.git
 		HttpSession session = request.getSession();
 		
 		if (userInfo != null) {
 			session.setAttribute("userInfo", userInfo);
 			session.setAttribute("alertMsg", "로그인에 성공하였습니다.");
+<<<<<<< HEAD
 			response.sendRedirect(request.getContextPath());
 			
 		} else {
+=======
+			
+			// 로그인 성공 시 이전 페이지로 이동 reUrl 값이 있을 경우에만 해당 경로로 이동. 아닐 경우 홈페이지로 이동. 
+			if(reUrl != null) {
+				response.sendRedirect(reUrl);
+			}else {
+				response.sendRedirect(request.getContextPath());
+			}
+			
+			// 세션에서 
+			session.removeAttribute("reUrl"); // session에서 해당 값을 지워주지 않으면 일반 로그인 시 reUrl이 session에 남아 있어 상품 예약 페이지로 이동이 된다. 
+			
+		}else {
+>>>>>>> branch 'main' of https://github.com/jeonsumin1/shareStudy.git
 			session.setAttribute("alertMsg", "로그인 실패. 아이디나 비밀번호를 확인해주세요.");
 			response.sendRedirect(request.getContextPath() + "/login.shs");
 		}

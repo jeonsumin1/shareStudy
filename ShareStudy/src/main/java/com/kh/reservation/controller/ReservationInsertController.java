@@ -44,7 +44,7 @@ public class ReservationInsertController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 	
 		String roomNo = request.getParameter("rno");
-		roomNo = "1"; // room 페이지 수정 후 삭제 
+//		roomNo = "1"; // room 페이지 수정 후 삭제 
 		
 		String userId = request.getParameter("userId"); // (전달받은 회원의 아이디를 전달해야 한다.)
 		String rvDate = request.getParameter("rvDate"); //방문 날짜
@@ -71,8 +71,9 @@ public class ReservationInsertController extends HttpServlet {
 			// rvNo 결제 번호를 가져온다면 결제 정보 select session에 정보 넣기. 
 			ReservationSelect reSuccessInfo = new ReservationService().selReSuccessInfo(rvNo);
 			request.getSession().setAttribute("reSuccessInfo", reSuccessInfo);
-			response.getWriter().print(rvNo);
 			System.out.println(reSuccessInfo);
+			
+			response.getWriter().print(rvNo);
 				
 		}else {
 			response.getWriter().print("예약 불가능");
