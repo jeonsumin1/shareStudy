@@ -39,6 +39,12 @@
     	border-bottom: 2px solid !important;
     	color: rgb(193, 195, 190);
 	}
+	.header-shadow {
+       box-shadow: 0 4px 0px -1px rgba(0, 0, 0, 0.1);
+   } 
+   .btnEn{
+         display: flex;
+   }
  </style>
 <title>메뉴바</title>
 </head>
@@ -49,8 +55,8 @@
 </svg>
 <main>
   <h1 class="visually-hidden">Headers examples</h1>
-  <div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+  <div style="background-color: rgba(0, 0, 0, 0.12);">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom header-shadow">
       <div class="col-md-3 mb-2 mb-md-0">
         <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
         </a>
@@ -62,15 +68,10 @@
         <li><a href="<%=contextPath%>/room/list.shs" class="nav-link px-2 link-secondary">상품 상세보기</a></li>
 
         <li><a href="<%=contextPath%>/reviewList.shs?currentPage=1" class="nav-link px-2 link-secondary">리뷰게시판</a></li>
-
-        
-        <!-- <li><a href="<%=contextPath%>/reservation.re" class="nav-link px-2 link-secondary">예약 페이지(삭제예정)</a></li> -->
-
-        <li><a href="<%=contextPath%>/reservation.re" class="nav-link px-2 link-secondary">예약 페이지(삭제예정)</a></li>
       </ul>
    		
    	  <%if(userInfo==null){%>
-      <div class="col-md-3 text-end">
+      <div class="col-md-3 text-end btnEn">
       <form action="<%=contextPath %>/login.shs">
         <button type="submit" class="btn btn-outline-primary me-2">로그인</button>
        </form>	
