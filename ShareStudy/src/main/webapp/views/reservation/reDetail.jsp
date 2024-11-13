@@ -46,6 +46,23 @@
 		margin: 8px 10px 10px 10px;
 		font-size: 12px;
 	}
+	
+	button{
+		margin-top: 10px;
+		background-color: rgba(255, 166, 0, 0.774);
+		border-color: rgba(255, 166, 0, 0.774);
+		
+	}
+	
+	button:hover{
+		background-color: rgba(255, 217, 175, 1);
+		border-color: rgba(255, 217, 175, 1);
+		
+	}
+	.btnDiv{
+		margin-top: 10px; 
+		
+	}
 </style>
 
 
@@ -72,7 +89,7 @@
 			</tr>
 			<tr>
 				<th><p>예약 날짜</p></th>
-				<td colspan="3"><p>${reSuccessInfo.rvDate }</p></td>
+				<td colspan="3">${reSuccessInfo.rvDate }</td>
 			</tr>
 			<tr>
 				<th><p>예약자 명</p></th>
@@ -100,8 +117,32 @@
 		<div class="remove" id="reTable" style="border-radius: 0px;">
 			<p> ** 취소 관련 사항은 호스트 또는 관리자에게 직접 문의하시기 바랍니다.</p>
 		</div>
+		<div align="center" class="btnDiv">
+			<button onclick="location.href='<%= contextPath%>/rvlist.shs'">목록으로</button>
+		</div>
+		
 	</div>
 	
+	<script>
+			var rvNo = "${reSuccessInfo.rvNo}";
+	        var roomName = "${reSuccessInfo.roomName}";
+	        var rvDate = "${reSuccessInfo.rvDate}";
+	        var userId = "${reSuccessInfo.userId}";
+	        var rvPeople = "${reSuccessInfo.rvPeople}";
+	        var bAmount = "${reSuccessInfo.bAmount}";
+	        var pAmount = "${reSuccessInfo.pAmount}";
+
+	        console.log("rvNo: " + rvNo);
+	        console.log("roomName: " + roomName);
+	        console.log("rvDate: " + rvDate);
+	        console.log("userId: " + userId);
+	        console.log("rvPeople: " + rvPeople);
+	        console.log("bAmount: " + bAmount);
+	        console.log("pAmount: " + pAmount);
+			
+	
+		
+	</script>
 	<br><br><br><br><br><br><br>
 	<%@ include file="/views/common/footer.jsp" %>
 	

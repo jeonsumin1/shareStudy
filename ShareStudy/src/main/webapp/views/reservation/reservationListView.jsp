@@ -11,13 +11,14 @@
 <style>
 
 	.rvList { 
-    	width: 60%;
-    	padding : 1% 0% 0% 0%;
+    	width: 70%;
     	margin: auto;
     }
     
     .tbClass{
     	border: 1px solid gray;
+    	border-radius: 10px;
+    	height: 230px;
     }   
     
 </style>
@@ -37,7 +38,10 @@
 				<c:forEach var="relist" items="${relist}">
 				<div class="rvList tbClass">
 					<div align="right">
-						<button class="btnStyle btn btn-outline-light text-dark" onclick="location.href='<%= contextPath %>/reservationDetail.shs?rvNo=${relist.rvNo}'">상세보기</button>
+						<form action="<%= contextPath %>/reMyDetail.shs" method="POST">
+							<input type="hidden" value="${relist.rvNo}" name="rvNo">
+							<button class="btnStyle btn btn-outline-light text-dark" style="margin-right: 3px;">상세보기</button>
+						</form>
 					</div>
 					<table class="table table-bordered">
 						<tr>
