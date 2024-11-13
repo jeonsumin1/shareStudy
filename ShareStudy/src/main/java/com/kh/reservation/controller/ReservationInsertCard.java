@@ -60,6 +60,7 @@ public class ReservationInsertCard extends HttpServlet {
 		
 		if(result>0) {
 			response.getWriter().print(result);
+			System.out.println(result);
 			ReservationSelect rePaySuccessInfo = new ReservationService().selReSuccessInfo(rvNo);
 			request.getSession().setAttribute("reSuccessInfo", rePaySuccessInfo);
 			

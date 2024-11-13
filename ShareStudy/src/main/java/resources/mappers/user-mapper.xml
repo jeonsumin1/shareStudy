@@ -88,5 +88,14 @@
 		AND USER_PHONE = ?
 	</entry>
 
+	<!-- 상담신청 -->
+	<entry key="insertQuestion">
+		SELECT USER_PW
+		FROM USERINFO
+		WHERE USER_ID = ?
+		AND USER_NAME = ?
+		AND USER_PHONE = ?
+	</entry>
+	
 
 </properties>
