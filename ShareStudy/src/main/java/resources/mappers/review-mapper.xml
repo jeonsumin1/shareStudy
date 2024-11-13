@@ -12,6 +12,7 @@
            REVIEW_DATE
 	FROM REVIEW
 	JOIN ROOM USING(ROOM_NO)
+	WHERE REVIEW_STATUS = 'Y'
 	</entry>
 	
 	

@@ -24,6 +24,7 @@
     <entry key="selectRegionList">
         SELECT REGION_NO, REGION_NAME 
         FROM REGION 
+        WHERE STATUS = 'Y'
         ORDER BY REGION_NO
     </entry>
     

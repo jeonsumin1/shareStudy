@@ -78,11 +78,16 @@
       <form action="<%=contextPath %>/views/member/myPage.jsp">
       <button type="submit" class="btn btn-outline-primary me-2">마이페이지</button>
       </form>
-      <a href="<%=contextPath%>/logout.shs" id="logout">로그아웃</a>
+      <a href="<%=contextPath%>/logout.shs" id="logout" onclick="return confirmLogout();">로그아웃</a>
       <%}%>
     </header>
   </div>
 </main>
+	<script>
+			function confirmLogout() {
+			    	return confirm("로그아웃 하시겠습니까?");
+			}
+	</script>
 <script src="${pageContext.request.contextPath}/views/common/assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
