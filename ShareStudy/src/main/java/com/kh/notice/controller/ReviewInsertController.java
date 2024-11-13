@@ -53,7 +53,7 @@ public class ReviewInsertController extends HttpServlet {
 			
 			int maxSize = 10*2024*2024; //최대 용량
 			
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/reviewUploadFiles");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/reviewUploadFiles/");
 			System.out.println(savePath);
 			MultipartRequest multiRequest = new MultipartRequest(request,savePath,maxSize,"UTF-8",new MyFileRenamePolicy());
 			
@@ -61,6 +61,7 @@ public class ReviewInsertController extends HttpServlet {
 			String[] region = multiRequest.getParameterValues("region");
 			String content = multiRequest.getParameter("content");
 			String writer = multiRequest.getParameter("userId");
+			String place = multiRequest.getParameter("place");
 			
 			String regionStr = "";
 			
@@ -72,6 +73,7 @@ public class ReviewInsertController extends HttpServlet {
 			r.setReviewTitle(title);
 			r.setRegionName(regionStr);
 			r.setReviewContent(content);
+			r.setRoomNo(place);
 			r.setUserId(writer);
 			
 			ArrayList<ReAttachment> reList = new ArrayList<>();
@@ -87,12 +89,13 @@ public class ReviewInsertController extends HttpServlet {
 					//원본파일명 추출
 					rAt.setChangeName(multiRequest.getFilesystemName(key));
 					//변경된 파일명 추출
-					rAt.setFilePath("/resources/ReviewUploadFiles/");
+					rAt.setFilePath("/resources/reviewUploadFiles/");
 					//저장 경로
 					reList.add(rAt);
 				}
 			}
 			
+			System.out.println(reList);
 			int result = new ReviewService().insertReview(r,reList);
 			
 			HttpSession session = request.getSession();
@@ -105,7 +108,7 @@ public class ReviewInsertController extends HttpServlet {
 			}
 			
 			session.setAttribute("alertMsg", alertMsg);
-			response.sendRedirect(request.getContextPath()+"/reviewList.shs"); 
+			response.sendRedirect(request.getContextPath()+"/reviewList.shs?currentPage=1");
 		}
 	}
 

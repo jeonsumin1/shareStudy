@@ -53,7 +53,9 @@ public class ReviewListController extends HttpServlet {
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
+		
 		//System.out.println(currentPage);
+		
 		pageLimit = 10;
 		boardLimit = 10;
 		

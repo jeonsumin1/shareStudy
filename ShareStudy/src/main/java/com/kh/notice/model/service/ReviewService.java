@@ -3,6 +3,8 @@ package com.kh.notice.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+
 import com.kh.common.JDBCTemplate;
 import com.kh.common.PageInfo;
 import com.kh.notice.model.dao.ReviewDao;
@@ -29,12 +31,14 @@ public class ReviewService {
 		
 		int reviewNo = new ReviewDao().selectReviewNo(conn);
 		
+		
+		
+		r.setReviewNo(reviewNo);
 		//게시글 정보 등록
 		int result = new ReviewDao().insertReview(conn,r);
 		
 		//첨부파일 등록
 		//첨부파일 목록 + 참조 게시글 번호
-		r.setReviewNo(reviewNo);
 		int result2 = new ReviewDao().insertAttachmentList(conn,reList,reviewNo); 
 		
 		if(result*result2>0) {
@@ -88,15 +92,32 @@ public class ReviewService {
 		return r;
 	}
 
-	public ReAttachment selectAttachment(int rno) {
+	public ArrayList<ReAttachment> selectAttachment(int rno) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		ReAttachment rt = new ReviewDao().selectAttachment(conn,rno);
+		ArrayList<ReAttachment> rt = new ReviewDao().selectAttachment(conn,rno);
 		
 		JDBCTemplate.close(conn);
 		
 		return rt;
+	}
+
+	public int deleteReview(int reviewNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new ReviewDao().deleteReview(conn,reviewNo);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
 	}
 
 }
