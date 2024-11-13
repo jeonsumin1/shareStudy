@@ -26,7 +26,7 @@
         FROM REGION 
         ORDER BY REGION_NO
     </entry>
-    
+
     <entry key="selectThumbnailList">
     <!-- INNER JOIN은 양쪽테이블에 값이 전부있어야해서 사진없는 상품이 있을수 있으니 LEFTJOIN사용  -->
     SELECT 
@@ -37,6 +37,7 @@
     JOIN REGION B ON A.region_no = B.region_no
     LEFT JOIN ATTACHMENT C ON A.ROOM_NO = C.ROOM_NO AND C.FILE_LEVEL = 1
     WHERE A.STATUS = 'Y'
+
     </entry>	
     
     <entry key="selectRoom">

@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% 
+    User userInfo2 = (User) session.getAttribute("userInfo");
+
+    // 권한 체크: "관리자"가 아닐 경우 메인 페이지로 리다이렉트
+    if (userInfo2 == null || !"관리자".equals(userInfo2.getUserName())) {
+        session.setAttribute("alertMsg", "접근 권한이 없습니다.");
+        response.sendRedirect(request.getContextPath());
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +28,7 @@
 </head>
 <body>
 	<%@include file="/views/common/menubar.jsp"%>
+	
 	<div class="container">
 		<div class="d-flex justify-content-center align-items-center"style="min-height: 100vh;">
 			<div class="col-md-6">

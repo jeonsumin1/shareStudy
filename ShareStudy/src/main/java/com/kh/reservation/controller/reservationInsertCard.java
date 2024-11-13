@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Reservation;
+import com.kh.reservation.model.vo.ReservationSelect;
 
 /**
  * Servlet implementation class reservationInsertCard
@@ -38,13 +39,12 @@ public class reservationInsertCard extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
 		
-		
-		// 임시 → 상품 상세 페이지에서 전달받은 roomNumber값으로 지정해야 한다. 
-		
+		// 신용카드 결제시 생성되는 주문번호 (신용카드 결제 예약 번호 != 시퀀스) 
 		String rvNo = request.getParameter("rvNo");
 		
-		String roomNo = "1"; // 수정 필요. 
+		String roomNo = request.getParameter("rno"); 
 		
 		String userId = request.getParameter("userId"); 
 		String rvDate = request.getParameter("rvDate"); //방문 날짜
@@ -53,17 +53,18 @@ public class reservationInsertCard extends HttpServlet {
 		String rvPayment = request.getParameter("rvPayment"); // 결제 수단
 		String buyEmail = request.getParameter("buyEmail"); // 결제 수단
 		String amount = request.getParameter("amount");
-		System.out.println(amount);
 		
 		Reservation reserInfo = new Reservation(rvNo,roomNo,userId,rePeople,rvDate,rvPayment,rvRequest);
 		
-		//int result = new ReservationService().insertRvCard(reserInfo, buyEmail, amount);
 		int result = new ReservationService().insertRvCard(reserInfo, buyEmail, amount);
 		
 		if(result>0) {
 			response.getWriter().print(result);
+			ReservationSelect rePaySuccessInfo = new ReservationService().selReSuccessInfo(rvNo);
+			request.getSession().setAttribute("reSuccessInfo", rePaySuccessInfo);
+			
 		}else {
-			//response.sendRedirect(request.getContextPath());
+			response.getWriter().print("예약 실패");
 		}
 		
 		

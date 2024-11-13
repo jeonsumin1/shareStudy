@@ -343,7 +343,13 @@ input[type="email"]{
                             <td style="height: 20px;"></td>
                         </tr>
                     
-                    
+                    	
+                    	<!-- sm 추가! -->
+                    	<tr>
+                            <td align="left" style="font-size: small;"><button onclick="location.href='<%= contextPath %>/rvlist.shs'">● 예약 내역</button></td>
+                        </tr>
+                        
+                    	
                         <tr>
                             <td align="left" style="font-size: small;">● 예약 정보</td>
                         </tr>
@@ -507,11 +513,7 @@ input[type="email"]{
           </form>
    	 
           
-        </div>
-        
-        
-          
-        
+        </div>        
        
       </div>
       
