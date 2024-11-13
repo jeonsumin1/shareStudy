@@ -11,13 +11,14 @@
 <style>
 
 	.rvList { 
-    	width: 60%;
-    	padding : 1% 0% 0% 0%;
+    	width: 70%;
     	margin: auto;
     }
     
     .tbClass{
     	border: 1px solid gray;
+    	border-radius: 10px;
+    	height: 230px;
     }   
     
 </style>
@@ -39,10 +40,8 @@
 					<div align="right">
 						<form action="<%= contextPath %>/reMyDetail.shs" method="POST">
 							<input type="hidden" value="${relist.rvNo}" name="rvNo">
-							<button>상세보기</button>
+							<button class="btnStyle btn btn-outline-light text-dark" style="margin-right: 3px;">상세보기</button>
 						</form>
-						<button class="btnStyle btn btn-outline-light text-dark" 
-							onclick="location.href='<%= contextPath %>/reMyDetail.shs?rvNo=${relist.rvNo}'">상세보기</button>
 					</div>
 					<table class="table table-bordered">
 						<tr>

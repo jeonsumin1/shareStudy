@@ -46,6 +46,23 @@
 		margin: 8px 10px 10px 10px;
 		font-size: 12px;
 	}
+	
+	button{
+		margin-top: 10px;
+		background-color: rgba(255, 166, 0, 0.774);
+		border-color: rgba(255, 166, 0, 0.774);
+		
+	}
+	
+	button:hover{
+		background-color: rgba(255, 217, 175, 1);
+		border-color: rgba(255, 217, 175, 1);
+		
+	}
+	.btnDiv{
+		margin-top: 10px; 
+		
+	}
 </style>
 
 
@@ -100,10 +117,13 @@
 		<div class="remove" id="reTable" style="border-radius: 0px;">
 			<p> ** 취소 관련 사항은 호스트 또는 관리자에게 직접 문의하시기 바랍니다.</p>
 		</div>
+		<div align="center" class="btnDiv">
+			<button onclick="location.href='<%= contextPath%>/rvlist.shs'">목록으로</button>
+		</div>
+		
 	</div>
 	
 	<script>
-		
 			var rvNo = "${reSuccessInfo.rvNo}";
 	        var roomName = "${reSuccessInfo.roomName}";
 	        var rvDate = "${reSuccessInfo.rvDate}";
