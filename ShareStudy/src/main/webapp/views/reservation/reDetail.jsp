@@ -72,7 +72,7 @@
 			</tr>
 			<tr>
 				<th><p>예약 날짜</p></th>
-				<td colspan="3"><p>${reSuccessInfo.rvDate }</p></td>
+				<td colspan="3">${reSuccessInfo.rvDate }</td>
 			</tr>
 			<tr>
 				<th><p>예약자 명</p></th>
@@ -102,6 +102,27 @@
 		</div>
 	</div>
 	
+	<script>
+		
+			var rvNo = "${reSuccessInfo.rvNo}";
+	        var roomName = "${reSuccessInfo.roomName}";
+	        var rvDate = "${reSuccessInfo.rvDate}";
+	        var userId = "${reSuccessInfo.userId}";
+	        var rvPeople = "${reSuccessInfo.rvPeople}";
+	        var bAmount = "${reSuccessInfo.bAmount}";
+	        var pAmount = "${reSuccessInfo.pAmount}";
+
+	        console.log("rvNo: " + rvNo);
+	        console.log("roomName: " + roomName);
+	        console.log("rvDate: " + rvDate);
+	        console.log("userId: " + userId);
+	        console.log("rvPeople: " + rvPeople);
+	        console.log("bAmount: " + bAmount);
+	        console.log("pAmount: " + pAmount);
+			
+	
+		
+	</script>
 	<br><br><br><br><br><br><br>
 	<%@ include file="/views/common/footer.jsp" %>
 	

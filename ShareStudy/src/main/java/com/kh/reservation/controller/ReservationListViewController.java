@@ -18,13 +18,13 @@ import com.kh.reservation.model.vo.Reservation;
  * Servlet implementation class reservationListViewController
  */
 @WebServlet("/rvlist.shs")
-public class reservationListViewController extends HttpServlet {
+public class ReservationListViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public reservationListViewController() {
+    public ReservationListViewController() {
         super();
         // TODO Auto-generated constructor stub
     }

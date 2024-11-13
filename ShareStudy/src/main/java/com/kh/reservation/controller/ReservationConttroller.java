@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.service.UserService;
+import com.kh.member.model.vo.User;
 import com.kh.room.model.service.RoomService;
 import com.kh.room.model.vo.Attachment;
 import com.kh.room.model.vo.Room;
@@ -34,6 +36,7 @@ public class ReservationConttroller extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+		
 		
 		request.getRequestDispatcher("/views/reservation/reservation.jsp").forward(request, response);
 		

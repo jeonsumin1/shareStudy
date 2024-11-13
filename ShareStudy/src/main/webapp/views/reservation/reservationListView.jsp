@@ -37,7 +37,12 @@
 				<c:forEach var="relist" items="${relist}">
 				<div class="rvList tbClass">
 					<div align="right">
-						<button class="btnStyle btn btn-outline-light text-dark" onclick="location.href='<%= contextPath %>/reservationDetail.shs?rvNo=${relist.rvNo}'">상세보기</button>
+						<form action="<%= contextPath %>/reMyDetail.shs" method="POST">
+							<input type="hidden" value="${relist.rvNo}" name="rvNo">
+							<button>상세보기</button>
+						</form>
+						<button class="btnStyle btn btn-outline-light text-dark" 
+							onclick="location.href='<%= contextPath %>/reMyDetail.shs?rvNo=${relist.rvNo}'">상세보기</button>
 					</div>
 					<table class="table table-bordered">
 						<tr>
