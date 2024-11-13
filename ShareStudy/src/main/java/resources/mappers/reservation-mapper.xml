@@ -51,7 +51,7 @@
 	<entry key="selReSuccessInfo">
 		SELECT R.RV_NO, 
 		       M.ROOM_NAME, 
-		       R.USER_ID, 
+		       U.USER_NAME, 
 		       R.RV_PEOPLE, 
 		       R.RV_DATE, 
 		       R.RV_CONFIRM, 
@@ -61,9 +61,25 @@
 		       P.AMOUNT P_AMOUNT
 		FROM RESERVATION R
 		JOIN ROOM M ON R.ROOM_NO=M.ROOM_NO
-		LEFT JOIN RVBANK B ON R.RV_NO=B.RV_NO
+        JOIN USERINFO U ON R.USER_ID=U.USER_ID
+ 		LEFT JOIN RVBANK B ON R.RV_NO=B.RV_NO
 		LEFT JOIN RVPAYMENT P ON R.RV_NO=P.RV_NO
 		WHERE R.RV_NO = ?
 	</entry>
 	
+	<!-- 예약 정보 리스트 select -->
+	<entry key="selectReserList">
+		SELECT RV_NO, 
+		       ROOM_NAME,
+		       USER_ID, 
+		       RV_PEOPLE,
+		       RV_DATE, 
+		       RV_CONFIRM,
+		       RV_PAYMENT,
+		       RV_REQUEST
+		FROM RESERVATION
+		JOIN ROOM USING(ROOM_NO)
+		WHERE USER_ID = ?
+		ORDER BY RV_DATE DESC
+	</entry>
 </properties>

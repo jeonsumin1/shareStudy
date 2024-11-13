@@ -1,6 +1,7 @@
 package com.kh.reservation.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.reservation.model.dao.ReservationDao;
@@ -27,7 +28,7 @@ public class ReservationService {
 		int result2 = 0;
 		int rvPayment = 0;
 		
-		if(rvNo != null) { // 예약번호가 null "" 이 아닐 때 
+		if(rvNo != "") { // 예약번호가 null "" 이 아닐 때 
 			reserInfo.setRvNo(rvNo);
 			
 			// 룸 예약시 입력한 정보 넣기 
@@ -38,23 +39,28 @@ public class ReservationService {
 			if(result1*result2 > 0) {
 				// 무통장 입금 정보 저장 메소드 
 				rvPayment = new ReservationDao().insertRvBank(conn, reserInfo, rvBank);
+				
+				if(rvPayment>0) {
+					if(result1*result2*rvPayment > 0) {
+						// 모든 정보가 저장되었을 때 rvNo값 전달.
+						JDBCTemplate.commit(conn);
+						return rvNo;
+					}else {
+						JDBCTemplate.rollback(conn);
+					}
+				}else {
+					System.out.println("");
+				}
+					
 			}else {
 				System.out.println("예약정보 저장 실패--");
 			}
 		}
 		
-		
-		
-		if(result1*result2*rvPayment > 0) {
-			JDBCTemplate.commit(conn);
-		}else {
-			JDBCTemplate.rollback(conn);
-		}
-		
 		JDBCTemplate.close(conn);
 		
 //		return result1*result2*rvPayment;
-		return rvNo;
+		return null;
 	}
 
 	
@@ -104,6 +110,19 @@ public class ReservationService {
 		JDBCTemplate.close(conn);
 		
 		return reSuccessInfo;
+	}
+
+
+	// 예약 내역 리스트 
+	public ArrayList<Reservation> selectReserList(String userId) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Reservation> relist = new ReservationDao().selectReserList(conn, userId);
+		
+		JDBCTemplate.close(conn);
+
+		return relist;
 	}
 	
 	

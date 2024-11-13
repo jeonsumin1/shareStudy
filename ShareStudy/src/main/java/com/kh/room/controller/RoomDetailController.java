@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.member.model.vo.User;
 import com.kh.room.model.service.RoomService;
 import com.kh.room.model.vo.Attachment;
 import com.kh.room.model.vo.Room;
@@ -29,11 +30,16 @@ public class RoomDetailController extends HttpServlet {
         RoomService rService = new RoomService();
         
         Room room = rService.selectRoom(roomNo);
-        ArrayList<Attachment> atList = rService.selectAttachmentList(roomNo);
-        
         // session 객체 얻기
         HttpSession session = request.getSession();
         
+    	User user = (User) session.getAttribute("userInfo");
+    	if(user != null) {
+    		request.setAttribute("userid", user.getUserId());
+    	}
+        ArrayList<Attachment> atList = rService.selectAttachmentList(roomNo);
+        
+       
         // room 정보를 session에 저장
         session.setAttribute("room", room);
 

@@ -228,4 +228,25 @@ public class RoomDao {
         
         return list;
     }
+
+	public int deleteRoom(Connection conn, String roomNo) {
+		 int result = 0;
+		    PreparedStatement pstmt = null;
+		    
+		    String sql = prop.getProperty("deleteRoom");
+		    
+		    try {
+		        pstmt = conn.prepareStatement(sql);
+		        pstmt.setString(1, roomNo);
+		        
+		        result = pstmt.executeUpdate();
+		        
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        JDBCTemplate.close(pstmt);
+		    }
+		    
+		    return result;
+	}
 }

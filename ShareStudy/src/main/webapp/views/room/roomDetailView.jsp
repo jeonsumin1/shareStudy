@@ -51,16 +51,16 @@
 	height: 150px;
 	object-fit: cover;
 	border: 1px solid #ddd;
-	transition: all 0.3s ease; 
+	transition: all 0.3s ease;
 }
 
 .sub-images img:hover { /*마우스 올라가면 약가 투명하게 변하게*/
-	opacity: 0.8; 
+	opacity: 0.8;
 	cursor: pointer;
 }
 </style>
 </head>
-<body> 
+<body>
 	<%@ include file="/views/common/menubar.jsp"%>
 
 	<div class="outer">
@@ -112,43 +112,56 @@
 			</div>
 		</div>
 		<div align="center">
+
 			<button type="button" class="btn btn-primary"
-				onclick="location.href='${contextPath}/reservation/form?roomNo=${room.roomNo}'">
+				onclick="location.href='<%= contextPath %>/reservation/re?rno=${room.roomNo}'">
 				예약하기</button>
+
 			<button type="button" class="btn btn-secondary"
-				onclick="history.back();">목록으로</button>	
+				onclick="history.back();">목록으로</button>
 		</div>
-		
-		<%--관리자만 수정 삭제가 가능하게 --%>
+
+		<%-- 관리자만 볼 수 있는 버튼 --%>
+		<c:if test="${'admin' eq userid}">
+			<div align="center" style="margin-top: 20px;">
+				<button type="button" class="btn btn-warning"
+					onclick="showUpdateForm('${room.roomNo}')">수정하기</button>
+				<button type="button" class="btn btn-danger"
+					onclick="deleteRoom('${room.roomNo}')">삭제하기</button>
+			</div>
+		</c:if>
+
+		<script>
+			// 원본 메인 이미지 URL을 저장할 변수
+			let originalMainImage = '';
+
+			// 페이지 로드시 원본 메인 이미지 URL 저장
+			window.onload = function() {
+				originalMainImage = document.getElementById('mainImg').src;
+			}
+
+			// 마우스 올렸을 때 이미지 변경
+			function changeMainImage(src) {
+				document.getElementById('mainImg').src = src;
+			}
+
+			// 마우스 뗐을 때 원본 이미지로 복구
+			function restoreMainImage() {
+				document.getElementById('mainImg').src = originalMainImage;
+			}
 			
-		<div align="center">
-			<button type="button" class="btn btn-rewrite">
-				수정하기
-			</button>
-			<button type="button" class="btn btn-delete">
-				삭제하기
-			</button>
-		</div>
-	</div>
-
-	<script>
-		// 원본 메인 이미지 URL을 저장할 변수
-		let originalMainImage = '';
-
-		// 페이지 로드시 원본 메인 이미지 URL 저장
-		window.onload = function() {
-			originalMainImage = document.getElementById('mainImg').src;
-		}
-
-		// 마우스 올렸을 때 이미지 변경
-		function changeMainImage(src) {
-			document.getElementById('mainImg').src = src;
-		}
-
-		// 마우스 뗐을 때 원본 이미지로 복구
-		function restoreMainImage() {
-			document.getElementById('mainImg').src = originalMainImage;
-		}
-	</script>
+			
+			// 수정페이지 이동
+		    function showUpdateForm(roomNo) {
+		        location.href = '<%=contextPath%>/room/updateForm.shs?rno=' + roomNo;
+		    }
+		    
+		    // 삭제 확인 및 처리
+		    function deleteRoom(roomNo) {
+		        if(confirm('정말로 이 상품을 삭제하시겠습니까?')) {
+		            location.href = '<%=contextPath%>/room/delete.shs?rno=' + roomNo;
+		        }
+		    }
+		</script>
 </body>
 </html>
