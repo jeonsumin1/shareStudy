@@ -43,6 +43,10 @@ public class NoticeUpdateController extends HttpServlet {
 		String nTitle = request.getParameter("nTitle");
 		String nContent = request.getParameter("nContent");
 		
+		request.setAttribute("noticeNo", noticeNo);
+		request.setAttribute("nTitle", nTitle);
+		request.setAttribute("nContent", nContent);
+		
 		request.getRequestDispatcher("views/notice/noticeUpdateView.jsp").forward(request, response);
 	}
 
