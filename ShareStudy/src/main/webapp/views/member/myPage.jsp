@@ -214,7 +214,7 @@ input[type="email"]{
 
 .eyes{
     position: absolute;
-    top:175px;
+    top:155px;
     bottom: 0;
     right: 645px;
     margin: auto;

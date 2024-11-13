@@ -33,9 +33,11 @@ public class ReAttachment {
 	
 	
 
-	public ReAttachment(String fileNo, String originName, String changeName, String filePath) {
+	
+	public ReAttachment(String fileNo, int reviewNo, String originName, String changeName, String filePath) {
 		super();
 		this.fileNo = fileNo;
+		this.reviewNo = reviewNo;
 		this.originName = originName;
 		this.changeName = changeName;
 		this.filePath = filePath;

@@ -21,8 +21,9 @@
 					   REVIEW_TITLE,
                    	   REGION_NAME,
                        REVIEW_CONTENT,
+                       ROOM_NO,
                        USER_ID)
-	VALUES(SEQ_RNO.NEXTVAL,?,?,?,?)
+	VALUES(?,?,?,?,?,?)
 	</entry>
 	
 	
@@ -38,13 +39,14 @@
                              ORIGIN_NAME,
                              CHANGE_NAME,
                              FILE_PATH,
-                             FILE_LEVEL)
+                             FILE_LEVEL
+                             )
 	VALUES(SEQ_FNO.NEXTVAL,?,?,?,?,?)
 	</entry>
 	
 	<!-- 게시글 번호 추출(시퀀스 발행) -->
 	<entry key="selectReviewNo">
-		SELECT SEQ_RNO.NEXTVAL RNO
+		SELECT SEQ_RRNO.NEXTVAL RNO
 		FROM DUAL
 	</entry>
 	
@@ -59,26 +61,27 @@
        	   USER_ID,
            REVIEW_TITLE,
            REVIEW_CONTENT,
+           ROOM_NO,
            REVIEW_DATE,
            REVIEW_COUNT,
-           REVIEW_DATE
-	FROM REVIEW
-	JOIN ROOM USING(ROOM_NO)
+           REVIEW_DATE,
            REGION_NAME
-    FROM REVIEW
+	FROM REVIEW
     WHERE REVIEW_NO = ?
     AND REVIEW_STATUS = 'Y'
 	</entry>
 	
 	<entry key="selectAttachment">
-	SELECT FILE_NO,
-           ORIGIN_NAME,
-           CHANGE_NAME,
-           FILE_PATH
+	SELECT *
 	FROM RVATTACHMENT
 	WHERE REVIEW_NO = ?
 	</entry>
 	
+	<entry key="deleteReview">
+	UPDATE REVIEW
+	SET REVIEW_STATUS = 'N'
+	WHERE REVIEW_NO = ?
+	</entry>
 	
 	
 	
