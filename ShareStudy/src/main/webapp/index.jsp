@@ -225,14 +225,15 @@ body {font-family: Verdana, sans-serif; margin:0}
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <a href=""><img src="<%=contextPath%>/views/common/images/roomEx.png"
+                <a href="detail.room?rno=R03"><img src="<%=contextPath%>/resources/uploadFiles/167990883_3fc1759cd950b0bcd98cf1cfbad35de0.jpg"
                 alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
-                <td>Room No.997</td>
-                <td>수용인원 : 최대 2명</td>
-                <td>가격 : 30,000￦</td>
+                <td>상품번호 : R03</td>
+                <td>수용인원 : 1~7명</td>
+                <td>가격 : 60,000￦</td>
             </tr>
+        <!--
         </table>
          <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
@@ -245,7 +246,9 @@ body {font-family: Verdana, sans-serif; margin:0}
                 <td>수용인원 : 최대 1명</td>
                 <td>가격 : 20,000￦</td>
             </tr>
+            -->
         </table>
+        
     </div>
 </div>
 <%@ include file="/views/common/footer.jsp" %>
