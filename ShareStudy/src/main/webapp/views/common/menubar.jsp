@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@page import="com.kh.member.model.vo.User"%>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.User"%>
 <!DOCTYPE html>
 <html>
 <%
@@ -80,14 +79,17 @@
         </form>
       </div>
       <%}else{%>
+      <div class="col-md-3 text-end d-flex justify-content-center align-items-center">
       <b><%=userInfo.getUserName()%>님 환영합니다.</b>
       <form action="<%=contextPath %>/views/member/myPage.jsp">
       <button type="submit" class="btn btn-outline-primary me-2">마이페이지</button>
       </form>
       <a href="<%=contextPath%>/logout.shs" id="logout" onclick="return confirmLogout();">로그아웃</a>
       <%}%>
+      </div>
     </header>
   </div>
+  
 </main>
 	<script>
 			function confirmLogout() {

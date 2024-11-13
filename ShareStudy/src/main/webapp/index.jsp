@@ -214,57 +214,64 @@ to {
 			</form>
 		</div>
 	</div>
-
-	<div id="content"
-		style="display: flex; justify-content: center; flex-wrap: wrap;">
-		<div id="product">
-			<table style="margin: 10px; text-align: center; display: inline-block;">
-				<tr>
-					<th colspan="3"><a href="detail.room?rno=R01" data-room-no="R01" class="room-image"><img src="<%=contextPath%>/resources/uploadFiles/rsiel12.jpg" alt="R01" id="roomPhoto" oncontextmenu="return false"></a></th>
-				</tr>
-				<tr>
-					<td>상품 번호 : R01</td>
-					<td>수용인원 : 1~7명</td>
-					<td>가격 : 50,000￦</td>
-				</tr>
-			</table>
-
-			<table style="margin: 10px; text-align: center; display: inline-block;">
-				<tr>
-					<th colspan="3"><a href="detail.room?rno=R02" data-room-no="R02" class="room-image"><img src="<%=contextPath%>/resources/uploadFiles/rsiel3.jpg" alt="R02" id="roomPhoto" oncontextmenu="return false"></a></th>
-				</tr>
-				<tr>
-					<td>상품 번호 : R02</td>
-					<td>수용인원 : 1~10명</td>
-					<td>가격 : 80,000￦</td>
-				</tr>
-			</table>
-
-			<table
-				style="margin: 10px; text-align: center; display: inline-block;">
-				<tr>
-					<th colspan="3"><a href="" data-room-no="R03" class="room-image"><img src="<%=contextPath%>/views/common/images/roomEx.png" alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
-				</tr>
-				<tr>
-					<td>상품 번호 : R03</td>
-					<td>수용인원 : 최대 2명</td>
-					<td>가격 : 30,000￦</td>
-				</tr>
-			</table>
-			<table
-				style="margin: 10px; text-align: center; display: inline-block;">
-				<tr>
-					<th colspan="3"><a href="" data-room-no="R04" class="room-image"><img src="<%=contextPath%>/views/common/images/roomEx.png" alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
-				</tr>
-				<tr>
-					<td>상품 번호 : R04</td>
-					<td>수용인원 : 최대 1명</td>
-					<td>가격 : 20,000￦</td>
-				</tr>
-			</table>
-		</div>
-	</div>
 	
-			<%@ include file="/views/common/footer.jsp"%>
+	<div id="content" style="display:flex; justify-content:center; flex-wrap: wrap;">
+    <div id="product">
+        <table style="margin: 10px; text-align: center; display: inline-block;">
+            <tr>
+                <th colspan="3">
+                <a href="detail.room?rno=R01"><img src="<%=contextPath%>/resources/uploadFiles/rsiel12.jpg"
+                alt="R01" id="roomPhoto" oncontextmenu="return false"></a></th>
+            </tr>
+            <tr>
+                <td>상품 번호 : R01</td>
+                <td>수용인원 : 1~7명</td>
+                <td>가격 : 50,000￦</td>
+            </tr>
+        </table>
+        
+        <table style="margin: 10px; text-align: center; display: inline-block;">
+            <tr>
+                <th colspan="3">
+                <a href="detail.room?rno=R02"><img src="<%=contextPath%>/resources/uploadFiles/rsiel3.jpg"
+                alt="R02" id="roomPhoto" oncontextmenu="return false"></a></th>
+            </tr>
+            <tr>
+                <td>상품 번호 : R02</td>
+                <td>수용인원 : 1~10명</td>
+                <td>가격 : 80,000￦</td>
+            </tr>
+        </table>
+        
+        <table style="margin: 10px; text-align: center; display: inline-block;">
+            <tr>
+                <th colspan="3">
+                <a href="detail.room?rno=R03"><img src="<%=contextPath%>/resources/uploadFiles/167990883_3fc1759cd950b0bcd98cf1cfbad35de0.jpg"
+                alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
+            </tr>
+            <tr>
+                <td>상품번호 : R03</td>
+                <td>수용인원 : 1~7명</td>
+                <td>가격 : 60,000￦</td>
+            </tr>
+        <!--
+        </table>
+         <table style="margin: 10px; text-align: center; display: inline-block;">
+            <tr>
+                <th colspan="3">
+                <a href=""><img src="<%=contextPath%>/views/common/images/roomEx.png"
+                alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
+            </tr>
+            <tr>
+                <td>Room No.996</td>
+                <td>수용인원 : 최대 1명</td>
+                <td>가격 : 20,000￦</td>
+            </tr>
+            -->
+        </table>
+        
+    </div>
+</div>
+<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
