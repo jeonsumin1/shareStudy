@@ -75,7 +75,7 @@
                 <tr>
                     <th>이용가격</th>
                     <td>
-                        <input type="text" name="price" placeholder="단위(원)" required>
+                        <input type="text" name="price" place	holder="단위(원)" required>
                     </td>
                 </tr>
                 <tr>

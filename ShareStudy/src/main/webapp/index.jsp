@@ -184,7 +184,7 @@ body {font-family: Verdana, sans-serif; margin:0}
 				alt="ShareStudyLogo" id="mainLogo" oncontextmenu="return false"></a>
 	</div>
 		<div id="searchBar">
-			<form action="search.shs" id="searchForm">
+			<form action="<%=contextPath%>/search.shs" id="searchForm">
 				<div class="search-container">
 					<input type="text" name="searchBar" id="searchInput"
 						placeholder="검색어를 입력해주세요.">

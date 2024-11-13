@@ -61,9 +61,13 @@
            REVIEW_CONTENT,
            REVIEW_DATE,
            REVIEW_COUNT,
+           REVIEW_DATE
+	FROM REVIEW
+	JOIN ROOM USING(ROOM_NO)
            REGION_NAME
     FROM REVIEW
     WHERE REVIEW_NO = ?
+    AND REVIEW_STATUS = 'Y'
 	</entry>
 	
 	<entry key="selectAttachment">

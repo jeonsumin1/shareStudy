@@ -27,7 +27,7 @@
 	<entry key="noticeDetailView"> 
 	SELECT KEY, N_TITLE, N_CONTENT, CREATEDATE 
 	FROM NOTICE 
-	WHERE KEY = ? 
+	WHERE KEY = ?
 	</entry>
 	
 	<!--  공지사항 수정하기  -->
