@@ -76,7 +76,7 @@
 		SELECT USER_ID
 		FROM USERINFO
 		WHERE USER_NAME = ?
-		AND PHONE = ?
+		AND USER_PHONE = ?
 	</entry>
 	
 	<!-- 비밀번호 찾기 -->
