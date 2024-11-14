@@ -155,8 +155,8 @@ h1{
                    			</tr>
                    		</c:when>
                    		<c:otherwise>
+                   			
                    			<c:forEach var="r" items="${rList }">
-                   				<c:if test="${r.reviewStatus == 'Y' }">
                    				<tr height="50" id="reviewList">
                    					<td align="center" >${r.reviewNo }</td>
                    					<td align="center">${r.regionName }</td>
@@ -165,8 +165,8 @@ h1{
                    					<td align="center">${r.reviewCount }</td>
                    					<td align="center">${r.reviewDate }</td>
                    				</tr>
-                   				</c:if>
                    			</c:forEach>
+                   				
                    		</c:otherwise>
                    </c:choose>
                 
@@ -194,9 +194,11 @@ h1{
 		
 		
             <br>
-            <div id="write">
-                <a href="<%=contextPath %>/insertReview.shs" id="submit" align="center">글작성</a>
-            </div>
+            <c:if test="${not empty userInfo }">
+            	<div id="write">
+                	<a href="<%=contextPath %>/insertReview.shs" id="submit" align="center">글작성</a>
+            	</div>
+            </c:if>
             
             <br><br>
             
