@@ -214,9 +214,9 @@ input[type="email"]{
 
 .eyes{
     position: absolute;
-    top:220px;
-    bottom: 0;
-    right: 645px;
+    top:-30px;
+    bottom: 0; 
+    right: 830px;
     margin: auto;
     height: 50px;
     font-size: 15px;
@@ -356,14 +356,6 @@ input[type="email"]{
                         <tr>
                             <td style="height: 20px;"></td>
                         </tr>
-
-                        <tr>
-                            <td align="left" style="font-size: small;">📞 나의 문의</td>
-                        </tr>
-                        <tr>       
-                            <td align="left" style="font-size: small;"><p class="m1"> 💌 시간문의(카테고리화)</p></td>
-                        </tr>
-
 
                         <tr>
                             <td style="height: 20px;"></td>
