@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.manager.model.service.ManagerService;
 
 /**
- * Servlet implementation class ManagerDeleteMember
+ * Servlet implementation class ManagerDeleteRoom
  */
-@WebServlet("/mdelete.ma")
-public class ManagerDeleteMember extends HttpServlet {
+@WebServlet("/rdelete.ma")
+public class ManagerDeleteRoom extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerDeleteMember() {
+    public ManagerDeleteRoom() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,32 +28,30 @@ public class ManagerDeleteMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
 		request.setCharacterEncoding("UTF-8");
-        String memId = request.getParameter("userId");
-		
-		int result = new ManagerService().deleteMember(memId);
-		
-		if(result>0) { //삭제 성공
-			request.setAttribute("altMsg", memId+" 삭제 성공");
-//			request.getRequestDispatcher("/views/manager/m_main.jsp").forward(request, response);
-			response.sendRedirect(request.getContextPath()+"/views/manager/m_main.jsp");
+        String roomNo = request.getParameter("roomNo");
+        
+        int result = new ManagerService().deleteRoom(roomNo);
+        
+        if(result>0) { //삭제 성공
+			request.setAttribute("altMsg", "룸 삭제 완료");
+			request.getRequestDispatcher("/views/manager/m_main.jsp").forward(request, response);
 			
 		}else {  //실패
 			
-			request.setAttribute("errorMessage", "삭제 실패!");
+			request.setAttribute("errorMessage", "오류");
 		    request.getRequestDispatcher("/views/manager/m_main.jsp").forward(request, response);
 			
 		}
-		}
+	}
 
 }

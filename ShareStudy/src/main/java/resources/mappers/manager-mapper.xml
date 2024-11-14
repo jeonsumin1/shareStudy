@@ -8,7 +8,7 @@
 </entry>
 
 <entry key="selectAllMember">
-    SELECT USER_ID,
+   SELECT USER_ID,
 	       USER_NAME,
 	       USER_PHONE,
 	       EMAIL,
@@ -18,17 +18,60 @@ FROM USERINFO WHERE STATUS = 'Y'
 </entry>
 
 <entry key="selectAllRoom">
-SELECT ROOM_NO, 
+<!--  SELECT ROOM_NO, 
        REGION_NO, 
        ROOM_NAME,
        ROOM_SIZE, 
        PRICE,
        STATUS
-FROM ROOM
+FROM ROOM -->
+
+SELECT * FROM ROOM
 </entry>
 
-<entry key="">
-    
+<entry key="selectAllQuestion">
+   SELECT USER_ID,
+          QT_PHONE,
+          QT_DATE
+   FROM QUESTION
 </entry>
+
+
+<entry key = "deleteMember">
+		UPDATE USERINFO
+		SET STATUS = 'N'
+		WHERE USER_ID = ?
+</entry>
+	
+	
+<entry key = "selectAllReview">
+		SELECT * FROM REVIEW
+</entry>
+
+
+<entry key = "selectAllReservation">
+		SELECT * FROM RESERVATION
+</entry>
+
+<entry key = "deleteQuestion">
+     DELETE FROM QUESTION 
+     WHERE USER_ID = ?
+</entry>
+
+<entry key = "deleteReview">
+     DELETE FROM REVIEW
+     WHERE USER_ID = ?
+</entry>
+
+<entry key = "deleteRoom">
+     DELETE FROM ROOM
+     WHERE ROOM_NO = ?
+</entry>
+
+<entry key = "deleteReservation">
+     DELETE FROM RESERVATION
+     WHERE RV_NO = ?
+</entry>
+
 
 </properties>
