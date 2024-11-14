@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% String contextPath = request.getContextPath(); %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -67,16 +66,27 @@
         margin-bottom: 10px;
     }
 
-    a{ 
-    	color: #f58b34; text-decoration: none; 
+    .links > a{ 
+    	color: #f58b34;
+    	text-decoration: none; 
     }
     .text2{
     	color : blue;
     }
+    
+    #header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+	}
     </style>
   </head>
 
   <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
+  	<div id="header">
+		<%@ include file="/views/common/menubar.jsp" %>
+	</div>
 	<div class="card align-middle" style="width:25rem;">
 		<div class="card-title" style="margin-top: 30px; display: flex; justify-content: center;">
 			<h2 class="card-title" style="color: #f58b34;">
