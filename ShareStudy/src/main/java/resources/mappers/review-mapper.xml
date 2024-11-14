@@ -1,31 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="selectReviewList"> SELECT *
+	<entry key="selectReviewList"> 
+		SELECT *
 		FROM (SELECT ROWNUM RNUM,A.*
-		FROM(SELECT
-		REVIEW_NO,
-		REGION_NAME,
-		REVIEW_TITLE,
-		USER_ID,
-		REVIEW_COUNT,
-		REVIEW_DATE
-		FROM REVIEW
-		ORDER BY REVIEW_DATE DESC) A)
+			  FROM(SELECT
+			  	   		 REVIEW_NO,
+			  	   		 REGION_NAME,
+			             REVIEW_TITLE,
+		                 USER_ID,
+		                 REVIEW_COUNT,
+		                 REVIEW_DATE
+		           FROM REVIEW
+		           WHERE REVIEW_STATUS = 'Y'
+				   ORDER BY REVIEW_DATE DESC) A)
 		WHERE RNUM BETWEEN ? AND ?
-	</entry>
-	<entry key="selectReviewList">
-	SELECT *
-	FROM (SELECT ROWNUM RNUM,A.*
-      	  FROM(SELECT REVIEW_NO,
-                 	  REGION_NAME,
-                      REVIEW_TITLE,
-                      USER_ID,
-                      REVIEW_COUNT,
-                      REVIEW_DATE
-               FROM REVIEW
-               ORDER BY REVIEW_DATE DESC) A)
-	WHERE RNUM BETWEEN ? AND ?
+		
 	</entry>
 	
 	<entry key="insertReview">
@@ -75,50 +65,29 @@
 	<entry key="selectReview">
 		SELECT REVIEW_NO,
 				USER_ID,
+				ROOM_NO,
 				REVIEW_TITLE,
 				REVIEW_CONTENT,
 				REVIEW_DATE,
 				REVIEW_COUNT,
+				REVIEW_STATUS,
 				REGION_NAME
 		FROM REVIEW
 		WHERE REVIEW_NO = ?
+		AND REVIEW_STATUS = 'Y'
 	</entry>
 	
-	<entry key="selectReview">
-	SELECT REVIEW_NO,
-       	   USER_ID,
-           REVIEW_TITLE,
-           REVIEW_CONTENT,
-           ROOM_NO,
-           REVIEW_DATE,
-           REVIEW_COUNT,
-<<<<<<< HEAD
-           REVIEW_DATE,
-           REGION_NAME
-	FROM REVIEW
-    WHERE REVIEW_NO = ?
-    AND REVIEW_STATUS = 'Y'
-=======
-	FROM REVIEW
-	JOIN ROOM USING(ROOM_NO)
->>>>>>> refs/heads/main
-	</entry>
+	
 	
 	<entry key="selectAttachment">
-<<<<<<< HEAD
+
 	SELECT *
 	FROM RVATTACHMENT
 	WHERE REVIEW_NO = ?
-=======
-		SELECT FILE_NO,
-		ORIGIN_NAME,
-		CHANGE_NAME,
-		FILE_PATH
-		FROM RVATTACHMENT
-		WHERE REVIEW_NO = ?
->>>>>>> refs/heads/main
+
+
 	</entry>
-<<<<<<< HEAD
+
 	
 	<entry key="deleteReview">
 	UPDATE REVIEW
@@ -134,6 +103,4 @@
 	
 	
 </properties>
-=======
-</properties>
->>>>>>> refs/heads/main
+

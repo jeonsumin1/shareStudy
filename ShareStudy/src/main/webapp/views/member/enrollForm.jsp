@@ -226,13 +226,13 @@ input[type="email"]{
                        
                         
                         <tr>
-                    	<td align="left" style="font-size: small;">비밀번호* <div id="ch"> PASSWORD가 동일하지 않습니다.</div><div id="re"> 비밀번호는 영문자+숫자 조합으로 8~15자리 사용해야 합니다.</div></td>
+                    	<td align="left" style="font-size: small;">비밀번호* <div id="re"> 비밀번호는 영문자+숫자 조합으로 8~15자리 사용해야 합니다.</div></td>
                         </tr>
                         <td colspan="2"><input type="password" name="userPwd" id="userPwd" maxlength="15" oninput="che();"  placeholder="영문/숫자 조합 8~15자로 입력하세요." required></td>
                         
                          
                         <tr>
-                        <td align="left" style="font-size: small;">비밀번호 확인</td>
+                        <td align="left" style="font-size: small;">비밀번호 확인<div id="ch"> PASSWORD가 동일하지 않습니다.</div></td>
                         </tr>
                         <td colspan="2"><input type="password" id="checkPwd" maxlength="15" oninput="che();"  required></td>
                         
@@ -246,13 +246,13 @@ input[type="email"]{
                         <tr>
                         <td align="left" style="font-size: small;">주민등록번호*<div id="rn"> 잘못입력하셨습니다. 다시 입력해주세요.</div></td>
                         </tr>
-                        <td colspan="2"><input type="text" name="userRrn"  id="rrn" maxlength="15" placeholder="-포함하여 입력하세요." oninput="num();" required></td>
+                        <td colspan="2"><input type="text" name="userRrn"  id="rrn" maxlength="15" placeholder="- 없이 입력하세요." oninput="num();" required></td>
                         
                        
                         <tr>
                         <td align="left" style="font-size: small;">전화번호*<div id="ph"> 잘못입력하셨습니다. 다시 입력해주세요.</div></td>
                         </tr>
-                        <td colspan="2"><input type="text" name="phone" id="phone" maxlength="15" placeholder="-포함하여 입력하세요."  oninput="phone();" required></td>
+                        <td colspan="2"><input type="text" name="phone" id="phone" maxlength="15" placeholder="- 없이 입력하세요."  oninput="phone();" required></td>
                         
                         
                         <tr>
@@ -399,7 +399,7 @@ input[type="email"]{
                 function num(){
 
                     var rrn = $("#rrn").val();
-                    var regExp =/^\d{2}(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])-[1-4]\d{6}$/;
+                    var regExp =/^\d{2}(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])[1-4]\d{6}$/;
                     
                    
                     
@@ -430,7 +430,7 @@ input[type="email"]{
                 function phone(){
 
                 var phone = $("#phone").val();
-                var regExp =/^(\d{3})-(\d{3,4})-(\d{4})$/;
+                var regExp =/^(\d{3})(\d{3,4})(\d{4})$/;
 
 
                 if(!regExp.test(phone)){

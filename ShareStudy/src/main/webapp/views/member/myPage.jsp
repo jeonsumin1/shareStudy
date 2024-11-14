@@ -10,8 +10,6 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <script src="https://use.fontawesome.com/72aaf9ab20.js"></script>
@@ -43,8 +41,8 @@
             justify-content: center; /* 수평 중앙 정렬 */
             align-items: center; /* 수직 중앙 정렬 (필요할 경우) */
             border: 1px solid #99999953;
-            width: 550px;
-            height: 1100px;
+            width: 50%;
+            height: 70%;
             margin: auto;
             margin-top: 50px;
             border-radius: 10px;
@@ -204,19 +202,8 @@ input[type="email"]{
     color: red;
     display: none;
  }
- #m1{
-    display: flex;
-    align-items: center;
-    border : 1px solid #99999953;
-    margin: 2px;
-    border-radius: 5px;
-    height: 30px;
-    width: 300px;
- }
- 
- /* id -> class로 바꿔야 될듯?!*/
  .m1{
- 	display: flex;
+    display: flex;
     align-items: center;
     border : 1px solid #99999953;
     margin: 2px;
@@ -227,11 +214,11 @@ input[type="email"]{
 
 .eyes{
     position: absolute;
-    top:155px;
-    bottom: 0;
-    right: 645px;
+    top:-30px;
+    bottom: 0; 
+    right: 830px;
     margin: auto;
-    height: 20px;
+    height: 50px;
     font-size: 15px;
     cursor: pointer;
     display: flex;
@@ -241,23 +228,8 @@ input[type="email"]{
 
 
     
-.qq{
-	   width: 550px; /* 페이지 너비 */
-       margin: auto; /* 페이지 중앙 정렬 */
-       margin-top: 50px;
-       text-align: left;
-       border: 1px solid #99999953;
-	   border-radius: 10px;
-	   height: 230px;
-}
-.inputSt{
-    	margin-top: 10px;
-    	width: 100%; 
-    }
-table th{
-	width: 200px;
-}
 
+ 
 
 
  
@@ -291,20 +263,20 @@ table th{
              
                     <table>
                      
-                    	
+                    	<br><br>
                     	
                     	<tr>
                     	<td align="left" style="font-size: small;">📌 아이디</td> 
                         </tr>
                         <tr>
-                            <td align="left" style="font-size:medium;"><p id="m1"> &nbsp; ${userInfo.userId }</p></td>
+                            <td align="left" style="font-size:medium;"><p class="m1"> &nbsp; ${userInfo.userId }</p></td>
                         </tr>
                         
                         <tr>
                             <td align="left" style="font-size: small;">📌 이름</td>
                         </tr>
                         <tr>
-                            <td align="left" style="font-size:medium;"><p id="m1"> &nbsp; ${userInfo.userName }</p></td>
+                            <td align="left" style="font-size:medium;"><p class="m1"> &nbsp; ${userInfo.userName }</p></td>
                         </tr>
                         
                       
@@ -312,7 +284,7 @@ table th{
                         <td align="left" style="font-size: small;"> 📌 주민등록번호</td>
                         </tr>
                         <tr>
-                        <td colspan="2"><p id="m1" class="rrn1" ></p></td>
+                        <td colspan="2"><p class="m1 rrn1">${userInfo.rrn }</p></td>
                         </tr>
                        
                         <tr>
@@ -320,21 +292,21 @@ table th{
                         </tr>
                          
                         <tr>
-                        <td colspan="2"><input type="password" id="m1" class="mm1" value=" &nbsp; ${userInfo.userPw }" > <div onclick="eye();" class="eyes"><i id="icon" class="fa fa-eye fa-lg"></i></div></td>
+                        <td colspan="2"><input type="password" class="m1 mm1" value=" &nbsp; ${userInfo.userPw }" > <div onclick="eye();" class="eyes"><i id="icon" class="fa fa-eye fa-lg"></i></div></td>
                         </tr>     
                 
                         <tr>
                         <td align="left" style="font-size: small;"> 📌 전화번호</td>
                         </tr>
                         <tr>
-                        <td colspan="2"><input type="text" id="m1" name="phone" value=" &nbsp; ${userInfo.userPhone }"></td>
+                        <td colspan="2"><input type="text" class="m1" name="phone" value=" &nbsp; ${userInfo.userPhone }"></td>
                         </tr>
                         
                         <tr>
                         <td align="left" style="font-size: small;">📌 이메일</td>
                         </tr>
                         <tr>
-                        <td colspan="2"><input type="email" id="m1" name="email" value=" &nbsp; ${userInfo.email }"></td>
+                        <td colspan="2"><input type="email" class="m1" name="email" value="${userInfo.email }"></td>
                         </tr>
                         
                       
@@ -348,7 +320,7 @@ table th{
                          
                       
                         <tr id="a2">
-                        <td colspan="3"><input type="checkbox" name="agreeBox" id="a" value="서비스동의"  required>
+                        <td colspan="3"><input type="checkbox" name="agreeBox id="a" value="서비스동의"  required>
                         <label for="a">[필수]sharestudy 서비스 이용약관 동의</label>
 
                         </td>
@@ -374,21 +346,16 @@ table th{
                     	
                     	<!-- sm 추가! -->
                     	<tr>
-                            <td align="left" style="font-size: small;"><p id="m1" onclick="location.href='<%= contextPath %>/rvlist.shs'">📚 예약 내역</p></td>                       
-                        </tr>
-                        
-                        <tr>
-                            <!-- <td align="left" style="font-size: small;">📞 나의 문의</td> -->
-                            <td align="left" style="font-size: small;">
-                            	<p id="m1" data-toggle="modal" data-target="#QModal">📞 문의 하기</p>
-                            </td>
+                            <td align="left" style="font-size: small;"><p class="m1" onclick="location.href='<%= contextPath %>/rvlist.shs'">📚 예약 내역</p></td>                       
                         </tr>
                         <tr>
-                            <td align="left" style="font-size: small;"><p id="m1">💭 문의 횟수 : ${count}</td>
-                        </tr>    
+                        	<td style="font-size: small;" data-toggle="modal" data-target="#QModal"><p class="m1">📞 문의 하기</p></td>
+                        </tr>
+                    	
+
                         <tr>
-                            <td align="left" style="font-size: small;"><p id="m1"> 💌 시간문의(카테고리화)</p></td>
-                        </tr>    
+                            <td style="height: 20px;"></td>
+                        </tr>
 
                         <tr>
                             <td style="height: 20px;"></td>
@@ -405,12 +372,25 @@ table th{
                                 <input type="button" id="submit3" data-toggle="modal" data-target="#deleteUser" value="회원탈퇴" onclick="deleteUser();">
                             </td>
                         </tr>
+                        
+                       
                                 
+                                
+                                
+
+                       
+                            
+                             
 					</table>
+					
+					 <br><br>
                 </form>
-                
             </div>
             
+            
+  
+
+  
 
   <!-- The Modal -->
   <div class="modal fade" id="updatePwd">
@@ -462,8 +442,14 @@ table th{
         
           </form>
           
+          	 
+          
         </div>
         
+        
+          
+        
+       
       </div>
       
     </div>
@@ -516,8 +502,7 @@ table th{
     </div>
   </div> 		
           		
-          	
-    <!-- 문의하기 모달 -->
+    <!-- 1:1 문의 모달 -->   	
 	<div class="modal" id="QModal">
 	   <div class="modal-dialog">
 	       <div class="modal-content">
@@ -552,65 +537,69 @@ table th{
 	            </div>
 	        </div>
 	    </div>
-	</div>
-
-
-<script>
-
-function test() {
-    	var qTime = $("#qTime");
-        var qContent = $("#qContent");
-        var tel = $("#tel");
-        console.log(qTime+" "+qContent+" "+tel);
-        
-        var regExp = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}$/;
-       	if(!regExp.test(tel.val())){
-       		alert("전화번호를 다시 입력하세요.");
-       		$("#tel").focus();
-       		return;
-       	}
-       	
-    	$.ajax({
-    		url: "<%= contextPath%>/question.shs",
-    		type: "POST",
-    		data: {
-    			userId : "${userInfo.userId}", 
-    			qTime: qTime.val(),
-    			qContent : qContent.val(),
-    			tel : tel.val()
-    		},
-    		success: function(result){
-    			if(result>0){
-	    		 	alert("상담신청이 완료되었습니다.");
-			        		        
-			        qTime.val("");
-			        qContent.val("");
-			        tel.val("");
-			        
-			        <!-- 모달 닫기(close)  : 모달 닫는 메소드라는데 적용이 안됨. 
-			        	$('#QModal').modal('hide'); 
-			        -->
-			        $("#QModal").css("display","none");
-			        $(".modal-backdrop").css("display","none");
-			        
-			        
-    			}else{
-	    			alert("상담신청이 실패되었습니다.");
-    			}
-    		},
-    		error : function(){
-	    			alert("에러");
-    		}
-    		
-    	});
-    }
-    
-    
-    
-		function maskRrn() {
-
-			var rrn = "
-	<%= userInfo.getRrn() %>";
+	</div>          	
+          
+          
+          
+          
+          
+            
+            <script>
+            
+            // 1:1 문의 
+            function test() {
+            	var qTime = $("#qTime");
+                var qContent = $("#qContent");
+                var tel = $("#tel");
+                console.log(qTime+" "+qContent+" "+tel);
+                
+                var regExp = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}$/;
+               	if(!regExp.test(tel.val())){
+               		alert("전화번호를 다시 입력하세요.");
+               		$("#tel").focus();
+               		return;
+               	}
+               	
+            	$.ajax({
+            		url: "<%= contextPath%>/question.shs",
+            		type: "POST",
+            		data: {
+            			userId : "${userInfo.userId}", 
+            			qTime: qTime.val(),
+            			qContent : qContent.val(),
+            			tel : tel.val()
+            		},
+            		success: function(result){
+            			if(result>0){
+        	    		 	alert("상담신청이 완료되었습니다.");
+        			        		        
+        			        qTime.val("");
+        			        qContent.val("");
+        			        tel.val("");
+        			        
+        			        <!-- 닫기(close)  : 모달 닫는 메소드라는데 적용이 안됨. 
+        			        	$('#QModal').modal('hide'); 
+        			        -->
+        			        
+        			        $("#QModal").css("display","none");
+        			        $(".modal-backdrop").css("display","none");
+        			        
+        			        
+            			}else{
+        	    			alert("상담신청이 실패되었습니다.");
+            			}
+            		},
+            		error : function(){
+        	    			alert("에러");
+            		}
+            		
+            	});
+            }
+            
+             
+            function maskRrn() {
+                
+                var rrn = "<%= userInfo.getRrn() %>";
 
                 
                 var maskedRrn = rrn.substring(0, 8) + "●●●●●●";
@@ -669,7 +658,7 @@ function test() {
                 }
                 
 
-                $(function(){ //이거 수정했을때 수정이 안됨..
+                $(function(){ 
                 	
                 	var adAgree = "${userInfo.adAccept}";
                 	
