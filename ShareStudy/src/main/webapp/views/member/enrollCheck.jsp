@@ -100,9 +100,10 @@
 
 			<tr>
                 <td align="center"><button id="okay" onclick="enrollCheck();">submit</button></td>
-                <td><button type="submit" id="back" onclick="return back();">back</button></td>    
+                <td><button type="submit" id="back" onclick="history.back();">back</button></td>    
                 
              </tr>
+             
         
 
 	<script>

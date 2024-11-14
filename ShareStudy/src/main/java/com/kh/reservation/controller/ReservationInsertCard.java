@@ -15,13 +15,13 @@ import com.kh.reservation.model.vo.ReservationSelect;
  * Servlet implementation class reservationInsertCard
  */
 @WebServlet("/reservationInsertCard.re")
-public class reservationInsertCard extends HttpServlet {
+public class ReservationInsertCard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public reservationInsertCard() {
+    public ReservationInsertCard() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -60,6 +60,7 @@ public class reservationInsertCard extends HttpServlet {
 		
 		if(result>0) {
 			response.getWriter().print(result);
+			System.out.println(result);
 			ReservationSelect rePaySuccessInfo = new ReservationService().selReSuccessInfo(rvNo);
 			request.getSession().setAttribute("reSuccessInfo", rePaySuccessInfo);
 			

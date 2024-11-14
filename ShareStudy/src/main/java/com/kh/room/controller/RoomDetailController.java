@@ -46,6 +46,8 @@ public class RoomDetailController extends HttpServlet {
         //첨부파일 정보는 여기서만 필요하니 request로 저장ㄴ
         request.setAttribute("atList", atList);
         
+        // 수정중.
+        session.setAttribute("atList", atList);
         request.getRequestDispatcher("/views/room/roomDetailView.jsp").forward(request, response);
     }
     

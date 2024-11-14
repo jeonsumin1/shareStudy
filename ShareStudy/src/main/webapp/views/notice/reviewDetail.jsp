@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,8 +25,8 @@
             justify-content: center; /* 수평 중앙 정렬 */
             align-items: center; /* 수직 중앙 정렬 (필요할 경우) */
             border: 1px solid #99999953;
-            width: 800px;
-            height: 900px;
+            width: 70%;
+            height: 70%;
             margin: auto;
             margin-top: 50px;
             
@@ -88,7 +91,7 @@
     width: 98%;
     }
 
-    #submit{
+    #submit,#delete{
     width: 100px;
     height: 40px;
     background-color: white;
@@ -129,14 +132,37 @@
 
     <div class="outer">
         
+        <script>
+                	$(function(){
+                		
+                		var reName = "${r.regionName}";
+                		
+                		$("#review-area option").each(function(){
+                			
+                			if($(this).text() == reName){
+                			
+                				$(this).attr("selected",true);
+                				
+                				return false;
+                			}	
+                			
+                		});
+                		
+                		
+                	});
+                
+                </script>
 
 
         <form action="<%=contextPath %>/detailReview.shs" id="review-area" >
-            
+            <br>
+            <br>
             <h2 align="center" >리뷰게시판</h2>
             <br>
 			<input type="hidden" name="userId" value="${userInfo.userId }">
-            <table align="center"  >
+			
+            
+            <table align="center" >
                 <tr>
                     <td align="center">제목</td>
                     <td colspan="5"><input type="text" name="title" id="title" value="${r.reviewTitle }"></td>
@@ -145,28 +171,18 @@
                     <td align="center">작성자</td>
                     <td><input type="text" id="writer" value="${r.userId }" ></td>
                     <td align="center">장소</td>
-                    <td><input type="text" name="place" id="place" ></td>
+                    <td><input type="text" name="place" id="place"  value=${r.roomNo }></td>
                     <td align="center" >지역
-                    <select name="region">
-                         <option value="서울">서울</option>
-                         <option value="경기">경기</option>
-                         <option value="인천">인천</option>
-                         <option value="부산">부산</option>
-                         <option value="대구">대구</option>
-                         <option value="대전">대전</option>
-                         <option value="제주">제주</option>
-                         <option value="강원">강원</option>
-                         <option value="경남">경남</option>
-                         <option value="경북">경북</option>
-                         <option value="전남">전남</option>
-                         <option value="전북">전북</option>
-                         <option value="충남">충남</option>
-                         <option value="충북">충북</option>
-                         <option value="대전">대전</option>
+                    <select name="region" >
+                         <option value="${r.regionName }">${r.regionName }</option>
+                         
                     </select>
                     </td>
                     
                 </tr>
+                
+                
+                
                 <tr>
                    
                 </tr>
@@ -176,28 +192,65 @@
                     
                 </tr>
             
-            
-               <tr>
-				<th>첨부파일</th> 
-				<td colspan="3">
-					<c:choose>
-						<c:when test="${empty at}">
-							첨부파일이 없습니다 
-						</c:when>
-						<c:otherwise>
-							<!-- 다운로드 속성 추가 -->
-							<a href="${contextPath}${at.filePath}${at.changeName}">${at.originName}</a>
-						</c:otherwise>
-					</c:choose>
-				
-				</td>
-			</tr>
-                
+         <c:forEach items="${rt }" var="rt" >
+				<c:if test="${not empty rt.filePath and not empty rt.changeName}">
+					
+							<tr>
+								
+						<td colspan="6" width="50" height="50" align="center">
+						<img id="contentImg" src="<%=contextPath %>/resources/reviewUploadFiles/${rt.changeName}">
+					           </td>
+									
+								
+							</tr>
+					</c:if>
+				</c:forEach>
                
                 </table>
+                
+                <c:if test="${userInfo.userId == r.userId or userInfo.userId eq 'admin'}">
+			<br>
+			<div align="center">
+				<button type="button" id="delete">삭제하기</button>
+				<br><br>
+				
+			</div>
+		</c:if>
         </form>
         
-        		
+        <script>
+        $(function(){
+			
+			$("#delete").click(function(){
+				<%-- 
+				삭제하기 버튼을 누르면 정말 삭제하시겠습니까? 확인 취소 가 나오는 confirm을 이용하여
+				확인을 눌렀을때 삭제 요청이 되도록 처리하기
+				매핑주소 : delete.bo
+				메소드명 : deleteBoard() 
+				컨트롤러명 : BoardDeleteController
+				
+				함수를 이용하여 post 방식 form 요청이 될 수 있도록 처리할것 
+				
+				삭제시 DML - DELETE 를 사용한다면 업로드 파일도 삭제 
+				삭제시 DML - UPDATE 를 사용한다면 업로드 파일은 보류
+				--%>
+				if(confirm("정말 삭제하시겠습니까?")){
+					
+					$("<form>",{
+								method:"POST"
+							   ,action:"<%=contextPath%>/reviewDelete.shs"
+					  }).append($("<input>",{
+								  type:"hidden"
+								 ,name:"reviewNo"
+								 ,value:"${r.reviewNo}"
+					  })).appendTo("body").submit();
+				}
+				
+			});
+			
+		});
+	
+        </script>
 				
 
 

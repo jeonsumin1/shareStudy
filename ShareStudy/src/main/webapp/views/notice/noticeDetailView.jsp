@@ -69,7 +69,7 @@ Notice n = (Notice) request.getAttribute("noticeDetail");
 				<button class="btn btn-dark pull-right" onclick="location.href='<%=contextPath%>/noticeBoard.shs'"
 						type="button">목록으로</button>
 				<%if (userInfo != null && userInfo.getUserName().equals("관리자")) { %>
-				<button class="btn btn-primary" type="button" id="noticeUpdate" name="noticeNo" onclick="submitForm('update')">수정</button>
+				<button class="btn btn-primary" type="button" id="noticeUpdate" name="noticeUpdate" onclick="submitForm('update')">수정</button>
 				<button class="btn btn-danger" type="button" class="d-inline" onclick="submitForm('delete')">삭제</button>
 				<%} %>
 			<script>

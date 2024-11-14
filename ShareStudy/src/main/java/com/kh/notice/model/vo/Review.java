@@ -46,11 +46,12 @@ public class Review {
 		this.regionName = regionName;
 	}
 
-	public Review(int reviewNo, String userId, String reviewTitle, String reviewContent, Date reviewDate,
+	public Review(int reviewNo, String userId, String roomNo, String reviewTitle, String reviewContent, Date reviewDate,
 			int reviewCount, String regionName) {
 		super();
 		this.reviewNo = reviewNo;
 		this.userId = userId;
+		this.roomNo = roomNo;
 		this.reviewTitle = reviewTitle;
 		this.reviewContent = reviewContent;
 		this.reviewDate = reviewDate;

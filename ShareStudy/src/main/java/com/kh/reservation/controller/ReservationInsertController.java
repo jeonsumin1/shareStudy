@@ -44,7 +44,7 @@ public class ReservationInsertController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 	
 		String roomNo = request.getParameter("rno");
-		roomNo = "1"; // room 페이지 수정 후 삭제 
+//		roomNo = "1"; // room 페이지 수정 후 삭제 
 		
 		String userId = request.getParameter("userId"); // (전달받은 회원의 아이디를 전달해야 한다.)
 		String rvDate = request.getParameter("rvDate"); //방문 날짜
@@ -63,6 +63,7 @@ public class ReservationInsertController extends HttpServlet {
 		
 		String rvNo = new ReservationService().insertReservation(reserInfo, rvBank);
 		
+		System.out.println(rvNo);
 		//정보저장 실패했을 경우 NULL로 return 
 		
 		// DAO에서 rvNo를 String rvNo = ""; 빈 문자열로 선언해 두었으니 null 값이 아닌 "" 빈 문자열과 비교해서 빈 문자열이 아닌 경우 예약 및 결제 정보를 가져온다. 
@@ -70,8 +71,9 @@ public class ReservationInsertController extends HttpServlet {
 			// rvNo 결제 번호를 가져온다면 결제 정보 select session에 정보 넣기. 
 			ReservationSelect reSuccessInfo = new ReservationService().selReSuccessInfo(rvNo);
 			request.getSession().setAttribute("reSuccessInfo", reSuccessInfo);
-			response.getWriter().print(rvNo);
 			System.out.println(reSuccessInfo);
+			
+			response.getWriter().print(rvNo);
 				
 		}else {
 			response.getWriter().print("예약 불가능");
