@@ -25,10 +25,14 @@
 		height: 3%;
     }
    	.outer{
-    	width: 700px; /* 페이지 너비 */
+   		border: 1px solid #ddd;
+    	width: 800px; /* 페이지 너비 */
         margin: auto; /* 페이지 중앙 정렬 */
-        margin-top: 50px;
+        padding: 50px;
         text-align: left;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        
     }
 	
 	h2{
@@ -166,7 +170,7 @@
 							<br>
 							<div>
 						        <p> 휴대폰 번호 </p>
-						        <input type="text" name="phone" id="phone" class="form-control" value="${ userInfo.userPhone }" readonly>
+						        <input type="text" name="phone" id="phone" class="form-control" value="${ userInfo.userPhone.substring(0,3)}-${ userInfo.userPhone.substring(3,7)}-${ userInfo.userPhone.substring(7,11)}" readonly>
 							</div>
 						
 							<br>
@@ -307,10 +311,11 @@
 			    	// 라디오 버튼 중 bankTransfer를 체크했을 경우에만 화면이 보여지게 하기 // 무통장 입금		
 		    												//$("선택자").is("선택자") <br> (선택 요소 일치 여부 판단 → 논리값 반환)
 		    		if($("#bankTransfer").is(":checked")){
-		    			$("#bInfo").css("display","block");
+		    			$("#bInfo").fadeIn();
+		    			<%--$("#bInfo").css("display","block").fadeIn(3000);--%>
 		    		}else{
 		    			// 무통장 입금이 아닌 다른 라디오 버튼 선택 시 해당 창 삭제 및 value 값 초기화. 
-		    			$("#bInfo").css("display","none");
+		    			$("#bInfo").fadeOut();
 		    			$("select[name='bank']").val("NO");
 		    			$("#rvName").val("");
 		    			$("#payDate").val("");
