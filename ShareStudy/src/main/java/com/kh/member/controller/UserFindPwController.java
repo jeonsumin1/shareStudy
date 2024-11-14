@@ -31,10 +31,6 @@ public class UserFindPwController extends HttpServlet {
 		String findName = request.getParameter("findName");
 		String findPhone = request.getParameter("findPhone");
 		
-		System.out.println(findId);
-		System.out.println(findName);
-		System.out.println(findPhone);
-		
 		String findPw = new UserService().findPw(findId, findName, findPhone);
 		
 		HttpSession session = request.getSession();

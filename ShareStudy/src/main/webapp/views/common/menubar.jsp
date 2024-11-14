@@ -54,7 +54,7 @@
 </svg>
 <main>
   <h1 class="visually-hidden">Headers examples</h1>
-  <div style="background-color: rgba(0, 0, 0, 0.12);">
+  <div style="background-color: rgba(0, 0, 0, 0.1);">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom header-shadow">
       <div class="col-md-3 mb-2 mb-md-0">
         <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
@@ -81,8 +81,8 @@
       <%}else{%>
       <div class="col-md-3 text-end d-flex justify-content-center align-items-center">
       <b><%=userInfo.getUserName()%>님 환영합니다.</b>
-      <form action="<%=contextPath %>/views/member/myPage.jsp">
-      <button type="submit" class="btn btn-outline-primary me-2">마이페이지</button>
+      <form action="<%=contextPath %>/MyPage.shs">
+      	<button type="submit" class="btn btn-outline-primary me-2">마이페이지</button>
       </form>
       <a href="<%=contextPath%>/logout.shs" id="logout" onclick="return confirmLogout();">로그아웃</a>
       <%}%>

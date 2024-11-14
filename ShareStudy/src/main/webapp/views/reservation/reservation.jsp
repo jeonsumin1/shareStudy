@@ -486,10 +486,11 @@
 						            amount: '${room.price}'   
 						        }, success: function(result){
 						            if(result>0){
-										if(confirm("예약이 완료되었습니다. 예약 확인 페이지로 이동하시겠습니까?")){
-											location.href = '<%= contextPath%>/reservationDetail.shs?rno=${room.roomNo}';
+						            	if(confirm("예약이 완료되었습니다. 예약 확인 페이지로 이동하시겠습니까?")){
+											<%-- 예약내역 확인 페이지로 이동 --%>
+											location.href = '<%= contextPath%>/reservationDetail.shs';
 										}else{
-											alert("메인페이지로 돌아갑니다.");
+											alert('메인으로 돌아갑니다.');
 											location.href = '<%= contextPath%>';				
 										}
 									}else{

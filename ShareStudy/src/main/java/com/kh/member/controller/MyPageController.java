@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.service.UserService;
+import com.kh.member.model.vo.User;
+
 /**
  * Servlet implementation class MyPageController
  */
@@ -27,6 +30,13 @@ public class MyPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		// 문의 하기 COUNT 
+		User userInfo = (User)request.getSession().getAttribute("userInfo");
+		String userId = userInfo.getUserId();
+		String count = new UserService().qCount(userId);
+		
+		request.getSession().setAttribute("count", count);
+		
 		request.getRequestDispatcher("views/member/myPage.jsp").forward(request, response);
 		
 	}

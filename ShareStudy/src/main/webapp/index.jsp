@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
 <title>메인페이지</title>
 <style>
@@ -35,20 +34,20 @@ body {
 }
 
 .search-container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .search-container input[type="text"] {
-    margin-right: 10px;
-    padding: 8px;
-    font-size: 16px;
+	margin-right: 10px;
+	padding: 8px;
+	font-size: 16px;
 }
 
 .search-container button {
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
+	padding: 8px 16px;
+	font-size: 16px;
+	cursor: pointer;
 }
 
 #loginContainer {
@@ -73,7 +72,6 @@ th, td {
 	padding: 5px 10px;
 }
 
-
 #loginSpace {
 	position: absolute;
 	top: 110px;
@@ -81,31 +79,38 @@ th, td {
 	margin-top: 100px;
 }
 
-#mainLogo{
+#mainLogo {
 	max-height: 200px;
 }
 
-#loginSpace{
+#loginSpace {
 	top: 50px;
 }
 
-#product{
+#product {
 	padding-left: 250px;
 	padding-right: 200px;
 }
 
 #roomPhoto{
+box-sizing: border-box;
+}
+body {
+	font-family: Verdana, sans-serif;
+	margin: 0
+}
+
+#roomPhoto {
 	width: 410px;
 	height: 226px;
 }
-
 </style>
 </head>
-<body>	
+<body>
 
-<%@ include file="/views/common/menubar.jsp" %>
+	<%@ include file="/views/common/menubar.jsp"%>
 
-<script>
+	<script>
 	
 	var msg = "<%=alertMsg%>";
 	if(msg != "null"){
@@ -115,13 +120,12 @@ th, td {
     	function enrollPage(){
     		location.href="<%=contextPath%>/enrollPage.shs";
 		}
-    	
 	</script>
-	
+
 	<div id="header">
 		<div id="Logo">
-			<a href="<%=contextPath%>">
-			<img src="<%=contextPath%>/views/common/images/ShareStudyLogo2.png"
+			<a href="<%=contextPath%>"> <img
+				src="<%=contextPath%>/views/common/images/ShareStudyLogo2.png"
 				alt="ShareStudyLogo" id="mainLogo" oncontextmenu="return false"></a>
 		</div>
 	</div>
@@ -218,7 +222,5 @@ th, td {
     </div>
 </div>
 <%@ include file="/views/common/footer.jsp" %>
-
-
 </body>
 </html>

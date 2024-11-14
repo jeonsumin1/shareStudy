@@ -120,5 +120,34 @@ public class UserService {
 		
 		return findPw;
 	}
+
+	
+	// 상담 신청
+	public int insertQuestion(String userId, String qTime, String qContent, String tel) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new UserDao().insertQuestion(conn, userId, qTime, qContent, tel);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	// 상담 신청 Count
+	public String qCount(String userId) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String count = new UserDao().qCount(conn, userId);
+		JDBCTemplate.close(conn);
+		
+		return count;
+	}
 	
 }

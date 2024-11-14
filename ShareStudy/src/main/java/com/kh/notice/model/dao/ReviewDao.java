@@ -93,10 +93,12 @@ import com.kh.notice.model.vo.Review;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, r.getReviewTitle());
-			pstmt.setString(2, r.getRegionName());
-			pstmt.setString(3, r.getReviewContent());
-			pstmt.setString(4, r.getUserId());
+			pstmt.setInt(1, r.getReviewNo());
+			pstmt.setString(2, r.getReviewTitle());
+			pstmt.setString(3, r.getRegionName());
+			pstmt.setString(4, r.getReviewContent());
+			pstmt.setString(5, r.getRoomNo());
+			pstmt.setString(6, r.getUserId());
 			
 			
 			result = pstmt.executeUpdate();
@@ -253,10 +255,12 @@ import com.kh.notice.model.vo.Review;
 
 				r = new Review(rset.getInt("REVIEW_NO"),
 							   rset.getString("USER_ID"),
+							   rset.getString("ROOM_NO"),
 							   rset.getString("REVIEW_TITLE"),
 							   rset.getString("REVIEW_CONTENT"),
 							   rset.getDate("REVIEW_DATE"),
 							   rset.getInt("REVIEW_COUNT"),
+							   rset.getString("REVIEW_STATUS"),
 							   rset.getString("REGION_NAME"));		
 				
 				
@@ -273,12 +277,12 @@ import com.kh.notice.model.vo.Review;
 		return r;
 	}
 
-	public ReAttachment selectAttachment(Connection conn, int rno) {
+	public ArrayList<ReAttachment> selectAttachment(Connection conn, int rno) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		ReAttachment rt = null;
+		ArrayList<ReAttachment> rt = new ArrayList<>();
 		
 		String sql = prop.getProperty("selectAttachment");
 		
@@ -288,12 +292,15 @@ import com.kh.notice.model.vo.Review;
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
 				
-				rt = new ReAttachment(rset.getString("FILE_NO"),
+				rt.add (new ReAttachment(rset.getString("FILE_NO"),
+									  rset.getInt("REVIEW_NO"),
 									  rset.getString("ORIGIN_NAME"),
 									  rset.getString("CHANGE_NAME"),
-									  rset.getString("FILE_PATH"));
+									  rset.getString("FILE_PATH")));
+				
+				
 			}
 			
 		} catch (SQLException e) {
@@ -308,6 +315,31 @@ import com.kh.notice.model.vo.Review;
 		
 		
 		return rt;
+	}
+
+	public int deleteReview(Connection conn, int reviewNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		
+		return result;
 	}
 
 		

@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-
+	<entry key="selectReviewList"> SELECT *
+		FROM (SELECT ROWNUM RNUM,A.*
+		FROM(SELECT
+		REVIEW_NO,
+		REGION_NAME,
+		REVIEW_TITLE,
+		USER_ID,
+		REVIEW_COUNT,
+		REVIEW_DATE
+		FROM REVIEW
+		ORDER BY REVIEW_DATE DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	<entry key="selectReviewList">
 	SELECT *
 	FROM (SELECT ROWNUM RNUM,A.*
@@ -17,40 +29,58 @@
 	</entry>
 	
 	<entry key="insertReview">
+
 	INSERT INTO REVIEW(REVIEW_NO,
 					   REVIEW_TITLE,
                    	   REGION_NAME,
                        REVIEW_CONTENT,
+                       ROOM_NO,
                        USER_ID)
-	VALUES(SEQ_RNO.NEXTVAL,?,?,?,?)
+	VALUES(?,?,?,?,?,?)
+
 	</entry>
-	
-	
+
+
 	<!-- 총 게시글 개수 조회 -->
 	<entry key="listCount">
-	SELECT COUNT(*) COUNT
-	FROM REVIEW
+		SELECT COUNT(*) COUNT
+		FROM REVIEW
 	</entry>
-	
+
 	<entry key="insertAttachmentList">
+
 	INSERT INTO RVATTACHMENT(FILE_NO,
                              REVIEW_NO,
                              ORIGIN_NAME,
                              CHANGE_NAME,
                              FILE_PATH,
-                             FILE_LEVEL)
+                             FILE_LEVEL
+                             )
 	VALUES(SEQ_FNO.NEXTVAL,?,?,?,?,?)
+
 	</entry>
-	
+
 	<!-- 게시글 번호 추출(시퀀스 발행) -->
 	<entry key="selectReviewNo">
-		SELECT SEQ_RNO.NEXTVAL RNO
+		SELECT SEQ_RRNO.NEXTVAL RNO
 		FROM DUAL
 	</entry>
-	
+
 	<entry key="increaseCount">
 		UPDATE REVIEW
 		SET REVIEW_COUNT = REVIEW_COUNT+1
+		WHERE REVIEW_NO = ?
+	</entry>
+
+	<entry key="selectReview">
+		SELECT REVIEW_NO,
+				USER_ID,
+				REVIEW_TITLE,
+				REVIEW_CONTENT,
+				REVIEW_DATE,
+				REVIEW_COUNT,
+				REGION_NAME
+		FROM REVIEW
 		WHERE REVIEW_NO = ?
 	</entry>
 	
@@ -59,23 +89,40 @@
        	   USER_ID,
            REVIEW_TITLE,
            REVIEW_CONTENT,
+           ROOM_NO,
            REVIEW_DATE,
            REVIEW_COUNT,
-           REVIEW_DATE
-	FROM REVIEW
-	JOIN ROOM USING(ROOM_NO)
+<<<<<<< HEAD
+           REVIEW_DATE,
            REGION_NAME
-    FROM REVIEW
+	FROM REVIEW
     WHERE REVIEW_NO = ?
     AND REVIEW_STATUS = 'Y'
+=======
+	FROM REVIEW
+	JOIN ROOM USING(ROOM_NO)
+>>>>>>> refs/heads/main
 	</entry>
 	
 	<entry key="selectAttachment">
-	SELECT FILE_NO,
-           ORIGIN_NAME,
-           CHANGE_NAME,
-           FILE_PATH
+<<<<<<< HEAD
+	SELECT *
 	FROM RVATTACHMENT
+	WHERE REVIEW_NO = ?
+=======
+		SELECT FILE_NO,
+		ORIGIN_NAME,
+		CHANGE_NAME,
+		FILE_PATH
+		FROM RVATTACHMENT
+		WHERE REVIEW_NO = ?
+>>>>>>> refs/heads/main
+	</entry>
+<<<<<<< HEAD
+	
+	<entry key="deleteReview">
+	UPDATE REVIEW
+	SET REVIEW_STATUS = 'N'
 	WHERE REVIEW_NO = ?
 	</entry>
 	
@@ -86,5 +133,7 @@
 	
 	
 	
-	
 </properties>
+=======
+</properties>
+>>>>>>> refs/heads/main

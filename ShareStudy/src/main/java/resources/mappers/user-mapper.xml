@@ -88,5 +88,18 @@
 		AND USER_PHONE = ?
 	</entry>
 
+	<!-- 상담신청 -->
+	<entry key="insertQuestion">
+		INSERT INTO QUESTION 
+		VALUES(?, ?, ?, ?)
+	</entry>
 
+	<!-- 상담신청 횟수 -->
+	<entry key="qCount">
+		SELECT COUNT(*) COUNT
+		FROM QUESTION
+		WHERE USER_ID=?
+	</entry>
+	
+	
 </properties>

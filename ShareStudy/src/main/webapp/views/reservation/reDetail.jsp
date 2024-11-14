@@ -119,6 +119,7 @@
 		</div>
 		<div align="center" class="btnDiv">
 			<button onclick="location.href='<%= contextPath%>/rvlist.shs'">목록으로</button>
+			<!-- history.back()을 사용할 경우 예약하기 페이지에서는 예약 내역 목록이 아닌 예약페이지로 다시 돌아간다. -->
 		</div>
 		
 	</div>
