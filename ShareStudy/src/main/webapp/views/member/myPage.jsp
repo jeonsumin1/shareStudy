@@ -41,8 +41,8 @@
             justify-content: center; /* 수평 중앙 정렬 */
             align-items: center; /* 수직 중앙 정렬 (필요할 경우) */
             border: 1px solid #99999953;
-            width: 550px;
-            height: 1100px;
+            width: 50%;
+            height: 70%;
             margin: auto;
             margin-top: 50px;
             border-radius: 10px;
@@ -214,11 +214,11 @@ input[type="email"]{
 
 .eyes{
     position: absolute;
-    top:175px;
-    bottom: 0;
-    right: 645px;
+    top:-30px;
+    bottom: 0; 
+    right: 830px;
     margin: auto;
-    height: 20px;
+    height: 50px;
     font-size: 15px;
     cursor: pointer;
     display: flex;
@@ -263,7 +263,7 @@ input[type="email"]{
              
                     <table>
                      
-                    	
+                    	<br><br>
                     	
                     	<tr>
                     	<td align="left" style="font-size: small;">📌 아이디</td> 
@@ -284,7 +284,7 @@ input[type="email"]{
                         <td align="left" style="font-size: small;"> 📌 주민등록번호</td>
                         </tr>
                         <tr>
-                        <td colspan="2"><p class="m1 rrn1"></p></td>
+                        <td colspan="2"><p class="m1 rrn1">${userInfo.rrn }</p></td>
                         </tr>
                        
                         <tr>
@@ -306,7 +306,7 @@ input[type="email"]{
                         <td align="left" style="font-size: small;">📌 이메일</td>
                         </tr>
                         <tr>
-                        <td colspan="2"><input type="email" class="m1" name="email" value=" &nbsp; ${userInfo.email }"></td>
+                        <td colspan="2"><input type="email" class="m1" name="email" value="${userInfo.email }"></td>
                         </tr>
                         
                       
@@ -320,7 +320,7 @@ input[type="email"]{
                          
                       
                         <tr id="a2">
-                        <td colspan="3"><input type="checkbox" name="agreeBox" id="a" value="서비스동의"  required>
+                        <td colspan="3"><input type="checkbox" name="agreeBox id="a" value="서비스동의"  required>
                         <label for="a">[필수]sharestudy 서비스 이용약관 동의</label>
 
                         </td>
@@ -372,6 +372,8 @@ input[type="email"]{
                                 <input type="button" id="submit3" data-toggle="modal" data-target="#deleteUser" value="회원탈퇴" onclick="deleteUser();">
                             </td>
                         </tr>
+                        
+                       
                                 
                                 
                                 
@@ -380,6 +382,8 @@ input[type="email"]{
                             
                              
 					</table>
+					
+					 <br><br>
                 </form>
             </div>
             
@@ -654,7 +658,7 @@ input[type="email"]{
                 }
                 
 
-                $(function(){ //이거 수정했을때 수정이 안됨..
+                $(function(){ 
                 	
                 	var adAgree = "${userInfo.adAccept}";
                 	
