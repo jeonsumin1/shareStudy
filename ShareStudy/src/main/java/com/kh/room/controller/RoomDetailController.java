@@ -48,7 +48,6 @@ public class RoomDetailController extends HttpServlet {
         
         // 수정중.
         session.setAttribute("atList", atList);
-        System.out.println(atList);
         request.getRequestDispatcher("/views/room/roomDetailView.jsp").forward(request, response);
     }
     
