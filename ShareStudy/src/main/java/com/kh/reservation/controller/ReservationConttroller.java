@@ -42,6 +42,7 @@ public class ReservationConttroller extends HttpServlet {
 			request.getRequestDispatcher("/views/reservation/reservation.jsp").forward(request, response);			
 		}else {
 			// 로그인 되어 있지 않을 경우 현재 url 경로 저장해서 세션에 넣어주기 
+			// request.getRequestURI() : 도메인이후 하위 주소를 가져 온다. //ex) "도메인: share" '/reservation.re?rno=1'		
 			String reUrl = request.getRequestURI();
 			session.setAttribute("reUrl", reUrl);
 			
