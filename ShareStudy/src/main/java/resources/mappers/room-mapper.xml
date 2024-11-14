@@ -61,4 +61,39 @@
     SET STATUS = 'N'
     WHERE ROOM_NO = ?
 </entry>
+
+<entry key="updateRoom">
+    UPDATE ROOM 
+    SET 
+        REGION_NO = ?,
+        ROOM_NAME = ?,
+        ROOM_ADDRESS = ?,
+        ROOM_SIZE = ?,
+        PRICE = ?,
+        USE_NIGHT = ?,
+        PARKING = ?,
+        EATING = ?
+    WHERE ROOM_NO = ?
+    AND STATUS = 'Y'
+</entry>
+
+<entry key="updateAttachment">
+    UPDATE ATTACHMENT 
+    SET 
+        ORIGIN_NAME = ?,
+        CHANGE_NAME = ?,
+        FILE_PATH = ?,
+        UPLOAD_DATE = SYSDATE
+    WHERE FILE_NO = ?
+    AND STATUS = 'Y'
+</entry>
+
+	<entry key="deleteRoom">
+	
+		UPDATE ROOM
+		SET STATUS = 'N'
+		WHERE ROOM_NO = ?
+		AND STATUS = 'Y'
+	    
+	</entry>
 </properties>

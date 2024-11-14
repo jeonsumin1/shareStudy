@@ -13,43 +13,36 @@ import javax.servlet.http.HttpSession;
 import com.kh.member.model.vo.User;
 import com.kh.room.model.service.RoomService;
 import com.kh.room.model.vo.Attachment;
+import com.kh.room.model.vo.Region;
 import com.kh.room.model.vo.Room;
 
-@WebServlet("/detail.room")
-public class RoomDetailController extends HttpServlet {
+@WebServlet("/updateForm.shs")
+public class RoomUpdateFormController extends HttpServlet {
     private static final long serialVersionUID = 1L;
        
-    public RoomDetailController() {
-        super();
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 관리자 권한 체크
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("userInfo");
+        
+        if(user == null || !"admin".equals(user.getUserId())) {
+            session.setAttribute("alertMsg", "관리자만 접근 가능합니다.");
+            response.sendRedirect(request.getContextPath());
+            return;
+        }
+        
         String roomNo = request.getParameter("rno");
         
-        // 상품 상세정보와 첨부파일 리스트 조회
+        // 수정할 상품 정보 조회
         RoomService rService = new RoomService();
-        
         Room room = rService.selectRoom(roomNo);
-        // session 객체 얻기
-        HttpSession session = request.getSession();
-        
-    	User user = (User) session.getAttribute("userInfo");
-    	if(user != null) {
-    		request.setAttribute("userid", user.getUserId());
-    	}
         ArrayList<Attachment> atList = rService.selectAttachmentList(roomNo);
+        ArrayList<Region> regionList = rService.selectRegionList();
         
-       
-        // room 정보를 session에 저장
-        session.setAttribute("room", room);
-
-        //첨부파일 정보는 여기서만 필요하니 request로 저장ㄴ
+        request.setAttribute("room", room);
         request.setAttribute("atList", atList);
+        request.setAttribute("regionList", regionList);
         
-        // 수정중.
-        session.setAttribute("atList", atList);
-        request.getRequestDispatcher("/views/room/roomDetailView.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/room/roomUpdateForm.jsp").forward(request, response);
     }
-    
-  
 }

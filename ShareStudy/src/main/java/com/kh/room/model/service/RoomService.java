@@ -3,10 +3,7 @@ package com.kh.room.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpSession;
-
 import com.kh.common.JDBCTemplate;
-import com.kh.member.model.vo.User;
 import com.kh.room.model.dao.RoomDao;
 import com.kh.room.model.vo.Attachment;
 import com.kh.room.model.vo.Region;
@@ -78,23 +75,45 @@ public class RoomService {
         return list;
     }
 
-	public int deleteRoom(String roomNo) {
-		Connection conn = JDBCTemplate.getConnection();
+	
+
+	public int updateRoom(Room room, ArrayList<Attachment> newAtList) {
+	    Connection conn = null;
 	    int result = 0;
 	    
 	    try {
+	        conn = JDBCTemplate.getConnection();
 	        conn.setAutoCommit(false);
 	        
 	        RoomDao dao = new RoomDao();
+        // 1. 스터디룸 정보 수정
+	        result = dao.updateRoom(conn, room);
 	        
-	        // 상품 상태를 'N'으로 변경
-	        result = dao.deleteRoom(conn, roomNo);
-	        
-	        if(result > 0) {
+	        // 2. 첨부파일 처리
+	        if(result > 0 && !newAtList.isEmpty()) {
+	            int atResult = 1;
+	            
+	            for(Attachment at : newAtList) {
+	                if(at.getFileNo() != null) { // 기존 파일 수정
+	                    atResult *= dao.updateAttachment(conn, at);
+	                } else { // 새로운 파일 추가
+	                    atResult *= dao.insertNewAttachment(conn, at);
+	                }
+	            }
+	            
+	            if(atResult > 0) {
+	                JDBCTemplate.commit(conn);
+	                result = 1;
+	            } else {
+	                JDBCTemplate.rollback(conn);
+	                result = 0;
+	            }
+	        } else if(result > 0) { // 첨부파일 없이 스터디룸 정보만 수정
 	            JDBCTemplate.commit(conn);
 	        } else {
 	            JDBCTemplate.rollback(conn);
 	        }
+	        
 	    } catch (Exception e) {
 	        JDBCTemplate.rollback(conn);
 	        e.printStackTrace();
@@ -103,6 +122,23 @@ public class RoomService {
 	    }
 	    
 	    return result;
-    
 	}
-}
+	//상품 삭제메소드
+	public int deleteRoom(int roomNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new RoomDao().deleteRoom(conn,roomNo);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+	}

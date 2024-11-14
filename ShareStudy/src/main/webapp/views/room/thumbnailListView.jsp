@@ -44,7 +44,7 @@
                     <img src="..${room.titleImg}" width="230px" height="160px">
                    
                     <p>
-                        지역 : ${region.regionName}<br>
+                        지역 : ${room.regionName}<br>
                         ${room.roomName}<br>
                         이용가격: ${room.price}원
                     </p>
@@ -52,5 +52,8 @@
             </c:forEach>
         </div>
     </div>
+    <div id="footer">
+		<%@include file="/views/common/footer.jsp"%>
+	</div>
 </body>
 </html>

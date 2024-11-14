@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<% String contextPath = request.getContextPath();
-   String alertMsg = (String) session.getAttribute("alertMsg");
-   if (alertMsg != null) {
-   session.removeAttribute("alertMsg");
-%>
-    <script>
-        alert("<%= alertMsg %>");
-    </script>
-<%
-}
-%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -74,17 +63,37 @@ body {
 	text-align: center;
 	margin-bottom: 10px;
 }
-a {
+.links > a {
 	color: #F58B34;
 	text-decoration: none;
 }
 .check {
 	color: red;
 }
+
+#header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
 </style>
 </head>
 <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0"
 	width="100%" height="100%" align="center">
+	<div id="header">
+		<%@ include file="/views/common/menubar.jsp" %>
+	</div>
+		<% 
+		   if (alertMsg != null) {
+		   session.removeAttribute("alertMsg");
+		%>
+		    <script>
+		        alert("<%= alertMsg %>");
+		    </script>
+		<%
+		}
+		%>
 	<div class="card align-middle" style="width: 25rem;">
 		<div class="card-title" style="margin-top: 30px; display: flex; justify-content: center;">
 			<h2 class="card-title" style="color: #F58B34;">
