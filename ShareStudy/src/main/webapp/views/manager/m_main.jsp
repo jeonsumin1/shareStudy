@@ -1,14 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.member.model.vo.User
-    ,com.kh.reservation.model.vo.Room"%>
+    ,com.kh.reservation.model.vo.Room, com.kh.member.model.vo.Question"%>
 
 <%
     //회원
      ArrayList<User> mList = (ArrayList<User>) session.getAttribute("mList");
      ArrayList<Room> rList = (ArrayList<Room>) session.getAttribute("rList");
+     ArrayList<Question> qList = (ArrayList<Question>) session.getAttribute("qList");
      int memCount = mList.size();
      int roomCount = rList.size();
+     int questionCount = qList.size();
 %>
+<% 
+    String errorMessage = (String) request.getAttribute("errorMessage");
+    String altMsg = (String) request.getAttribute("altMsg"); %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,13 +28,13 @@
 	<div class="total_board">
 		<div class="board1">
 			<h2>총 예약 건수 : 건</h2>
-			<h3>현재 등록된 룸 갯수 : <%=roomCount %> 건</h3>
+			<h3>현재 등록된 룸 갯수 : <%=roomCount%> 건</h3>
 		</div>
 		<div class="board2">
 			<h2>회원 수 : <%=memCount%> 명</h2>
 		</div>
 		<div class="board3">
-			<h2>리뷰 수 : 15 개</h2>
+			<h2>상담 신청 내역 : <%=questionCount%> 개</h2>
 		</div>
 	</div>
 
@@ -48,10 +54,10 @@
 				<th width="7%">삭제</th>
 			</tr>
 			<%
-			    if (mList == null || mList.isEmpty()) {
+			    if (rList == null || rList.isEmpty()) {
 			%>
 			        <tr>
-			            <td colspan="8">조회할 회원 정보가 없습니다.</td>
+			            <td colspan="8">현재 등록된 룸이 없습니다</td>
 			        </tr>
 			<%
 			    } else {
@@ -64,7 +70,7 @@
 			       <td><%= r.getRoomSize() %></td>
 			       <td><%= r.getPrice() %>원</td>
 			       <td><%= r.getStatus() %></td>
-			       <td><a href="">상세보기</a></td>
+			       <td><a href="${contextPath}/share/views/manager/m_detail.jsp">상세보기</a></td>
 			       <td><a href="">삭제</a></td>
 			  </tr>
 			                
@@ -169,7 +175,8 @@
                                  <% } %></td>
 			                 
 			                <td><a href="">상세보기</a></td>
-			                <td><form action="${contextPath}/share/mdelete.ma" method="post" style="display:inline;">
+			                 <td>
+			                 <form action="${contextPath}/share/mdelete.ma" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
 							        <input type="hidden" name="userId" value="<%= u.getUserId() %>">
 							        <button type="submit">삭제</button>
 							    </form>
@@ -213,12 +220,32 @@
 				<th width="40%">신청일</th>
 				<th width="10%">삭제</th>
 			</tr>
+			<%
+			    if (qList == null || qList.isEmpty()) {
+			%>
+			        <tr>
+			            <td colspan="4">상담 신청 내역이 없습니다.</td>
+			        </tr>
+			 <%}else{
+				 for(Question q : qList){%>
 			<tr>
-				<td>값1</td>
-				<td>값2</td>
-				<td>값3</td>
-				<td>값4</td>
-			</tr>
+				<td><%= q.getUserId() %></td>
+				<td><%= q.getQtPhone() %></td>
+				<td><%= q.getQtDate() %></td>
+				<td>
+				<form action="${contextPath}/share/qdelete.ma" method="post" style="display:inline;" 
+                      onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                    <input type="hidden" name="userId" value="<%= q.getUserId() %>">
+                    <button type="submit">삭제</button>
+                </form>
+                </td>
+			</tr> 
+				<% 
+				}
+			 }
+			%>       
+			 
+			
 		</table>
 	</section>
 
@@ -240,6 +267,60 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script>
 
+let labels = ['상품 A', '상품 B', '상품 C', '상품 D', '상품 E']; 
+let totalQuantities = [50, 30, 20, 40, 10]; 
+
+// 막대형 차트 설정
+let myCt1 = document.getElementById('myChart1');
+let myChart1 = new Chart(myCt1, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: '판매량(개)',
+            data: totalQuantities, 
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: '카테고리별 제품 구매 회수'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+    },
+});
+
+let ctgLabels = ['카테고리 A', '카테고리 B', '카테고리 C', '카테고리 D', '카테고리 E'];
+let ctgData = [25, 15, 30, 20, 10];
+
+
+let myCt2 = document.getElementById('myChart2');
+let myChart2 = new Chart(myCt2, {
+    type: 'doughnut',
+    data: {
+        labels: ctgLabels,
+        datasets: [{
+            data: ctgData, 
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: '카테고리별 제품 구매 회수'
+            }
+        },
+    },
+});
 </script>
+
 
 </html>

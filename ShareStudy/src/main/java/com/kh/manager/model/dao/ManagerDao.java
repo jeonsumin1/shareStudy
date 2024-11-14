@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.manager.model.vo.Manager;
+import com.kh.member.model.vo.Question;
 import com.kh.member.model.vo.User;
 import com.kh.reservation.model.vo.Room;
 
@@ -142,6 +143,61 @@ public class ManagerDao {
 		} 
 		
 		return list;
+	}
+
+	public ArrayList<Question> selectAllQuestion(Connection conn) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null; 
+	    
+		ArrayList<Question> list = new ArrayList<>();
+		
+		String sql = prop.getProperty("selectAllQuestion");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rset=pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				list.add(new Question(
+						  rset.getString("USER_ID"),
+						  rset.getString("QT_PHONE"),
+						  rset.getDate("QT_DATE")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		} 
+		
+		return list;
+	}
+
+	public int deleteMember(Connection conn, String memId) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
 	}
 
 }
