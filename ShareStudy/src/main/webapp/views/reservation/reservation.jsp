@@ -117,7 +117,7 @@
 			            		</tr>
 			            		<tr>
 			            			<th>주소</th>
-			            			<td>${room.roomAddress} 명</td> <!-- 수정  -->
+			            			<td>${room.roomAddress}</td> <!-- 수정  -->
 			            		</tr>
 			            		<tr>
 			            			<th>이용 가능 인원</th>
