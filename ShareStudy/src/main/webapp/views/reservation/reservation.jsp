@@ -113,11 +113,15 @@
 			            	<table class="table table-bordered">
 			            		<tr>
 			            			<th>가격</th>
-			            			<td>${room.price} 원</td> <!-- 수정  -->
+			            			<td>${room.price} 원</td> 
+			            		</tr>
+			            		<tr>
+			            			<th>주소</th>
+			            			<td>${room.roomAddress} 명</td> <!-- 수정  -->
 			            		</tr>
 			            		<tr>
 			            			<th>이용 가능 인원</th>
-			            			<td>${room.roomSize} 명</td> <!-- 수정  -->
+			            			<td>${room.roomSize} 명</td> 
 			            		</tr>
 			            		<tr>
 			            			<th>야간이용</th>

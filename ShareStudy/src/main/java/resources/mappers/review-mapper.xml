@@ -21,7 +21,7 @@
 	<entry key="insertReview">
 
 	INSERT INTO REVIEW(REVIEW_NO,
-					   REVIEW_TITLE,
+					   REVIEW_TITLE,s
                    	   REGION_NAME,
                        REVIEW_CONTENT,
                        ROOM_NO,
@@ -46,7 +46,7 @@
                              FILE_PATH,
                              FILE_LEVEL
                              )
-	VALUES(SEQ_FNO.NEXTVAL,?,?,?,?,?)
+	VALUES(SEQ_FFNO.NEXTVAL,?,?,?,?,?)
 
 	</entry>
 

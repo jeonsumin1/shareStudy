@@ -22,7 +22,7 @@
 	
 	<!-- 상품 예약 번호 시퀀스 -->
 	<entry key="selectRvNo">
-		SELECT 'STS'||RESER_SEQ.NEXTVAL RV_NO
+		SELECT 'SHS'||RESER_SEQ.NEXTVAL RV_NO
 		FROM DUAL
 	</entry>
 	

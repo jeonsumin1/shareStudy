@@ -223,14 +223,17 @@ input[type="email"]{
     cursor: pointer;
     display: flex;
     align-items: center;
+    z-index: 100;
 }
 
 
-
-    
-
- 
-
+#QModal{
+	position: fixed;
+	margin: auto;
+	left: 0;
+	top: 20%;
+	
+}
 
  
 
@@ -501,11 +504,11 @@ input[type="email"]{
       
     </div>
   </div> 		
-          		
+          
     <!-- 1:1 문의 모달 -->   	
-	<div class="modal" id="QModal">
+	<div class="modal fade" id="QModal">
 	   <div class="modal-dialog">
-	       <div class="modal-content">
+	       <div class="modal-content" style="width: 600px;">
 	           <div class="modal-header">
 	               <h4 class="modal-title">ShareStudy</h4>
 	               <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -520,7 +523,7 @@ input[type="email"]{
 	                   </tr>
 	                   <tr>
 	                       <th>전화번호</th>
-	                       <td><input type="text" id="tel" class="form-control" placeholder="010-0000-0000 (- 포함입력)" maxlength="13" required></td>
+	                       <td><input type="text" id="tel" class="form-control" placeholder="010-0000-0000 (- 포함입력)" maxlength="13" style="width: 100%;" required></td>
 	                   </tr>
 	                   <tr>
 	                       <th>상담 상담 내용</th>
@@ -539,13 +542,13 @@ input[type="email"]{
 	    </div>
 	</div>          	
           
-          
+    
           
           
           
             
             <script>
-            
+
             // 1:1 문의 
             function test() {
             	var qTime = $("#qTime");
@@ -576,7 +579,6 @@ input[type="email"]{
         			        qTime.val("");
         			        qContent.val("");
         			        tel.val("");
-        			        
         			        <!-- 닫기(close)  : 모달 닫는 메소드라는데 적용이 안됨. 
         			        	$('#QModal').modal('hide'); 
         			        -->
@@ -595,7 +597,7 @@ input[type="email"]{
             		
             	});
             }
-            
+           
              
             function maskRrn() {
                 
