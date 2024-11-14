@@ -103,7 +103,7 @@
         
 		</div>
         <div class="links">
-            <a href="<%=contextPath%>/views/member/findId.jsp">아이디 찾기</a> | <a href="<%=contextPath%>/views/member/loginForm.jsp">로그인</a>
+            <a href="<%=contextPath%>/views/member/loginForm.jsp">로그인</a> | <a href="<%=contextPath%>/views/member/findId.jsp">아이디 찾기</a> | <a href="<%=contextPath%>/views/member/enrollForm.jsp"%>회원가입</a>
 
         </div>
 	</div>

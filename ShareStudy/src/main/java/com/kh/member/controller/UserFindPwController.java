@@ -40,7 +40,7 @@ public class UserFindPwController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if(findPw != null) {
-			session.setAttribute("alertMsg", "회원님의 아이디는 "+findPw+"입니다.<br>비밀번호 변경을 권장합니다.");
+			session.setAttribute("alertMsg", "회원님의 비밀번호는 "+findPw+"입니다.<br>비밀번호 변경을 권장합니다.");
 		} else {
 			session.setAttribute("alertMsg", "입력하신 정보와 일치하는 데이터가 없습니다.");
 		}
