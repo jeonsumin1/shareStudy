@@ -102,9 +102,9 @@
 			        <div class="roomInfo">
 			            <div class="imgSt">
 			            	<!-- 룸정보 중 filePath가 1인 것만 보여준다. -->
-			           		<c:forEach var="atList" items="${atList}">
+			           		<c:forEach var="atList" items="${atList}" >
 				            	<c:if test="${atList.fileLevel == 1}">
-				            		<img alt="예약룸사진" src="<%= contextPath %>${atList.filePath}${atList.changeName}">
+				            		<img alt="예약룸사진" style="width: 300px;" src="<%= contextPath %>${atList.filePath}${atList.changeName}">
 				            	</c:if>
 			           		</c:forEach>
 				        </div>
