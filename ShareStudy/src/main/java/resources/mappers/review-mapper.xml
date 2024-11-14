@@ -46,7 +46,7 @@
                              FILE_PATH,
                              FILE_LEVEL
                              )
-	VALUES(SEQ_FNO.NEXTVAL,?,?,?,?,?)
+	VALUES(SEQ_FFNO.NEXTVAL,?,?,?,?,?)
 
 	</entry>
 
