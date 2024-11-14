@@ -69,7 +69,7 @@
                     <th>이용가능인원</th>
                     <td>
                         <input type="text" name="roomSize" 
-                               placeholder="최소인원~최대인원 으로 입력하세요." required>
+                               placeholder="최대인원을 입력하세요." required>
                     </td>
                 </tr>
                 <tr>
@@ -158,8 +158,8 @@
  
  			// 이용가능인원 검증
  			const roomSize = document.querySelector('input[name="roomSize"]').value;
-            if(!/^\d+~\d+$/.test(roomSize)) {
-                alert('이용가능인원은 숫자~숫자 형식으로 입력해주세요.');
+            if(!/^\d+$/.test(roomSize)) {
+                alert('이용가능인원은 숫자만 입력 가능합니다.');
                 return false;
             }
             
