@@ -229,24 +229,110 @@ public class RoomDao {
         return list;
     }
 
-	public int deleteRoom(Connection conn, String roomNo) {
-		 int result = 0;
-		    PreparedStatement pstmt = null;
-		    
-		    String sql = prop.getProperty("deleteRoom");
-		    
-		    try {
-		        pstmt = conn.prepareStatement(sql);
-		        pstmt.setString(1, roomNo);
-		        
-		        result = pstmt.executeUpdate();
-		        
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    } finally {
-		        JDBCTemplate.close(pstmt);
-		    }
-		    
-		    return result;
+	
+
+	public int updateRoom(Connection conn, Room room) {
+	    int result = 0;
+	    PreparedStatement pstmt = null;
+	    String sql = prop.getProperty("updateRoom");
+	    
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        
+	        pstmt.setString(1, room.getRegionNo());
+	        pstmt.setString(2, room.getRoomName());
+	        pstmt.setString(3, room.getRoomAddress());
+	        pstmt.setString(4, room.getRoomSize());
+	        pstmt.setString(5, room.getPrice());
+	        pstmt.setString(6, room.getUseNight());
+	        pstmt.setString(7, room.getParking());
+	        pstmt.setString(8, room.getEating());
+	        pstmt.setString(9, room.getRoomNo());
+	        
+	        result = pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        JDBCTemplate.close(pstmt);
+	    }
+	    
+	    return result;
+	}
+
+	public int updateAttachment(Connection conn, Attachment at) {
+	    int result = 0;
+	    PreparedStatement pstmt = null;
+	    String sql = prop.getProperty("updateAttachment");
+	    
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        
+	        pstmt.setString(1, at.getOriginName());
+	        pstmt.setString(2, at.getChangeName());
+	        pstmt.setString(3, at.getFilePath());
+	        pstmt.setString(4, at.getFileNo());
+	        
+	        result = pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        JDBCTemplate.close(pstmt);
+	    }
+	    
+	    return result;
+	}
+
+	public int insertNewAttachment(Connection conn, Attachment at) {
+	    int result = 0;
+	    PreparedStatement pstmt = null;
+	    String sql = prop.getProperty("insertAttachment");
+	    
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        
+	        pstmt.setString(1, at.getRoomNo());
+	        pstmt.setString(2, at.getOriginName());
+	        pstmt.setString(3, at.getChangeName());
+	        pstmt.setString(4, at.getFilePath());
+	        pstmt.setInt(5, at.getFileLevel());
+	        
+	        result = pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        JDBCTemplate.close(pstmt);
+	    }
+	    
+	    return result;
+	}
+
+	public int deleteRoom(Connection conn, int roomNo) {
+
+		//DML(delete)
+		int result=0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteRoom");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, roomNo);
+			
+			
+			result=pstmt.executeUpdate();
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 }
