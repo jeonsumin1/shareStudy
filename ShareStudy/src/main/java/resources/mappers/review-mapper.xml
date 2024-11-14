@@ -21,7 +21,7 @@
 	<entry key="insertReview">
 
 	INSERT INTO REVIEW(REVIEW_NO,
-					   REVIEW_TITLE,s
+					   REVIEW_TITLE,
                    	   REGION_NAME,
                        REVIEW_CONTENT,
                        ROOM_NO,
