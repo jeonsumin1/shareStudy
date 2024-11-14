@@ -1,6 +1,9 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,10 +42,13 @@ public class QuestionController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String userId = request.getParameter("userId");
+		
 		String qTime = request.getParameter("qTime");
 		String qContent = request.getParameter("qContent");
+		String tel = request.getParameter("tel");
 		
-		int result = new UserService().insertQuestion(userId, qTime, qContent);
+		int result = new UserService().insertQuestion(userId, qTime, qContent, tel);
+		
 		
 		response.getWriter().print(result);
 		
