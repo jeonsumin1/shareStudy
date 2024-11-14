@@ -46,8 +46,20 @@ public class Room {
         this.parking = parking;
         this.eating = eating;
     }
+    
+    
 
-    public String getRoomNo() {
+    public Room(String roomNo, String regionNo, String roomName, String roomSize, String price, String status) {
+		super();
+		this.roomNo = roomNo;
+		this.regionNo = regionNo;
+		this.roomName = roomName;
+		this.roomSize = roomSize;
+		this.price = price;
+		this.status = status;
+	}
+
+	public String getRoomNo() {
         return roomNo;
     }
 

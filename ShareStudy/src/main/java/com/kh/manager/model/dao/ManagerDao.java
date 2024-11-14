@@ -13,7 +13,9 @@ import com.kh.common.JDBCTemplate;
 import com.kh.manager.model.vo.Manager;
 import com.kh.member.model.vo.Question;
 import com.kh.member.model.vo.User;
-import com.kh.reservation.model.vo.Room;
+import com.kh.notice.model.vo.Review;
+import com.kh.reservation.model.vo.Reservation;
+import com.kh.room.model.vo.Room;
 
 public class ManagerDao {
 	
@@ -198,6 +200,171 @@ public class ManagerDao {
 		}
 		return result;
 		
+	}
+
+	public ArrayList<Review> selectAllReview(Connection conn) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+        ArrayList<Review> list = new ArrayList<>();
+		
+		String sql = prop.getProperty("selectAllReview");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rset=pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				list.add(new Review(
+						  rset.getDate("REVIEW_DATE"),
+						  rset.getString("USER_ID"),
+						  rset.getString("REVIEW_TITLE")));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
+		return list;
+	}
+
+	public ArrayList<Reservation> selectAllReservation(Connection conn) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+        ArrayList<Reservation> list = new ArrayList<>();
+		
+		String sql = prop.getProperty("selectAllReservation");
+		
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rset=pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				list.add(new Reservation(
+						  rset.getString("RV_NO"),
+						  rset.getString("ROOM_NO"),
+						  rset.getString("USER_ID"),
+						  rset.getString("RV_DATE"),
+						  rset.getDate("RV_CONFIRM"),
+						  rset.getString("RV_PAYMENT")));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	public int deleteQuestion(Connection conn, String memId) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteQuestion");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int deleteReview(Connection conn, String memId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int deleteRoom(Connection conn, String roomNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteRoom");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, roomNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int deleteReservation(Connection conn, String rvNo) {
+		
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteReservation");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rvNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return result;
 	}
 
 }

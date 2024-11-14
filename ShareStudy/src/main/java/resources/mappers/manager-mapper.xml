@@ -36,10 +36,42 @@ SELECT * FROM ROOM
    FROM QUESTION
 </entry>
 
+
 <entry key = "deleteMember">
 		UPDATE USERINFO
 		SET STATUS = 'N'
 		WHERE USER_ID = ?
-	</entry>
+</entry>
+	
+	
+<entry key = "selectAllReview">
+		SELECT * FROM REVIEW
+</entry>
+
+
+<entry key = "selectAllReservation">
+		SELECT * FROM RESERVATION
+</entry>
+
+<entry key = "deleteQuestion">
+     DELETE FROM QUESTION 
+     WHERE USER_ID = ?
+</entry>
+
+<entry key = "deleteReview">
+     DELETE FROM REVIEW
+     WHERE USER_ID = ?
+</entry>
+
+<entry key = "deleteRoom">
+     DELETE FROM ROOM
+     WHERE ROOM_NO = ?
+</entry>
+
+<entry key = "deleteReservation">
+     DELETE FROM RESERVATION
+     WHERE RV_NO = ?
+</entry>
+
 
 </properties>

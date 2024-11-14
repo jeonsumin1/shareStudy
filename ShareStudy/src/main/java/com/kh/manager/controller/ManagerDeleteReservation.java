@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.manager.model.service.ManagerService;
 
 /**
- * Servlet implementation class ManagerDeleteQuestion
+ * Servlet implementation class ManagerDeleteReservation
  */
-@WebServlet("/qdelete.ma")
-public class ManagerDeleteQuestion extends HttpServlet {
+@WebServlet("/rvdelete.ma")
+public class ManagerDeleteReservation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerDeleteQuestion() {
+    public ManagerDeleteReservation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,6 +28,8 @@ public class ManagerDeleteQuestion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
+		
 	}
 
 	/**
@@ -36,14 +38,13 @@ public class ManagerDeleteQuestion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-        String memId = request.getParameter("userId");
-        
-        int result = new ManagerService().deleteQuestion(memId);
+        String rvNo = request.getParameter("rvNo");
+                
+        int result = new ManagerService().deleteReservation(rvNo);
         
         if(result>0) { //삭제 성공
-			request.setAttribute("altMsg", memId+"상담 완료");
+			request.setAttribute("altMsg", "예약 삭제 완료");
 			request.getRequestDispatcher("/views/manager/m_main.jsp").forward(request, response);
-//			response.sendRedirect(request.getContextPath()+"/views/manager/m_main.jsp");
 			
 		}else {  //실패
 			
@@ -52,6 +53,8 @@ public class ManagerDeleteQuestion extends HttpServlet {
 			
 		}
 	
+	
+
 	}
 
 }
