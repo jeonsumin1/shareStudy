@@ -1,160 +1,111 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<% String contextPath = request.getContextPath();
+   String alertMsg = (String) session.getAttribute("alertMsg");
+   if (alertMsg != null) {
+   session.removeAttribute("alertMsg");
+%>
+    <script>
+        alert("<%= alertMsg %>");
+    </script>
+<%
+}
+%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
 <title>로그인</title>
 <style>
-    html, body {
-        height: 100%;
-        margin: 0;
-    }
-
-    #contentWrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 70vh;
-    }
-
-    #loginForm {
-        text-align: center;
-        width: 400px;
-        padding-left: 50px;
-        padding: 40px;
-        border: 1px solid #e9ecef;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    #idForm {
-        margin: 0 auto;
-    }
-    
-    p {
-        text-align: center;
-    }
-    <!--
-    #loginBtn {
-        display: block;
-        margin: 10px auto;
-    }
-    -->
-    #exampleImg{
-    	text-align: center;
-    	margin-bottom: 500px;
-    }
-    
-    #loginForm{
-        border-radius: 5%;
-    }
-    
-	.btn-4 {
-		background: linear-gradient(0deg, rgba(255,190,0,1) 0%, rgba(251,130,2,1) 100%);
-  		line-height: 42px;
-  		padding: 0;
-  		border: none;
-  		width: 110px;
-  		border-radius: 10%;
-	}
-	.btn-4 span {
-  		position: relative;
-  		display: block;
-  		width: 100%;
-  		height: 100%;
-	}
-	.btn-4:before,
-	.btn-4:after {
-  		position: absolute;
-  		content: "";
-  		right: 0;
-  		bottom: 0;
-  		background: rgba(251,75,2,1);
-  		box-shadow:
-   					-7px -7px 20px 0px rgba(255,255,255,.9),
-   					-4px -4px 5px 0px rgba(255,255,255,.9),
-   					 7px 7px 20px 0px rgba(0,0,0,.2),
-   					 4px 4px 5px 0px rgba(0,0,0,.3);
-  		transition: all 0.3s ease;
-	}
-	.btn-4:before{
-   		height: 0%;
-   		width: 2px;
-	}
-	.btn-4:after {
-  		width: 0%;
-  		height: 2px;
-	}
-	.btn-4:hover{
-  		background-color: #89d8d3;
-		background-image: linear-gradient(315deg, #fb8202 0%, #ffbe02 74%);
-	}
-
-	}
-	.btn-4:hover:before {
-  		height: 100%;
-	}
-	.btn-4:hover:after {
-  		width: 100%;
-	}
-	.btn-4 span:before,
-	.btn-4 span:after {
-  		position: absolute;
-  		content: "";
-  		left: 0;
-  		top: 0;
-  		background: rgba(251,75,2,1);
-  		box-shadow:
-   					-7px -7px 20px 0px rgba(255,255,255,.9),
-   					-4px -4px 5px 0px rgba(255,255,255,.9),
-   					 7px 7px 20px 0px rgba(0,0,0,.2),
-   					 4px 4px 5px 0px rgba(0,0,0,.3);
-  		transition: all 0.3s ease;
-	}
-	.btn-4 span:before {
-  		width: 2px;
-  		height: 0%;
-	}
-	.btn-4 span:after {
-  		height: 2px;
-  		width: 0%;
-	}
-	.btn-4 span:hover:before {
-  		height: 100%;
-	}
-	.btn-4 span:hover:after {
-  		width: 100%;
-	}
-
+@import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+html {
+	height: 100%;
+}
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding-top: 200px;
+	padding-bottom: 40px;
+	font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+	background-repeat: no-repeat;
+}
+.card {
+	margin: 0 auto; /* Added */
+	float: none; /* Added */
+	margin-bottom: 10px; /* Added */
+}
+#btn-Yes {
+	background-color: #E4932B;
+	border: none;
+}
+.login .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+.checkbox {
+	margin-right: 20px;
+	text-align: right;
+}
+.card-title {
+	left: 30px;
+}
+.card-title > img{
+	width: 70%;
+	margin-left: 60px;
+}
+.links {
+	text-align: center;
+	margin-bottom: 10px;
+}
+a {
+	color: #F58B34;
+	text-decoration: none;
+}
+.check {
+	color: red;
+}
 </style>
 </head>
-<body>
-    <%@include file="/views/common/menubar.jsp"%>
-    <div id="contentWrapper" style="display: flex; flex-direction: column; align-items: center;">
-     <div id="contentWrapper" style="display: flex; flex-direction: column; align-items: center;">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <img src="<%=contextPath%>/views/common/images/ShareStudyLogo2.png" alt="ShareStudyLogo2" style="width: 80%; max-width: 300px;"/>
-        </div>
-        
-        <form action="<%=contextPath%>/login.shs" method="post">
-        <div id="loginForm">
-        	<table id="idForm">
-                <tr>
-                    <th>아이디 :</th>
-                    <td><input type="text" name="userId" placeholder="아이디를 입력해주세요."></td>
-                </tr>
-                <tr>
-                    <th>비밀번호 :</th>
-                    <td><input type="password" size="21" name="userPw" placeholder="비밀번호를 입력해주세요."></td>
-                </tr>
-                <tr>
-                </tr>
-            </table>
-			 <button type="submit" id="loginBtn" class="btn-4">로그인</button>
-			 <p>아이디/비밀번호 찾기</p>
-        </div>
-        </form>
-        </div>
-      </div>
+<body cellpadding="0" cellspacing="0" marginleft="0" margintop="0"
+	width="100%" height="100%" align="center">
+	<div class="card align-middle" style="width: 25rem;">
+		<div class="card-title" style="margin-top: 30px; display: flex; justify-content: center;">
+			<h2 class="card-title" style="color: #F58B34;">
+				<a href="<%=contextPath%>/index.jsp"><img src="<%=contextPath%>/views/common/images/IDPWFIND.png"/></a>
+			</h2>
+		</div>
+		<div class="card-body">
+			<form action="login.shs" class="login" method="POST">
+				<input type="text" name="userId" id="userId" class="form-control"
+					placeholder="아이디" autofocus required><BR> <input
+					type="password" name="userPw" id="userPw" class="form-control"
+					placeholder="비밀번호" required><br>
+				<p id="check" class="check">${login_msg}</p>
+				<br /> <input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
+					type="submit" value="로 그 인">
+			</form>
+		</div>
+	</div>
+	<div class="links">
+		<a href="<%=contextPath%>/views/member/findId.jsp">아이디 찾기</a> | <a href="<%=contextPath%>/views/member/findPw.jsp">비밀번호 찾기</a> | <a href="<%=contextPath%>/views/member/enrollForm.jsp">회원가입</a>
+	</div>
+	
 </body>
 </html>

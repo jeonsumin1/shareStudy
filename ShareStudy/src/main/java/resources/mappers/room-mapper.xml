@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="insertRoom">
+        INSERT INTO ROOM (
+            ROOM_NO, REGION_NO, ROOM_SIZE, ROOM_NAME, ROOM_ADDRESS, 
+            PRICE, USE_NIGHT, PARKING, EATING, STATUS
+        ) VALUES (
+            ?, ?, ?, ?, ?, 
+            ?, ?, ?, ?, 'Y'
+        )
+    </entry>
+    
+    <entry key="insertAttachment">
+        INSERT INTO ATTACHMENT (
+            FILE_NO, ROOM_NO, ORIGIN_NAME, CHANGE_NAME, 
+            FILE_PATH, UPLOAD_DATE, FILE_LEVEL, STATUS
+        ) VALUES (
+            SEQ_FNO.NEXTVAL, ?, ?, ?, 
+            ?, SYSDATE, ?, 'Y'
+        )
+    </entry>
+    
+    <entry key="selectRegionList">
+        SELECT REGION_NO, REGION_NAME 
+        FROM REGION 
+        ORDER BY REGION_NO
+    </entry>
+
+    <entry key="selectThumbnailList">
+    <!-- INNER JOIN은 양쪽테이블에 값이 전부있어야해서 사진없는 상품이 있을수 있으니 LEFTJOIN사용  -->
+    SELECT 
+        b.region_name AS regionName, 
+        A.*,
+        C.FILE_PATH || C.CHANGE_NAME AS TITLE_IMG
+    FROM ROOM A
+    JOIN REGION B ON A.region_no = B.region_no
+    LEFT JOIN ATTACHMENT C ON A.ROOM_NO = C.ROOM_NO AND C.FILE_LEVEL = 1
+    WHERE A.STATUS = 'Y'
+
+    </entry>	
+    
+    <entry key="selectRoom">
+    SELECT *
+    FROM ROOM
+    WHERE ROOM_NO = ?
+    AND STATUS = 'Y'
+</entry>
+
+<entry key="selectAttachmentList">
+    SELECT *
+    FROM ATTACHMENT
+    WHERE ROOM_NO = ?
+    AND STATUS = 'Y'
+    ORDER BY FILE_LEVEL
+</entry>
+
+
+<entry key="deleteRoom">
+    UPDATE ROOM 
+    SET STATUS = 'N'
+    WHERE ROOM_NO = ?
+</entry>
+</properties>

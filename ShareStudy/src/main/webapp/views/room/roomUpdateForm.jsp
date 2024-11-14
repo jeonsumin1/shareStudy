@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="/views/common/menubar.jsp" %>
-	<h1>예약 확인 페이지.</h1>
+
 </body>
 </html>

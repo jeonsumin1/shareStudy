@@ -6,10 +6,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.reservation.model.vo.Reservation;
+import com.kh.reservation.model.vo.ReservationSelect;
+import com.kh.reservation.model.vo.RvBank;
 
 public class ReservationDao {
 	
@@ -38,7 +41,7 @@ public class ReservationDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, reserInfo.getRvNo());
-			pstmt.setString(2, "1");
+			pstmt.setString(2, reserInfo.getRoomNo()); 
 			pstmt.setString(3, reserInfo.getUserId());
 			pstmt.setInt(4, reserInfo.getRePeople());
 			pstmt.setString(5, reserInfo.getReDate());
@@ -82,6 +85,7 @@ public class ReservationDao {
 		return result;
 	}
 
+	
 	// 예약 번호 시퀀스 번호 추출 메소드 
 	public String selectRvNo(Connection conn) {
 		
@@ -110,31 +114,141 @@ public class ReservationDao {
 		return rvNo;
 	}
 
-	public int insertRvPayment(Connection conn, String rvNo, String userId, String bank, String rvName, String payDate) {
+	
+	// 무통장 입금 정보 저장 메소드 
+	public int insertRvBank(Connection conn, Reservation reserInfo, RvBank rvBank) {
+		// reserInfo, rvBank
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = prop.getProperty("insertRvPayment");
+		String sql = prop.getProperty("insertRvBank");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, rvNo);
-			pstmt.setString(2, userId);
-			pstmt.setString(3, bank);
-			pstmt.setString(4, rvName);
-			pstmt.setString(5, payDate);
+			pstmt.setString(1, reserInfo.getRvNo());
+			pstmt.setString(2, reserInfo.getUserId());
+			pstmt.setString(3, rvBank.getRvBank());
+			pstmt.setString(4, rvBank.getRvName());
+			pstmt.setString(5, rvBank.getRvDate());
+			pstmt.setString(6, rvBank.getAmount());
 			
 			result = pstmt.executeUpdate();
 			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
 		}
 		
 		return result;
 		
 	}
+
+	// 신용카드 결제 정보 저장 메소드 
+	public int insertRvCard(Connection conn, Reservation reserInfo, String buyEmail, String amount) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertRvCard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, reserInfo.getRvNo());
+			pstmt.setString(2, reserInfo.getUserId());
+			pstmt.setString(3, buyEmail);
+			pstmt.setString(4, amount);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+
+	public ReservationSelect selReSuccessInfo(Connection conn, String rvNo) {
+		
+		ReservationSelect reSuccessInfo = new ReservationSelect();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selReSuccessInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, rvNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				reSuccessInfo = new ReservationSelect(rset.getString("RV_NO"),
+													  rset.getString("ROOM_NAME"),
+													  rset.getString("USER_NAME"),
+													  rset.getString("RV_PEOPLE"),
+													  rset.getDate("RV_DATE"),
+													  rset.getString("RV_CONFIRM"),
+													  rset.getString("RV_PAYMENT"),
+													  rset.getString("RV_REQUEST"),
+													  rset.getString("B_AMOUNT"),
+													  rset.getString("P_AMOUNT"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return reSuccessInfo;
+	}
+
+	
+	// 예약 내역 리스트 
+	public ArrayList<Reservation> selectReserList(Connection conn, String userId) {
+		
+		ArrayList<Reservation> relist = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReserList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+				
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				relist.add(new Reservation(rset.getString("RV_NO"),
+									       rset.getString("ROOM_NAME"),
+									       rset.getString("USER_ID"),
+									       rset.getInt("RV_PEOPLE"),
+									       rset.getString("RV_DATE"),
+						 			       rset.getDate("RV_CONFIRM"),
+									       rset.getString("RV_PAYMENT"),
+									       rset.getString("RV_REQUEST")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return relist;
+	}
+
+	
 
 	
 

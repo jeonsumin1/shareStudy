@@ -10,6 +10,8 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <script src="https://use.fontawesome.com/72aaf9ab20.js"></script>
@@ -211,10 +213,21 @@ input[type="email"]{
     height: 30px;
     width: 300px;
  }
+ 
+ /* id -> class로 바꿔야 될듯?!*/
+ .m1{
+ 	display: flex;
+    align-items: center;
+    border : 1px solid #99999953;
+    margin: 2px;
+    border-radius: 5px;
+    height: 30px;
+    width: 300px;
+ }
 
 .eyes{
     position: absolute;
-    top:190px;
+    top:155px;
     bottom: 0;
     right: 645px;
     margin: auto;
@@ -228,8 +241,23 @@ input[type="email"]{
 
 
     
+.qq{
+	   width: 550px; /* 페이지 너비 */
+       margin: auto; /* 페이지 중앙 정렬 */
+       margin-top: 50px;
+       text-align: left;
+       border: 1px solid #99999953;
+	   border-radius: 10px;
+	   height: 230px;
+}
+.inputSt{
+    	margin-top: 10px;
+    	width: 100%; 
+    }
+table th{
+	width: 200px;
+}
 
- 
 
 
  
@@ -244,13 +272,12 @@ input[type="email"]{
 
 <%@ include file="/views/common/menubar.jsp" %>
 
-<%
-	String userId = userInfo.getUserId();
-	String userPhone = userInfo.getUserPhone();
-	String email = userInfo.getEmail();
-	String adAgree = userInfo.getAdAccept();
-	String userPw = userInfo.getUserPw();
-%>
+
+	
+    
+    
+   
+    
 
 	<h2 align="left" id="form">마이페이지</h2>
     <div id="z1" class="z-test"></div>
@@ -259,7 +286,7 @@ input[type="email"]{
   			 	
 
                 <form action="<%=contextPath %>/update.shs" id="update" method="post">
-                <input type="hidden" name="userId" value= "<%=userId%>">
+                <input type="hidden" name="userId" value= "${userInfo.userId }">
                 
              
                     <table>
@@ -285,55 +312,56 @@ input[type="email"]{
                         <td align="left" style="font-size: small;"> 📌 주민등록번호</td>
                         </tr>
                         <tr>
-                        <td colspan="2"><p id="m1" class="rrn1"> &nbsp; </p></td>
+                        <td colspan="2"><p id="m1" class="rrn1" ></p></td>
                         </tr>
+                       
                         <tr>
                         <td align="left" style="font-size: small;"> 📌 비밀번호 </td>
                         </tr>
                          
                         <tr>
-                        <td colspan="2"><input type="password" id="m1" class="mm1" value="<%=userPw %>" > <div onclick="eye();" class="eyes"><i id="icon" class="fa fa-eye fa-lg"></i></div></td>
+                        <td colspan="2"><input type="password" id="m1" class="mm1" value=" &nbsp; ${userInfo.userPw }" > <div onclick="eye();" class="eyes"><i id="icon" class="fa fa-eye fa-lg"></i></div></td>
                         </tr>     
                 
                         <tr>
                         <td align="left" style="font-size: small;"> 📌 전화번호</td>
                         </tr>
                         <tr>
-                        <td colspan="2"><input type="text" id="m1" name="phone" value="<%=userPhone%>"></td>
+                        <td colspan="2"><input type="text" id="m1" name="phone" value=" &nbsp; ${userInfo.userPhone }"></td>
                         </tr>
                         
                         <tr>
                         <td align="left" style="font-size: small;">📌 이메일</td>
                         </tr>
                         <tr>
-                        <td colspan="2"><input type="email" id="m1" name="email" value="<%=email%>"></td>
+                        <td colspan="2"><input type="email" id="m1" name="email" value=" &nbsp; ${userInfo.email }"></td>
                         </tr>
                         
                       
                         
                         <tr id="a1">
-                        <td colspan="3"><input type="checkbox" name="agree" id="all" value="전체동의" align="right" onclick="chkAll();">
-                        <label for="all"align="right">전체동의하기</label>
+                        <td colspan="3"><input type="checkbox" name="agreeBox" id="all" value="전체동의" align="right" >
+                        <label for="all" align="right">전체동의하기</label>
                         </td>
                         </tr>
                         
                          
                       
                         <tr id="a2">
-                        <td colspan="3"><input type="checkbox" name="agree" id="a" value="서비스동의"  required>
+                        <td colspan="3"><input type="checkbox" name="agreeBox" id="a" value="서비스동의"  required>
                         <label for="a">[필수]sharestudy 서비스 이용약관 동의</label>
 
                         </td>
                         </tr>
                          
                         <tr id="a3">
-                        <td colspan="3"><input type="checkbox" name="agree" id="b" value="본인확인동의"  required>
+                        <td colspan="3"><input type="checkbox" name="agreeBox" id="b" value="본인확인동의"  required>
                         <label for="b">[필수]본인 확인 서비스 이용약관 동의</label>
                         </td>
                         </tr>
                          
                         <tr id="a4">
-                        <td colspan="3"><input type="checkbox" name="agree" id="c" value="마케팅동의">
+                        <td colspan="3"><input type="checkbox" name="agreeBox" id="c" value="마케팅동의">
                         <label for="c">[선택] 마케팅 정보 수신 동의</label>
                         </td>
                         </tr>
@@ -343,35 +371,24 @@ input[type="email"]{
                             <td style="height: 20px;"></td>
                         </tr>
                     
-                    
-                        <tr>
-                            <td align="left" style="font-size: small;">● 예약 정보</td>
+                    	
+                    	<!-- sm 추가! -->
+                    	<tr>
+                            <td align="left" style="font-size: small;"><p id="m1" onclick="location.href='<%= contextPath %>/rvlist.shs'">📚 예약 내역</p></td>                       
                         </tr>
-                            <td colspan="2"><input type="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MTBfNDYg%2FMDAxNjU3NDU2MjM2NTAz.yJQCChoFPgiWm0vjkCU4NlcH4lRPWWxePl6n0R7IkB0g.1Alvs-Px7p8PWhddQBr3-SZXZ5X2zzMGMAQqSVemU7Mg.JPEG.room_rivate%2F%25BD%25BA%25C5%25CD%25B5%25F0%25B7%25EB1.JPG&type=a340" required></td>
+                        
                         <tr>
+                            <!-- <td align="left" style="font-size: small;">📞 나의 문의</td> -->
+                            <td align="left" style="font-size: small;">
+                            	<p id="m1" data-toggle="modal" data-target="#QModal">📞 문의 하기</p>
+                            </td>
                         </tr>
-                        <td align="left" style="font-size: small;" id="inform1">📚예약번호</td>
                         <tr>
-                        </tr>
-                        <td align="left" style="font-size: small;"  id="inform2">📚룸 번호</td>
+                            <td align="left" style="font-size: small;"><p id="m1">💭 문의 횟수 : ${count}</td>
+                        </tr>    
                         <tr>
-                        </tr>
-                        <td align="left" style="font-size: small;" id="inform3">📚예약인원수</td>
-                        <tr>
-                        </tr>
-                        <td align="left" style="font-size: small;" id="inform4">📚예약시간</td>
-                        <tr>
-
-                        <tr>
-                            <td style="height: 20px;"></td>
-                        </tr>
-
-                        <tr>
-                            <td align="left" style="font-size: small;">📞 나의 문의</td>
-                            </tr>
                             <td align="left" style="font-size: small;"><p id="m1"> 💌 시간문의(카테고리화)</p></td>
-                        <tr>       
-
+                        </tr>    
 
                         <tr>
                             <td style="height: 20px;"></td>
@@ -389,20 +406,11 @@ input[type="email"]{
                             </td>
                         </tr>
                                 
-                                
-                                
-
-                       
-                            
-                             
 					</table>
                 </form>
+                
             </div>
             
-            
-  
-
-  
 
   <!-- The Modal -->
   <div class="modal fade" id="updatePwd">
@@ -420,7 +428,7 @@ input[type="email"]{
         
           <form action="<%=contextPath %>/updatePwd.shs" method="post">
           
-          <input type="hidden" name="userId" value= "<%=userId%>">
+          <input type="hidden" name="userId" value= "${userInfo.userId }">
           
           	<table>
           		<tr>
@@ -454,14 +462,8 @@ input[type="email"]{
         
           </form>
           
-          	 
-          
         </div>
         
-        
-          
-        
-       
       </div>
       
     </div>
@@ -483,7 +485,7 @@ input[type="email"]{
         
           <form action="<%=contextPath %>/delete.shs" method="post">
           
-          <input type="hidden" name="userId" value= "<%=userId%>">
+          <input type="hidden" name="userId" value= "${userInfo.userId }">
           
           	<table>
           	
@@ -507,11 +509,7 @@ input[type="email"]{
           </form>
    	 
           
-        </div>
-        
-        
-          
-        
+        </div>        
        
       </div>
       
@@ -519,25 +517,146 @@ input[type="email"]{
   </div> 		
           		
           	
-          	
-          
-          
-          
-          
-          
+    <!-- 문의하기 모달 -->
+	<div class="modal" id="QModal">
+	   <div class="modal-dialog">
+	       <div class="modal-content">
+	           <div class="modal-header">
+	               <h4 class="modal-title">ShareStudy</h4>
+	               <button type="button" class="close" data-dismiss="modal">&times;</button>
+	           </div>
+	
+	           <div class="modal-body">
+	               <p>문의사항</p>
+	               <table class="table table-bordered inputSt">
+	                   <tr>
+	                       <th>상담 가능 시간</th>
+	                       <td><input type="datetime-local" id="qTime" class="form-control" required></td>
+	                   </tr>
+	                   <tr>
+	                       <th>전화번호</th>
+	                       <td><input type="text" id="tel" class="form-control" placeholder="010-0000-0000 (- 포함입력)" maxlength="13" required></td>
+	                   </tr>
+	                   <tr>
+	                       <th>상담 상담 내용</th>
+	                       <td><textarea id="qContent" rows="5" cols="30" placeholder="상담 내용에 대해 간략하게 적어주세요." style="resize: none;" class="form-control"></textarea></td>
+	                   </tr>
+	               </table>
+	           </div>
+	
+	           <div class="modal-footer">
+	               <!-- 'send' 버튼 클릭 시 test() 함수 호출 -->
+	               <button class="btn" style="background-color: rgba(255, 166, 0, 0.774)" onclick="test();">send</button>
+	               <!-- 'close' 버튼 클릭 시 모달만 닫히고 test() 함수는 호출되지 않음 -->
+	                <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
+<script>
+
+function test() {
+    	var qTime = $("#qTime");
+        var qContent = $("#qContent");
+        var tel = $("#tel");
+        console.log(qTime+" "+qContent+" "+tel);
+        
+        var regExp = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}$/;
+       	if(!regExp.test(tel.val())){
+       		alert("전화번호를 다시 입력하세요.");
+       		$("#tel").focus();
+       		return;
+       	}
+       	
+    	$.ajax({
+    		url: "<%= contextPath%>/question.shs",
+    		type: "POST",
+    		data: {
+    			userId : "${userInfo.userId}", 
+    			qTime: qTime.val(),
+    			qContent : qContent.val(),
+    			tel : tel.val()
+    		},
+    		success: function(result){
+    			if(result>0){
+	    		 	alert("상담신청이 완료되었습니다.");
+			        		        
+			        qTime.val("");
+			        qContent.val("");
+			        tel.val("");
+			        
+			        <!-- 모달 닫기(close)  : 모달 닫는 메소드라는데 적용이 안됨. 
+			        	$('#QModal').modal('hide'); 
+			        -->
+			        $("#QModal").css("display","none");
+			        $(".modal-backdrop").css("display","none");
+			        
+			        
+    			}else{
+	    			alert("상담신청이 실패되었습니다.");
+    			}
+    		},
+    		error : function(){
+	    			alert("에러");
+    		}
+    		
+    	});
+    }
+    
+    
+    
+		function maskRrn() {
+
+			var rrn = "
+	<%= userInfo.getRrn() %>";
+
+                
+                var maskedRrn = rrn.substring(0, 8) + "●●●●●●";
+
+               
+                $(".rrn1").html("&nbsp;" + maskedRrn);
+            }
+
+            // 페이지 로딩 후, 마스킹 함수 호출
+            $(document).ready(function() {
+                maskRrn();
+            });
             
-            <script>
+           
                
                 
+           
+                
+            
+            
+            
+            
+            
+            function eye() {
+                var mm1 = document.querySelector(".mm1");
+                var icon = document.querySelector("#icon");
+
+                if (mm1.type !== "password") {
+                    mm1.type = "password"; // 비밀번호 입력창을 비밀번호로 설정
+                    icon.classList.remove("fa-eye-slash"); // 'fa-eye-slash' 아이콘을 제거
+                    icon.classList.add("fa-eye"); // 'fa-eye' 아이콘을 추가
+                } else {
+                    mm1.type = "text"; // 비밀번호 입력창을 일반 텍스트로 설정
+                    icon.classList.remove("fa-eye"); // 'fa-eye' 아이콘을 제거
+                    icon.classList.add("fa-eye-slash"); // 'fa-eye-slash' 아이콘을 추가
+                }
+            }
 
                
                     
+             </script>   
                 
                 
                 
                 
-                
-
+				<script>
                 function checkPwd(){
 
                 	var pwd1 = document.querySelector("#p1");
@@ -550,32 +669,36 @@ input[type="email"]{
                 }
                 
 
-                $(function(){
+                $(function(){ //이거 수정했을때 수정이 안됨..
                 	
-                	var adAgree = "<%=adAgree%>";
+                	var adAgree = "${userInfo.adAccept}";
+                	
+                	
                 	
                 	var adAgreeStr = adAgree.split(",");
+                	console.log(adAgree);
+                	console.log(adAgreeStr);
                 	
-                	$("input[name=agree]").each(function(){
+                	$("input[type=checkbox]").each(function(){
                 		
                 		if(adAgreeStr.indexOf($(this).val()) != -1){
                 		
                 		$(this).attr("checked",true);
                 		}
-                		
-                	});
+                	})
                 	
                 	
                 	
                 });
                 
+               
                 
                 function deleteUser(){
                 	
                 	var pwd1 = 	$("#d1").val();
                 	var userPw = ${userInfo.userPw};
                 	
-                	if(pwd1 == userPw){}
+                	if(pwd1 == userPw){
                 		
                 		return confirm("정말 탈퇴하시겠습니까? 탈퇴 후 복구는 불가능하며 사이트 이용 원할시 다시 회원가입해주시길 바랍니다. 그동안 이용해주셔서 감사합니다." );
                 
@@ -588,47 +711,17 @@ input[type="email"]{
      
                 	
                 }
+            
                 
-				var rrn = "${userInfo.rrn}";
-                
-                function maskRrn(rrn) {
-                    // 주민등록번호에서 뒤 6자리를 마스킹
-                    
-                	var maskedRrn = rrn.substring(0, 8) + "●●●●●●";
-                    return maskedRrn;
-                    
-                }
-                    
-                
-                var maskedRrn = maskRrn(rrn);
-                $(".rrn1").html("&nbsp;" +maskedRrn);
-                
-                
-                
-                function eye(){
-					
-                    var mm1 = document.querySelector(".mm1");
-                    var icon = document.querySelector("#icon");
-                    
-                    if(mm1.type != password){
-                    	mm1.type = "password";
-                    	icon.classList.remove("fa-eye-slash");
-                    	icon.classList.add("fa-eye");
-                    }else{
-                    	mm1.type = "text";
-                    	icon.classList.remove("fa-eye");
-                    	icon.classList.add("fa-eye-slash");
-                    }
-                    
-                }
+               
 
                 	
             
             
-            </script>
+                </script>
                     
                     
-
+<%@ include file="/views/common/footer.jsp" %>
 
 
 

@@ -14,9 +14,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   
   
-  <!-- 결제를 위한 라이브러리 추가 -->
+  <!-- 결제를 위한 라이브러리 추가 (iamport) -->
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <script type="text/javascript"	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
   
 <style>
     .input input, .input textarea{
@@ -38,9 +39,7 @@
 	hr{
 		width: 100%;
 	}
-	img{
-		width: 100%;
-	}
+	
 	
 	.i{
 		padding:5%;
@@ -64,6 +63,25 @@
 		padding: 3%;
 		border-radius: 5px;
 	}
+	.imgSt{
+		margin-right: 30px;
+	}
+	
+	.areSt{
+		color : red;
+	}
+	table{
+		background-color: #f8f9fa;
+	}
+	table th{
+		width: 150px;
+	}
+	
+	.roomInfo{
+		padding-top: 30px;
+		display: flex;
+		justify-content: space-between; /* 아이템 사이에 균일한 간격을 만들어 준다. */
+	}
 	
 </style>
 </head>
@@ -74,29 +92,46 @@
 		 - 비회원 예약 추가할 경우 비회원/로그인 예약 페이지 따로 생성.?
 	--%>
 	<div class="outer" align="center">
-		<c:if test="${empty userInfo}">
-			<div class="i divBor" align="center">
-				<h3> 로그인/회원가입을 해주세요. </h3>
-				<P>공간을 예약하려면 로그인이 필요합니다.</P>
-			</div>
-		</c:if>
-		
+		 
 		<c:if test="${not empty userInfo}">
 		
 			<h2>예약 정보 작성</h2>
 			<hr>
 			    <div>	  
-		            <div class="i">
-			            <div><h4>상품명</h4></div> <!-- ${room.roomName}    상세페이지에서 클릭한 상품 pk를 이용하여 상품명 불러오기 -->
-			            <div>
-				            <img src="../../resources/스터디룸.jpg" >  <!-- 상품 사진으로 불러오기 -->
-			            </div>
+			    	<div><h4>${room.roomName}</h4></div> <!-- ${room.roomName}    상세페이지에서 클릭한 상품 pk를 이용하여 상품명 불러오기 -->
+			        <div class="roomInfo">
+			            <div class="imgSt">
+			            	<!-- 룸정보 중 filePath가 1인 것만 보여준다. -->
+			           		<c:forEach var="atList" items="${atList}">
+				            	<c:if test="${atList.fileLevel == 1}">
+				            		<img alt="예약룸사진" src="<%= contextPath %>${atList.filePath}${atList.changeName}">
+				            	</c:if>
+			           		</c:forEach>
+				        </div>
 			            <br>
-			            <div class="st" id="stDiv">
-			                <p>* 상품 정보 * </p>  <!--   db 에서 정보 가져오기 -->
-			                <p>상품 가격</p>       <!-- ${room.Price} db 에서 정보 가져오기 -->
-			                <p>주차 가능 유무</p>  <!-- ${room.Price} db 에서 정보 가져오기 -->
-			                <p>취식 가능 유무</p>  <!-- ${room.Price} db 에서 정보 가져오기 -->
+			            <div class="" id="stDiv" style="width: 500px;">
+			            	<table class="table table-bordered">
+			            		<tr>
+			            			<th>가격</th>
+			            			<td>${room.price} 원</td> <!-- 수정  -->
+			            		</tr>
+			            		<tr>
+			            			<th>이용 가능 인원</th>
+			            			<td>${room.roomSize} 명</td> <!-- 수정  -->
+			            		</tr>
+			            		<tr>
+			            			<th>야간이용</th>
+			            			<td>${room.useNight == "Y" ? "가능":"불가능"}</td>
+			            		</tr>
+			            		<tr>
+			            			<th>주차</th>
+			          	  			<td>${room.parking == "Y" ? "가능":"불가능"}</td>
+			            		</tr>
+			            		<tr>
+			            			<th>취식</th>
+			            			<td>${room.eating == "Y" ? "가능":"불가능"}</td>
+			            		</tr>
+			            	</table>
 			               
 						</div>	        
 					</div>
@@ -115,13 +150,10 @@
 			             
 			                <div>
 				                <p> 예약 인원 수 </p>
-			                	<input type="number" name="rePeople" id="rePeople" class="form-control" min="1" max="50" required oninput="selDate();"> <!-- 입력 시 값을 보여줄 수 있도록 oninput 사용 -->
-			                		<!-- 각 상품별 예약 가능 입원수로 제한? --ROOM_SIZE를 가져와서 max에 넣어주면 될 듯. -->
-			                		<!-- 상품 정보 테이블에서 사용 가능 인원 불러와서 max에 넣어주기? -->
+				                <!-- 전달받은 예약 인원 수 만큼 option 생성  -->
+			                	<select name="rePeople" class="form-control" oninput="selDate();" required ></select>
 			                </div>
 			            
-					        <div><input type="hidden"></div> <!-- 사용자 아이디, 룸 (상품) 번호 받아와야 한다. -->
-										
 					        <br>
 					        <div>
 						        <p> 성명 </p>
@@ -159,7 +191,7 @@
 				    		</tr>
 				    	</table>
 				    	<hr>  <!-- text-align은 block 요소에만 사용됨.  -->
-				    	<div style="text-align: right;"><h4><strong> ₩ 40,000</strong></h4></div> <!--${room.Price}  price 값 가져오기 -->
+				    	<h4 align="right">₩<strong style="margin-left: 3%;">${room.price}<%-- 수정 ${room.price} --%></strong></h4> 
 				    </div>
 					
 					<div class="divBor">
@@ -184,10 +216,6 @@
 					            <input type="radio" name="rvPayment" id="card" value="card"><label for="card" class="itext">신용카드</label>
 					        </div>
 							
-					       
-					        <div class="radio">
-					            <input type="radio" name="rvPayment" id="kpay" value="pay"><label for="kpay" class="itext">카카오페이</label>  <!-- 신용카드 기능 구현 후 추가 구현하기 -->
-					        </div>
 						</div>
 				    </div>
 				    <br><hr><br>
@@ -226,48 +254,51 @@
 				    <div class="divBor">
 				    	<strong>서비스 동의</strong>
 						<div align="right" id="check">
-							<input type="checkbox" class="agr" id="all" onclick="chkAll();" required><label for="all"> 전체동의</label>
+							<input type="checkbox" class="agr" id="all" onclick="chkAll();" required><label for="all">전체동의</label>
 						</div>
 						<br>
-						<input type="checkbox" class="agr" name="agreement" id="ag1" required> <label for="ag1">위 공간의 예약 조건 확인 및 결제 진행 동의 (필수)</label>  <br>
-						<input type="checkbox" class="agr" name="agreement" id="ag2" required> <label for="ag2">환불 규정 안내에 대한 동의 (필수)</label>  <br>
-						<input type="checkbox" class="agr" name="agreement" id="ag3" required> <label for="ag3">개인정보 제3자 제공 동의 (필수)</label>  <br>
-						<input type="checkbox" class="agr" name="agreement" id="ag4" required> <label for="ag4">개인정보 수집 및 이용 동의 (필수)</label>  <br>
+						<input type="checkbox" class="agr" name="agreement" id="ag1" required> <label for="ag1">위 공간의 예약 조건 확인 및 결제 진행 동의 <span class="areSt">(필수)</span></label>  <br>
+						<input type="checkbox" class="agr" name="agreement" id="ag2" required> <label for="ag2">환불 규정 안내에 대한 동의 <span class="areSt">(필수)</span></label>  <br>
+						<input type="checkbox" class="agr" name="agreement" id="ag3" required> <label for="ag3">개인정보 제3자 제공 동의 <span class="areSt">(필수)</span></label>  <br>
+						<input type="checkbox" class="agr" name="agreement" id="ag4" required> <label for="ag4">개인정보 수집 및 이용 동의 <span class="areSt">(필수)</span></label>  <br>
 				    </div>				   
 			    </div>
 			 
 			   <br><br>
-			   <button onclick="insertReservation();" class="btn btn-block" style="background-color: #A3C296; font-weight: bold;">결제하기</button>
-		    
+			   <button onclick="insertReservation();" class="btn btn-block" style="background-color: rgba(255, 166, 0, 0.774); font-weight: bold;">결제하기</button>
+		 
 		</c:if>
+		
 	</div>
 	  
-	  
+<br><br><br><br><br><br>
+<%@ include file="/views/common/footer.jsp" %> 
 	  
 	    <script>
-	 		<%-- input type date 날짜 제한 --%>
-	 		var rvDate = $("#rvDate")
-	 		var d = new Date();  
-	 		
-	 		var stDate = (d.getFullYear()+"-"+(d.getMonth()+1).toString().padStart(2, '0')+"-"+d.getDate().toString().padStart(2, '0'));
-
-	 		var laDate = new Date(stDate);  // 한국 표준시로 나온다. 
-	 		laDate.setMonth(laDate.getMonth() + 1);
-	 		laDate.setDate(laDate.getDate() - 1);
-	 		laDate = (laDate.getFullYear()+"-"+(laDate.getMonth()+1).toString().padStart(2, '0')+"-"+laDate.getDate().toString().padStart(2, '0'));
-	 		
-	 		// 예약 일자 선택 
-	 		rvDate.attr("min", stDate);
-	 		rvDate.attr("max", laDate);
-
-
-	 		// 무통장 입금 당일 입금만 가능하도록 지정.  
-	 		$("#payDate").attr("min", stDate);
-	 		$("#payDate").attr("max", stDate);
-	 		
-	 		
-	 		
+	 		 		
 		    $(function(){
+		    	
+		    	<%-- input type date 날짜 제한 --%>
+		 		var rvDate = $("#rvDate")
+		 		var d = new Date();  
+		 		
+		 		var stDate = (d.getFullYear()+"-"+(d.getMonth()+1).toString().padStart(2, '0')+"-"+d.getDate().toString().padStart(2, '0'));
+
+		 		var laDate = new Date(stDate);  // 한국 표준시로 나온다. 
+		 		laDate.setMonth(laDate.getMonth() + 1);
+		 		laDate.setDate(laDate.getDate() - 1);
+		 		laDate = (laDate.getFullYear()+"-"+(laDate.getMonth()+1).toString().padStart(2, '0')+"-"+laDate.getDate().toString().padStart(2, '0'));
+		 		
+		 		// 예약 일자 선택 
+		 		rvDate.attr("min", stDate);
+		 		rvDate.attr("max", laDate);
+
+		 		// 무통장 입금 당일 입금만 가능하도록 지정.  
+		 		$("#payDate").attr("min", stDate);
+		 		$("#payDate").attr("max", stDate);
+		 		
+		 		
+		 		<%-- 결제방법 무통장 입금 선택 시에만 입금 정보 입력하도록 하는 함수 --%> 
 		    	$("input[type='radio']").on("click", function(){
 			    	// 라디오 버튼 중 bankTransfer를 체크했을 경우에만 화면이 보여지게 하기 // 무통장 입금		
 		    												//$("선택자").is("선택자") <br> (선택 요소 일치 여부 판단 → 논리값 반환)
@@ -277,42 +308,51 @@
 		    			$("#bInfo").css("display","none");
 					}
 		    	});
+		    	
+		    	
+		    	<%-- 전달받은 예약 인원 만큼 select 박스 생성 --%>
+		    	var rePeople = $("select[name='rePeople']");
+		    	for(var i=1; i<=${room.roomSize}; i++){ //
+		    		rePeople.append($("<option>").val(i).text(i));
+		    	}
+		    	
 		    });
-	    
-	    	<%-- 결제 예정 금액 테이블에 선택한 날짜와 예약 인원 표시 --%>
-	    	function selDate(){
+		    
+		    <%-- 결제 예정 금액 테이블에 선택한 날짜와 예약 인원 표시 --%>
+	    	function selDate(){ 
 	    		//console.log($("#rvDate").val());
 	    		//console.log($("#rePeople").val());
-	    		
 	    		var selectDate = $("#rvDate").val();
-	    		var selectUser = $("#rePeople").val();
+	    		var selectUser = $("select[name='rePeople'] :selected").text();
 	    		
 	    		$("#selDate").text(selectDate);
-	    		$("#selUser").text(selectUser + " 명");	
+	    		$("#selUser").text(selectUser  + " 명");	
 	    	}
-	    	
-	    	// 서비스 동의 전체 체크
-	    	function chkAll(){
-	    		var all = $("#all")[0]; /* Object 타입으로 반환 → 0번 인덱스에 있는 input 요소를 가져와야 한다.*/
-	    		var sub = $("input[name='agreement']");
-	    		
-	    		if(all.checked){	    			
-	    			// 나머지 요소에 접근하여 속성 checked true로 변경	
-	    			for(var i=0; i<sub.length; i++){
-    					sub[i].checked = true;
-	    			}
-	    		}else{ // 체크 해제
-	    			for(var i=0; i<sub.length; i++){
-    					sub[i].checked = false;
-	    			}
-	    		}		
-	    	}
-	    	
+		    	
+		    <%-- 서비스 전체동의를 하지 않은 경우 결제 불가능하게 하기.
+			 	| ** → DB 컬럼 추가. [서비스 동의 여부]
+				| ** → 전체 동의를 했을 경우 Y로 저장되게 하기.
+			--%>    	
+			function chkAll(){
+				// 서비스 동의 전체 체크
+				var all = $("#all"); /* Object 타입으로 반환 → 0번 인덱스에 있는 input 요소를 가져와야 한다.*/
+				var sub = $("input[name='agreement']");
+				var allchecked = true;
+				
+				// 전체 체크 선택 시  	    		
+				if(all.prop("checked")){	    			
+					// 나머지 요소에 접근하여 속성 checked true로 변경	
+					sub.prop("checked", true);
+				}else{ // all 체크 해제 시 
+					sub.prop("checked", false);
+				}
+			}
+			
+			
 	    	// 예약 정보 전달
 	    	function insertReservation(){
 	    		var rvDate = $("#rvDate").val();
-				var rePeople = $("#rePeople").val();
-				//var userName = $("#userName").val();
+	    		var rePeople = $("select[name='rePeople'] :selected").text();
 				var rvRequest = $("#rvRequest").val();
 				var rvPayment = $("input[name='rvPayment']:checked").val(); // 결제 수단
 	    		var agrementChk = $("input[name='agreement']:checked").length;
@@ -323,11 +363,6 @@
 	    		var payDate = $("#payDate").val();
 	    		
 	    		var sub = $("input[name='agreement']");
-				
-	    		//console.log(rvPayment);
-	    		//console.log(bank);
-	    		//console.log(rvName);
-	    		//console.log(payDate);
 	    		
 				<%-- 예약 날짜, 인원수, 결제 방법 미입력시 focus --%>
     			if(!rvDate){
@@ -367,78 +402,65 @@
 		   			}
 		   		}
    		
+		   		if(!sub.prop("checked")){
+					alert("서비스 동의를 해주시기 바랍니다.");
+				}
 		   		
-	    		<%-- 서비스 전체동의를 하지 않은 경우 결제 불가능하게 하기.
-	    			 	| ** → DB 컬럼 추가. [서비스 동의 여부]
-	    				| ** → 전체 동의를 했을 경우 Y로 저장되게 하기.
-	    		--%>    		
-	    		if(agrementChk !== sub.length){
-	    			alert("서비스 동의를 해주시기 바랍니다.");
-	    			
-	    			// 체크되지 않은 체크박스 찾아서 focus
-	    			for(var i = 0; i < sub.length; i++) {
-	    	            if (!sub[i].checked) {
-	    	                $(sub[i]).next('label').css("color", "red").focus();
-	    	                break;
-	    	            }else{
-	    	                $(sub[i]).next('label').css("color", "black");	    	           
-	    	            }
-	    	        }
-	    	        return;
-	    		}
-	    		
-	    		
-	    		
+		   		// 예약 번호 생성. 겹치지 않게 1970년 1월 1일부터 현재까지 경과 시간 ms로 표시되는 getTime()을 사용한다. → 시퀀스로 예약정보를 뽑아오는 대신 사용.(신용카드 결제 API에도 예약 고유 번호가 들어가야 하기 때문)
+		   		// API 생성시 필요한 고유 번흐. (신용카드 결제 시 생성되는 예약 번호)
+		   		var rvNo = 'SHS'+new Date().getTime();
+		   		
+		   		// amount는 String이 아니다. 추후 수정시 주의할 것. 
+	    		<%-- 입금 방법 별 페이지 이동 --%>
 	    		if (rvPayment === "bank") {
-		    		
 					$.ajax({
-						url : "${contextPath}/reservationInsert.re",
+						url : "<%= contextPath%>/reservationInsert.re",
 						type: "POST",
 						data: {
-							userId : "${userInfo.userId}", 
+							userId : "${userInfo.userId}",
+							rno: "${room.roomNo}",
 							rvDate: rvDate,
 					        rePeople: rePeople,
 					        rvRequest: rvRequest,
 					        rvPayment : $("input[name='rvPayment']:checked").val(),  <%-- check되어있는 현재 값을 가져와야 한다. --%>
 							bank : bank,
 							rvName : rvName,
-							payDate : payDate
-						},
-						success : function(result){
-							// 성공했을 경우 입력받은 데이터들을 DB 테이블에 넣어준다.
-							if(result>0){
+							payDate : payDate,
+							amount : '${room.price}' <%-- 수정 ${room.price} --%>
+						},success : function(rvNo){
+							// 사용자에게 입력받은 정보가 저장되었을 때. 예약 확인 또는 메인 페이지로 이동 
+							if(rvNo != null){
 								if(confirm("예약이 완료되었습니다. 예약 확인 페이지로 이동하시겠습니까?")){
-									<%-- 마이페이지로만 이동시키게 하거나 예약 내역 보기 페이지로 이동. → 예약 내역에서 로그인된 회원의 예약 정보만 확인할 수 있게 리스트로 보여주기 → 각 예약별 상세보기 할 필요 없게... --%>
-									location.href = '<%= contextPath%>/views/reservation/reservationSuccess.jsp';
+									<%-- 예약내역 확인 페이지로 이동 --%>
+									location.href = '<%= contextPath%>/reservationDetail.shs';
 								}else{
+									alert('메인으로 돌아갑니다.');
 									location.href = '<%= contextPath%>';				
 								}
-							}else{
-								alert("예약 실패");
+							}else{ 
+								alert("예약 중 오류가 발생했습니다. ");
 							}
 							
-						},
-						error: function(){
+						}, error: function(){
 							alert("예약 중 오류 발생.");
 						}
 					});
+					<%-- 신용카드 입금 --%>  
 				} else if (rvPayment === "card") {
 				    /* 1. 가맹점 식별하기 */
 				    const { IMP } = window;
-				    IMP.init('INIpayTest');   // 발급받은 가맹점 식별 코드
+				    IMP.init('imp13294039');   // 발급받은 가맹점 식별 코드
 
 				    IMP.request_pay({
-				        pg: 'html5_inicis', // PG Provider 지정 (html5_inicis 사용)
-				        pay_method: 'card', // 결제 방법 카드
-				        merchant_uid: 'order_no_0001', // 상점에서 생성한 고유 주문번호 (상점 고유의 값으로 변경 필요)
-				        name: '주문명:결제테스트', // 주문명
-				        amount: 40000,  // 상품 가격 (테스트용 금액, 실제 금액으로 변경)
-				        buyer_email: 'test@portone.io', // 구매자 이메일
+				    	channelKey: 'channel-key-c35a906c-403d-4c57-8ab6-01e93e52b059', // PG Provider 지정 (html5_inicis 사용)
+				        pay_method: 'scard', // 결제 방법 카드
+				        merchant_uid: rvNo, // 상점에서 생성한 고유 주문번호 (상점 고유의 값으로 변경 필요)// 고유값이여야 한다.
+				        name: '${room.roomName}', // 주문명
+				        amount: '${room.price}',  // 상품 가격 
+				        buyer_email: '${ userInfo.email }', // 구매자 이메일
 				        buyer_name: "${ userInfo.userName }",  // 로그인한 userName
 				        buyer_tel: "${ userInfo.userPhone }", // 구매자 전화번호
-				        // buyer_addr: "서울특별시 강남구 삼성동",  // 배송지 (필요시 추가)
-				        // vbank_due: "YYYYMMDD", // 가상계좌 입금 마감일시 (필요시 추가)
-
+				        //m_redirect_url : '${contextPath}', 
 				        // 간편결제 버튼 제외 (PC에서만 적용됨)
 				        bypass: {
 				            acceptmethod: 'noeasypay', // noeasypay는 간편결제 제외 (PC 환경)
@@ -446,26 +468,50 @@
 				    }, function (rsp) {
 				        // 결제 요청 후 콜백 함수
 				        if (rsp.success) {
-				            // 결제 성공 시 처리
-				            alert('결제가 완료되었습니다.');
-				            console.log('결제성공');
+				            // 결제 성공 시 처리 → 결제 성공시 해당 정보를 테이블에 저장해야 한다.
+				            //console.log(rsp);  // rsp 객체 내용 확인
+				            //console.log(rsp.amount);  // rsp 객체 내용 확인
+						    $.ajax({
+						        url: '<%= contextPath %>/reservationInsertCard.re',
+						        type: "POST",
+						        data: {
+						            userId: "${userInfo.userId}",
+						            rvNo: rvNo,
+						            rno: "${room.roomNo}",
+						            rvDate: rvDate,
+						            rePeople: rePeople,
+						            rvRequest: rvRequest,
+						            rvPayment: $("input[name='rvPayment']:checked").val(),
+						            buyEmail: rsp.buyer_email,
+						            amount: '${room.price}'   
+						        }, success: function(result){
+						            if(result>0){
+						            	if(confirm("예약이 완료되었습니다. 예약 확인 페이지로 이동하시겠습니까?")){
+											<%-- 예약내역 확인 페이지로 이동 --%>
+											location.href = '<%= contextPath%>/reservationDetail.shs';
+										}else{
+											alert('메인으로 돌아갑니다.');
+											location.href = '<%= contextPath%>';				
+										}
+									}else{
+										if(confirm("예약 중 오류가 발생했습니다. 메인으로 돌아가시겠습니까?")){
+											location.href = '<%= contextPath%>';				
+										} 
+									}
+				            	}
+				            });
 				        } else {
 				            // 결제 실패 시 처리
 				            alert('결제 실패');
 				        }
 				    });
-	
-				}else if(rvPayment === "pay"){
-							alert("준비중.");
-				}
-				
+				}				
 			}
 	   
 	   
 	    </script>
+	    
+
 	  
-	  
-	    <br><br><br><br><br><br>
-		
 </body>
 </html>
