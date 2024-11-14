@@ -225,7 +225,7 @@
 					
 					<div class="i divBor" id="bInfo" style="display:none;">
 						<div>
-						   입금은행:
+						   입금은행
 			               <select name="bank" class="form-control" required>
 			               	   <option value="NO" disabled selected>입금 은행 선택</option>
 	                           <option value="KI">기업은행 / 521-458845-01-255 / 쉐어스터디(주) </option>
@@ -289,11 +289,11 @@
 		 		laDate.setDate(laDate.getDate() - 1);
 		 		laDate = (laDate.getFullYear()+"-"+(laDate.getMonth()+1).toString().padStart(2, '0')+"-"+laDate.getDate().toString().padStart(2, '0'));
 		 		
-		 		// 예약 일자 선택 
+		 		// 예약 일자 선택  -- 예약 가능 일자 1달로 한정. 
 		 		rvDate.attr("min", stDate);
 		 		rvDate.attr("max", laDate);
 
-		 		// 무통장 입금 당일 입금만 가능하도록 지정.  
+		 		// 무통장 입금 당일 입금만 가능하도록 지정.   
 		 		$("#payDate").attr("min", stDate);
 		 		$("#payDate").attr("max", stDate);
 		 		
@@ -305,7 +305,11 @@
 		    		if($("#bankTransfer").is(":checked")){
 		    			$("#bInfo").css("display","block");
 		    		}else{
+		    			// 무통장 입금이 아닌 다른 라디오 버튼 선택 시 해당 창 삭제 및 value 값 초기화. 
 		    			$("#bInfo").css("display","none");
+		    			$("select[name='bank']").val("NO");
+		    			$("#rvName").val("");
+		    			$("#payDate").val("");
 					}
 		    	});
 		    	
@@ -329,10 +333,7 @@
 	    		$("#selUser").text(selectUser  + " 명");	
 	    	}
 		    	
-		    <%-- 서비스 전체동의를 하지 않은 경우 결제 불가능하게 하기.
-			 	| ** → DB 컬럼 추가. [서비스 동의 여부]
-				| ** → 전체 동의를 했을 경우 Y로 저장되게 하기.
-			--%>    	
+		    <%-- 서비스 전체동의를 하지 않은 경우 결제 불가능 --%>    	
 			function chkAll(){
 				// 서비스 동의 전체 체크
 				var all = $("#all"); /* Object 타입으로 반환 → 0번 인덱스에 있는 input 요소를 가져와야 한다.*/
@@ -345,6 +346,10 @@
 					sub.prop("checked", true);
 				}else{ // all 체크 해제 시 
 					sub.prop("checked", false);
+				}
+   		
+		   		if(!sub.prop("checked")){
+					alert("서비스 동의를 해주시기 바랍니다.");
 				}
 			}
 			
@@ -359,8 +364,8 @@
 	    		
 	    		// 무통장 입금시 전달할 데이터. bank (name), payName (ID), payDate (ID)
 	    		var bank = $("select[name='bank'] :selected").val();
-	    		var rvName = $("#rvName").val();
-	    		var payDate = $("#payDate").val();
+	    		var rvName = $("#rvName");
+	    		var payDate = $("#payDate");
 	    		
 	    		var sub = $("input[name='agreement']");
 	    		
@@ -368,16 +373,14 @@
     			if(!rvDate){
 	    			$("#rvDate").focus();
 	    			return;
-	    		}
-    			if(!rePeople){
+    			}else if(!rePeople){
 	    			$("#rePeople").focus();
 	    			return;
-	    		}
-    			if(!rvPayment){
+	    		}else if(!rvPayment){
 	    			alert("결제 수단을 입력해 주세요.");
 	    			$("#payRadio").css("border-color", "red").focus();
 	    			return;
-	    		}else{
+	    		}else{ // 모두 입력된 경우 border color 원복. 
 	    			$("#payRadio").css("border-color", "lightgray");
 	    		}
 
@@ -385,26 +388,22 @@
 	   			 		해당 조건 적용이 안된다.  
 	   			 	- 입금 은행 선택까지는 적용 된다. 
 	   			--%>	
-   		
 		   		if(rvPayment == "bank"){
 		   			if(!bank || bank == "NO"){
 			   			alert("입금 은행을 선택해 주세요.");
 			   			$("select[name='bank']").focus();
 			   			return;
-		   			} else if(!rvName){
+		   			} else if(!rvName.val()){
 			   			alert("입금자 명을 입력해 주세요.");
-			   			$("#rvName").focus();
+			   			rvName.focus();
 			   			return;
-		   			} else if(!payDate){
+		   			} else if(!payDate.val()){
 			   			alert("입금 예정일을 입력해 주세요.");
-			   			$("#payDate").focus();
+			   			payDate.focus();
 			   			return;
 		   			}
 		   		}
-   		
-		   		if(!sub.prop("checked")){
-					alert("서비스 동의를 해주시기 바랍니다.");
-				}
+		   		
 		   		
 		   		// 예약 번호 생성. 겹치지 않게 1970년 1월 1일부터 현재까지 경과 시간 ms로 표시되는 getTime()을 사용한다. → 시퀀스로 예약정보를 뽑아오는 대신 사용.(신용카드 결제 API에도 예약 고유 번호가 들어가야 하기 때문)
 		   		// API 생성시 필요한 고유 번흐. (신용카드 결제 시 생성되는 예약 번호)
@@ -424,8 +423,8 @@
 					        rvRequest: rvRequest,
 					        rvPayment : $("input[name='rvPayment']:checked").val(),  <%-- check되어있는 현재 값을 가져와야 한다. --%>
 							bank : bank,
-							rvName : rvName,
-							payDate : payDate,
+							rvName : rvName.val(),
+							payDate : payDate.val(),
 							amount : '${room.price}' <%-- 수정 ${room.price} --%>
 						},success : function(rvNo){
 							// 사용자에게 입력받은 정보가 저장되었을 때. 예약 확인 또는 메인 페이지로 이동 
