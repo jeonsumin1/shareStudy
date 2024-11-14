@@ -579,14 +579,7 @@ input[type="email"]{
         			        qTime.val("");
         			        qContent.val("");
         			        tel.val("");
-        			        <!-- 닫기(close)  : 모달 닫는 메소드라는데 적용이 안됨. 
-        			        	$('#QModal').modal('hide'); 
-        			        -->
-        			        
-        			        $("#QModal").css("display","none");
-        			        $(".modal-backdrop").css("display","none");
-        			        
-        			        
+
             			}else{
         	    			alert("상담신청이 실패되었습니다.");
             			}
