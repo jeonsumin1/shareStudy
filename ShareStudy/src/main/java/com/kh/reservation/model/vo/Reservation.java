@@ -14,9 +14,19 @@ public class Reservation {
 	private String rvRequest; // RV_REQUEST VARCHAR2(1000 BYTE)
 
 	
-
 	public Reservation() {
 		super();
+	}
+
+	
+	public Reservation(String rvNo, String roomNo, String userId, String reDate, Date rvConfirm, String rvPayment) {
+		super();
+		this.rvNo = rvNo;
+		this.roomNo = roomNo;
+		this.userId = userId;
+		this.reDate = reDate;
+		this.rvConfirm = rvConfirm;
+		this.rvPayment = rvPayment;
 	}
 
 	public Reservation(String roomNo, String userId, int rePeople, String reDate, String rvPayment, String rvRequest) {

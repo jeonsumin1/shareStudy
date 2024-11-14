@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.manager.model.service.ManagerService;
 
 /**
- * Servlet implementation class ManagerDeleteMember
+ * Servlet implementation class ManagerDeleteQuestion
  */
-@WebServlet("/mdelete.ma")
-public class ManagerDeleteMember extends HttpServlet {
+@WebServlet("/qdelete.ma")
+public class ManagerDeleteQuestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerDeleteMember() {
+    public ManagerDeleteQuestion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,32 +28,30 @@ public class ManagerDeleteMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
 		request.setCharacterEncoding("UTF-8");
         String memId = request.getParameter("userId");
-		
-		int result = new ManagerService().deleteMember(memId);
-		
-		if(result>0) { //삭제 성공
-			request.setAttribute("altMsg", memId+" 삭제 성공");
-//			request.getRequestDispatcher("/views/manager/m_main.jsp").forward(request, response);
-			response.sendRedirect(request.getContextPath()+"/views/manager/m_main.jsp");
+        
+        int result = new ManagerService().deleteQuestion(memId);
+        
+        if(result>0) { //삭제 성공
+			request.setAttribute("altMsg", memId+"상담 완료");
+			request.getRequestDispatcher("/views/manager/m_main.jsp").forward(request, response);
+//			response.sendRedirect(request.getContextPath()+"/views/manager/m_main.jsp");
 			
 		}else {  //실패
 			
-			request.setAttribute("errorMessage", "삭제 실패!");
+			request.setAttribute("errorMessage", "오류");
 		    request.getRequestDispatcher("/views/manager/m_main.jsp").forward(request, response);
 			
 		}
-		}
+	
+	}
 
 }
