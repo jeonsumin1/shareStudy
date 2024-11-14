@@ -48,7 +48,7 @@ public class ReservationConttroller extends HttpServlet {
 			
 			System.out.println(reUrl);
 			
-			session.setAttribute("alertMsg", "비회원인 경우 예약이 불가합니다. 로그인을 해주세요.");
+			session.setAttribute("alertMsg", "로그인 후 예약이 가능합니다. 로그인을 해주세요.");
 			response.sendRedirect(request.getContextPath()+"/login.shs");
 		}
 		
