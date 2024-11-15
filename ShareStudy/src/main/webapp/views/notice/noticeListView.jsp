@@ -75,7 +75,6 @@ body {
 				<thead>
 					<tr>
 						<th>번호</th>
-						<th>카테고리</th>
 						<th>제목</th>
 						<th>작성일</th>
 						<th>조회수</th>
@@ -85,14 +84,13 @@ body {
 					<c:choose>
 						<c:when test="${empty n}">
 							<tr>
-								<td colspan="5">등록된 공지사항이 없습니다.</td>
+								<td colspan="4">등록된 공지사항이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${n}" var="nList">
 								<tr class="trNoticeList">
 									<td>${nList.key}</td>
-									<td></td>
 									<td>${nList.nTitle}</td>
 									<td>${nList.createDate}</td>
 									<td>${nList.count}</td>

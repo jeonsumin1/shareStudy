@@ -213,19 +213,14 @@ input[type="email"]{
  }
 
 .eyes{
-    position: absolute;
-    top:-30px;
-    bottom: 0; 
-    right: 830px;
-    margin: auto;
-    height: 50px;
-    font-size: 15px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    z-index: 100;
+    cursor: pointer;  /* 클릭 가능하게 커서 변경 */
+    margin-left: -30px; 
 }
 
+#td{
+   display: flex;  /* 자식 요소를 나란히 배치 */
+    align-items: center;
+}
 
 #QModal{
 	position: fixed;
@@ -295,14 +290,14 @@ input[type="email"]{
                         </tr>
                          
                         <tr>
-                        <td colspan="2"><input type="password" class="m1 mm1" value=" &nbsp; ${userInfo.userPw }" > <div onclick="eye();" class="eyes"><i id="icon" class="fa fa-eye fa-lg"></i></div></td>
+                        <td colspan="2" id="td"><input type="password" class="m1 mm1" value="${userInfo.userPw }" > <div onclick="eye();" class="eyes"><i id="icon" class="fa fa-eye fa-lg"></i></div></td>
                         </tr>     
                 
                         <tr>
                         <td align="left" style="font-size: small;"> 📌 전화번호</td>
                         </tr>
                         <tr>
-                        <td colspan="2"><input type="text" class="m1" name="phone" value=" &nbsp; ${userInfo.userPhone }"></td>
+                        <td colspan="2"><input type="text" class="m1" name="phone" value="${ userInfo.userPhone}"></td>
                         </tr>
                         
                         <tr>
@@ -579,14 +574,7 @@ input[type="email"]{
         			        qTime.val("");
         			        qContent.val("");
         			        tel.val("");
-        			        <!-- 닫기(close)  : 모달 닫는 메소드라는데 적용이 안됨. 
-        			        	$('#QModal').modal('hide'); 
-        			        -->
-        			        
-        			        $("#QModal").css("display","none");
-        			        $(".modal-backdrop").css("display","none");
-        			        
-        			        
+
             			}else{
         	    			alert("상담신청이 실패되었습니다.");
             			}
@@ -604,7 +592,9 @@ input[type="email"]{
                 var rrn = "<%= userInfo.getRrn() %>";
 
                 
+
                 var maskedRrn = rrn.substring(0, 6) +"-" +"●●●●●●";
+
 
                
                 $(".rrn1").html("&nbsp;" + maskedRrn);

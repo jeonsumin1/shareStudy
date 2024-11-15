@@ -25,10 +25,14 @@
 		height: 3%;
     }
    	.outer{
-    	width: 700px; /* 페이지 너비 */
+   		border: 1px solid #ddd;
+    	width: 800px; /* 페이지 너비 */
         margin: auto; /* 페이지 중앙 정렬 */
-        margin-top: 50px;
+        padding: 50px;
         text-align: left;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        
     }
 	
 	h2{
@@ -102,9 +106,9 @@
 			        <div class="roomInfo">
 			            <div class="imgSt">
 			            	<!-- 룸정보 중 filePath가 1인 것만 보여준다. -->
-			           		<c:forEach var="atList" items="${atList}">
+			           		<c:forEach var="atList" items="${atList}" >
 				            	<c:if test="${atList.fileLevel == 1}">
-				            		<img alt="예약룸사진" src="<%= contextPath %>${atList.filePath}${atList.changeName}">
+				            		<img alt="예약룸사진" style="width: 300px;" src="<%= contextPath %>${atList.filePath}${atList.changeName}">
 				            	</c:if>
 			           		</c:forEach>
 				        </div>
@@ -117,7 +121,7 @@
 			            		</tr>
 			            		<tr>
 			            			<th>주소</th>
-			            			<td>${room.roomAddress} 명</td> <!-- 수정  -->
+			            			<td>${room.roomAddress}</td> <!-- 수정  -->
 			            		</tr>
 			            		<tr>
 			            			<th>이용 가능 인원</th>
@@ -166,7 +170,7 @@
 							<br>
 							<div>
 						        <p> 휴대폰 번호 </p>
-						        <input type="text" name="phone" id="phone" class="form-control" value="${ userInfo.userPhone }" readonly>
+						        <input type="text" name="phone" id="phone" class="form-control" value="${ userInfo.userPhone}" readonly>
 							</div>
 						
 							<br>
@@ -305,12 +309,13 @@
 		 		<%-- 결제방법 무통장 입금 선택 시에만 입금 정보 입력하도록 하는 함수 --%> 
 		    	$("input[type='radio']").on("click", function(){
 			    	// 라디오 버튼 중 bankTransfer를 체크했을 경우에만 화면이 보여지게 하기 // 무통장 입금		
-		    												//$("선택자").is("선택자") <br> (선택 요소 일치 여부 판단 → 논리값 반환)
+		    												//$("선택자").is("선택자") (선택 요소 일치 여부 판단 → 논리값 반환)
 		    		if($("#bankTransfer").is(":checked")){
-		    			$("#bInfo").css("display","block");
+		    			$("#bInfo").fadeIn(500);
 		    		}else{
 		    			// 무통장 입금이 아닌 다른 라디오 버튼 선택 시 해당 창 삭제 및 value 값 초기화. 
-		    			$("#bInfo").css("display","none");
+		    			$("#bInfo").fadeOut(500);
+		    			
 		    			$("select[name='bank']").val("NO");
 		    			$("#rvName").val("");
 		    			$("#payDate").val("");
@@ -320,7 +325,7 @@
 		    	
 		    	<%-- 전달받은 예약 인원 만큼 select 박스 생성 --%>
 		    	var rePeople = $("select[name='rePeople']");
-		    	for(var i=1; i<=${room.roomSize}; i++){ //
+		    	for(var i=1; i<=${room.roomSize}; i++){ 
 		    		rePeople.append($("<option>").val(i).text(i));
 		    	}
 		    	
@@ -463,8 +468,6 @@
 				        buyer_email: '${ userInfo.email }', // 구매자 이메일
 				        buyer_name: "${ userInfo.userName }",  // 로그인한 userName
 				        buyer_tel: "${ userInfo.userPhone }", // 구매자 전화번호
-				        //m_redirect_url : '${contextPath}', 
-				        // 간편결제 버튼 제외 (PC에서만 적용됨)
 				        bypass: {
 				            acceptmethod: 'noeasypay', // noeasypay는 간편결제 제외 (PC 환경)
 				        },
@@ -479,7 +482,7 @@
 						        type: "POST",
 						        data: {
 						            userId: "${userInfo.userId}",
-						            rvNo: rvNo,
+						            rvNo: rsp.merchant_uid,
 						            rno: "${room.roomNo}",
 						            rvDate: rvDate,
 						            rePeople: rePeople,
@@ -505,7 +508,7 @@
 				            });
 				        } else {
 				            // 결제 실패 시 처리
-				            alert('결제 실패');
+				            alert('서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
 				        }
 				    });
 				}				

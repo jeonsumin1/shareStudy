@@ -1,12 +1,12 @@
 package com.kh.member.model.vo;
 
-
 public class Question {
 	private String userId;
 	private String qtPhone;
 	private String qtDate;
 	private String qtRequest;
-	
+
+
 	
 	
 	
@@ -21,6 +21,15 @@ public class Question {
 		this.qtPhone = qtPhone;
 		this.qtDate = qtDate;
 		this.qtRequest = qtRequest;
+	}
+
+
+
+	public Question(String userId, String qtPhone, String qtDate) {
+		super();
+		this.userId = userId;
+		this.qtPhone = qtPhone;
+		this.qtDate = qtDate;
 	}
 
 
@@ -48,7 +57,6 @@ public class Question {
 		return qtDate;
 	}
 
-
 	public void setQtDate(String qtDate) {
 		this.qtDate = qtDate;
 	}
@@ -71,16 +79,4 @@ public class Question {
 	}
 
 
-	public Question(String userId, String qtPhone, String qtDate) {
-		super();
-		this.userId = userId;
-		this.qtPhone = qtPhone;
-		this.qtDate = qtDate;
-	}
-	
-	
-	
-	
 
-	
-}
