@@ -14,7 +14,7 @@
         <h3>예약조회</h3>
 
         <%
-            Reservation r = (Reservation) session.getAttribute("rvList");
+            Reservation r = (Reservation) session.getAttribute("rvvList");
             RvBank b = (RvBank) session.getAttribute("baList");
         %>
 

@@ -136,7 +136,7 @@ body {
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <a href="detail.room?rno=R01"><img src="<%=contextPath%>/resources/uploadFiles/rsiel12.jpg"
+                <a href="detail.room?rno=R01"><img src="<%=contextPath%>/resources/uploadFiles/르씨엘 1.jpg"
                 alt="R01" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
@@ -149,7 +149,7 @@ body {
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <a href="detail.room?rno=R02"><img src="<%=contextPath%>/resources/uploadFiles/rsiel3.jpg"
+                <a href="detail.room?rno=R02"><img src="<%=contextPath%>/resources/uploadFiles/르씨엘 2.jpg"
                 alt="R02" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
@@ -162,7 +162,7 @@ body {
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <a href="detail.room?rno=R03"><img src="<%=contextPath%>/resources/uploadFiles/167990883_3fc1759cd950b0bcd98cf1cfbad35de0.jpg"
+                <a href="detail.room?rno=R03"><img src="<%=contextPath%>/resources/uploadFiles/르씨엘 3.jpg"
                 alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
@@ -174,7 +174,7 @@ body {
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <a href="detail.room?rno=R04"><img src="<%=contextPath%>/resources/스터디룸2.jpg"
+                <a href="detail.room?rno=R04"><img src="<%=contextPath%>/resources/uploadFiles/르씨엘 4.jpg"
                 alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
@@ -186,7 +186,7 @@ body {
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <a href="detail.room?rno=R05"><img src="<%=contextPath%>/resources/스터디룸3.jpg"
+                <a href="detail.room?rno=R05"><img src="<%=contextPath%>/resources/uploadFiles/모락 1.png"
                 alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
@@ -198,7 +198,7 @@ body {
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <a href="detail.room?rno=R06"><img src="<%=contextPath%>/resources/스터디룸4.jpg"
+                <a href="detail.room?rno=R06"><img src="<%=contextPath%>/resources/uploadFiles/모락 2.png"
                 alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
@@ -210,11 +210,35 @@ body {
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>
                 <th colspan="3">
-                <a href="detail.room?rno=R07"><img src="<%=contextPath%>/resources/uploadFiles/168059146_3a5fbb60f8d30b8ed87a5e2af9188c81.png"
+                <a href="detail.room?rno=R07"><img src="<%=contextPath%>/resources/uploadFiles/모락 3.png"
                 alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
             </tr>
             <tr>
                 <td>상품번호 : R07</td>
+                <td>수용인원 : 1~7명</td>
+                <td>가격 : 60,000￦</td>
+            </tr>
+        </table>
+        <table style="margin: 10px; text-align: center; display: inline-block;">
+            <tr>
+                <th colspan="3">
+                <a href="detail.room?rno=R07"><img src="<%=contextPath%>/resources/uploadFiles/모락 4.png"
+                alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
+            </tr>
+            <tr>
+                <td>상품번호 : R08</td>
+                <td>수용인원 : 1~7명</td>
+                <td>가격 : 60,000￦</td>
+            </tr>
+        </table>
+        <table style="margin: 10px; text-align: center; display: inline-block;">
+            <tr>
+                <th colspan="3">
+                <a href="detail.room?rno=R07"><img src="<%=contextPath%>/resources/uploadFiles/비허밍 1.jpeg"
+                alt="roomEx" id="roomPhoto" oncontextmenu="return false"></a></th>
+            </tr>
+            <tr>
+                <td>상품번호 : R09</td>
                 <td>수용인원 : 1~7명</td>
                 <td>가격 : 60,000￦</td>
             </tr>

@@ -38,7 +38,7 @@ public class ManagerSelectReservation extends HttpServlet {
 		Reservation r = new ManagerService().selectReservation(rvNo);
 		RvBank b = new ManagerService().selectBank(rvNo);
 		
-        request.getSession().setAttribute("rvList", r);
+        request.getSession().setAttribute("rvvList", r);
         request.getSession().setAttribute("baList", b);
 		
 		request.getRequestDispatcher("/views/manager/m_reservationDetail.jsp").forward(request, response);
