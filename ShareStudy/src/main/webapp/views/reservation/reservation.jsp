@@ -170,7 +170,7 @@
 							<br>
 							<div>
 						        <p> 휴대폰 번호 </p>
-						        <input type="text" name="phone" id="phone" class="form-control" value="${ userInfo.userPhone.substring(0,3)}-${ userInfo.userPhone.substring(3,7)}-${ userInfo.userPhone.substring(7,11)}" readonly>
+						        <input type="text" name="phone" id="phone" class="form-control" value="${ userInfo.userPhone}" readonly>
 							</div>
 						
 							<br>

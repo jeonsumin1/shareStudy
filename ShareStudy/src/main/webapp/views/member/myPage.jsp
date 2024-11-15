@@ -290,14 +290,14 @@ input[type="email"]{
                         </tr>
                          
                         <tr>
-                        <td colspan="2" id="td"><input type="password" class="m1 mm1" value=" &nbsp; ${userInfo.userPw }" > <div onclick="eye();" class="eyes"><i id="icon" class="fa fa-eye fa-lg"></i></div></td>
+                        <td colspan="2" id="td"><input type="password" class="m1 mm1" value="${userInfo.userPw }" > <div onclick="eye();" class="eyes"><i id="icon" class="fa fa-eye fa-lg"></i></div></td>
                         </tr>     
                 
                         <tr>
                         <td align="left" style="font-size: small;"> 📌 전화번호</td>
                         </tr>
                         <tr>
-                        <td colspan="2"><input type="text" class="m1" name="phone" value=" &nbsp; ${ userInfo.userPhone.substring(0,3)}-${ userInfo.userPhone.substring(3,7)}-${ userInfo.userPhone.substring(7,11)}"></td>
+                        <td colspan="2"><input type="text" class="m1" name="phone" value="${ userInfo.userPhone}"></td>
                         </tr>
                         
                         <tr>
