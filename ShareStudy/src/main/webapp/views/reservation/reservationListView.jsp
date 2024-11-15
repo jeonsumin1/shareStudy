@@ -11,16 +11,36 @@
 <style>
 
 	.rvList { 
-    	width: 70%;
+	 	border: 1px solid #ddd;
+    	width: 60%;
     	margin: auto;
+    	margin-top: 50px;
+    	border-radius: 10px;
     }
     
     .tbClass{
-    	border: 1px solid gray;
-    	border-radius: 10px;
-    	height: 230px;
+    	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    	margin-top: 20px;
+    	height: 10%;
     }   
     
+    .i{
+    	display: flex;
+    	justify-content: space-between;
+    	align-items: center;
+    	margin-top: 10px;
+    }
+    .btnStyle{
+    	border:none;
+    	background-color: rgba(255, 166, 0, 0.774);
+    	font-size: 12px;
+    	margin: 1px;
+    	border-radius: 10px;
+    }
+    .btnStyle:hover{
+    	background-color: rgba(255, 217, 175, 1);
+    	
+    }
 </style>
 
 </head>
@@ -29,38 +49,28 @@
 	
 	<div class="rvList" align="center">
 		<c:choose>
+			<%-- 예약 내역이 없을 때 --%>
 			<c:when test="${empty relist}">
 				<div class="tbClass rvList" align="center">
 					<p>조회된 예약 내역이 없습니다.</p>
 				</div>
 			</c:when>
 			<c:otherwise>
+				<%-- 예약 내역이 있을 때.--%>
 				<c:forEach var="relist" items="${relist}">
 				<div class="rvList tbClass">
-					<div align="right">
-						<form action="<%= contextPath %>/reMyDetail.shs" method="POST">
-							<input type="hidden" value="${relist.rvNo}" name="rvNo">
-							<button class="btnStyle btn btn-outline-light text-dark" style="margin-right: 3px;">상세보기</button>
-						</form>
+					<div align="left">
+						<div class="i">&nbsp; ◎ &nbsp;${relist.roomNo}
+							<div align="right">
+								<!-- 상세보기 클릭 시 상품 예약 상세보기 페이지로 이동. hidden 사용하여 상품 번호 가려서 보내기. -->
+								<form action="<%= contextPath %>/reMyDetail.shs" method="POST">
+									<input type="hidden" value="${relist.rvNo}" name="rvNo">
+									<button class="btnStyle " style="margin-right: 10px;">상세보기</button>
+								</form>
+							</div>
+						</div>
+						<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약일 :&nbsp; ${relist.reDate.substring(0,11)}</div>
 					</div>
-					<table class="table table-bordered">
-						<tr>
-							<td>예약번호</td> 
-							<td>${relist.rvNo}</td>
-						</tr>
-						<tr>
-							<td>상품명</td>
-							<td>${relist.roomNo}</td>
-						</tr>
-						<tr>
-							<td>방문 날짜</td>
-							<td>${relist.reDate}</td>
-						</tr>
-						<tr>
-							<td>예약 인원</td>
-							<td>${relist.rePeople}</td>
-						</tr>
-					</table>
 					<br>
 				</div>
 				<br>

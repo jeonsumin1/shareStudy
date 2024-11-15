@@ -45,6 +45,9 @@ public class UserLoginController extends HttpServlet {
 		
 		if (userInfo != null) {
 			
+			session.setAttribute("userInfo", userInfo);
+			session.setAttribute("alertMsg", "로그인에 성공하였습니다.");
+
 			// 로그인 성공 시 이전 페이지로 이동 reUrl 값이 있을 경우에만 해당 경로로 이동. 아닐 경우 홈페이지로 이동. 
 			if(reUrl != null) {
 				response.sendRedirect(reUrl);
@@ -52,9 +55,6 @@ public class UserLoginController extends HttpServlet {
 				// 이전 경로가 없을 경우 메인페이지로 이동
 				response.sendRedirect(request.getContextPath());
 			}
-			
-			session.setAttribute("userInfo", userInfo);
-			session.setAttribute("alertMsg", "로그인에 성공하였습니다.");
 			
 			// 세션에서 
 			session.removeAttribute("reUrl"); // session에서 해당 값을 지워주지 않으면 일반 로그인 시 reUrl이 session에 남아 있어 상품 예약 페이지로 이동이 된다. 
