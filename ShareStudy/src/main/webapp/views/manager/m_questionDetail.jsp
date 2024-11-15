@@ -9,51 +9,36 @@
 </head>
 <body>
 		<section class="goods" id="goods">
-			<h2>상세보기</h2>
-			<h3>예약조회</h3>
+			<h2>리뷰 상세조회</h2>
 
 			<form name="goodsModify" method="post" action="updateGoodsResult.jsp">
-
 			<table>
 				<tr>
-					<th width="13%">예약 확인</th>
+					<th width="13%">리뷰 번호</th>
 					<td><input type="text" name="no" id="no" value=""></td>
 				</tr>
 				<tr>
-					<th>방 상세정보</th>
-					<td><img src="" onclick="window.open(this.src)"></td>
-				</tr>
-				<tr>
-					<th></th>
+					<th>작성자 아이디</th>
 					<td><input type="text" name="type" id="type" value=""></td>
 				</tr>
 				<tr>
-					<th>상세 설명</th>
+					<th>상품 이름</th>
 					<td><textarea name="detail" id="detail"></textarea></td>
 				</tr>
-			</table>
-			
-			<h3>결제방법</h3>
-			<table>
 				<tr>
-					<th width="13%">결제 방법</th>
-					<td><input type="text" name="no" id="no" value=""></td>
-				</tr>
-				<tr>
-					<th>방 상세정보</th>
-					<td><img src="" onclick="window.open(this.src)"></td>
-				</tr>
-				<tr>
-					<th></th>
+					<th>작성자 아이디</th>
 					<td><input type="text" name="type" id="type" value=""></td>
 				</tr>
 				<tr>
-					<th>상세 설명</th>
-					<td><textarea name="detail" id="detail"></textarea></td>
+					<th>작성자 아이디</th>
+					<td><input type="text" name="type" id="type" value=""></td>
 				</tr>
+				<tr>
+					<th>작성자 아이디</th>
+					<td><input type="text" name="type" id="type" value=""></td>
+				</tr>
+				
 			</table>
-			<a href="m_main.jsp"><div class="btn_back">뒤로가기</div></a>
-
 			</form>
 			
 		</section>

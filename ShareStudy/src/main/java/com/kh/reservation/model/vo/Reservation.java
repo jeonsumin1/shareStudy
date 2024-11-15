@@ -73,6 +73,8 @@ public class Reservation {
 		this.rvPayment = rvPayment;
 		this.rvRequest = rvRequest;
 	}
+	
+	
 
 	public String getRvNo() {
 		return rvNo;

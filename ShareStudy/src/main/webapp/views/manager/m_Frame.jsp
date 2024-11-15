@@ -21,7 +21,7 @@
 		<div class="logo">
 		
 		<a href="${contextPath}/share">
-			<img src="${pageContext.request.contextPath}/views/manager/image/logo.png">
+			<img src="${pageContext.request.contextPath}/views/common/images/LOGO.png">
 		</a>
 		</div>
 		<ul>

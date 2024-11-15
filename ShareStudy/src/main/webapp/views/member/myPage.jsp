@@ -592,7 +592,9 @@ input[type="email"]{
                 var rrn = "<%= userInfo.getRrn() %>";
 
                 
-                var maskedRrn = rrn.substring(0, 6)+"-"+ "●●●●●●●";
+
+                var maskedRrn = rrn.substring(0, 6) +"-" +"●●●●●●";
+
 
                
                 $(".rrn1").html("&nbsp;" + maskedRrn);

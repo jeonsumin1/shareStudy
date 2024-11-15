@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
@@ -15,6 +16,7 @@ import com.kh.member.model.vo.Question;
 import com.kh.member.model.vo.User;
 import com.kh.notice.model.vo.Review;
 import com.kh.reservation.model.vo.Reservation;
+import com.kh.reservation.model.vo.RvBank;
 import com.kh.room.model.vo.Room;
 
 public class ManagerDao {
@@ -165,7 +167,7 @@ public class ManagerDao {
 				list.add(new Question(
 						  rset.getString("USER_ID"),
 						  rset.getString("QT_PHONE"),
-						  rset.getDate("QT_DATE")));
+						  rset.getString("QT_DATE")));
 			}
 			
 		} catch (SQLException e) {
@@ -218,6 +220,7 @@ public class ManagerDao {
 			
 			while(rset.next()) {
 				list.add(new Review(
+						  rset.getInt("REVIEW_NO"),
 						  rset.getDate("REVIEW_DATE"),
 						  rset.getString("USER_ID"),
 						  rset.getString("REVIEW_TITLE")));
@@ -292,7 +295,7 @@ public class ManagerDao {
 		return result;
 	}
 
-	public int deleteReview(Connection conn, String memId) {
+	public int deleteReview(Connection conn, String vNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -300,13 +303,12 @@ public class ManagerDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memId);
+			pstmt.setString(1, vNo);
 			
 			result = pstmt.executeUpdate();
 			
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(pstmt);
@@ -342,29 +344,166 @@ public class ManagerDao {
 	}
 
 	public int deleteReservation(Connection conn, String rvNo) {
-		
+	    PreparedStatement pstmt = null;
+	    ResultSet rset = null;
+	    int result = 0;
+
+	    try {
+	        String selectPaymentSql = "SELECT RV_PAYMENT FROM RESERVATION WHERE RV_NO = ?";
+	        pstmt = conn.prepareStatement(selectPaymentSql);
+	        pstmt.setString(1, rvNo);
+	        rset = pstmt.executeQuery();
+
+	        String rvPayment = null;
+	        if (rset.next()) {
+	            rvPayment = rset.getString("RV_PAYMENT");
+	        }
+
+	        // 'card'일 경우 카드결제 테이블에서 삭제
+	        if ("card".equals(rvPayment)) {
+	            String deleteCardSql = "DELETE FROM RVPAYMENT WHERE RV_NO = ?";
+	            pstmt = conn.prepareStatement(deleteCardSql);
+	            pstmt.setString(1, rvNo);
+	            result = pstmt.executeUpdate();
+	        }
+	        // 'bank'일 경우 무통장입금 테이블에서 삭제
+	        else if ("bank".equals(rvPayment)) {
+	            String deleteBankSql = "DELETE FROM RVBANK WHERE RV_NO = ?";
+	            pstmt = conn.prepareStatement(deleteBankSql);
+	            pstmt.setString(1, rvNo);
+	            result = pstmt.executeUpdate();
+	        }
+
+	        // 마지막으로 예약 테이블에서 해당 예약 삭제
+	        if (result > 0) {
+	            String deleteReservationSql = "DELETE FROM RESERVATION WHERE RV_NO = ?";
+	            pstmt = conn.prepareStatement(deleteReservationSql);
+	            pstmt.setString(1, rvNo);
+	            result = pstmt.executeUpdate();
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        JDBCTemplate.close(pstmt);
+	        JDBCTemplate.close(rset);
+	    }
+
+	    return result;
+	}
+
+	public ArrayList<Review> selectReview(Connection conn, String vNo) {
 		
 		PreparedStatement pstmt = null;
-		int result = 0;
+		ResultSet rset = null;
 		
-		String sql = prop.getProperty("deleteReservation");
+        ArrayList<Review> list = new ArrayList<>();
+		
+		String sql = prop.getProperty("detailReview");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, vNo);
+			
+			rset=pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				list.add(new Review(
+						  rset.getInt("REVIEW_NO"),
+						  rset.getString("USER_ID"),
+						  rset.getString("ROOM_NO"),
+						  rset.getString("REVIEW_TITLE"),
+						  rset.getDate("REVIEW_DATE"),
+						  rset.getString("REGION_NAME"),
+						  rset.getString("REVIEW_CONTENT")
+						  ));
+			}
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  finally {
+			JDBCTemplate.close(pstmt);
+		}
+	
+		
+		return list;
+		
+
+	}
+
+	public Reservation selectReservation(Connection conn, String rvNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		Reservation r = null;
+		
+		String sql = prop.getProperty("selectReservation");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, rvNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+			    r = new Reservation(rset.getString("RV_NO"),
+			    		            rset.getString("ROOM_NO"),
+			    		            rset.getString("USER_ID"),
+			    		            rset.getInt("RV_PEOPLE"),
+			    		            rset.getString("RV_DATE"),
+			    		            rset.getDate("RV_CONFIRM"),
+			    		            rset.getString("RV_PAYMENT"),
+			    		            rset.getString("RV_REQUEST"));	
 			
-			result = pstmt.executeUpdate();
+			}
+			
 			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
+			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
 		
 		
-		return result;
+		return r;
+	}
+
+	public RvBank selectBank(Connection conn, String rvNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		RvBank b = null;
+		
+		String sql = prop.getProperty("selectBank");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rvNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				b = new RvBank(rset.getString("RV_NO"),
+						       rset.getString("RV_BANK"),
+						       rset.getString("RV_NAME"),
+						       rset.getString("RV_DATE"),
+						       rset.getString("AMOUNT"));
+			} 
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+
+		
+		return b;
 	}
 
 }
