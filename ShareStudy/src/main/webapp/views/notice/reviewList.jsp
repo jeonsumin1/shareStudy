@@ -98,7 +98,13 @@ h1{
 	right: 250px;
 }
    
+#reviewList.clicked {
+            background-color: lightblue; /* 클릭한 게시글의 배경색 */
+        }
 
+#reviewList:hover {
+            background-color: #99999953; /* 마우스를 올리면 배경색 변경 */
+        }
    
     </style>
 </head>

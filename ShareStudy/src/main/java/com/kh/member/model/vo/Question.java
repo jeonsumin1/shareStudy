@@ -8,7 +8,7 @@ public class Question {
 
 	public Question() {
 		super();
-	}
+	} 
 
 	public Question(String userId, String qtPhone, String qtDate, String qtRequest) {
 		super();
@@ -16,6 +16,15 @@ public class Question {
 		this.qtPhone = qtPhone;
 		this.qtDate = qtDate;
 		this.qtRequest = qtRequest;
+	}
+	
+	
+
+	public Question(String userId, String qtPhone, String qtDate) {
+		super();
+		this.userId = userId;
+		this.qtPhone = qtPhone;
+		this.qtDate = qtDate;
 	}
 
 	public String getUserId() {

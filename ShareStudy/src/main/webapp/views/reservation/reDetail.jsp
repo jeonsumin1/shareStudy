@@ -51,7 +51,6 @@
 		margin-top: 10px;
 		background-color: rgba(255, 166, 0, 0.774);
 		border-color: rgba(255, 166, 0, 0.774);
-		
 	}
 	
 	button:hover{
@@ -60,6 +59,7 @@
 		
 	}
 	.btnDiv{
+		border-radius: 10px;
 		margin-top: 10px; 
 		
 	}
