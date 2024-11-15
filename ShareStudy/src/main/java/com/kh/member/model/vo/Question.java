@@ -77,6 +77,8 @@ public class Question {
 		return "Question [userId=" + userId + ", qtPhone=" + qtPhone + ", qtDate=" + qtDate + ", qtRequest=" + qtRequest
 				+ "]";
 	}
+	
+}
 
 
 

@@ -334,11 +334,11 @@ td, th {
 	<section class="graph_n_chart" id="chart_wrap">
 		<h2>통계</h2>
 		<div class="chart1">
-			<h3>순위(그래프 예정)</h3>
+			<h3>순위</h3>
 			<canvas id="myChart1"></canvas>
 		</div>
 		<div class="chart2">
-			<h3>카테고리(그래프 예정)</h3>
+			<h3>카테고리</h3>
 			<div class="chart2_group">
 				<canvas id="myChart2"></canvas>
 			</div>

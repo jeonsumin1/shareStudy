@@ -349,7 +349,9 @@ input[type="email"]{
                         <tr>
                         	<td style="font-size: small;" data-toggle="modal" data-target="#QModal"><p class="m1">📞 문의 하기</p></td>
                         </tr>
-                    	
+                    	<tr>
+                        	<td style="font-size: small;" data-toggle="modal" data-target="#QModal"><p class="m1">📞 문의 횟수 : ${count}</p></td>
+                        </tr>
 
                         <tr>
                             <td style="height: 20px;"></td>
