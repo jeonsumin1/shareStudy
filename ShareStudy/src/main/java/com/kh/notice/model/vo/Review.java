@@ -20,6 +20,33 @@ public class Review {
 	}
 	
 
+	
+	
+	
+	public Review(int reviewNo, Date reviewDate, String userId, String reviewTitle) {
+		super();
+		this.reviewNo = reviewNo;
+		this.reviewDate = reviewDate;
+		this.userId = userId;
+		this.reviewTitle = reviewTitle;
+	}
+	
+
+
+	public Review(int reviewNo, String userId, String roomNo, String reviewTitle, Date reviewDate, String reviewContent,
+			String regionName) {
+		super();
+		this.reviewNo = reviewNo;
+		this.userId = userId;
+		this.roomNo = roomNo;
+		this.reviewTitle = reviewTitle;
+		this.reviewDate = reviewDate;
+		this.reviewContent = reviewContent;
+		this.regionName = regionName;
+	}
+
+
+
 	public Review(Date reviewDate, String userId, String reviewTitle) {
 		super();
 		this.reviewDate = reviewDate;

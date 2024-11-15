@@ -212,6 +212,7 @@
 			<br>
 			<div align="center">
 				<button type="button" id="delete">삭제하기</button>
+				<button type="button" id="delete" onclick="history.back();">목록</button>
 				<br><br>
 				
 			</div>

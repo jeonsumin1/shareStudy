@@ -8,13 +8,15 @@
 </entry>
 
 <entry key="selectAllMember">
-   SELECT USER_ID,
+  <!-- SELECT USER_ID,
 	       USER_NAME,
 	       USER_PHONE,
 	       EMAIL,
 	       ENROLLDATE,
 	       ADACCEPT
-FROM USERINFO WHERE STATUS = 'Y'
+FROM USERINFO WHERE STATUS = 'Y' -->
+
+ SELECT * FROM USERINFO WHERE STATUS = 'Y'
 </entry>
 
 <entry key="selectAllRoom">
@@ -30,10 +32,12 @@ SELECT * FROM ROOM
 </entry>
 
 <entry key="selectAllQuestion">
-   SELECT USER_ID,
+   <!-- SELECT USER_ID,
           QT_PHONE,
           QT_DATE
-   FROM QUESTION
+   FROM QUESTION -->
+   
+   SELECT * FROM QUESTION
 </entry>
 
 
@@ -60,7 +64,7 @@ SELECT * FROM ROOM
 
 <entry key = "deleteReview">
      DELETE FROM REVIEW
-     WHERE USER_ID = ?
+     WHERE REVIEW_NO = ?
 </entry>
 
 <entry key = "deleteRoom">
@@ -72,6 +76,19 @@ SELECT * FROM ROOM
      DELETE FROM RESERVATION
      WHERE RV_NO = ?
 </entry>
+
+<entry key = "detailReview">
+     SELECT * FROM REVIEW WHERE REVIEW_NO = ?
+</entry>
+
+<entry key = "selectReservation">
+     SELECT * FROM RESERVATION WHERE RV_NO = ?
+</entry>
+
+<entry key = "selectBank">
+     SELECT * FROM RVBANK WHERE RV_NO = ?
+</entry>
+
 
 
 </properties>

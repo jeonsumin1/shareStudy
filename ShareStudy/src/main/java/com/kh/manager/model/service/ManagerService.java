@@ -2,6 +2,7 @@ package com.kh.manager.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.manager.model.dao.ManagerDao;
@@ -10,6 +11,7 @@ import com.kh.member.model.vo.Question;
 import com.kh.member.model.vo.User;
 import com.kh.notice.model.vo.Review;
 import com.kh.reservation.model.vo.Reservation;
+import com.kh.reservation.model.vo.RvBank;
 import com.kh.room.model.vo.Room;
 
 public class ManagerService {
@@ -106,11 +108,11 @@ public class ManagerService {
 		  return result;
 	}
 
-	public int deleteReview(String memId) {
+	public int deleteReview(String vNo) {
 		 
 		Connection conn = JDBCTemplate.getConnection();
 			
-		int result = new ManagerDao().deleteReview(conn,memId);
+		int result = new ManagerDao().deleteReview(conn,vNo);
 					
 	    if(result>0) {
 				JDBCTemplate.commit(conn);
@@ -155,6 +157,33 @@ public class ManagerService {
 	    JDBCTemplate.close(conn);
 			
 		return result;
+	}
+
+	public ArrayList<Review> selectReview(String vNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Review> list = new ManagerDao().selectReview(conn, vNo);
+		
+		return list;
+		
+	}
+
+	public Reservation selectReservation(String rvNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		Reservation r = new ManagerDao().selectReservation(conn, rvNo);
+		
+		
+		return r;
+	}
+
+	public RvBank selectBank(String rvNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		RvBank b = new ManagerDao().selectBank(conn, rvNo);
+		
+		
+		return b;
 	}
 
 }

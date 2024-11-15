@@ -29,6 +29,16 @@ public class RvBank {
 		this.rvDate = rvDate;
 		this.amount = amount;
 	}
+	
+	
+	public RvBank(String rvNo, String rvBank, String rvName, String rvDate, String amount) {
+		super();
+		this.rvNo = rvNo;
+		this.rvBank = rvBank;
+		this.rvName = rvName;
+		this.rvDate = rvDate;
+		this.amount = amount;
+	}
 
 	public String getRvNo() {
 		return rvNo;

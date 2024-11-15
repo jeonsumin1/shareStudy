@@ -103,7 +103,7 @@ td, th {
 			       <td><%= r.getRoomSize() %></td>
 			       <td><%= r.getPrice() %>원</td>
 			       <td><%= r.getStatus() %></td>
-			       <td><a href="${contextPath}/share/views/manager/m_detail.jsp">상세보기</a></td>
+			       <td><a href="${contextPath}/share/rselect.ma?rNo=<%= r.getRoomNo()%>">상세보기</a></td>
 			       <td>
 				 <form action="${contextPath}/share/rdelete.ma" method="post" style="display:inline;" 
                       onsubmit="return confirm('정말 삭제하시겠습니까?');">
@@ -163,10 +163,10 @@ td, th {
                 <td><%= rv.getReDate() %></td>
                 <td><%= rv.getRvConfirm() %></td>
                 <td><%= rv.getRvPayment() %></td>
-                <td><a href="#">상세보기</a></td>
+               <td><a href="${contextPath}/share/rvselect.ma?rvNo=<%= rv.getRvNo()%>">상세보기</a></td>
                 <td>
 			     <form action="${contextPath}/share/rvdelete.ma" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-					<input type="hidden" name="rvNo" value="<%= rv.getRvNo() %>">
+					<input type="hidden" name="rvNo" value="<%=rv.getRvNo()%>">
 					<button type="submit" class="delete-button">삭제</button>
 				</form>
 				</td> 
@@ -214,7 +214,7 @@ td, th {
                                      N
                                  <% } %></td>
 			                 
-			                <td><a href="">상세보기</a></td>
+			                <td><a href="${contextPath}/share/uselect.ma?userId=<%= u.getUserId()%>">상세보기</a></td>
 			                  <td>
 			                 <form action="${contextPath}/share/mdelete.ma" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
 							        <input type="hidden" name="userId" value="<%= u.getUserId() %>">
@@ -234,9 +234,10 @@ td, th {
 
     <table>
         <tr>
+            <th width="10%">게시글 번호</th>
             <th width="25%">작성일</th>
             <th width="15%">작성자</th>
-            <th width="40%">리뷰 제목</th>
+            <th width="30%">리뷰 제목</th>
             <th width="10%">상세보기</th>
             <th width="10%">삭제</th>
         </tr>
@@ -251,14 +252,15 @@ td, th {
                 for (Review v : vList) {
         %>
             <tr>
+                <td><%= v.getReviewNo() %></td>
                 <td><%= v.getReviewDate() %></td>
                 <td><%= v.getUserId() %></td>
                 <td><%= v.getReviewTitle() %></td>
-                <td><a href="#">상세보기</a></td>
+               <td><a href="${contextPath}/share/vselect.ma?vNo=<%= v.getReviewNo()%>">상세보기</a></td>
                 <td>
 				<form action="${contextPath}/share/vdelete.ma" method="post" style="display:inline;" 
                       onsubmit="return confirm('정말 삭제하시겠습니까?');">
-                    <input type="hidden" name="userId" value="<%= v.getUserId() %>">
+                    <input type="hidden" name="vNo" value="<%= v.getReviewNo() %>">
                     <button type="submit" class="delete-button">삭제</button>
                     <% if (altMsg != null) { %>
 	                 <script type="text/javascript">
@@ -301,8 +303,8 @@ td, th {
 			<tr>
 				<td><%= q.getUserId() %></td>
 				<td><%= q.getQtPhone() %></td>
-				<td><%= q.getQtDate() %></td>
-				<td><a href="#">상세보기</a></td>
+				<td><%= q.getQtDate() %></td> 
+				<td><a href="${contextPath}/share/qselect.ma?vNo=<%= q.getQtPhone()%>">상세보기</a></td>
 				<td>
 				<form action="${contextPath}/share/qdelete.ma" method="post" style="display:inline;" 
                       onsubmit="return confirm('정말 삭제하시겠습니까?');">
