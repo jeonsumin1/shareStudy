@@ -28,7 +28,8 @@
     </entry>
 
     <entry key="selectThumbnailList">
-    <!-- INNER JOIN은 양쪽테이블에 값이 전부있어야해서 사진없는 상품이 있을수 있으니 LEFTJOIN사용  -->
+    <!-- INNER JOIN은 양쪽테이블에 값이 전부있어야해서 
+    사진없는 상품이 있을수 있으니 LEFTJOIN사용  -->
     SELECT 
         b.region_name AS regionName, 
         A.*,

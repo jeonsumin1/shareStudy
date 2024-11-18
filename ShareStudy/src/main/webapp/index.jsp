@@ -11,7 +11,7 @@
 <title>메인페이지</title>
 <style>
 body {
-	margin: 0;
+	margin: 0 auto;
 	font-family: Arial, sans-serif;
 	display: flex;
 	flex-direction: column;
@@ -104,6 +104,11 @@ body {
 	width: 410px;
 	height: 226px;
 }
+
+#content{
+   margin: 0 auto;
+   align:center;
+}
 </style>
 </head>
 <body>
@@ -131,7 +136,7 @@ body {
 	</div>
 	
 	
-	<div id="content" style="display:flex; justify-content:center; flex-wrap: wrap;">
+	<div id="content" align="center">
     <div id="product">
         <table style="margin: 10px; text-align: center; display: inline-block;">
             <tr>

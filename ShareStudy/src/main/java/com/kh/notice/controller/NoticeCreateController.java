@@ -28,9 +28,9 @@ public class NoticeCreateController extends HttpServlet {
 		User userInfo = (User)session.getAttribute("userInfo");
 		System.out.println("userInfo: " + userInfo);
 	    if (userInfo != null) {
-	        System.out.println("userName: " + userInfo.getUserName());
+	        System.out.println("userId: " + userInfo.getUserId());
 	    }
-		if (userInfo == null || !userInfo.getUserName().equals("관리자")) {
+		if (userInfo == null || !userInfo.getUserId().equals("admin")) {
 	        session.setAttribute("alertMsg", "작성 권한이 없습니다.");
 	        response.sendRedirect(request.getContextPath()+"/");
 	        return;
@@ -43,7 +43,7 @@ public class NoticeCreateController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		User userInfo = (User)session.getAttribute("userInfo");
-		if (userInfo == null || !userInfo.getUserName().equals("관리자")) {
+		if (userInfo == null || !userInfo.getUserId().equals("admin")) {
 	        session.setAttribute("alertMsg", "작성 권한이 없습니다.");
 	        response.sendRedirect(request.getContextPath()+"/");
 	        return;

@@ -39,10 +39,15 @@ public class ManagerDeleteReservation extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
         String rvNo = request.getParameter("rvNo");
+        String rmNo = request.getParameter("rmNo");
+        
+        System.out.println(rmNo);
                 
         int result = new ManagerService().deleteReservation(rvNo);
         
-        if(result>0) { //삭제 성공
+        int result2 = new ManagerService().updateRoom(rmNo);
+        
+        if(result*result2>0) { //삭제 성공
 			request.setAttribute("altMsg", "예약 삭제 완료");
 			request.getRequestDispatcher("/views/manager/m_main.jsp").forward(request, response);
 			

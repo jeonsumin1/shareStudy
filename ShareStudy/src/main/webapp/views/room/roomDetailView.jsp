@@ -58,6 +58,16 @@
    opacity: 0.8;
    cursor: pointer;
 }
+
+
+#map {
+    width: 500px;
+    height: 400px;
+    margin: 0 auto;  
+    display: block;  
+}
+
+
 </style>
 </head>
 <body>
@@ -114,12 +124,6 @@
 
 
 
-   	<div align="center">
-   		<button type="button" class="btn btn-primary"
-   			onclick="location.href='<%= contextPath %>/reservation.re?rno=${room.roomNo}'">예약하기</button>
-   		<button type="button" class="btn btn-secondary"
-   			onclick="location.href='<%=contextPath%>/room/list.shs'">목록으로</button>
-   	</div>
 
    	<%-- 관리자만 볼 수 있는 버튼 --%>
    	<c:if test="${'admin' eq userid}">
@@ -130,9 +134,58 @@
    		</div>
    	</c:if>
 
+  
+   	<div id="map" style="width:500px;height:400px;">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cf540fbe6db6fee577f7d57194e1a6d"></script>
+    <script>
+        var roomNo = "${room.roomNo}";
+        
+        var a,b;
+        
+        if(roomNo == "R01"){
+        	 a= 37.47991;
+        	 b= 126.9405;
+        }else if(roomNo == "R02"){
+        	a= 37.51571;
+       	    b= 127.1074;
+        }else if(roomNo == "R03"){
+        	a= 37.53492;
+       	    b= 126.9022;
+        }else if(roomNo == "R04"){
+        	a= 37.26222;
+       	    b= 127.0316;
+        }else if(roomNo == "R05"){
+        	a= 35.09424;
+       	    b= 128.9062;
+        }else{
+        	a= 33.48786;
+       	    b= 126.5090;
+        }
+        
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(a, b),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+
+		var markerPosition  = new kakao.maps.LatLng(a, b);  
+		var marker = new kakao.maps.Marker({  
+		    position: markerPosition
+		});
+
+		marker.setMap(map);
+	</script>
+	</div>
    	<br>
-   	<br>
-   	<br>
+
+   		<div align="center">
+   		<button type="button" class="btn btn-primary"
+   			onclick="location.href='<%= contextPath %>/reservation.re?rno=${room.roomNo}'">예약하기</button>
+   		<button type="button" class="btn btn-secondary"
+   			onclick="location.href='<%=contextPath%>/room/list.shs'">목록으로</button>
+   	</div>
    	<br>
    	<br>
    </div>
