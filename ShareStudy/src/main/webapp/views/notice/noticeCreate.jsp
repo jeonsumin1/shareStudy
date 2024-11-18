@@ -4,8 +4,7 @@
 <% 
     User userInfo2 = (User) session.getAttribute("userInfo");
 
-    // 권한 체크: "관리자"가 아닐 경우 메인 페이지로 리다이렉트
-    if (userInfo2 == null || !"관리자".equals(userInfo2.getUserName())) {
+    if (userInfo2 == null || !"admin".equals(userInfo2.getUserId())) {
         session.setAttribute("alertMsg", "접근 권한이 없습니다.");
         response.sendRedirect(request.getContextPath());
         return;

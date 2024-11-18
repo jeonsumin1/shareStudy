@@ -167,6 +167,7 @@ td, th {
                 <td>
 			     <form action="${contextPath}/share/rvdelete.ma" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
 					<input type="hidden" name="rvNo" value="<%=rv.getRvNo()%>">
+					<input type="hidden" name="rmNo" value="<%=rv.getRoomNo()%>">
 					<button type="submit" class="delete-button">삭제</button>
 				</form>
 				</td> 

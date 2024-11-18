@@ -101,7 +101,7 @@ body {
 				</tbody>
 			</table>
 			<hr>
-			<%if (userInfo != null && userInfo.getUserName().equals("관리자")) {%>
+			<%if (userInfo != null && userInfo.getUserId().equals("admin")) {%>
 			<div class="text-center mb-3">
 				<button class="button-secondary" id="createNoticeBtn"
 					style="display: block; position: relative; top: 43%; right: 15px"

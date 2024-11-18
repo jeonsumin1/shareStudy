@@ -186,4 +186,20 @@ public class ManagerService {
 		return b;
 	}
 
+	public int updateRoom(String rmNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ManagerDao().updateRoom(conn, rmNo);
+		
+		 if(result>0) {
+				JDBCTemplate.commit(conn);
+		}else {
+				JDBCTemplate.rollback(conn);
+		}
+			
+	    JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 }

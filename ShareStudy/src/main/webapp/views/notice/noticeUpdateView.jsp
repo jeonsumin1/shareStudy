@@ -66,7 +66,7 @@ html, body {
 			<hr class="my-4">
 			<div class="d-flex justify-content-end">
 				<button class="btn btn-dark pull-right" onclick="location.href='<%=contextPath%>/noticeBoard.shs'" type="button">목록으로</button>
-				<%if (userInfo != null && userInfo.getUserName().equals("관리자")) { %>
+				<%if (userInfo != null && userInfo.getUserId().equals("admin")) { %>
 				<button class="btn btn-primary" type="submit" id="noticeUpdate" name="noticeNo">수정하기</button>
 			<%} %>
 		</div>

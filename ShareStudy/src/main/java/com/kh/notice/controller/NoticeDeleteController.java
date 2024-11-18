@@ -23,7 +23,7 @@ public class NoticeDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User userInfo = (User)session.getAttribute("userInfo");
-		if (userInfo == null || !userInfo.getUserName().equals("관리자")) {
+		if (userInfo == null || !userInfo.getUserId().equals("admin")) {
 	        session.setAttribute("alertMsg", "접근 권한이 없습니다.");
 	        response.sendRedirect(request.getContextPath());
 	        return;
@@ -53,7 +53,7 @@ public class NoticeDeleteController extends HttpServlet {
 		HttpSession session = request.getSession();
 		User userInfo = (User)session.getAttribute("userInfo");
 		
-		if (userInfo == null || !userInfo.getUserName().equals("관리자")) {
+		if (userInfo == null || !userInfo.getUserId().equals("admin")) {
 	        session.setAttribute("alertMsg", "접근 권한이 없습니다.");
 	        response.sendRedirect(request.getContextPath());
 	        return;

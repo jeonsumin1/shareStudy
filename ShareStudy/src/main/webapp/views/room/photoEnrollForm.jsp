@@ -144,7 +144,7 @@
     </div>
     
 </body>
-
+	
 <script>
         function validateForm() {
             // 상품번호 검증
@@ -154,8 +154,6 @@
                 return false;
             }
             
-            
- 
  			// 이용가능인원 검증
  			const roomSize = document.querySelector('input[name="roomSize"]').value;
             if(!/^\d+$/.test(roomSize)) {

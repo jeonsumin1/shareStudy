@@ -89,6 +89,11 @@ SELECT * FROM ROOM
      SELECT * FROM RVBANK WHERE RV_NO = ?
 </entry>
 
+<entry key = "updateRoom">
+   UPDATE ROOM SET STATUS = 'Y' 
+   WHERE ROOM_NO = ?
+</entry>
+
 
 
 </properties>

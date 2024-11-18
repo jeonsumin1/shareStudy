@@ -506,4 +506,29 @@ public class ManagerDao {
 		return b;
 	}
 
+	public int updateRoom(Connection conn, String rmNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("updateRoom");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, rmNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+	        JDBCTemplate.close(pstmt);
+	    }
+		
+		
+		return result;
+	}
+
 }
